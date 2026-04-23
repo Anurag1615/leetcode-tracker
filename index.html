@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══════════════════════════════════════════
+     SEO META TAGS
+═══════════════════════════════════════════ -->
+<title>LeetCode Patterns Tracker – Free DSA Progress Tracker for Coding Interviews 2026</title>
+<meta name="description" content="Free LeetCode patterns tracker with 368 problems across 88 DSA patterns. Track Two Pointers, Sliding Window, DP, Graphs, Trees & more. Synced to Google. Ace FAANG interviews in 2026.">
+<meta name="keywords" content="leetcode patterns tracker, dsa patterns, leetcode progress tracker, coding interview preparation 2026, sliding window leetcode, dynamic programming patterns, graph algorithms leetcode, two pointers pattern, sde interview sheet, striver sheet alternative, neetcode 150 tracker, leetcode tracker free, faang interview prep, dsa sheet tracker">
+<meta name="author" content="LeetCode Pattern Tracker">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#0d0f1a">
+<meta name="language" content="English">
+<meta name="revisit-after" content="7 days">
+<meta name="rating" content="general">
+<link rel="canonical" href="https://leetcodepattern.com/">
+
+<!-- Open Graph — optimized for max CTR -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="LeetCode Patterns Tracker – Free DSA Tracker (88 Patterns, 368 Problems)">
+<meta property="og:description" content="Stop grinding randomly. Track your LeetCode progress by DSA pattern. 88 patterns, 368 problems, cloud-synced notes & personal solutions. 100% free.">
+<meta property="og:url" content="https://leetcodepattern.com/">
+<!--
+  og:image — Uncomment the lines below once /og-image.png (1200×630) is deployed.
+  <meta property="og:image" content="https://leetcodepattern.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="LeetCode Patterns Tracker - DSA Progress Dashboard">
+-->
+<meta property="og:site_name" content="LeetCode Pattern Tracker">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free LeetCode Patterns Tracker – 88 DSA Patterns, 368 Problems">
+<meta name="twitter:description" content="Track your coding interview prep by DSA pattern. Two Pointers, Sliding Window, DP, Graphs & more. Free, cloud-synced, beautiful UI.">
+<!--
+  twitter:image — Uncomment once og-image.png is deployed.
+  <meta name="twitter:image" content="https://leetcodepattern.com/og-image.png">
+  <meta name="twitter:image:alt" content="LeetCode Patterns Tracker Dashboard">
+-->
+<meta name="twitter:site" content="@lcpatterntrack">
+<meta name="twitter:creator" content="@lcpatterntrack">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+<!-- Structured Data — Multi-schema for rich Google results -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "LeetCode Pattern Tracker",
+  "alternateName": "LC Pattern Tracker",
+  "description": "Free interactive DSA progress tracker for coding interview preparation. Track 368 LeetCode problems across 88 patterns and 15 categories with cloud sync.",
+  "url": "https://leetcodepattern.com/",
+  "applicationCategory": "EducationalApplication",
+  "applicationSubCategory": "Coding Interview Preparation",
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "LeetCode Pattern Tracker",
+    "url": "https://leetcodepattern.com/"
+  },
+  "featureList": [
+    "88 DSA patterns with 368 problems",
+    "Google account sync via Firebase",
+    "Personal notes per problem",
+    "Real-time progress tracking",
+    "Mobile responsive",
+    "Completely free"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "LeetCode Pattern Tracker",
+  "url": "https://leetcodepattern.com/",
+  "description": "Free LeetCode DSA pattern tracker for coding interview preparation",
+  "potentialAction": { "@type": "SearchAction", "target": { "@type": "EntryPoint", "urlTemplate": "https://leetcodepattern.com/?search={search_term_string}" }, "query-input": "required name=search_term_string" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://leetcodepattern.com/" },
+    { "@type": "ListItem", "position": 2, "name": "DSA Patterns Tracker", "item": "https://leetcodepattern.com/#tracker" },
+    { "@type": "ListItem", "position": 3, "name": "Sliding Window Pattern", "item": "https://leetcodepattern.com/sliding-window.html" },
+    { "@type": "ListItem", "position": 4, "name": "Two Pointers Pattern", "item": "https://leetcodepattern.com/two-pointers.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are LeetCode patterns and why do they matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LeetCode patterns are reusable algorithmic templates such as Two Pointers, Sliding Window, and Dynamic Programming that apply to whole categories of coding problems. They matter because interviewers pick problems from known patterns. Learning the pattern means you can solve any variant, not just ones you have memorized."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to learn DSA for coding interviews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engineers need 8 to 16 weeks of consistent daily practice. Solving 5 to 8 problems per day across all major patterns using a structured tracker is the most efficient approach. Do not rush — understanding the pattern deeply is more valuable than volume."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to prepare for FAANG coding interviews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Follow a pattern-based study plan: start with Arrays and Two Pointers, move to Trees and Graphs, then tackle Dynamic Programming. Use a tracker to ensure you have covered all patterns. Write approach notes for every problem. Do 2 to 3 mock interviews in your final week. Aim for 150 to 300 problems total before your interview."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this LeetCode tracker completely free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, 100% free forever. You can start tracking immediately without any account. Sign in with Google for free cloud sync powered by Firebase so your progress is preserved across all your devices. No credit card, no premium tier, no hidden costs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between this tracker and Striver SDE Sheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Striver SDE Sheet organizes problems by broad topic such as Arrays and Linked Lists. LeetCode Pattern Tracker organizes by specific algorithmic pattern such as Fast and Slow Pointers, Monotonic Stack, and Union-Find DSU, which is more granular and better for interview readiness. It also includes cloud sync, per-problem notes, and a live progress dashboard."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many LeetCode problems should I solve before interviews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Quality over quantity. Solving 150 to 300 problems across all major patterns and being able to explain the time and space complexity of each is sufficient for most FAANG-level interviews. If you can solve any problem in each pattern confidently, you are ready regardless of the total count."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<script src="shared.js" defer></script>
+<script type="module" src="firebase.js"></script>
+
+<!-- Google AdSense (replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID) -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+
+      <link rel="stylesheet" href="firebase.css">
+
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     FIREBASE STATUS BANNER
+═══════════════════════════════════════════ -->
+<div id="firebase-banner" role="status" aria-live="polite"></div>
+
+<!-- ═══════════════════════════════════════════
+     GLOBAL NAVIGATION
+═══════════════════════════════════════════ -->
+<!-- <header class="global-nav" role="banner">
+  <div class="global-nav-inner">
+    <a href="/" class="global-nav-brand" aria-label="LeetCode Pattern Tracker Home">⚡ <span>LC</span>Pattern</a>
+    <nav class="global-nav-links" aria-label="Main navigation">
+      <a href="/" class="global-nav-link active">Home</a>
+      <div class="gnav-dropdown" role="navigation" aria-label="Patterns menu">
+        <button class="gnav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+          Patterns
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="gnav-dropdown-menu" role="menu">
+          <a href="/two-pointers.html" class="gnav-dropdown-item" role="menuitem">
+            <span class="di-icon">👉</span>
+            <span>Two Pointers<span class="di-sub">7 sub-patterns · 33 problems</span></span>
+          </a>
+          <a href="/sliding-window.html" class="gnav-dropdown-item" role="menuitem">
+            <span class="di-icon">🪟</span>
+            <span>Sliding Window<span class="di-sub">4 sub-patterns · 28 problems</span></span>
+          </a>
+          <div class="gnav-dropdown-divider"></div>
+          <span class="gnav-dropdown-item gnav-soon" aria-disabled="true">
+            <span class="di-icon">🧮</span><span>Dynamic Programming<span class="di-sub">Coming soon</span></span>
+          </span>
+          <span class="gnav-dropdown-item gnav-soon" aria-disabled="true">
+            <span class="di-icon">🕸️</span><span>Graph Algorithms<span class="di-sub">Coming soon</span></span>
+          </span>
+          <span class="gnav-dropdown-item gnav-soon" aria-disabled="true">
+            <span class="di-icon">🔍</span><span>Binary Search<span class="di-sub">Coming soon</span></span>
+          </span>
+          <div class="gnav-dropdown-divider"></div>
+          <a href="/#tracker" class="gnav-dropdown-item" role="menuitem">
+            <span class="di-icon">⚡</span><span>All 368 Problems<span class="di-sub">Full tracker — all 15 categories</span></span>
+          </a>
+        </div>
+      </div>
+      <a href="/resume-checker.html" class="global-nav-link" style="color:var(--green);">Resume Checker</a>
+      <a href="/about.html" class="global-nav-link">About</a>
+    </nav>
+    <div class="auth-left" style="gap:8px;display:flex;align-items:center;">
+      <img class="auth-avatar" id="auth-avatar" src="" alt="User profile picture" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);display:none;object-fit:cover;">
+      <span class="auth-name" id="auth-name" style="font-size:12px;font-weight:500;color:var(--muted);">Guest</span>
+      <span class="sync-badge" id="sync-badge" style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;background:rgba(245,158,11,0.1);color:var(--yellow);">💾 Local</span>
+      <button class="auth-btn" id="auth-btn" onclick="window.signInWithGoogle?.()" style="display:none;padding:7px 14px;font-size:12px;" aria-label="Sign in with Google">
+        <span class="google-icon" aria-hidden="true"></span>
+        Sign in
+      </button>
+    </div>
+  </div>
+</header> -->
+<style>
+  .gnav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;}
+  .gnav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px;gap:12px;}
+  .gnav-brand{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;text-decoration:none;flex-shrink:0;}
+  .gnav-brand span{color:var(--accent);}
+  .gnav-links{display:flex;align-items:center;gap:2px;flex:1;}
+  .gnav-link{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;transition:color 0.15s,background 0.15s;}
+  .gnav-link:hover{color:var(--text);background:var(--surface2);text-decoration:none;}
+  .gnav-link.active-page{color:var(--accent);}
+  /* Dropdown */
+  .gnav-dd{position:relative;}
+  .gnav-dd-btn{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:color 0.15s,background 0.15s;}
+  .gnav-dd-btn:hover,.gnav-dd:hover .gnav-dd-btn{color:var(--text);background:var(--surface2);}
+  .gnav-dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;min-width:240px;box-shadow:0 8px 24px rgba(0,0,0,0.4);padding:6px;z-index:200;}
+  .gnav-dd:hover .gnav-dd-menu,.gnav-dd:focus-within .gnav-dd-menu{display:block;}
+  .gnav-dd-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;color:var(--text);}
+  .gnav-dd-item:hover{background:var(--surface2);text-decoration:none;}
+  .gnav-dd-icon{font-size:16px;flex-shrink:0;}
+  .gnav-dd-label{font-size:13px;font-weight:600;}
+  .gnav-dd-sub{font-size:11px;color:var(--muted);display:block;font-weight:400;}
+  .gnav-dd-divider{border:none;border-top:1px solid var(--border);margin:4px 0;}
+  .gnav-dd-soon{opacity:0.45;cursor:default;pointer-events:none;}
+  .gnav-cta{background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.2s;flex-shrink:0;}
+  .gnav-cta:hover{opacity:0.85;text-decoration:none;}
+  #auth-btn:hover{border-color:var(--accent);color:var(--accent);}
+  #auth-btn.signed-in{border-color:var(--border);}
+  #auth-btn.signed-in:hover{border-color:#ef4444;color:#ef4444;}
+  @media(max-width:700px){.gnav-links{display:none;}.gnav-inner{justify-content:space-between;}}
+  </style>
+  
+  <header class="gnav" role="banner">
+    <div class="gnav-inner">
+      <a href="/" class="gnav-brand" aria-label="LeetCode Pattern Tracker Home">⚡ <span>LC</span>Pattern</a>
+      <nav class="gnav-links" aria-label="Main navigation">
+        <a href="/" class="gnav-link ">Home</a>
+        <div class="gnav-dd" role="navigation" aria-label="Patterns menu">
+          <button class="gnav-dd-btn" aria-haspopup="true" aria-expanded="false">
+            Patterns
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div class="gnav-dd-menu" role="menu">
+            <a href="/two-pointers.html" class="gnav-dd-item " role="menuitem">
+              <span class="gnav-dd-icon">👉</span>
+              <span><span class="gnav-dd-label">Two Pointers</span><span class="gnav-dd-sub">7 sub-patterns · 33 problems</span></span>
+            </a>
+            <a href="/sliding-window.html" class="gnav-dd-item active-page" role="menuitem">
+              <span class="gnav-dd-icon">🪟</span>
+              <span><span class="gnav-dd-label">Sliding Window</span><span class="gnav-dd-sub">4 sub-patterns · 28 problems</span></span>
+            </a>
+            <hr class="gnav-dd-divider">
+            <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🧮</span><span><span class="gnav-dd-label">Dynamic Programming</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+            <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🕸️</span><span><span class="gnav-dd-label">Graph Algorithms</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+            <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🔍</span><span><span class="gnav-dd-label">Binary Search</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+            <hr class="gnav-dd-divider">
+            <a href="/#tracker" class="gnav-dd-item" role="menuitem"><span class="gnav-dd-icon">⚡</span><span><span class="gnav-dd-label">All 368 Problems</span><span class="gnav-dd-sub">Full tracker — all 15 categories</span></span></a>
+          </div>
+        </div>
+           <!-- commented for now-->
+        <!-- <a href="/resume-checker.html" class="gnav-link " style="color:var(--green);">Resume Checker</a> -->
+        <a href="/about.html" class="gnav-link ">About</a>
+      </nav>
+      
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+        <img id="auth-avatar" src="" alt="Profile" style="width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);display:none;object-fit:cover;">
+        <span id="auth-name" style="font-size:12px;font-weight:500;color:var(--muted);">Guest</span>
+        <span id="sync-badge" style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(245,158,11,0.1);color:#f59e0b;white-space:nowrap;">💾 Local</span>
+        <button id="auth-btn" onclick="window.signInWithGoogle?.()"
+          style="display:none;align-items:center;gap:6px;background:transparent;border:1px solid var(--border);color:var(--text);font-family:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;cursor:pointer;transition:border-color 0.15s,color 0.15s;white-space:nowrap;"
+          aria-label="Sign in with Google">
+          <svg width="14" height="14" viewBox="0 0 18 18" aria-hidden="true"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z"/></svg>
+          Sign in
+        </button>
+      </div>
+    </div>
+  </header>
+<!-- ═══════════════════════════════════════════
+     TOP AD BANNER
+     ADSENSE: Replace placeholder div with your ad ins tag after approval
+═══════════════════════════════════════════ -->
+<div style="text-align:center;padding:8px 16px 0;background:var(--bg);">
+  <!--
+  <ins class="adsbygoogle" style="display:block;min-height:90px;"
+    data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+    data-ad-slot="XXXXXXXXXX"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+
+     <!-- commented for now-->
+  <!-- <div class="ad-unit ad-banner" style="min-height:90px;">728 × 90 — Top Banner Ad</div> -->
+</div>
+
+<!-- ═══════════════════════════════════════════
+     HERO HEADER
+═══════════════════════════════════════════ -->
+<nav aria-label="Breadcrumb" style="padding:6px 24px;background:var(--surface);border-bottom:1px solid var(--border);font-size:11px;color:var(--muted);">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList" style="list-style:none;display:flex;gap:6px;align-items:center;flex-wrap:wrap;max-width:1300px;margin:0 auto;">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="https://leetcodepattern.com/" style="color:var(--accent);text-decoration:none;"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1">
+    </li>
+    <li style="color:var(--border);" aria-hidden="true">›</li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name" style="color:var(--muted);">DSA Patterns Tracker</span>
+      <meta itemprop="position" content="2">
+    </li>
+  </ol>
+</nav>
+<header class="hero" id="home" role="banner">
+  <h1>⚡ LeetCode Patterns Tracker</h1>
+  <p class="hero-sub">Master every DSA pattern. Track your progress. Ace your coding interviews.</p>
+
+  <div class="hero-tags" aria-label="Topics covered">
+    <span class="hero-tag">Two Pointers</span>
+    <span class="hero-tag">Sliding Window</span>
+    <span class="hero-tag">Dynamic Programming</span>
+    <span class="hero-tag">Graphs</span>
+    <span class="hero-tag">Binary Search</span>
+    <span class="hero-tag">Backtracking</span>
+    <span class="hero-tag">Heaps</span>
+    <span class="hero-tag">Trees</span>
+  </div>
+
+  <div class="overall-bar-wrap" role="progressbar" aria-label="Overall LeetCode progress">
+    <div class="overall-bar-label">
+      <span>Overall Progress</span>
+      <span id="overall-label">0 / 368 solved</span>
+    </div>
+    <div class="bar-outer">
+      <div class="bar-inner" id="overall-bar"></div>
+    </div>
+  </div>
+
+  <div class="stats-row" role="region" aria-label="Progress statistics">
+    <div class="stat-card" style="--accent-color:#6366f1">
+      <div class="stat-num" id="stat-solved">0</div>
+      <div class="stat-label">Solved</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#ef4444">
+      <div class="stat-num" id="stat-remaining">368</div>
+      <div class="stat-label">Remaining</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#06b6d4">
+      <div class="stat-num" id="stat-pct">0%</div>
+      <div class="stat-label">Complete</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#10b981">
+      <div class="stat-num">368</div>
+      <div class="stat-label">Total</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#f59e0b">
+      <div class="stat-num">88</div>
+      <div class="stat-label">Patterns</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#8b5cf6">
+      <div class="stat-num">15</div>
+      <div class="stat-label">Categories</div>
+    </div>
+  </div>
+
+  <!-- Per-pattern progress strips -->
+      <!-- commented for now-->
+  <!-- <div id="pattern-progress-strips" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:20px;max-width:760px;margin-left:auto;margin-right:auto;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 16px;min-width:180px;text-align:left;">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">👉 Two Pointers</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="flex:1;height:5px;background:var(--surface2);border-radius:99px;overflow:hidden;">
+          <div id="prog-bar-two-pointers" style="height:100%;background:#6366f1;border-radius:99px;width:0%;transition:width .5s;"></div>
+        </div>
+        <span id="prog-label-two-pointers" style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);white-space:nowrap;">0/33</span>
+      </div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 16px;min-width:180px;text-align:left;">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">🪟 Sliding Window</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="flex:1;height:5px;background:var(--surface2);border-radius:99px;overflow:hidden;">
+          <div id="prog-bar-sliding-window" style="height:100%;background:#06b6d4;border-radius:99px;width:0%;transition:width .5s;"></div>
+        </div>
+        <span id="prog-label-sliding-window" style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);white-space:nowrap;">0/28</span>
+      </div>
+    </div>
+  </div> -->
+</header>
+
+<!-- ═══════════════════════════════════════════
+     STICKY CONTROLS
+═══════════════════════════════════════════ -->
+<nav class="controls" role="navigation" aria-label="Filter and search controls">
+  <div class="search-wrap">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/></svg>
+    <input class="search-input" id="search" type="search" placeholder="Search problems by name or number..." aria-label="Search problems">
+  </div>
+  <button class="btn active" id="btn-all" onclick="filterProblems('all')">All</button>
+  <button class="btn" id="btn-unsolved" onclick="filterProblems('unsolved')">Unsolved</button>
+  <button class="btn" id="btn-solved" onclick="filterProblems('solved')">Solved ✅</button>
+  <button class="btn btn-danger" onclick="confirmReset()">Reset</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     CTA + ONBOARDING
+═══════════════════════════════════════════ -->
+<div style="max-width:1300px;margin:20px auto 0;padding:0 16px;" id="onboarding-wrap">
+  <div class="onboarding-banner" id="onboarding-msg">
+    <span class="onboarding-icon">👋</span>
+    <div>
+      <div class="onboarding-title">Welcome to LeetCode Pattern Tracker!</div>
+      <div class="onboarding-desc">
+        Check off problems as you solve them. Your progress saves automatically in your browser.
+        <strong>Sign in with Google</strong> to sync across devices — 100% free.
+        Start with <a href="/two-pointers.html" style="color:var(--accent);">Two Pointers</a> or <a href="/sliding-window.html" style="color:var(--accent);">Sliding Window</a> if you're new.
+      </div>
+    </div>
+    <button class="onboarding-close" onclick="document.getElementById('onboarding-msg').style.display='none';localStorage.setItem('lc_seen_onboard','1');" aria-label="Close onboarding">✕</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     RESUME ANALYZER CTA BANNER
+═══════════════════════════════════════════ -->
+   <!-- commented for now-->
+<!-- <div style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(99,102,241,0.06));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 24px;">
+  <div style="max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div>
+      <span style="font-size:14px;font-weight:700;color:var(--text);">📄 Analyze Your Resume for Interviews</span>
+      <span style="font-size:12px;color:var(--muted);margin-left:10px;">Check ATS compatibility and get improvement tips</span>
+    </div>
+    <a href="/resume-checker.html" style="background:var(--green);color:#fff;font-size:12px;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;flex-shrink:0;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      Try Resume Checker →
+    </a>
+  </div>
+</div> -->
+
+<!-- ═══════════════════════════════════════════
+     MAIN LAYOUT
+═══════════════════════════════════════════ -->
+<div class="layout" id="tracker">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" role="complementary" aria-label="Category navigation">
+    <div class="sidebar-title">Jump to Category</div>
+    <div id="sidebar-nav"></div>
+
+    <!-- Sidebar Ad -->
+    <div style="margin-top:16px">
+      <!-- Google AdSense Sidebar Ad
+      <ins class="adsbygoogle ad-sidebar" style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+        data-ad-slot="XXXXXXXXXX"
+        data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+       <!-- commented for now-->
+      <!-- <div class="ad-unit ad-sidebar">300 × 250<br>Sidebar Ad</div> -->
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content" id="content" role="main" aria-label="Problem tracker"></main>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SEO CONTENT SECTION
+═══════════════════════════════════════════ -->
+<section class="seo-section" id="learn" aria-labelledby="seo-main-heading">
+  <div class="seo-inner">
+
+    <!-- Quick Jump Links -->
+    <nav aria-label="Page sections" style="margin-bottom:32px;display:flex;flex-wrap:wrap;gap:10px;">
+      <a href="#what-are-patterns" style="font-size:12px;color:var(--accent);background:rgba(99,102,241,0.1);padding:5px 12px;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">What are LeetCode Patterns?</a>
+      <a href="#why-use-tracker" style="font-size:12px;color:var(--accent);background:rgba(99,102,241,0.1);padding:5px 12px;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">Why Use This Tracker?</a>
+      <a href="#key-patterns" style="font-size:12px;color:var(--accent);background:rgba(99,102,241,0.1);padding:5px 12px;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">Key DSA Patterns</a>
+      <a href="#study-plan" style="font-size:12px;color:var(--accent);background:rgba(99,102,241,0.1);padding:5px 12px;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">Study Plan</a>
+      <a href="#faq" style="font-size:12px;color:var(--accent);background:rgba(99,102,241,0.1);padding:5px 12px;border-radius:20px;border:1px solid rgba(99,102,241,0.3);">FAQ</a>
+      <a href="sliding-window.html" style="font-size:12px;color:var(--green);background:rgba(16,185,129,0.08);padding:5px 12px;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">Sliding Window Guide →</a>
+      <a href="two-pointers.html" style="font-size:12px;color:var(--green);background:rgba(16,185,129,0.08);padding:5px 12px;border-radius:20px;border:1px solid rgba(16,185,129,0.3);">Two Pointers Guide →</a>
+    </nav>
+
+    <!-- Section 1 -->
+    <section id="what-are-patterns" aria-labelledby="heading-what">
+      <h2 id="heading-what" id="seo-main-heading">What Is LeetCode Pattern Tracker?</h2>
+      <p>LeetCode patterns are reusable algorithmic techniques — such as <strong>Two Pointers</strong>, <strong>Sliding Window</strong>, <strong>Dynamic Programming</strong>, and <strong>Graph BFS/DFS</strong> — that apply to entire categories of coding problems. Instead of memorizing hundreds of individual solutions, mastering a pattern lets you recognize and solve any problem that follows that template. This pattern-based approach is the single most effective strategy for FAANG and SDE interview preparation at companies like Google, Amazon, Meta, Apple, and Microsoft.</p>
+      <p>This free tracker organizes all 88 major DSA patterns into 15 categories with 368 hand-curated LeetCode problems, letting you systematically work through each one and measure your readiness.</p>
+    </section>
+
+    <hr class="seo-divider">
+
+    <!-- Section 2 -->
+    <section id="why-use-tracker" aria-labelledby="heading-why">
+      <h2 id="heading-why">Why Pattern-Based DSA Preparation Works</h2>
+      <p>Most engineers preparing for coding interviews grind random LeetCode problems — spending hundreds of hours without a clear roadmap. Research and experience show that <strong>pattern-based DSA preparation</strong> is 3–5× more efficient. When you recognize that "this problem uses the Two Pointers pattern" instead of memorizing a specific solution, you unlock the ability to solve problems you've never seen before.</p>
+      <p>This <strong>free LeetCode patterns tracker</strong> gives you a structured preparation roadmap that mirrors how interviewers think. Every problem in FAANG interviews belongs to one of ~88 algorithmic patterns. Master the patterns, not the problems.</p>
+
+      <ul>
+        <li><strong>368 curated LeetCode problems</strong> across 88 patterns and 15 categories — covering every topic asked in FAANG interviews</li>
+        <li><strong>Real-time progress bars</strong> per category and pattern — always know where you stand</li>
+        <li><strong>Personal notes per problem</strong> — store your approach, time/space complexity, and working code solutions</li>
+        <li><strong>Cloud sync via Google login (Firebase)</strong> — access your progress from any device, never lose your work</li>
+        <li><strong>Completely free</strong> — no sign-up required to start, no paywalls, no premium tier</li>
+        <li><strong>Direct LeetCode links</strong> — one click to open any problem on LeetCode.com</li>
+      </ul>
+
+      <!-- CTA Buttons -->
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 28px;">
+        <a href="#tracker" class="cta-btn" onclick="document.getElementById('tracker').scrollIntoView({behavior:'smooth'});return false;">
+          🚀 Start Practicing Now
+        </a>
+        <!-- commented for now-->
+        <!-- <a href="/resume-checker.html" class="cta-btn-secondary">
+          📄 Analyze Your Resume
+        </a> -->
+      </div>
+
+      <!-- ADSENSE IN-FEED: replace div after approval -->
+      <!--
+      <ins class="adsbygoogle" style="display:block;text-align:center;min-height:100px;"
+           data-ad-layout="in-article" data-ad-format="fluid"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+       <!-- commented for now-->
+      <!-- <div class="ad-unit ad-in-feed" style="margin:24px 0;min-height:100px;">In-Feed Ad · 728 × 90</div> -->
+    </section>
+
+    <hr class="seo-divider">
+
+    <!-- Section 3 -->
+    <section id="key-patterns" aria-labelledby="heading-patterns">
+      <h2 id="heading-patterns">Key DSA Patterns Explained</h2>
+
+      <h3 id="two-pointers">Two Pointers Pattern <a href="#cat-0" style="font-size:12px;color:var(--accent);margin-left:8px;">→ Practice</a> <a href="two-pointers.html" style="font-size:12px;color:var(--green);margin-left:6px;">→ Full Guide</a></h3>
+      <p>The <a href="two-pointers.html"><strong>Two Pointers</strong></a> technique uses two indices that move through a data structure — often converging from opposite ends or moving at different speeds. It reduces O(n²) brute-force solutions to O(n) linear time. Essential for sorted array problems, linked list cycle detection (fast &amp; slow pointers), palindrome validation, and container maximization. Classic problems: <em>Two Sum II, 3Sum, Container With Most Water, Linked List Cycle.</em></p>
+
+      <h3 id="sliding-window">Sliding Window Pattern <a href="#cat-1" style="font-size:12px;color:var(--accent);margin-left:8px;">→ Practice</a> <a href="sliding-window.html" style="font-size:12px;color:var(--green);margin-left:6px;">→ Full Guide</a></h3>
+      <p>The <a href="sliding-window.html"><strong>Sliding Window</strong></a> pattern maintains a dynamic subset of elements as a window slides across an array or string. Fixed-size windows solve subarray sum/average problems in O(n). Variable-size windows handle constraint-based substring problems. Monotonic deque variants solve max/min in windows. Classic problems: <em>Minimum Window Substring, Longest Substring Without Repeating Characters, Sliding Window Maximum.</em></p>
+
+      <h3 id="dynamic-programming">Dynamic Programming (DP) Patterns <a href="#cat-4" style="font-size:12px;color:var(--accent);margin-left:8px;">→ Practice</a></h3>
+      <p><strong>Dynamic Programming</strong> is the most tested topic in FAANG interviews. It decomposes complex problems into overlapping subproblems using memoization or tabulation. This tracker covers all major DP subtypes: 1D Fibonacci-style (Climbing Stairs, House Robber), 1D Knapsack (Coin Change, Partition Equal Subset Sum), 2D LCS/Edit Distance, Grid DP, Interval DP, and LIS. Mastering all 11 DP patterns here is sufficient for any SDE interview.</p>
+
+      <h3 id="graph-algorithms">Graph Traversal Patterns <a href="#cat-3" style="font-size:12px;color:var(--accent);margin-left:8px;">→ Practice</a></h3>
+      <p><strong>Graph algorithms</strong> — BFS, DFS, Topological Sort, Dijkstra's, and Union-Find — appear in nearly every senior SDE interview. This tracker covers 8 distinct graph patterns including cycle detection, connected components, shortest paths (Dijkstra &amp; Bellman-Ford), island counting, and disjoint set union. Classic problems: <em>Number of Islands, Course Schedule, Word Ladder, Network Delay Time.</em></p>
+
+      <h3 id="binary-search">Binary Search Pattern <a href="#cat-8" style="font-size:12px;color:var(--accent);margin-left:8px;">→ Practice</a></h3>
+      <p><strong>Binary Search</strong> extends far beyond sorted arrays. The "search on answer" technique applies binary search to monotonic functions and optimization problems — reducing O(n) or O(n²) solutions to O(log n). Classic problems: <em>Koko Eating Bananas, Capacity to Ship Packages, Find Peak Element, Median of Two Sorted Arrays.</em></p>
+
+      <h3 id="backtracking">Backtracking Patterns <a href="#cat-6" style="font-size:12px;color:var(--accent);margin-left:8px;">→ Practice</a></h3>
+      <p><strong>Backtracking</strong> systematically explores all possible solutions by building candidates incrementally and abandoning ("backtracking") paths that violate constraints. It powers permutation generation, subset enumeration, constraint satisfaction (N-Queens, Sudoku), and word search in grids. Understanding the include/exclude decision tree is the key to mastering this pattern.</p>
+
+      <div class="pattern-grid" aria-label="All DSA pattern categories overview">
+        <a href="/two-pointers.html" class="pattern-card" style="text-decoration:none;display:block;" title="Two Pointers Pattern Guide"><div class="pattern-card-title">👉 Two Pointers</div><div class="pattern-card-desc">7 patterns · 33 problems · Full Guide →</div></a>
+        <a href="/sliding-window.html" class="pattern-card" style="text-decoration:none;display:block;" title="Sliding Window Pattern Guide"><div class="pattern-card-title">🪟 Sliding Window</div><div class="pattern-card-desc">4 patterns · 28 problems · Full Guide →</div></a>
+        <a href="#cat-2" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🌲 Tree Traversal</div><div class="pattern-card-desc">6 patterns · 33 problems</div></a>
+        <a href="#cat-3" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🕸️ Graph Algorithms</div><div class="pattern-card-desc">8 patterns · 53 problems</div></a>
+        <a href="#cat-4" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🧮 Dynamic Programming</div><div class="pattern-card-desc">11 patterns · 35 problems</div></a>
+        <a href="#cat-5" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🏔️ Heap / Priority Queue</div><div class="pattern-card-desc">4 patterns · 22 problems</div></a>
+        <a href="#cat-6" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🔙 Backtracking</div><div class="pattern-card-desc">7 patterns · 17 problems</div></a>
+        <a href="#cat-8" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🔍 Binary Search</div><div class="pattern-card-desc">5 patterns · 25 problems</div></a>
+        <a href="#cat-9" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">📚 Stack Patterns</div><div class="pattern-card-desc">6 patterns · 24 problems</div></a>
+        <a href="#cat-10" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">⚡ Bit Manipulation</div><div class="pattern-card-desc">4 patterns · 8 problems</div></a>
+        <a href="#cat-11" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">🔗 Linked List</div><div class="pattern-card-desc">5 patterns · 15 problems</div></a>
+        <a href="#cat-12" class="pattern-card" style="text-decoration:none;display:block;"><div class="pattern-card-title">📐 Array / Matrix</div><div class="pattern-card-desc">8 patterns · 15 problems</div></a>
+      </div>
+    </section>
+
+    <hr class="seo-divider">
+
+    <!-- Section 4 — Study Plan -->
+    <section id="study-plan" aria-labelledby="heading-plan">
+      <h2 id="heading-plan">8-Week DSA Study Plan for Coding Interviews</h2>
+      <p>Use this structured plan with the tracker to cover all 88 patterns in 8 weeks. Aim for 5–8 problems per day and always write your approach in the notes section before submitting.</p>
+      <ul>
+        <li><strong>Week 1:</strong> <a href="two-pointers.html">Two Pointers</a> + <a href="sliding-window.html">Sliding Window</a> — build pattern recognition fundamentals (<a href="two-pointers.html" style="font-size:12px">guide</a> / <a href="sliding-window.html" style="font-size:12px">guide</a>)</li>
+        <li><strong>Week 2:</strong> <a href="#cat-2">Tree Traversal (BFS &amp; DFS)</a> — master recursive and iterative tree techniques</li>
+        <li><strong>Week 3:</strong> <a href="#cat-3">Graph Algorithms</a> — DFS, BFS, Topological Sort, Union-Find</li>
+        <li><strong>Week 4–5:</strong> <a href="#cat-4">Dynamic Programming</a> — 1D, 2D, Knapsack, LCS, LIS (the hardest topic, give it two weeks)</li>
+        <li><strong>Week 6:</strong> <a href="#cat-5">Heaps</a> + <a href="#cat-6">Backtracking</a> + <a href="#cat-7">Greedy</a></li>
+        <li><strong>Week 7:</strong> <a href="#cat-8">Binary Search</a> + <a href="#cat-9">Stack</a> + <a href="#cat-10">Bit Manipulation</a></li>
+        <li><strong>Week 8:</strong> <a href="#cat-11">Linked List</a> + <a href="#cat-12">Array/Matrix</a> + <a href="#cat-13">Strings</a> + <a href="#cat-14">Design</a> + Mock interviews</li>
+      </ul>
+    </section>
+
+    <hr class="seo-divider">
+
+    <!-- ── HOW TO PREPARE section ── -->
+    <section id="how-to-prepare" aria-labelledby="heading-how">
+      <h2 id="heading-how">How to Prepare for Coding Interviews in 2026</h2>
+      <p>Effective <strong>coding interview preparation</strong> follows a three-phase approach. In the first phase (weeks 1–3), build your foundational pattern knowledge: start with <a href="/two-pointers.html">Two Pointers</a> and <a href="/sliding-window.html">Sliding Window</a> — they appear in nearly every interview and share underlying mechanics that unlock faster learning of harder patterns.</p>
+      <p>In the second phase (weeks 4–6), tackle the high-frequency patterns that make or break FAANG interviews: Tree DFS/BFS, Graph traversal, and Dynamic Programming. Use this tracker to ensure you haven't skipped any pattern sub-type — interviewers know exactly which DP variant to test if they see you've practiced Coin Change but not Knapsack.</p>
+      <p>In the final phase (weeks 7–8), do timed mock problem sets, review your notes, and optimize your approach explanations. Your goal is to reach the point where you recognize a pattern within 30 seconds of reading a problem — that's when you're interview-ready.</p>
+         <!-- commented for now-->
+      <!-- <p><strong>Pro tip:</strong> After mastering DSA patterns, make sure your resume reflects your skills. Use our <a href="/resume-checker.html" style="color:var(--green);font-weight:600;">Resume Checker</a> to analyze your resume for ATS compatibility and interview readiness.</p> -->
+    </section>
+
+    <hr class="seo-divider">
+
+    <!-- HOW TO PREPARE section -->
+    <section id="how-to-prepare" aria-labelledby="h-how-prepare">
+      <h2 id="h-how-prepare">How to Prepare for Coding Interviews in 2026</h2>
+      <p>Effective <strong>coding interview preparation</strong> follows a three-phase approach. In the first phase (weeks 1–3), build foundational pattern knowledge: start with <a href="/two-pointers.html">Two Pointers</a> and <a href="/sliding-window.html">Sliding Window</a> — they appear in almost every interview and share underlying mechanics that unlock faster learning of harder patterns.</p>
+      <p>In the second phase (weeks 4–6), tackle the patterns that make or break FAANG interviews: Tree DFS/BFS, Graph traversal, and Dynamic Programming. Use this tracker's per-category progress bars to ensure you haven't skipped any sub-type — interviewers know exactly which DP variant to test.</p>
+      <p>In the final phase (weeks 7–8), do timed mock problem sets, review your notes, and optimize your approach explanations. Your goal: recognize a pattern within 30 seconds of reading a problem. That's when you're interview-ready. Then use our <a href="/resume-checker.html" style="color:var(--green);font-weight:600;">Resume Checker</a> to ensure your skills show up on paper.</p>
+    </section>
+
+    <hr class="seo-divider">
+
+    <!-- ADSENSE IN-FEED 2: replace div after approval -->
+    <!--
+    <ins class="adsbygoogle" style="display:block;min-height:100px;"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+     <!-- commented for now-->
+    <!-- <div class="ad-unit ad-in-feed" style="margin-bottom:32px;min-height:100px;">In-Feed Ad 2 · 728 × 90</div> -->
+
+    <!-- Section 5 — FAQ (schema-backed) -->
+    <section id="faq" aria-labelledby="heading-faq">
+      <h2 id="heading-faq">Frequently Asked Questions</h2>
+
+      <details class="faq-item" open>
+        <summary class="faq-q">What are LeetCode patterns and why do they matter?</summary>
+        <p class="faq-a">LeetCode patterns are reusable algorithmic templates — like Two Pointers, Sliding Window, and Dynamic Programming — that apply to whole categories of problems. They matter because interviewers don't randomly pick problems; they pick problems from known patterns. Learning the pattern means you can solve any variant, not just the ones you've seen.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How long does it take to learn DSA for coding interviews?</summary>
+        <p class="faq-a">Most engineers need 8–16 weeks of consistent daily practice. If you solve 5–8 problems per day across all major patterns using a structured tracker, you can be interview-ready in 8 weeks. Don't rush — understanding the pattern deeply is more valuable than volume.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How to prepare for FAANG coding interviews?</summary>
+        <p class="faq-a">Follow a pattern-based study plan: start with Arrays and Two Pointers, move to Trees and Graphs, then tackle Dynamic Programming. Use a tracker (like this one) to ensure you've covered all patterns. Write approach notes for every problem you solve. Do 2–3 mock interviews in your final week. Aim for 150–300 problems total before your interview.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Is this LeetCode tracker completely free?</summary>
+        <p class="faq-a">Yes — 100% free, forever. You can start tracking immediately without any account. Sign in with Google for free cloud sync (powered by Firebase) so your progress is preserved across all your devices. No credit card, no premium tier, no hidden costs.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is the difference between this and Striver's SDE Sheet?</summary>
+        <p class="faq-a">Striver's SDE Sheet organizes problems by broad topic (Arrays, Linked Lists, etc.). LeetCode Pattern Tracker organizes by specific algorithmic pattern — e.g., "Fast &amp; Slow Pointers," "Monotonic Stack," "Union-Find DSU" — which is more granular and better for interview readiness. It also includes cloud sync, per-problem notes, and a live progress dashboard.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How many LeetCode problems should I solve before interviews?</summary>
+        <p class="faq-a">Quality over quantity. Solving 150–300 problems across all major patterns — and being able to explain the time and space complexity of each — is sufficient for most FAANG-level interviews. If you can solve any problem in each pattern confidently, you're ready regardless of the total count.</p>
+      </details>
+    </section>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     GLOBAL FOOTER-->
+     
+<div id="footer"></div>
+<!-- ═══════════════════════════════════════════
+     MODALS
+═══════════════════════════════════════════ -->
+<div class="modal-overlay" id="about-modal" role="dialog" aria-modal="true" aria-label="About Us">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('about-modal')" aria-label="Close">✕</button>
+    <h2>About Us</h2>
+    <p>LeetCode Patterns Tracker is a free, open-source tool built to help software engineers systematically prepare for technical interviews. Our goal is to make DSA preparation structured, measurable, and effective.</p>
+    <p style="margin-top:12px">We believe in learning by patterns, not by memorization. By mastering the 88 core patterns covered here, you'll be equipped to solve any problem you encounter in coding interviews at top tech companies.</p>
+    <p style="margin-top:12px">This tracker is inspired by Striver's SDE Sheet and NeetCode 150, designed with a modern interface and cloud sync capability.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="privacy-modal" role="dialog" aria-modal="true" aria-label="Privacy Policy">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('privacy-modal')" aria-label="Close">✕</button>
+    <h2>Privacy Policy</h2>
+    <p><strong>Last updated: 2026</strong></p>
+    <p style="margin-top:12px">We respect your privacy. Here's what we collect and how we use it:</p>
+    <ul style="margin-top:12px">
+      <li><strong>Google Account Info:</strong> When you sign in with Google, we store your name, email, and profile photo to personalize your experience.</li>
+      <li><strong>Progress Data:</strong> Your problem-solving progress and notes are stored securely in Firebase Firestore, linked to your account.</li>
+      <li><strong>Local Storage:</strong> Guest users' progress is stored in browser localStorage only and never sent to our servers.</li>
+      <li><strong>Analytics:</strong> We may use anonymous analytics to improve the product.</li>
+      <li><strong>Advertising:</strong> Google AdSense may display ads and use cookies for personalization.</li>
+    </ul>
+    <p style="margin-top:12px">We do not sell your personal data to any third parties. You can delete your account and all associated data at any time by contacting us.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-label="Contact Us">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('contact-modal')" aria-label="Close">✕</button>
+    <h2>Contact Us</h2>
+    <p>Have feedback, found a bug, or want to contribute? We'd love to hear from you.</p>
+    <ul style="margin-top:16px">
+      <li>📧 Email: <a href="/cdn-cgi/l/email-protection#ff9c90918b9e9c8bbf939a9a8b9c909b9a8f9e8b8b9a8d91d19c9092" style="color:var(--accent)"><span class="__cf_email__" data-cfemail="4724282933262433072b22223324282322372633332235296924282a">[email&#160;protected]</span></a></li>
+      <li style="margin-top:8px">🐛 Bug Reports: <a href="https://github.com/lcpatterntrack/leetcode-tracker/issues" target="_blank" rel="noopener" style="color:var(--accent)">GitHub Issues</a></li>
+      <li style="margin-top:8px">⭐ GitHub: <a href="https://github.com/lcpatterntrack/leetcode-tracker" target="_blank" rel="noopener" style="color:var(--accent)">github.com/lcpatterntrack/leetcode-tracker</a></li>
+    </ul>
+    <p style="margin-top:16px"><a href="/contact.html" style="color:var(--accent);font-weight:600;">Open full contact page →</a></p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <div class="toast-dot" id="toast-dot"></div>
+  <span id="toast-msg"></span>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN SCRIPT
+═══════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── DATA ──
+const COLORS  = ['#6366f1','#06b6d4','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316','#84cc16','#a855f7','#3b82f6','#22d3ee','#fb923c','#4ade80'];
+const EMOJIS  = ['👉','🪟','🌲','🕸️','🧮','🏔️','🔙','💰','🔍','📚','⚡','🔗','📐','🔤','🏗️'];
+const TOTAL   = 368;
+
+const DATA = [{"category":"I. Two Pointer Patterns","patterns":[{"name":"Pattern 1: Two Pointers - Converging (Sorted Array Target Sum)","problems":[{"num":"1","title":"Two Sum","slug":"two-sum"},{"num":"11","title":"Container With Most Water","slug":"container-with-most-water"},{"num":"15","title":"3Sum","slug":"3sum"},{"num":"16","title":"3Sum Closest","slug":"3sum-closest"},{"num":"18","title":"4Sum","slug":"4sum"},{"num":"167","title":"Two Sum II - Input Array Is Sorted","slug":"two-sum-ii-input-array-is-sorted"},{"num":"349","title":"Intersection of Two Arrays","slug":"intersection-of-two-arrays"},{"num":"392","title":"Is Subsequence","slug":"is-subsequence"},{"num":"881","title":"Boats to Save People","slug":"boats-to-save-people"},{"num":"977","title":"Squares of a Sorted Array","slug":"squares-of-a-sorted-array"},{"num":"259","title":"3Sum Smaller","slug":"3sum-smaller"}]},{"name":"Pattern 2: Two Pointers - Fast & Slow (Cycle Detection)","problems":[{"num":"141","title":"Linked List Cycle","slug":"linked-list-cycle"},{"num":"202","title":"Happy Number","slug":"happy-number"},{"num":"287","title":"Find the Duplicate Number","slug":"find-the-duplicate-number"}]},{"name":"Pattern 3: Two Pointers - Fixed Separation (Nth Node from End)","problems":[{"num":"19","title":"Remove Nth Node From End of List","slug":"remove-nth-node-from-end-of-list"},{"num":"876","title":"Middle of the Linked List","slug":"middle-of-the-linked-list"},{"num":"2095","title":"Delete the Middle Node of a Linked List","slug":"delete-the-middle-node-of-a-linked-list"}]},{"name":"Pattern 4: Two Pointers - In-place Array Modification","problems":[{"num":"26","title":"Remove Duplicates from Sorted Array","slug":"remove-duplicates-from-sorted-array"},{"num":"27","title":"Remove Element","slug":"remove-element"},{"num":"75","title":"Sort Colors","slug":"sort-colors"},{"num":"80","title":"Remove Duplicates from Sorted Array II","slug":"remove-duplicates-from-sorted-array-ii"},{"num":"283","title":"Move Zeroes","slug":"move-zeroes"},{"num":"443","title":"String Compression","slug":"string-compression"},{"num":"905","title":"Sort Array By Parity","slug":"sort-array-by-parity"},{"num":"2337","title":"Move Pieces to Obtain a String","slug":"move-pieces-to-obtain-a-string"},{"num":"2938","title":"Separate Black and White Balls","slug":"separate-black-and-white-balls"}]},{"name":"Pattern 5: Two Pointers - String Comparison with Backspaces","problems":[{"num":"844","title":"Backspace String Compare","slug":"backspace-string-compare"}]},{"name":"Pattern 6: Two Pointers - Expanding From Center (Palindromes)","problems":[{"num":"5","title":"Longest Palindromic Substring","slug":"longest-palindromic-substring"},{"num":"647","title":"Palindromic Substrings","slug":"palindromic-substrings"}]},{"name":"Pattern 7: Two Pointers - String Reversal","problems":[{"num":"151","title":"Reverse Words in a String","slug":"reverse-words-in-a-string"},{"num":"344","title":"Reverse String","slug":"reverse-string"},{"num":"345","title":"Reverse Vowels of a String","slug":"reverse-vowels-of-a-string"},{"num":"541","title":"Reverse String II","slug":"reverse-string-ii"}]}]},{"category":"II. Sliding Window Patterns","patterns":[{"name":"Pattern 8: Sliding Window - Fixed Size (Subarray Calculation)","problems":[{"num":"346","title":"Moving Average from Data Stream","slug":"moving-average-from-data-stream"},{"num":"643","title":"Maximum Average Subarray I","slug":"maximum-average-subarray-i"},{"num":"2985","title":"Calculate Compressed Mean","slug":"calculate-compressed-mean"},{"num":"3254","title":"Find the Power of K-Size Subarrays I","slug":"find-the-power-of-k-size-subarrays-i"},{"num":"3318","title":"Find X-Sum of All K-Long Subarrays I","slug":"find-x-sum-of-all-k-long-subarrays-i"}]},{"name":"Pattern 9: Sliding Window - Variable Size (Condition-Based)","problems":[{"num":"3","title":"Longest Substring Without Repeating Characters","slug":"longest-substring-without-repeating-characters"},{"num":"76","title":"Minimum Window Substring","slug":"minimum-window-substring"},{"num":"209","title":"Minimum Size Subarray Sum","slug":"minimum-size-subarray-sum"},{"num":"219","title":"Contains Duplicate II","slug":"contains-duplicate-ii"},{"num":"424","title":"Longest Repeating Character Replacement","slug":"longest-repeating-character-replacement"},{"num":"713","title":"Subarray Product Less Than K","slug":"subarray-product-less-than-k"},{"num":"904","title":"Fruit Into Baskets","slug":"fruit-into-baskets"},{"num":"1004","title":"Max Consecutive Ones III","slug":"max-consecutive-ones-iii"},{"num":"1438","title":"Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit","slug":"longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit"},{"num":"1493","title":"Longest Subarray of 1's After Deleting One Element","slug":"longest-subarray-of-1s-after-deleting-one-element"},{"num":"1658","title":"Minimum Operations to Reduce X to Zero","slug":"minimum-operations-to-reduce-x-to-zero"},{"num":"1838","title":"Frequency of the Most Frequent Element","slug":"frequency-of-the-most-frequent-element"},{"num":"2461","title":"Maximum Sum of Distinct Subarrays With Length K","slug":"maximum-sum-of-distinct-subarrays-with-length-k"},{"num":"2516","title":"Take K of Each Character From Left and Right","slug":"take-k-of-each-character-from-left-and-right"},{"num":"2762","title":"Continuous Subarrays","slug":"continuous-subarrays"},{"num":"2779","title":"Maximum Beauty of an Array After Applying Operation","slug":"maximum-beauty-of-an-array-after-applying-operation"},{"num":"2981","title":"Find Longest Special Substring That Occurs Thrice I","slug":"find-longest-special-substring-that-occurs-thrice-i"},{"num":"3026","title":"Maximum Good Subarray Sum","slug":"maximum-good-subarray-sum"},{"num":"3346","title":"Maximum Frequency of an Element After Performing Operations I","slug":"maximum-frequency-of-an-element-after-performing-operations-i"},{"num":"3347","title":"Maximum Frequency of an Element After Performing Operations II","slug":"maximum-frequency-of-an-element-after-performing-operations-ii"}]},{"name":"Pattern 10: Sliding Window - Monotonic Queue for Max/Min","problems":[{"num":"239","title":"Sliding Window Maximum","slug":"sliding-window-maximum"},{"num":"862","title":"Shortest Subarray with Sum at Least K","slug":"shortest-subarray-with-sum-at-least-k"},{"num":"1696","title":"Jump Game VI","slug":"jump-game-vi"}]},{"name":"Pattern 11: Sliding Window - Character Frequency Matching","problems":[]}]},{"category":"III. Tree Traversal Patterns (DFS & BFS)","patterns":[{"name":"Pattern 12: Tree BFS - Level Order Traversal","problems":[{"num":"102","title":"Binary Tree Level Order Traversal","slug":"binary-tree-level-order-traversal"},{"num":"103","title":"Binary Tree Zigzag Level Order Traversal","slug":"binary-tree-zigzag-level-order-traversal"},{"num":"199","title":"Binary Tree Right Side View","slug":"binary-tree-right-side-view"},{"num":"515","title":"Find Largest Value in Each Tree Row","slug":"find-largest-value-in-each-tree-row"},{"num":"1161","title":"Maximum Level Sum of a Binary Tree","slug":"maximum-level-sum-of-a-binary-tree"}]},{"name":"Pattern 13: Tree DFS - Recursive Preorder Traversal","problems":[{"num":"100","title":"Same Tree","slug":"same-tree"},{"num":"101","title":"Symmetric Tree","slug":"symmetric-tree"},{"num":"105","title":"Construct Binary Tree from Preorder and Inorder Traversal","slug":"construct-binary-tree-from-preorder-and-inorder-traversal"},{"num":"114","title":"Flatten Binary Tree to Linked List","slug":"flatten-binary-tree-to-linked-list"},{"num":"226","title":"Invert Binary Tree","slug":"invert-binary-tree"},{"num":"257","title":"Binary Tree Paths","slug":"binary-tree-paths"},{"num":"988","title":"Smallest String Starting From Leaf","slug":"smallest-string-starting-from-leaf"}]},{"name":"Pattern 14: Tree DFS - Recursive Inorder Traversal","problems":[{"num":"94","title":"Binary Tree Inorder Traversal","slug":"binary-tree-inorder-traversal"},{"num":"98","title":"Validate Binary Search Tree","slug":"validate-binary-search-tree"},{"num":"173","title":"Binary Search Tree Iterator","slug":"binary-search-tree-iterator"},{"num":"230","title":"Kth Smallest Element in a BST","slug":"kth-smallest-element-in-a-bst"},{"num":"501","title":"Find Mode in Binary Search Tree","slug":"find-mode-in-binary-search-tree"},{"num":"530","title":"Minimum Absolute Difference in BST","slug":"minimum-absolute-difference-in-bst"}]},{"name":"Pattern 15: Tree DFS - Recursive Postorder Traversal","problems":[{"num":"104","title":"Maximum Depth of Binary Tree","slug":"maximum-depth-of-binary-tree"},{"num":"110","title":"Balanced Binary Tree","slug":"balanced-binary-tree"},{"num":"124","title":"Binary Tree Maximum Path Sum","slug":"binary-tree-maximum-path-sum"},{"num":"145","title":"Binary Tree Postorder Traversal","slug":"binary-tree-postorder-traversal"},{"num":"337","title":"House Robber III","slug":"house-robber-iii"},{"num":"366","title":"Find Leaves of Binary Tree","slug":"find-leaves-of-binary-tree"},{"num":"543","title":"Diameter of Binary Tree","slug":"diameter-of-binary-tree"},{"num":"863","title":"All Nodes Distance K in Binary Tree","slug":"all-nodes-distance-k-in-binary-tree"},{"num":"1110","title":"Delete Nodes And Return Forest","slug":"delete-nodes-and-return-forest"},{"num":"2458","title":"Height of Binary Tree After Subtree Removal Queries","slug":"height-of-binary-tree-after-subtree-removal-queries"}]},{"name":"Pattern 17: Tree - Lowest Common Ancestor (LCA) Finding","problems":[{"num":"235","title":"Lowest Common Ancestor of a Binary Search Tree","slug":"lowest-common-ancestor-of-a-binary-search-tree"},{"num":"236","title":"Lowest Common Ancestor of a Binary Tree","slug":"lowest-common-ancestor-of-a-binary-tree"}]},{"name":"Pattern 18: Tree - Serialization and Deserialization","problems":[{"num":"297","title":"Serialize and Deserialize Binary Tree","slug":"serialize-and-deserialize-binary-tree"},{"num":"572","title":"Subtree of Another Tree","slug":"subtree-of-another-tree"},{"num":"652","title":"Find Duplicate Subtrees","slug":"find-duplicate-subtrees"}]}]},{"category":"IV. Graph Traversal Patterns (DFS & BFS)","patterns":[{"name":"Pattern 19: Graph DFS - Connected Components / Island Counting","problems":[{"num":"130","title":"Surrounded Regions","slug":"surrounded-regions"},{"num":"200","title":"Number of Islands","slug":"number-of-islands"},{"num":"417","title":"Pacific Atlantic Water Flow","slug":"pacific-atlantic-water-flow"},{"num":"547","title":"Number of Provinces","slug":"number-of-provinces"},{"num":"695","title":"Max Area of Island","slug":"max-area-of-island"},{"num":"733","title":"Flood Fill","slug":"flood-fill"},{"num":"841","title":"Keys and Rooms","slug":"keys-and-rooms"},{"num":"1020","title":"Number of Enclaves","slug":"number-of-enclaves"},{"num":"1254","title":"Number of Closed Islands","slug":"number-of-closed-islands"},{"num":"1905","title":"Count Sub Islands","slug":"count-sub-islands"},{"num":"2101","title":"Detonate the Maximum Bombs","slug":"detonate-the-maximum-bombs"}]},{"name":"Pattern 20: Graph BFS - Connected Components / Island Counting","problems":[{"num":"127","title":"Word Ladder","slug":"word-ladder"},{"num":"542","title":"01 Matrix","slug":"01-matrix"},{"num":"994","title":"Rotting Oranges","slug":"rotting-oranges"},{"num":"1091","title":"Shortest Path in Binary Matrix","slug":"shortest-path-in-binary-matrix"}]},{"name":"Pattern 21: Graph DFS - Cycle Detection (Directed Graph)","problems":[{"num":"207","title":"Course Schedule","slug":"course-schedule"},{"num":"210","title":"Course Schedule II","slug":"course-schedule-ii"},{"num":"802","title":"Find Eventual Safe States","slug":"find-eventual-safe-states"},{"num":"1059","title":"All Paths from Source Lead to Destination","slug":"all-paths-from-source-lead-to-destination"}]},{"name":"Pattern 22: Graph BFS - Topological Sort (Kahn's Algorithm)","problems":[{"num":"207","title":"Course Schedule","slug":"course-schedule"},{"num":"210","title":"Course Schedule II","slug":"course-schedule-ii"},{"num":"269","title":"Alien Dictionary","slug":"alien-dictionary"},{"num":"310","title":"Minimum Height Trees","slug":"minimum-height-trees"},{"num":"444","title":"Sequence Reconstruction","slug":"sequence-reconstruction"},{"num":"1136","title":"Parallel Courses","slug":"parallel-courses"},{"num":"1857","title":"Largest Color Value in a Directed Graph","slug":"largest-color-value-in-a-directed-graph"},{"num":"2050","title":"Parallel Courses III","slug":"parallel-courses-iii"},{"num":"2115","title":"Find All Possible Recipes from Given Supplies","slug":"find-all-possible-recipes-from-given-supplies"},{"num":"2392","title":"Build a Matrix With Conditions","slug":"build-a-matrix-with-conditions"}]},{"name":"Pattern 23: Graph - Deep Copy / Cloning","problems":[{"num":"133","title":"Clone Graph","slug":"clone-graph"}]},{"name":"Pattern 24: Graph - Shortest Path (Dijkstra's Algorithm)","problems":[{"num":"743","title":"Network Delay Time","slug":"network-delay-time"},{"num":"778","title":"Swim in Rising Water","slug":"swim-in-rising-water"},{"num":"1514","title":"Path with Maximum Probability","slug":"path-with-maximum-probability"},{"num":"1631","title":"Path With Minimum Effort","slug":"path-with-minimum-effort"},{"num":"1976","title":"Number of Ways to Arrive at Destination","slug":"number-of-ways-to-arrive-at-destination"},{"num":"2045","title":"Second Minimum Time to Reach Destination","slug":"second-minimum-time-to-reach-destination"},{"num":"2203","title":"Minimum Weighted Subgraph With the Required Paths","slug":"minimum-weighted-subgraph-with-the-required-paths"},{"num":"2290","title":"Minimum Obstacle Removal to Reach Corner","slug":"minimum-obstacle-removal-to-reach-corner"},{"num":"2577","title":"Minimum Time to Visit a Cell In a Grid","slug":"minimum-time-to-visit-a-cell-in-a-grid"},{"num":"2812","title":"Find the Safest Path in a Grid","slug":"find-the-safest-path-in-a-grid"}]},{"name":"Pattern 25: Graph - Shortest Path (Bellman-Ford / BFS+K)","problems":[{"num":"787","title":"Cheapest Flights Within K Stops","slug":"cheapest-flights-within-k-stops"}]},{"name":"Pattern 26: Graph - Union-Find (Disjoint Set Union - DSU)","problems":[{"num":"200","title":"Number of Islands","slug":"number-of-islands"},{"num":"261","title":"Graph Valid Tree","slug":"graph-valid-tree"},{"num":"305","title":"Number of Islands II","slug":"number-of-islands-ii"},{"num":"323","title":"Number of Connected Components in an Undirected Graph","slug":"number-of-connected-components-in-an-undirected-graph"},{"num":"547","title":"Number of Provinces","slug":"number-of-provinces"},{"num":"684","title":"Redundant Connection","slug":"redundant-connection"},{"num":"721","title":"Accounts Merge","slug":"accounts-merge"},{"num":"737","title":"Sentence Similarity II","slug":"sentence-similarity-ii"},{"num":"947","title":"Most Stones Removed with Same Row or Column","slug":"most-stones-removed-with-same-row-or-column"},{"num":"952","title":"Largest Component Size by Common Factor","slug":"largest-component-size-by-common-factor"},{"num":"959","title":"Regions Cut By Slashes","slug":"regions-cut-by-slashes"},{"num":"1101","title":"The Earliest Moment When Everyone Become Friends","slug":"the-earliest-moment-when-everyone-become-friends"}]}]},{"category":"V. Dynamic Programming (DP) Patterns","patterns":[{"name":"Pattern 27: DP - 1D Array (Fibonacci Style)","problems":[{"num":"70","title":"Climbing Stairs","slug":"climbing-stairs"},{"num":"91","title":"Decode Ways","slug":"decode-ways"},{"num":"198","title":"House Robber","slug":"house-robber"},{"num":"213","title":"House Robber II","slug":"house-robber-ii"},{"num":"337","title":"House Robber III","slug":"house-robber-iii"},{"num":"509","title":"Fibonacci Number","slug":"fibonacci-number"},{"num":"740","title":"Delete and Earn","slug":"delete-and-earn"},{"num":"746","title":"Min Cost Climbing Stairs","slug":"min-cost-climbing-stairs"}]},{"name":"Pattern 28: DP - 1D Array (Kadane's Algorithm for Max/Min Subarray)","problems":[{"num":"53","title":"Maximum Subarray","slug":"maximum-subarray"}]},{"name":"Pattern 29: DP - 1D Array (Coin Change / Unbounded Knapsack Style)","problems":[{"num":"322","title":"Coin Change","slug":"coin-change"},{"num":"377","title":"Combination Sum IV","slug":"combination-sum-iv"},{"num":"518","title":"Coin Change II","slug":"coin-change-ii"}]},{"name":"Pattern 30: DP - 1D Array (0/1 Knapsack Subset Sum Style)","problems":[{"num":"416","title":"Partition Equal Subset Sum","slug":"partition-equal-subset-sum"},{"num":"494","title":"Target Sum","slug":"target-sum"}]},{"name":"Pattern 31: DP - 1D Array (Word Break Style)","problems":[{"num":"139","title":"Word Break","slug":"word-break"},{"num":"140","title":"Word Break II","slug":"word-break-ii"}]},{"name":"Pattern 32: DP - 2D Array (Longest Common Subsequence - LCS)","problems":[{"num":"583","title":"Delete Operation for Two Strings","slug":"delete-operation-for-two-strings"},{"num":"1143","title":"Longest Common Subsequence","slug":"longest-common-subsequence"}]},{"name":"Pattern 33: DP - 2D Array (Edit Distance / Levenshtein Distance)","problems":[{"num":"72","title":"Edit Distance","slug":"edit-distance"}]},{"name":"Pattern 34: DP - 2D Array (Unique Paths on Grid)","problems":[{"num":"62","title":"Unique Paths","slug":"unique-paths"},{"num":"63","title":"Unique Paths II","slug":"unique-paths-ii"},{"num":"64","title":"Minimum Path Sum","slug":"minimum-path-sum"},{"num":"120","title":"Triangle","slug":"triangle"},{"num":"221","title":"Maximal Square","slug":"maximal-square"},{"num":"931","title":"Minimum Falling Path Sum","slug":"minimum-falling-path-sum"},{"num":"1277","title":"Count Square Submatrices with All Ones","slug":"count-square-submatrices-with-all-ones"}]},{"name":"Pattern 35: DP - Interval DP","problems":[{"num":"312","title":"Burst Balloons","slug":"burst-balloons"},{"num":"546","title":"Remove Boxes","slug":"remove-boxes"}]},{"name":"Pattern 36: DP - Catalan Numbers","problems":[{"num":"95","title":"Unique Binary Search Trees II","slug":"unique-binary-search-trees-ii"},{"num":"96","title":"Unique Binary Search Trees","slug":"unique-binary-search-trees"},{"num":"241","title":"Different Ways to Add Parentheses","slug":"different-ways-to-add-parentheses"}]},{"name":"Pattern 37: DP - Longest Increasing Subsequence (LIS)","problems":[{"num":"300","title":"Longest Increasing Subsequence","slug":"longest-increasing-subsequence"},{"num":"354","title":"Russian Doll Envelopes","slug":"russian-doll-envelopes"},{"num":"1671","title":"Minimum Number of Removals to Make Mountain Array","slug":"minimum-number-of-removals-to-make-mountain-array"},{"num":"2407","title":"Longest Increasing Subsequence II","slug":"longest-increasing-subsequence-ii"}]}]},{"category":"VI. Heap (Priority Queue) Patterns","patterns":[{"name":"Pattern 38: Heap - Top K Elements (Selection/Frequency)","problems":[{"num":"215","title":"Kth Largest Element in an Array","slug":"kth-largest-element-in-an-array"},{"num":"347","title":"Top K Frequent Elements","slug":"top-k-frequent-elements"},{"num":"451","title":"Sort Characters By Frequency","slug":"sort-characters-by-frequency"},{"num":"506","title":"Relative Ranks","slug":"relative-ranks"},{"num":"703","title":"Kth Largest Element in a Stream","slug":"kth-largest-element-in-a-stream"},{"num":"973","title":"K Closest Points to Origin","slug":"k-closest-points-to-origin"},{"num":"1046","title":"Last Stone Weight","slug":"last-stone-weight"},{"num":"2558","title":"Take Gifts From the Richest Pile","slug":"take-gifts-from-the-richest-pile"}]},{"name":"Pattern 39: Heap - Two Heaps for Median Finding","problems":[{"num":"295","title":"Find Median from Data Stream","slug":"find-median-from-data-stream"},{"num":"1825","title":"Finding MK Average","slug":"finding-mk-average"}]},{"name":"Pattern 40: Heap - K-way Merge","problems":[{"num":"23","title":"Merge k Sorted Lists","slug":"merge-k-sorted-lists"},{"num":"373","title":"Find K Pairs with Smallest Sums","slug":"find-k-pairs-with-smallest-sums"},{"num":"378","title":"Kth Smallest Element in a Sorted Matrix","slug":"kth-smallest-element-in-a-sorted-matrix"},{"num":"632","title":"Smallest Range Covering Elements from K Lists","slug":"smallest-range-covering-elements-from-k-lists"}]},{"name":"Pattern 41: Heap - Scheduling / Minimum Cost (Greedy with Priority Queue)","problems":[{"num":"253","title":"Meeting Rooms II","slug":"meeting-rooms-ii"},{"num":"767","title":"Reorganize String","slug":"reorganize-string"},{"num":"857","title":"Minimum Cost to Hire K Workers","slug":"minimum-cost-to-hire-k-workers"},{"num":"1642","title":"Furthest Building You Can Reach","slug":"furthest-building-you-can-reach"},{"num":"1792","title":"Maximum Average Pass Ratio","slug":"maximum-average-pass-ratio"},{"num":"1834","title":"Single-Threaded CPU","slug":"single-threaded-cpu"},{"num":"1942","title":"The Number of the Smallest Unoccupied Chair","slug":"the-number-of-the-smallest-unoccupied-chair"},{"num":"2402","title":"Meeting Rooms III","slug":"meeting-rooms-iii"}]}]},{"category":"VII. Backtracking Patterns","patterns":[{"name":"Pattern 42: Backtracking - Subsets (Include/Exclude)","problems":[{"num":"17","title":"Letter Combinations of a Phone Number","slug":"letter-combinations-of-a-phone-number"},{"num":"77","title":"Combinations","slug":"combinations"},{"num":"78","title":"Subsets","slug":"subsets"},{"num":"90","title":"Subsets II","slug":"subsets-ii"}]},{"name":"Pattern 43: Backtracking - Permutations","problems":[{"num":"31","title":"Next Permutation","slug":"next-permutation"},{"num":"46","title":"Permutations","slug":"permutations"},{"num":"60","title":"Permutation Sequence","slug":"permutation-sequence"}]},{"name":"Pattern 44: Backtracking - Combination Sum","problems":[{"num":"39","title":"Combination Sum","slug":"combination-sum"},{"num":"40","title":"Combination Sum II","slug":"combination-sum-ii"}]},{"name":"Pattern 45: Backtracking - Parentheses Generation","problems":[{"num":"22","title":"Generate Parentheses","slug":"generate-parentheses"},{"num":"301","title":"Remove Invalid Parentheses","slug":"remove-invalid-parentheses"}]},{"name":"Pattern 46: Backtracking - Word Search / Path Finding in Grid","problems":[{"num":"79","title":"Word Search","slug":"word-search"},{"num":"212","title":"Word Search II","slug":"word-search-ii"},{"num":"2018","title":"Check if Word Can Be Placed In Crossword","slug":"check-if-word-can-be-placed-in-crossword"}]},{"name":"Pattern 47: Backtracking - N-Queens / Constraint Satisfaction","problems":[{"num":"37","title":"Sudoku Solver","slug":"sudoku-solver"},{"num":"51","title":"N-Queens","slug":"n-queens"}]},{"name":"Pattern 48: Backtracking - Palindrome Partitioning","problems":[{"num":"131","title":"Palindrome Partitioning","slug":"palindrome-partitioning"}]}]},{"category":"VIII. Greedy Patterns","patterns":[{"name":"Pattern 49: Greedy - Interval Merging/Scheduling","problems":[{"num":"56","title":"Merge Intervals","slug":"merge-intervals"},{"num":"57","title":"Insert Interval","slug":"insert-interval"},{"num":"759","title":"Employee Free Time","slug":"employee-free-time"},{"num":"986","title":"Interval List Intersections","slug":"interval-list-intersections"},{"num":"2406","title":"Divide Intervals Into Minimum Number of Groups","slug":"divide-intervals-into-minimum-number-of-groups"}]},{"name":"Pattern 51: Greedy - Jump Game Reachability/Minimization","problems":[{"num":"45","title":"Jump Game II","slug":"jump-game-ii"},{"num":"55","title":"Jump Game","slug":"jump-game"}]},{"name":"Pattern 52: Greedy - Buy/Sell Stock","problems":[{"num":"121","title":"Best Time to Buy and Sell Stock","slug":"best-time-to-buy-and-sell-stock"},{"num":"122","title":"Best Time to Buy and Sell Stock II","slug":"best-time-to-buy-and-sell-stock-ii"}]},{"name":"Pattern 53: Greedy - Gas Station Circuit","problems":[{"num":"134","title":"Gas Station","slug":"gas-station"}]},{"name":"Pattern 54: Greedy - Task Scheduling (Frequency Based)","problems":[{"num":"621","title":"Task Scheduler","slug":"task-scheduler"}]}]},{"category":"IX. Binary Search Patterns","patterns":[{"name":"Pattern 55: Binary Search - On Sorted Array/List","problems":[{"num":"35","title":"Search Insert Position","slug":"search-insert-position"},{"num":"69","title":"Sqrt(x)","slug":"sqrtx"},{"num":"74","title":"Search a 2D Matrix","slug":"search-a-2d-matrix"},{"num":"278","title":"First Bad Version","slug":"first-bad-version"},{"num":"374","title":"Guess Number Higher or Lower","slug":"guess-number-higher-or-lower"},{"num":"540","title":"Single Element in a Sorted Array","slug":"single-element-in-a-sorted-array"},{"num":"704","title":"Binary Search","slug":"binary-search"},{"num":"1539","title":"Kth Missing Positive Number","slug":"kth-missing-positive-number"}]},{"name":"Pattern 56: Binary Search - Find Min/Max in Rotated Sorted Array","problems":[{"num":"33","title":"Search in Rotated Sorted Array","slug":"search-in-rotated-sorted-array"},{"num":"81","title":"Search in Rotated Sorted Array II","slug":"search-in-rotated-sorted-array-ii"},{"num":"153","title":"Find Minimum in Rotated Sorted Array","slug":"find-minimum-in-rotated-sorted-array"},{"num":"162","title":"Find Peak Element","slug":"find-peak-element"},{"num":"852","title":"Peak Index in a Mountain Array","slug":"peak-index-in-a-mountain-array"},{"num":"1095","title":"Find in Mountain Array","slug":"find-in-mountain-array"}]},{"name":"Pattern 57: Binary Search - On Answer / Condition Function","problems":[{"num":"410","title":"Split Array Largest Sum","slug":"split-array-largest-sum"},{"num":"774","title":"Minimize Max Distance to Gas Station","slug":"minimize-max-distance-to-gas-station"},{"num":"875","title":"Koko Eating Bananas","slug":"koko-eating-bananas"},{"num":"1011","title":"Capacity To Ship Packages Within D Days","slug":"capacity-to-ship-packages-within-d-days"},{"num":"1482","title":"Minimum Number of Days to Make m Bouquets","slug":"minimum-number-of-days-to-make-m-bouquets"},{"num":"1760","title":"Minimum Limit of Balls in a Bag","slug":"minimum-limit-of-balls-in-a-bag"},{"num":"2064","title":"Minimized Maximum of Products Distributed to Any Store","slug":"minimized-maximum-of-products-distributed-to-any-store"},{"num":"2226","title":"Maximum Candies Allocated to K Children","slug":"maximum-candies-allocated-to-k-children"}]},{"name":"Pattern 58: Binary Search - Find First/Last Occurrence","problems":[{"num":"34","title":"Find First and Last Position of Element in Sorted Array","slug":"find-first-and-last-position-of-element-in-sorted-array"},{"num":"658","title":"Find K Closest Elements","slug":"find-k-closest-elements"}]},{"name":"Pattern 59: Binary Search - Median of Two Sorted Arrays","problems":[{"num":"4","title":"Median of Two Sorted Arrays","slug":"median-of-two-sorted-arrays"}]}]},{"category":"X. Stack Patterns","patterns":[{"name":"Pattern 60: Stack - Valid Parentheses Matching","problems":[{"num":"20","title":"Valid Parentheses","slug":"valid-parentheses"},{"num":"32","title":"Longest Valid Parentheses","slug":"longest-valid-parentheses"},{"num":"921","title":"Minimum Add to Make Parentheses Valid","slug":"minimum-add-to-make-parentheses-valid"},{"num":"1249","title":"Minimum Remove to Make Valid Parentheses","slug":"minimum-remove-to-make-valid-parentheses"},{"num":"1963","title":"Minimum Number of Swaps to Make the String Balanced","slug":"minimum-number-of-swaps-to-make-the-string-balanced"}]},{"name":"Pattern 61: Stack - Monotonic Stack","problems":[{"num":"402","title":"Remove K Digits","slug":"remove-k-digits"},{"num":"496","title":"Next Greater Element I","slug":"next-greater-element-i"},{"num":"503","title":"Next Greater Element II","slug":"next-greater-element-ii"},{"num":"739","title":"Daily Temperatures","slug":"daily-temperatures"},{"num":"901","title":"Online Stock Span","slug":"online-stock-span"},{"num":"907","title":"Sum of Subarray Minimums","slug":"sum-of-subarray-minimums"},{"num":"962","title":"Maximum Width Ramp","slug":"maximum-width-ramp"},{"num":"1475","title":"Final Prices With a Special Discount in a Shop","slug":"final-prices-with-a-special-discount-in-a-shop"},{"num":"1673","title":"Find the Most Competitive Subsequence","slug":"find-the-most-competitive-subsequence"}]},{"name":"Pattern 62: Stack - Expression Evaluation (RPN/Infix)","problems":[{"num":"150","title":"Evaluate Reverse Polish Notation","slug":"evaluate-reverse-polish-notation"},{"num":"224","title":"Basic Calculator","slug":"basic-calculator"},{"num":"227","title":"Basic Calculator II","slug":"basic-calculator-ii"},{"num":"772","title":"Basic Calculator III","slug":"basic-calculator-iii"}]},{"name":"Pattern 63: Stack - Simulation / Backtracking Helper","problems":[{"num":"71","title":"Simplify Path","slug":"simplify-path"},{"num":"394","title":"Decode String","slug":"decode-string"},{"num":"735","title":"Asteroid Collision","slug":"asteroid-collision"}]},{"name":"Pattern 64: Stack - Min Stack Design","problems":[{"num":"155","title":"Min Stack","slug":"min-stack"}]},{"name":"Pattern 65: Stack - Largest Rectangle in Histogram","problems":[{"num":"84","title":"Largest Rectangle in Histogram","slug":"largest-rectangle-in-histogram"},{"num":"85","title":"Maximal Rectangle","slug":"maximal-rectangle"}]}]},{"category":"XI. Bit Manipulation Patterns","patterns":[{"name":"Pattern 66: Bitwise XOR - Finding Single/Missing Number","problems":[{"num":"136","title":"Single Number","slug":"single-number"},{"num":"137","title":"Single Number II","slug":"single-number-ii"},{"num":"268","title":"Missing Number","slug":"missing-number"},{"num":"389","title":"Find the Difference","slug":"find-the-difference"}]},{"name":"Pattern 67: Bitwise AND - Counting Set Bits (Hamming Weight)","problems":[{"num":"191","title":"Number of 1 Bits","slug":"number-of-1-bits"}]},{"name":"Pattern 70: Bitwise DP - Counting Bits Optimization","problems":[{"num":"338","title":"Counting Bits","slug":"counting-bits"}]},{"name":"Pattern 69: Bitwise Operations - Power of Two/Four Check","problems":[{"num":"231","title":"Power of Two","slug":"power-of-two"},{"num":"342","title":"Power of Four","slug":"power-of-four"}]}]},{"category":"XII. Linked List Manipulation Patterns","patterns":[{"name":"Pattern 71: Linked List - In-place Reversal","problems":[{"num":"83","title":"Remove Duplicates from Sorted List","slug":"remove-duplicates-from-sorted-list"},{"num":"92","title":"Reverse Linked List II","slug":"reverse-linked-list-ii"},{"num":"206","title":"Reverse Linked List","slug":"reverse-linked-list"},{"num":"25","title":"Reverse Nodes in k-Group","slug":"reverse-nodes-in-k-group"},{"num":"234","title":"Palindrome Linked List","slug":"palindrome-linked-list"},{"num":"82","title":"Remove Duplicates from Sorted List II","slug":"remove-duplicates-from-sorted-list-ii"}]},{"name":"Pattern 72: Linked List - Merging Two Sorted Lists","problems":[{"num":"21","title":"Merge Two Sorted Lists","slug":"merge-two-sorted-lists"}]},{"name":"Pattern 73: Linked List - Addition of Numbers","problems":[{"num":"2","title":"Add Two Numbers","slug":"add-two-numbers"},{"num":"369","title":"Plus One Linked List","slug":"plus-one-linked-list"}]},{"name":"Pattern 74: Linked List - Intersection Detection","problems":[{"num":"160","title":"Intersection of Two Linked Lists","slug":"intersection-of-two-linked-lists"}]},{"name":"Pattern 75: Linked List - Reordering / Partitioning","problems":[{"num":"24","title":"Swap Nodes in Pairs","slug":"swap-nodes-in-pairs"},{"num":"61","title":"Rotate List","slug":"rotate-list"},{"num":"86","title":"Partition List","slug":"partition-list"},{"num":"143","title":"Reorder List","slug":"reorder-list"},{"num":"328","title":"Odd Even Linked List","slug":"odd-even-linked-list"}]}]},{"category":"XIII. Array/Matrix Manipulation Patterns","patterns":[{"name":"Pattern 76: Array/Matrix - In-place Rotation","problems":[{"num":"48","title":"Rotate Image","slug":"rotate-image"},{"num":"189","title":"Rotate Array","slug":"rotate-array"}]},{"name":"Pattern 77: Array/Matrix - Spiral Traversal","problems":[{"num":"54","title":"Spiral Matrix","slug":"spiral-matrix"},{"num":"885","title":"Spiral Matrix III","slug":"spiral-matrix-iii"},{"num":"2326","title":"Spiral Matrix IV","slug":"spiral-matrix-iv"}]},{"name":"Pattern 78: Array/Matrix - Set Matrix Zeroes (In-place Marking)","problems":[{"num":"73","title":"Set Matrix Zeroes","slug":"set-matrix-zeroes"}]},{"name":"Pattern 79: Array - Product Except Self (Prefix/Suffix Products)","problems":[{"num":"238","title":"Product of Array Except Self","slug":"product-of-array-except-self"}]},{"name":"Pattern 80: Array - Plus One (Handling Carry)","problems":[{"num":"66","title":"Plus One","slug":"plus-one"}]},{"name":"Pattern 81: Array - Merge Sorted Array (In-place from End)","problems":[{"num":"88","title":"Merge Sorted Array","slug":"merge-sorted-array"}]},{"name":"Pattern 82: Array - Cyclic Sort","problems":[{"num":"41","title":"First Missing Positive","slug":"first-missing-positive"},{"num":"268","title":"Missing Number","slug":"missing-number"},{"num":"287","title":"Find the Duplicate Number","slug":"find-the-duplicate-number"},{"num":"442","title":"Find All Duplicates in an Array","slug":"find-all-duplicates-in-an-array"},{"num":"448","title":"Find All Numbers Disappeared in an Array","slug":"find-all-numbers-disappeared-in-an-array"}]},{"name":"Pattern 83: Array - Kadane's Variant for Maximum Product","problems":[{"num":"152","title":"Maximum Product Subarray","slug":"maximum-product-subarray"}]}]},{"category":"XIV. String Manipulation Patterns","patterns":[{"name":"Pattern 84: String - Palindrome Check (Two Pointers / Reverse)","problems":[{"num":"9","title":"Palindrome Number","slug":"palindrome-number"},{"num":"125","title":"Valid Palindrome","slug":"valid-palindrome"},{"num":"680","title":"Valid Palindrome II","slug":"valid-palindrome-ii"}]},{"name":"Pattern 85: String - Anagram Check (Frequency Count/Sort)","problems":[{"num":"49","title":"Group Anagrams","slug":"group-anagrams"},{"num":"242","title":"Valid Anagram","slug":"valid-anagram"}]},{"name":"Pattern 86: String - Roman to Integer Conversion","problems":[{"num":"13","title":"Roman to Integer","slug":"roman-to-integer"}]},{"name":"Pattern 87: String - String to Integer (atoi)","problems":[{"num":"8","title":"String to Integer (atoi)","slug":"string-to-integer-atoi"}]},{"name":"Pattern 88: String - Multiply Strings (Manual Simulation)","problems":[{"num":"43","title":"Multiply Strings","slug":"multiply-strings"}]},{"name":"Pattern 89: String Matching - Naive / KMP / Rabin-Karp","problems":[{"num":"28","title":"Find the Index of the First Occurrence in a String","slug":"find-the-index-of-the-first-occurrence-in-a-string"},{"num":"214","title":"Shortest Palindrome","slug":"shortest-palindrome"},{"num":"686","title":"Repeated String Match","slug":"repeated-string-match"},{"num":"796","title":"Rotate String","slug":"rotate-string"},{"num":"3008","title":"Find Beautiful Indices in the Given Array II","slug":"find-beautiful-indices-in-the-given-array-ii"}]},{"name":"Pattern 90: String - Repeated Substring Pattern Detection","problems":[{"num":"459","title":"Repeated Substring Pattern","slug":"repeated-substring-pattern"}]}]},{"category":"XV. Design Patterns","patterns":[{"name":"Pattern 91: Design (General/Specific)","problems":[{"num":"146","title":"LRU Cache","slug":"lru-cache"},{"num":"155","title":"Min Stack","slug":"min-stack"},{"num":"208","title":"Implement Trie (Prefix Tree)","slug":"implement-trie-prefix-tree"},{"num":"211","title":"Design Add and Search Words Data Structure","slug":"design-add-and-search-words-data-structure"},{"num":"225","title":"Implement Stack using Queues","slug":"implement-stack-using-queues"},{"num":"232","title":"Implement Queue using Stacks","slug":"implement-queue-using-stacks"},{"num":"251","title":"Flatten 2D Vector","slug":"flatten-2d-vector"},{"num":"271","title":"Encode and Decode Strings","slug":"encode-and-decode-strings"},{"num":"295","title":"Find Median from Data Stream","slug":"find-median-from-data-stream"},{"num":"341","title":"Flatten Nested List Iterator","slug":"flatten-nested-list-iterator"},{"num":"346","title":"Moving Average from Data Stream","slug":"moving-average-from-data-stream"},{"num":"353","title":"Design Snake Game","slug":"design-snake-game"},{"num":"359","title":"Logger Rate Limiter","slug":"logger-rate-limiter"},{"num":"362","title":"Design Hit Counter","slug":"design-hit-counter"},{"num":"379","title":"Design Phone Directory","slug":"design-phone-directory"},{"num":"380","title":"Insert Delete GetRandom O(1)","slug":"insert-delete-getrandom-o1"},{"num":"432","title":"All O`one Data Structure","slug":"all-oone-data-structure"},{"num":"460","title":"LFU Cache","slug":"lfu-cache"},{"num":"604","title":"Design Compressed String Iterator","slug":"design-compressed-string-iterator"},{"num":"622","title":"Design Circular Queue","slug":"design-circular-queue"},{"num":"641","title":"Design Circular Deque","slug":"design-circular-deque"},{"num":"642","title":"Design Search Autocomplete System","slug":"design-search-autocomplete-system"},{"num":"706","title":"Design HashMap","slug":"design-hashmap"},{"num":"715","title":"Range Module","slug":"range-module"},{"num":"900","title":"RLE Iterator","slug":"rle-iterator"},{"num":"981","title":"Time Based Key-Value Store","slug":"time-based-key-value-store"},{"num":"1146","title":"Snapshot Array","slug":"snapshot-array"},{"num":"1348","title":"Tweet Counts Per Frequency","slug":"tweet-counts-per-frequency"},{"num":"1352","title":"Product of the Last K Numbers","slug":"product-of-the-last-k-numbers"},{"num":"1381","title":"Design a Stack With Increment Operation","slug":"design-a-stack-with-increment-operation"},{"num":"1756","title":"Design Most Recently Used Queue","slug":"design-most-recently-used-queue"},{"num":"2013","title":"Detect Squares","slug":"detect-squares"},{"num":"2034","title":"Stock Price Fluctuation","slug":"stock-price-fluctuation"},{"num":"2296","title":"Design a Text Editor","slug":"design-a-text-editor"},{"num":"2336","title":"Smallest Number in Infinite Set","slug":"smallest-number-in-infinite-set"}]}]}];
+
+// ── GLOBAL STATE ──
+window.state = {};
+let filterMode = 'all';
+
+// ── HELPERS ──
+const getKey  = (ci,pi,qi) => `${ci}-${pi}-${qi}`;
+const isSolved = (ci,pi,qi) => !!window.state[getKey(ci,pi,qi)]?.solved;
+const getNote  = (ci,pi,qi) => window.state[getKey(ci,pi,qi)]?.note || '';
+const countSolved   = ()   => Object.values(window.state).filter(v=>v.solved).length;
+const countCatTotal = (ci) => DATA[ci].patterns.reduce((s,p)=>s+p.problems.length,0);
+const countCatSolved = (ci) => {
+  let n=0; DATA[ci].patterns.forEach((p,pi)=>p.problems.forEach((_,qi)=>{if(isSolved(ci,pi,qi))n++;})); return n;
+};
+const countPatSolved = (ci,pi) => DATA[ci].patterns[pi].problems.filter((_,qi)=>isSolved(ci,pi,qi)).length;
+
+// ── UI REFRESH ──
+function refreshAllUI() {
+  DATA.forEach((_,ci) => { updateCategoryUI(ci); DATA[ci].patterns.forEach((_,pi) => updatePatternUI(ci,pi)); });
+  DATA.forEach((_,ci) => DATA[ci].patterns.forEach((_,pi) =>
+    DATA[ci].patterns[pi].problems.forEach((_,qi) => {
+      const row   = document.getElementById(`row-${ci}-${pi}-${qi}`);
+      const check = document.getElementById(`chk-${ci}-${pi}-${qi}`);
+      if (!row) return;
+      const s = isSolved(ci,pi,qi);
+      row.classList.toggle('solved', s);
+      check?.classList.toggle('checked', s);
+    })
+  ));
+  updateGlobal();
+}
+
+function updateGlobal() {
+  const solved = countSolved(), pct = Math.round(solved/TOTAL*100);
+  document.getElementById('stat-solved').textContent    = solved;
+  document.getElementById('stat-remaining').textContent = TOTAL-solved;
+  document.getElementById('stat-pct').textContent       = pct+'%';
+  document.getElementById('overall-bar').style.width    = pct+'%';
+  document.getElementById('overall-label').textContent  = `${solved} / ${TOTAL} solved`;
+  // Update per-pattern progress pills
+  updatePatternProgress();
+}
+
+function updatePatternProgress() {
+  // Two Pointers: category index 0, total 33
+  const tpEl = document.getElementById('progress-tp');
+  const swEl = document.getElementById('progress-sw');
+  if (tpEl) {
+    const tpSolved = countCatSolved(0);
+    const tpTotal  = countCatTotal(0);
+    tpEl.textContent = `${tpSolved} / ${tpTotal}`;
+    tpEl.style.color = tpSolved === tpTotal ? 'var(--green)' : 'var(--accent)';
+  }
+  if (swEl) {
+    const swSolved = countCatSolved(1);
+    const swTotal  = countCatTotal(1);
+    swEl.textContent = `${swSolved} / ${swTotal}`;
+    swEl.style.color = swSolved === swTotal ? 'var(--green)' : 'var(--accent)';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// CENTRALIZED STATE API — the ONLY way all pages read/write state
+// Never mutate window.state directly outside these functions
+// ══════════════════════════════════════════════════════════════
+window.markDone = function(pattern, id, done) {
+  if (!window.state) window.state = {};
+  if (!window.state[pattern]) window.state[pattern] = {};
+  window.state[pattern][id] = done === undefined ? true : done;
+  window.persistState?.();
+};
+
+window.isDone = function(pattern, id) {
+  return !!(window.state?.[pattern]?.[id] === true);
+};
+
+window.getProgress = function(pattern) {
+  const patState = window.state?.[pattern] || {};
+  const solved = Object.values(patState).filter(v => v === true).length;
+  return solved;
+};
+
+window.toggleDone = function(pattern, id) {
+  const current = window.isDone(pattern, id);
+  window.markDone(pattern, id, !current);
+  return !current;
+};
+
+// Legacy helpers for index.html's own flat-key system
+window.lcState = {
+  STORAGE_KEY: 'lc_tracker_v2',
+  persist: function() { window.persistState?.(); },
+  load: function() {
+    try { window.state = JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '{}'); }
+    catch { window.state = {}; }
+  }
+};
+function updateCategoryUI(ci) {
+  const solved = countCatSolved(ci), total = countCatTotal(ci);
+  const pct = total ? Math.round(solved/total*100) : 0;
+  const color = COLORS[ci%COLORS.length];
+  const cnt = document.getElementById(`cat-count-${ci}`);
+  const bar = document.getElementById(`cat-bar-${ci}`);
+  const nav = document.getElementById(`nav-badge-${ci}`);
+  if (cnt) { cnt.textContent = `${solved} / ${total}`; cnt.style.color = color; }
+  if (bar) bar.style.width = pct+'%';
+  if (nav) nav.textContent = `${solved}/${total}`;
+}
+function updatePatternUI(ci,pi) {
+  const el = document.getElementById(`pat-stat-${ci}-${pi}`);
+  if (el) el.textContent = `${countPatSolved(ci,pi)} / ${DATA[ci].patterns[pi].problems.length}`;
+}
+
+// ── ACTIONS ──
+function toggleSolve(ci, pi, qi) {
+  const key = getKey(ci,pi,qi);
+  const now = !window.state[key]?.solved;
+  window.state[key] = { ...window.state[key], solved: now };
+  window.persistState?.();
+  const row   = document.getElementById(`row-${ci}-${pi}-${qi}`);
+  const check = document.getElementById(`chk-${ci}-${pi}-${qi}`);
+  row?.classList.toggle('solved', now);
+  check?.classList.toggle('checked', now);
+  if (now) { showToast('✅ Marked as solved!','#10b981'); spawnConfetti(row); }
+  else       showToast('↩️ Unmarked','#6366f1');
+  updatePatternUI(ci,pi); updateCategoryUI(ci); updateGlobal();
+}
+function toggleNote(ci,pi,qi) {
+  document.getElementById(`note-panel-${ci}-${pi}-${qi}`)?.classList.toggle('open');
+}
+function saveNote(ci,pi,qi,val) {
+  const key = getKey(ci,pi,qi);
+  window.state[key] = { ...window.state[key], note: val };
+  window.persistState?.();
+}
+function toggleCategory(ci) {
+  document.getElementById(`cat-body-${ci}`)?.style.display === 'none'
+    ? (document.getElementById(`cat-body-${ci}`).style.display='', document.getElementById(`cat-chev-${ci}`)?.classList.add('open'))
+    : (document.getElementById(`cat-body-${ci}`).style.display='none', document.getElementById(`cat-chev-${ci}`)?.classList.remove('open'));
+}
+function togglePattern(ci,pi) {
+  const list = document.getElementById(`prob-list-${ci}-${pi}`);
+  const chev = document.getElementById(`pat-chev-${ci}-${pi}`);
+  list?.classList.toggle('open'); chev?.classList.toggle('open', list?.classList.contains('open'));
+}
+function filterProblems(mode) {
+  filterMode = mode;
+  ['all','unsolved','solved'].forEach(m => document.getElementById(`btn-${m}`)?.classList.toggle('active', m===mode));
+  applyFilters();
+}
+function applyFilters() {
+  const q = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.prob-row').forEach(row => {
+    const title  = row.dataset.title || '';
+    const num    = row.dataset.num   || '';
+    const solved = row.classList.contains('solved');
+    let vis = title.includes(q) || num.includes(q);
+    if (filterMode==='solved'   && !solved) vis = false;
+    if (filterMode==='unsolved' &&  solved) vis = false;
+    row.style.display = vis ? '' : 'none';
+  });
+}
+function confirmReset() {
+  if (confirm('Reset ALL progress? This cannot be undone.')) {
+    window.state = {};
+    window.persistState?.();
+    refreshAllUI();
+    showToast('🔄 Progress reset','#ef4444');
+  }
+}
+
+// ── MODAL ──
+function openModal(id)  { document.getElementById(id)?.classList.add('open'); }
+function closeModal(id) { document.getElementById(id)?.classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('open'); }));
+
+// ── TOAST ──
+let toastTimer;
+function showToast(msg, color) {
+  const t=document.getElementById('toast'), d=document.getElementById('toast-dot'), m=document.getElementById('toast-msg');
+  d.style.background=color; m.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// ── CONFETTI ──
+function spawnConfetti(anchor) {
+  if (!anchor) return;
+  const r = anchor.getBoundingClientRect();
+  const colors = ['#6366f1','#06b6d4','#10b981','#f59e0b','#ec4899'];
+  for (let i=0;i<14;i++) {
+    const p = document.createElement('div'); p.className='confetti-particle';
+    p.style.cssText=`left:${r.left+Math.random()*r.width}px;top:${r.top}px;background:${colors[i%colors.length]};animation-delay:${Math.random()*0.3}s;`;
+    document.body.appendChild(p); setTimeout(()=>p.remove(),1300);
+  }
+}
+
+// ── BUILD SIDEBAR ──
+function buildSidebar() {
+  document.getElementById('sidebar-nav').innerHTML = DATA.map((cat,ci)=>{
+    const color=COLORS[ci%COLORS.length], emoji=EMOJIS[ci%EMOJIS.length], total=countCatTotal(ci);
+    return `<a class="nav-item" href="#cat-${ci}" aria-label="Jump to ${cat.category}">
+      <div class="nav-dot" style="background:${color}" aria-hidden="true"></div>
+      <span class="nav-label">${emoji} ${cat.category.replace(/^[IVX]+\.\s*/,'')}</span>
+      <span class="nav-badge" id="nav-badge-${ci}">0/${total}</span>
+    </a>`;
+  }).join('');
+}
+
+// ── BUILD CONTENT ──
+function buildContent() {
+  document.getElementById('content').innerHTML = DATA.map((cat,ci)=>{
+    const color=COLORS[ci%COLORS.length], emoji=EMOJIS[ci%EMOJIS.length];
+    const total=countCatTotal(ci), patCount=cat.patterns.length;
+
+    const patternsHTML = cat.patterns.map((pat,pi)=>{
+      const ptotal=pat.problems.length;
+      const shortName=pat.name.replace(/^Pattern \d+:\s*/,'');
+      const patNum=pat.name.match(/^Pattern (\d+)/)?.[1]||(pi+1);
+      const probsHTML = pat.problems.map((prob,qi)=>`
+        <article class="prob-row" id="row-${ci}-${pi}-${qi}"
+          data-title="${prob.title.toLowerCase()}" data-num="${prob.num}"
+          role="listitem" aria-label="${prob.title}">
+          <div class="prob-check" id="chk-${ci}-${pi}-${qi}"
+            onclick="toggleSolve(${ci},${pi},${qi})"
+            role="checkbox" aria-checked="${isSolved(ci,pi,qi)}" aria-label="Mark ${prob.title} as solved" tabindex="0"
+            onkeydown="if(event.key==='Enter'||event.key===' ')toggleSolve(${ci},${pi},${qi})">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 5.5l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="prob-num">#${prob.num}</span>
+          <span class="prob-title-text">${prob.title}</span>
+          <button class="note-btn" onclick="toggleNote(${ci},${pi},${qi})" title="Add notes/solution" aria-label="Toggle notes for ${prob.title}">📝</button>
+          <a class="lc-btn" href="https://leetcode.com/problems/${prob.slug}/" target="_blank" rel="noopener noreferrer" aria-label="Open ${prob.title} on LeetCode" onclick="event.stopPropagation()">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true"><path d="M5.5 1h3.5v3.5M9 1L4 6M2 3H1v6h6V8"/></svg>LC
+          </a>
+        </article>
+        <div class="notes-panel${getNote(ci,pi,qi)?' open':''}" id="note-panel-${ci}-${pi}-${qi}" role="region" aria-label="Notes for ${prob.title}">
+          <div class="notes-label">Notes / Solution / Complexity</div>
+          <textarea class="notes-textarea" placeholder="Approach: ...&#10;Time: O()  Space: O()&#10;&#10;// Code here"
+            oninput="saveNote(${ci},${pi},${qi},this.value)"
+            aria-label="Notes for ${prob.title}">${getNote(ci,pi,qi)}</textarea>
+        </div>`).join('');
+
+      return `<section class="pattern-block">
+        <h3 class="pattern-header" onclick="togglePattern(${ci},${pi})" role="button" aria-expanded="false" aria-controls="prob-list-${ci}-${pi}">
+          <span class="pattern-num" style="background:${color}22;color:${color}" aria-label="Pattern ${patNum}">${patNum}</span>
+          <span class="pattern-title">${shortName}</span>
+          <span class="pattern-stat" id="pat-stat-${ci}-${pi}" aria-label="Progress">0 / ${ptotal}</span>
+          <svg class="pat-chevron" id="pat-chev-${ci}-${pi}" width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M3 5l3.5 3.5L10 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </h3>
+        <div class="problems-list" id="prob-list-${ci}-${pi}" role="list">${probsHTML}</div>
+      </section>`;
+    }).join('');
+
+    // Insert in-feed ad every 4 categories
+    const adSlot = (ci > 0 && ci % 4 === 0) ? `<div class="ad-unit ad-in-feed" style="margin-bottom:0">In-Feed Ad</div>` : '';
+
+    return `${adSlot}<section class="category-section" id="cat-${ci}" aria-label="${cat.category}">
+      <h2 class="cat-header" onclick="toggleCategory(${ci})" role="button" aria-expanded="true" aria-controls="cat-body-${ci}">
+        <div class="cat-color-bar" style="background:${color}" aria-hidden="true"></div>
+        <div class="cat-title-wrap">
+          <span class="cat-title">${emoji} ${cat.category}</span>
+          <span class="cat-meta">${patCount} patterns · ${total} problems</span>
+        </div>
+        <div class="cat-progress-wrap">
+          <span class="cat-count" id="cat-count-${ci}" style="color:${color}" aria-label="Category progress">0 / ${total}</span>
+          <div class="mini-bar" role="progressbar"><div class="mini-bar-fill" id="cat-bar-${ci}" style="background:${color};width:0%"></div></div>
+        </div>
+        <svg class="cat-chevron open" id="cat-chev-${ci}" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </h2>
+      <div class="cat-body" id="cat-body-${ci}">${patternsHTML}</div>
+    </section>`;
+  }).join('');
+}
+
+// ── INIT ──
+// Build UI immediately so problems are always visible
+buildSidebar();
+buildContent();
+
+// State loads async (Firebase or localStorage) — refreshAllUI called after load
+// But ensure UI shows with empty state immediately (guest mode safe)
+if (!window.state || typeof window.state !== 'object') {
+  window.state = {};
+}
+refreshAllUI();
+
+// Hide onboarding if user has seen it
+if (localStorage.getItem('lc_seen_onboard') === '1') {
+  const ob = document.getElementById('onboarding-msg');
+  if (ob) ob.style.display = 'none';
+}
+
+// Search
+document.getElementById('search').addEventListener('input', applyFilters);
+document.getElementById('btn-all').classList.add('active');
+
+// Keyboard accessibility for prob rows
+document.getElementById('content').addEventListener('keydown', e => {
+  if ((e.key==='Enter'||e.key===' ') && e.target.classList.contains('prob-check')) {
+    e.preventDefault();
+  }
+});
+
+// Expose global refreshAllUI for Firebase module to call
+window.refreshAllUI = refreshAllUI;
+
+// Handle URL hash — auto-scroll to category on load
+if (location.hash && location.hash.startsWith('#cat-')) {
+  setTimeout(() => {
+    const el = document.querySelector(location.hash);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 300);
+}
+
+// ── Per-pattern progress strips (uses shared.js LCT) ──
+function updatePatternStrips() {
+  if (typeof LCT === 'undefined') return;
+  const patterns = [
+    { key: 'two-pointers', total: 33 },
+    { key: 'sliding-window', total: 28 },
+  ];
+  patterns.forEach(({ key, total }) => {
+    const prog = LCT.getProgress(key);
+    const bar  = document.getElementById('prog-bar-' + key);
+    const lbl  = document.getElementById('prog-label-' + key);
+    if (bar) bar.style.width = prog.pct + '%';
+    if (lbl) lbl.textContent = prog.done + '/' + prog.total;
+  });
+}
+
+// Patch refreshAllUI to also update pattern strips
+const _origRefreshAllUI = window.refreshAllUI;
+window.refreshAllUI = function() {
+  if (typeof _origRefreshAllUI === 'function') _origRefreshAllUI();
+  updatePatternStrips();
+};
+
+// Also call on load (LCT may load after this script)
+setTimeout(updatePatternStrips, 100);
+</script>
+</body>
+</html>

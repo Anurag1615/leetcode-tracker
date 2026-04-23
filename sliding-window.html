@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sliding Window Pattern – Complete LeetCode Guide with Problems & Examples 2025</title>
+<meta name="description" content="Master the Sliding Window pattern for LeetCode interviews. Learn fixed window, variable window & monotonic deque techniques with 28 problems, code examples, and complexity analysis. Free guide.">
+<meta name="keywords" content="sliding window leetcode, sliding window pattern, sliding window algorithm, sliding window technique, fixed window leetcode, variable sliding window, minimum window substring, longest substring without repeating characters, sliding window problems list, dsa sliding window">
+<meta name="author" content="LeetCode Pattern Tracker">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0d0f1a">
+<link rel="canonical" href="https://leetcodepattern.com/sliding-window.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sliding Window Pattern – Complete LeetCode Guide 2025">
+<meta property="og:description" content="Master the Sliding Window pattern with fixed, variable, and monotonic deque techniques. 28 curated LeetCode problems with explanations and code examples.">
+<meta property="og:url" content="https://leetcodepattern.com/sliding-window.html">
+<meta property="og:site_name" content="LeetCode Pattern Tracker">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sliding Window LeetCode Pattern – Complete Guide 2025">
+<meta name="twitter:description" content="Fixed window, variable window, monotonic deque. 28 problems. Master sliding window for FAANG interviews.">
+<meta name="twitter:site" content="@lcpatterntrack">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Sliding Window Pattern – Complete LeetCode Guide with Problems and Examples",
+  "description": "Master the Sliding Window DSA pattern for coding interviews. Covers fixed window, variable window, and monotonic deque techniques with 28 LeetCode problems.",
+  "url": "https://leetcodepattern.com/sliding-window.html",
+  "author": { "@type": "Organization", "name": "LeetCode Pattern Tracker", "url": "https://leetcodepattern.com/" },
+  "publisher": { "@type": "Organization", "name": "LeetCode Pattern Tracker", "url": "https://leetcodepattern.com/" },
+  "datePublished": "2025-04-05",
+  "dateModified": "2025-04-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://leetcodepattern.com/sliding-window.html" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://leetcodepattern.com/" },
+    { "@type": "ListItem", "position": 2, "name": "DSA Patterns", "item": "https://leetcodepattern.com/#tracker" },
+    { "@type": "ListItem", "position": 3, "name": "Sliding Window Pattern", "item": "https://leetcodepattern.com/sliding-window.html" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Sliding Window pattern in LeetCode?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Sliding Window pattern maintains a contiguous subarray or substring that moves through the data structure. It avoids redundant computation by incrementally updating the window result instead of recomputing from scratch, reducing time complexity from O(n squared) to O(n)." }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use a fixed vs variable sliding window?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use a fixed-size window when the problem specifies an exact window length (e.g., maximum average subarray of size k). Use a variable window when the window expands and shrinks based on a constraint (e.g., longest substring with at most k distinct characters)." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the time complexity of the Sliding Window algorithm?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most Sliding Window problems run in O(n) time because each element is added and removed from the window at most once. Space complexity is typically O(1) for fixed windows or O(k) for windows using a hash map to track frequencies." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most important Sliding Window LeetCode problems?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The most important sliding window problems are: Minimum Window Substring (hard), Longest Substring Without Repeating Characters (medium), Sliding Window Maximum (hard), Longest Repeating Character Replacement (medium), and Fruit Into Baskets (medium). Master these five to handle any sliding window interview question." }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Google AdSense — uncomment after approval
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<style>
+:root {
+  --bg: #0d0f1a; --surface: #131627; --surface2: #1a1f35;
+  --border: #252a45; --text: #e2e8f0; --muted: #64748b;
+  --accent: #06b6d4; --accent2: #6366f1; --green: #10b981;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-brand { font-size: 15px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
+.topbar-brand span { color: var(--accent); }
+.topbar-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.topbar-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+.topbar-nav a:hover { color: var(--accent); text-decoration: none; }
+.topbar-cta {
+  background: var(--accent2); color: #fff;
+  border: none; border-radius: 8px;
+  font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 8px 16px; cursor: pointer; text-decoration: none;
+  transition: opacity 0.2s;
+}
+.topbar-cta:hover { opacity: 0.85; text-decoration: none; }
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  padding: 10px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+.breadcrumb ol { list-style: none; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+.breadcrumb a { color: var(--accent); }
+.breadcrumb .sep { color: var(--border); }
+
+/* ── AD UNITS ── */
+.ad-wrap { text-align: center; margin: 28px auto; max-width: 728px; }
+.ad-unit {
+  background: var(--surface); border: 1px dashed var(--border);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  position: relative;
+}
+.ad-unit::before { content: 'Advertisement'; position: absolute; top: 6px; left: 10px; font-size: 9px; color: var(--border); letter-spacing: 0.1em; }
+.ad-banner { width: 100%; height: 90px; min-height: 90px; }
+.ad-in-feed { width: 100%; height: 100px; min-height: 100px; }
+
+/* ── HERO ── */
+.hero {
+  padding: 56px 24px 48px;
+  text-align: center;
+  background: linear-gradient(135deg, #0d0f1a 0%, #131627 60%, #0d0f1a 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(6,182,212,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px;
+  background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3);
+  color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(26px, 5vw, 46px); font-weight: 800; letter-spacing: -1px;
+  margin-bottom: 14px; line-height: 1.15;
+  background: linear-gradient(135deg, #a5f3fc 0%, #06b6d4 50%, #6366f1 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub { font-size: 16px; color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+.hero-stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); }
+.hero-stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── LAYOUT ── */
+.layout { display: flex; max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; gap: 32px; }
+.sidebar-toc {
+  width: 220px; flex-shrink: 0;
+  position: sticky; top: 72px;
+  align-self: flex-start; max-height: calc(100vh - 90px); overflow-y: auto;
+}
+.sidebar-toc::-webkit-scrollbar { width: 3px; }
+.sidebar-toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+.toc-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+.toc-item { display: block; font-size: 12px; color: var(--muted); padding: 5px 8px; border-radius: 6px; margin-bottom: 2px; transition: all 0.15s; border-left: 2px solid transparent; }
+.toc-item:hover { color: var(--accent); background: rgba(6,182,212,0.06); border-left-color: var(--accent); text-decoration: none; }
+.toc-item.sub { padding-left: 16px; font-size: 11px; }
+main.content { flex: 1; min-width: 0; }
+
+/* ── SECTIONS ── */
+.section { margin-bottom: 52px; scroll-margin-top: 80px; }
+h2 {
+  font-size: 24px; font-weight: 800; color: var(--text);
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+h2 .sec-icon { font-size: 22px; }
+h3 { font-size: 17px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+h4 { font-size: 14px; font-weight: 700; color: var(--accent); margin: 16px 0 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+p { font-size: 14px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+ul, ol { padding-left: 20px; margin-bottom: 14px; }
+li { font-size: 14px; color: var(--muted); line-height: 1.8; }
+strong { color: var(--text); }
+
+/* ── CODE BLOCK ── */
+.code-block {
+  background: #0a0c18; border: 1px solid var(--border);
+  border-radius: 10px; overflow-x: auto;
+  margin: 16px 0;
+}
+.code-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  font-size: 11px; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.code-lang { color: var(--accent); }
+pre { padding: 16px 18px; overflow-x: auto; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #c9d1d9; }
+.kw { color: #ff7b72; } .fn { color: #d2a8ff; } .str { color: #a5d6ff; }
+.cm { color: #8b949e; font-style: italic; } .num { color: #79c0ff; }
+.var { color: #ffa657; }
+
+/* ── COMPLEXITY BADGE ── */
+.complexity-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 20px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+.badge-time { background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3); color: var(--accent); }
+.badge-space { background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); color: var(--accent2); }
+.badge-diff { font-family: 'Outfit', sans-serif; }
+.badge-easy { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: var(--green); }
+.badge-med { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; }
+.badge-hard { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; }
+
+/* ── PROBLEM TABLE ── */
+.prob-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+.prob-table th {
+  background: var(--surface2); color: var(--muted); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.07em; padding: 10px 14px;
+  text-align: left; border-bottom: 1px solid var(--border);
+}
+.prob-table td { padding: 11px 14px; border-bottom: 1px solid rgba(37,42,69,0.5); color: var(--muted); vertical-align: middle; }
+.prob-table tr:last-child td { border-bottom: none; }
+.prob-table tr:hover td { background: rgba(6,182,212,0.03); }
+.prob-table a { color: var(--text); font-weight: 500; }
+.prob-table a:hover { color: var(--accent); text-decoration: none; }
+.diff-easy { color: var(--green); font-weight: 600; font-size: 11px; }
+.diff-med { color: #f59e0b; font-weight: 600; font-size: 11px; }
+.diff-hard { color: #ef4444; font-weight: 600; font-size: 11px; }
+
+/* ── PATTERN TYPE CARD ── */
+.pattern-type-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 16px 0 24px; }
+.pattern-type-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px 20px;
+  border-top: 3px solid var(--accent);
+  transition: border-color 0.15s;
+}
+.pattern-type-card:hover { border-color: var(--accent); }
+.ptc-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.ptc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.ptc-ex { font-size: 11px; color: var(--accent); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+/* ── CALLOUT ── */
+.callout {
+  border-left: 3px solid var(--accent);
+  background: rgba(6,182,212,0.06);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px; margin: 16px 0;
+}
+.callout.warning { border-left-color: #f59e0b; background: rgba(245,158,11,0.06); }
+.callout.tip { border-left-color: var(--green); background: rgba(16,185,129,0.06); }
+.callout-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); margin-bottom: 5px; }
+.callout.warning .callout-title { color: #f59e0b; }
+.callout.tip .callout-title { color: var(--green); }
+.callout p { margin: 0; font-size: 13px; }
+
+/* ── FAQ ── */
+.faq-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; }
+.faq-item[open] { border-color: var(--accent); }
+.faq-q { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; list-style: none; user-select: none; }
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after { content: '⌄'; font-size: 16px; color: var(--accent); transition: transform 0.2s; flex-shrink: 0; margin-left: 12px; }
+.faq-item[open] .faq-q::after { transform: rotate(180deg); }
+.faq-a { padding: 12px 18px 16px; font-size: 13px; color: var(--muted); line-height: 1.8; border-top: 1px solid var(--border); }
+
+/* ── FOOTER ── */
+.page-footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 32px 24px; text-align: center;
+}
+.page-footer p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--muted); transition: color 0.15s; }
+.footer-links a:hover { color: var(--accent); text-decoration: none; }
+
+.track-check {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex; align-items: center;
+  justify-content: center; cursor: pointer; transition: all 0.2s;
+  margin: 0 auto; flex-shrink: 0;
+}
+.track-check.done { background: var(--green); border-color: var(--green); }
+.track-check svg { display: none; }
+.track-check.done svg { display: block; }
+.prob-row-track { cursor: default; }
+.prob-row-track.done-row td { background: rgba(16,185,129,0.04); }
+.prob-row-track.done-row td a { text-decoration: line-through; text-decoration-color: rgba(16,185,129,0.4); color: var(--green); }
+.pat-progress {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--muted); margin-bottom: 8px;
+}
+.pat-progress-bar { flex: 1; height: 4px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+.pat-progress-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width 0.4s ease; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+@media (max-width: 768px) {
+  .sidebar-toc { display: none; }
+  .layout { padding: 24px 16px 60px; }
+  .hero { padding: 36px 16px 32px; }
+}
+
+/* ── DROPDOWN NAVIGATION ── */
+.gnav-dropdown{position:relative;}
+.gnav-dropdown-btn{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;background:none;border:none;font-family:inherit;white-space:nowrap;transition:color .15s,background .15s;}
+.gnav-dropdown-btn:hover,.gnav-dropdown:hover .gnav-dropdown-btn{color:var(--text);background:var(--surface2,#1a1f35);}
+.gnav-dropdown-btn svg{transition:transform .2s;flex-shrink:0;}
+.gnav-dropdown:hover .gnav-dropdown-btn svg,.gnav-dropdown:focus-within .gnav-dropdown-btn svg{transform:rotate(180deg);}
+.gnav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;background:var(--surface,#131627);border:1px solid var(--border,#252a45);border-radius:12px;min-width:240px;padding:6px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.45);}
+.gnav-dropdown:hover .gnav-dropdown-menu,.gnav-dropdown:focus-within .gnav-dropdown-menu{display:block;}
+.gnav-dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:500;color:var(--muted,#64748b);transition:background .12s,color .12s;}
+.gnav-dropdown-item:hover{background:var(--surface2,#1a1f35);color:var(--text,#e2e8f0);text-decoration:none;}
+.gnav-dropdown-item .di-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0;}
+.gnav-dropdown-item .di-sub{font-size:10px;color:var(--muted,#64748b);display:block;margin-top:1px;opacity:.7;}
+.gnav-dropdown-divider{height:1px;background:var(--border,#252a45);margin:4px 6px;}
+.gnav-soon{opacity:.4;cursor:default;pointer-events:none;}
+</style>
+<script src="shared.js" defer></script>
+<script type="module" src="firebase.js"></script>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// SHARED STATE MODULE — runs on every guide/tool page
+// Provides the same markDone / isDone / getProgress API as index.html
+// ══════════════════════════════════════════════════════════════
+(function() {
+  const KEY = 'lc_tracker_v2';
+
+  // ── Load ──
+  function _load() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      window.state = raw ? JSON.parse(raw) : {};
+    } catch(e) { window.state = {}; }
+  }
+
+  // ── Persist ──
+  // Only set the localStorage fallback if firebase.js hasn't already provided
+  // a Firestore-backed persistState.
+  if (!window.persistState) {
+    window.persistState = function() {
+      try { localStorage.setItem(KEY, JSON.stringify(window.state || {})); }
+      catch(e) { console.error('State save error:', e); }
+    };
+  }
+
+  // ── Centralized API — same surface as index.html ──
+  window.markDone = function(pattern, id, done) {
+    if (!window.state) window.state = {};
+    if (!window.state[pattern]) window.state[pattern] = {};
+    window.state[pattern][id] = (done === undefined) ? true : !!done;
+    window.persistState();
+  };
+
+  window.isDone = function(pattern, id) {
+    return !!(window.state?.[pattern]?.[id] === true);
+  };
+
+  window.getProgress = function(pattern) {
+    const s = window.state?.[pattern] || {};
+    return Object.values(s).filter(v => v === true).length;
+  };
+
+  window.toggleDone = function(pattern, id) {
+    const next = !window.isDone(pattern, id);
+    window.markDone(pattern, id, next);
+    return next;
+  };
+
+  // ── Init: always load on page start ──
+  window.state = {};
+  _load();
+
+  // ── Re-sync when user returns to this tab ──
+  window.addEventListener('focus', function() {
+    _load();
+    if (typeof window.refreshPageUI === 'function') window.refreshPageUI();
+  });
+})();
+</script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     GLOBAL NAV — shared across all pages
+══════════════════════════════════════════════ -->
+<style>
+.gnav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;}
+.gnav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px;gap:12px;}
+.gnav-brand{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;text-decoration:none;flex-shrink:0;}
+.gnav-brand span{color:var(--accent);}
+.gnav-links{display:flex;align-items:center;gap:2px;flex:1;}
+.gnav-link{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;transition:color 0.15s,background 0.15s;}
+.gnav-link:hover{color:var(--text);background:var(--surface2);text-decoration:none;}
+.gnav-link.active-page{color:var(--accent);}
+/* Dropdown */
+.gnav-dd{position:relative;}
+.gnav-dd-btn{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:color 0.15s,background 0.15s;}
+.gnav-dd-btn:hover,.gnav-dd:hover .gnav-dd-btn{color:var(--text);background:var(--surface2);}
+.gnav-dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;min-width:240px;box-shadow:0 8px 24px rgba(0,0,0,0.4);padding:6px;z-index:200;}
+.gnav-dd:hover .gnav-dd-menu,.gnav-dd:focus-within .gnav-dd-menu{display:block;}
+.gnav-dd-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;color:var(--text);}
+.gnav-dd-item:hover{background:var(--surface2);text-decoration:none;}
+.gnav-dd-icon{font-size:16px;flex-shrink:0;}
+.gnav-dd-label{font-size:13px;font-weight:600;}
+.gnav-dd-sub{font-size:11px;color:var(--muted);display:block;font-weight:400;}
+.gnav-dd-divider{border:none;border-top:1px solid var(--border);margin:4px 0;}
+.gnav-dd-soon{opacity:0.45;cursor:default;pointer-events:none;}
+.gnav-cta{background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.2s;flex-shrink:0;}
+.gnav-cta:hover{opacity:0.85;text-decoration:none;}
+@media(max-width:700px){.gnav-links{display:none;}.gnav-inner{justify-content:space-between;}}
+</style>
+
+<header class="gnav" role="banner">
+  <div class="gnav-inner">
+    <a href="/" class="gnav-brand" aria-label="LeetCode Pattern Tracker Home">⚡ <span>LC</span>Pattern</a>
+    <nav class="gnav-links" aria-label="Main navigation">
+      <a href="/" class="gnav-link ">Home</a>
+      <div class="gnav-dd" role="navigation" aria-label="Patterns menu">
+        <button class="gnav-dd-btn" aria-haspopup="true" aria-expanded="false">
+          Patterns
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="gnav-dd-menu" role="menu">
+          <a href="/two-pointers.html" class="gnav-dd-item " role="menuitem">
+            <span class="gnav-dd-icon">👉</span>
+            <span><span class="gnav-dd-label">Two Pointers</span><span class="gnav-dd-sub">7 sub-patterns · 33 problems</span></span>
+          </a>
+          <a href="/sliding-window.html" class="gnav-dd-item active-page" role="menuitem">
+            <span class="gnav-dd-icon">🪟</span>
+            <span><span class="gnav-dd-label">Sliding Window</span><span class="gnav-dd-sub">4 sub-patterns · 28 problems</span></span>
+          </a>
+          <hr class="gnav-dd-divider">
+          <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🧮</span><span><span class="gnav-dd-label">Dynamic Programming</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+          <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🕸️</span><span><span class="gnav-dd-label">Graph Algorithms</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+          <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🔍</span><span><span class="gnav-dd-label">Binary Search</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+          <hr class="gnav-dd-divider">
+          <a href="/#tracker" class="gnav-dd-item" role="menuitem"><span class="gnav-dd-icon">⚡</span><span><span class="gnav-dd-label">All 368 Problems</span><span class="gnav-dd-sub">Full tracker — all 15 categories</span></span></a>
+        </div>
+      </div>
+      <a href="/resume-checker.html" class="gnav-link " style="color:var(--green);">Resume Checker</a>
+      <a href="/about.html" class="gnav-link ">About</a>
+    </nav>
+    
+    <a href="/" class="gnav-cta" title="Free LeetCode DSA Patterns Tracker">Track Progress →</a>
+  </div>
+</header>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="https://leetcodepattern.com/" title="Free LeetCode DSA Patterns Tracker">LeetCode Pattern Tracker</a></li>
+    <li class="sep">›</li>
+    <li><a href="https://leetcodepattern.com/#tracker">DSA Patterns</a></li>
+    <li class="sep">›</li>
+    <li aria-current="page" style="color:var(--text)">Sliding Window</li>
+  </ol>
+</nav>
+
+<!-- ── TOP AD ── -->
+<div class="ad-wrap">
+  <!--
+  ADSENSE TOP BANNER — 728x90 leaderboard
+  <ins class="adsbygoogle ad-banner" style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+  <div class="ad-unit ad-banner">728 × 90 — Top Banner Ad</div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">DSA Pattern Guide</div>
+  <h1>🪟 Sliding Window Pattern</h1>
+  <p class="hero-sub">From beginner to advanced — learn every Sliding Window technique used in FAANG interviews with real LeetCode problems and working code.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-label">Sub-patterns</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">28</div><div class="hero-stat-label">Problems</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">O(n)</div><div class="hero-stat-label">Typical Time</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">★★★</div><div class="hero-stat-label">Interview Freq.</div></div>
+  </div>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="sidebar-toc" aria-label="Table of contents">
+    <div class="toc-title">On This Page</div>
+    <a class="toc-item" href="#what-is-sliding-window">What Is Sliding Window?</a>
+    <a class="toc-item" href="#when-to-use">When to Use It</a>
+    <a class="toc-item" href="#sub-patterns">Sub-patterns</a>
+    <a class="toc-item sub" href="#fixed-window">Fixed Window</a>
+    <a class="toc-item sub" href="#variable-window">Variable Window</a>
+    <a class="toc-item sub" href="#monotonic-deque">Monotonic Deque</a>
+    <a class="toc-item sub" href="#freq-matching">Frequency Matching</a>
+    <a class="toc-item" href="#template">Code Templates</a>
+    <a class="toc-item" href="#problems">All Problems</a>
+    <a class="toc-item" href="#tips">Tips & Tricks</a>
+    <a class="toc-item" href="#faq">FAQ</a>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content" id="content">
+
+    <!-- WHAT IS -->
+    <section class="section" id="what-is-sliding-window" aria-labelledby="h-what">
+      <h2><span class="sec-icon">🪟</span> <span id="h-what">What Is the Sliding Window Pattern?</span></h2>
+      <p>The <strong>Sliding Window</strong> pattern is a technique that processes a contiguous subarray or substring by maintaining a "window" that slides across the data structure. Instead of recomputing the result for each new window from scratch — which costs O(n·k) — you incrementally update by removing the element that left and adding the element that entered, achieving <strong>O(n) time complexity</strong>.</p>
+      <p>It is one of the most frequently tested patterns in FAANG interviews, appearing in problems related to subarrays, substrings, stream data, and optimization under constraints.</p>
+
+      <div class="callout">
+        <div class="callout-title">Core Intuition</div>
+        <p>Think of it as a physical window on a train. As the train moves, the window reveals a new slice of the scenery while the old one disappears — you never see the whole landscape, just the current "window."</p>
+      </div>
+    </section>
+
+    <!-- WHEN TO USE -->
+    <section class="section" id="when-to-use" aria-labelledby="h-when">
+      <h2><span class="sec-icon">🎯</span> <span id="h-when">When to Use Sliding Window</span></h2>
+      <p>Recognize these signals in a problem statement to reach for the sliding window technique:</p>
+      <ul>
+        <li>The problem involves a <strong>contiguous subarray or substring</strong></li>
+        <li>You need to find a <strong>maximum, minimum, longest, or shortest</strong> subarray/substring</li>
+        <li>The problem mentions a <strong>fixed window size k</strong> or a <strong>constraint</strong> (at most k distinct, sum ≥ target)</li>
+        <li>A brute-force solution is O(n²) and you need to optimize to O(n)</li>
+        <li>The problem involves <strong>character frequencies or counts</strong> in a window</li>
+      </ul>
+
+      <div class="callout warning">
+        <div class="callout-title">When NOT to use it</div>
+        <p>Sliding Window requires the data to be linear (array or string) and the window to be contiguous. It does not apply to non-contiguous subsets, tree paths, or graph traversals.</p>
+      </div>
+    </section>
+
+    <!-- SUB-PATTERNS -->
+    <section class="section" id="sub-patterns" aria-labelledby="h-sub">
+      <h2><span class="sec-icon">🔬</span> <span id="h-sub">The 4 Sliding Window Sub-patterns</span></h2>
+      <div class="pattern-type-grid">
+        <div class="pattern-type-card">
+          <div class="ptc-title">1. Fixed Window</div>
+          <div class="ptc-desc">Window size k is constant. Slide by removing left and adding right on every step.</div>
+          <div class="ptc-ex">Max avg subarray of size k</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#6366f1">
+          <div class="ptc-title">2. Variable Window</div>
+          <div class="ptc-desc">Window expands until a constraint is violated, then shrinks from the left.</div>
+          <div class="ptc-ex">Longest substring ≤ k distinct chars</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#f59e0b">
+          <div class="ptc-title">3. Monotonic Deque</div>
+          <div class="ptc-desc">Track max/min inside the window using a double-ended queue (deque).</div>
+          <div class="ptc-ex">Sliding Window Maximum (#239)</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#10b981">
+          <div class="ptc-title">4. Frequency Matching</div>
+          <div class="ptc-desc">Compare character frequency maps of window vs target using a match counter.</div>
+          <div class="ptc-ex">Minimum Window Substring (#76)</div>
+        </div>
+      </div>
+
+      <!-- FIXED WINDOW -->
+      <h3 id="fixed-window">Pattern 1: Fixed-Size Window</h3>
+      <p>The window size never changes. Initialize the window for the first k elements, then slide right by adding one element and removing one.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n)</span>
+        <span class="badge badge-space">💾 Space: O(1)</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Fixed Window Template</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">fixed_window</span>(arr, k):
+    <span class="cm"># Build the initial window</span>
+    window_sum = <span class="fn">sum</span>(arr[:k])
+    result = window_sum
+
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(k, <span class="fn">len</span>(arr)):
+        <span class="cm"># Slide: add new right element, remove old left element</span>
+        window_sum += arr[i] - arr[i - k]
+        result = <span class="fn">max</span>(result, window_sum)
+
+    <span class="kw">return</span> result</code></pre>
+      </div>
+      <p><strong>Classic problems:</strong> <a href="https://leetcode.com/problems/maximum-average-subarray-i/" target="_blank" rel="noopener">643. Maximum Average Subarray I</a>, <a href="https://leetcode.com/problems/moving-average-from-data-stream/" target="_blank" rel="noopener">346. Moving Average from Data Stream</a></p>
+
+      <!-- VARIABLE WINDOW -->
+      <h3 id="variable-window">Pattern 2: Variable-Size Window</h3>
+      <p>Expand the right pointer unconditionally. When the constraint is violated, shrink from the left until the constraint is restored. The answer is tracked throughout.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n)</span>
+        <span class="badge badge-space">💾 Space: O(k)</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Variable Window Template</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">variable_window</span>(s, k):
+    <span class="kw">from</span> collections <span class="kw">import</span> defaultdict
+    freq = defaultdict(<span class="fn">int</span>)
+    left = <span class="num">0</span>
+    result = <span class="num">0</span>
+
+    <span class="kw">for</span> right <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(s)):
+        freq[s[right]] += <span class="num">1</span>           <span class="cm"># expand window</span>
+
+        <span class="kw">while</span> <span class="fn">len</span>(freq) > k:           <span class="cm"># constraint violated</span>
+            freq[s[left]] -= <span class="num">1</span>
+            <span class="kw">if</span> freq[s[left]] == <span class="num">0</span>:
+                <span class="kw">del</span> freq[s[left]]
+            left += <span class="num">1</span>                   <span class="cm"># shrink from left</span>
+
+        result = <span class="fn">max</span>(result, right - left + <span class="num">1</span>)
+
+    <span class="kw">return</span> result</code></pre>
+      </div>
+      <p><strong>Classic problems:</strong> <a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">3. Longest Substring Without Repeating Characters</a>, <a href="https://leetcode.com/problems/fruit-into-baskets/" target="_blank" rel="noopener">904. Fruit Into Baskets</a>, <a href="https://leetcode.com/problems/minimum-size-subarray-sum/" target="_blank" rel="noopener">209. Minimum Size Subarray Sum</a></p>
+
+      <!-- MONOTONIC DEQUE -->
+      <h3 id="monotonic-deque">Pattern 3: Monotonic Deque (Max/Min in Window)</h3>
+      <p>When you need the maximum or minimum of the current window in O(1), maintain a deque of indices whose values form a decreasing (for max) or increasing (for min) sequence. Remove elements outside the window and smaller/larger elements that are no longer useful.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n)</span>
+        <span class="badge badge-space">💾 Space: O(k)</span>
+        <span class="badge badge-diff badge-hard">Hard</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Monotonic Deque Template — LC #239 Sliding Window Maximum</span></div>
+        <pre><code><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="kw">def</span> <span class="fn">maxSlidingWindow</span>(nums, k):
+    dq = deque()        <span class="cm"># stores indices, values are decreasing</span>
+    result = []
+
+    <span class="kw">for</span> i, num <span class="kw">in</span> <span class="fn">enumerate</span>(nums):
+        <span class="cm"># Remove indices outside window</span>
+        <span class="kw">if</span> dq <span class="kw">and</span> dq[<span class="num">0</span>] < i - k + <span class="num">1</span>:
+            dq.popleft()
+
+        <span class="cm"># Remove smaller elements (they'll never be the max)</span>
+        <span class="kw">while</span> dq <span class="kw">and</span> nums[dq[-<span class="num">1</span>]] < num:
+            dq.pop()
+
+        dq.append(i)
+
+        <span class="kw">if</span> i >= k - <span class="num">1</span>:
+            result.append(nums[dq[<span class="num">0</span>]])  <span class="cm"># front is always the max</span>
+
+    <span class="kw">return</span> result</code></pre>
+      </div>
+
+      <!-- FREQ MATCHING -->
+      <h3 id="freq-matching">Pattern 4: Frequency Matching Window</h3>
+      <div class="pat-progress" aria-label="Progress for this pattern"><span style="font-size:11px;color:var(--muted);">Progress:</span><div class="pat-progress-bar"><div class="pat-progress-fill" data-pattern="sliding-window" data-total="5" style="width:0%"></div></div><span class="pat-progress-count" data-pattern="sliding-window" data-total="5" style="font-size:11px;color:var(--accent);">0 / 5</span></div>
+      <p>Used when the window must contain all characters of a target string (possibly with extra characters). Track a "formed" count — how many characters in the window have met their required frequency. When formed equals the number of unique characters in target, you have a valid window.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n + m)</span>
+        <span class="badge badge-space">💾 Space: O(n + m)</span>
+        <span class="badge badge-diff badge-hard">Hard</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Frequency Matching — LC #76 Minimum Window Substring</span></div>
+        <pre><code><span class="kw">from</span> collections <span class="kw">import</span> Counter
+
+<span class="kw">def</span> <span class="fn">minWindow</span>(s, t):
+    need = Counter(t)
+    have, total = <span class="num">0</span>, <span class="fn">len</span>(need)
+    window = {}
+    res, res_len = [-<span class="num">1</span>, -<span class="num">1</span>], <span class="fn">float</span>(<span class="str">"inf"</span>)
+    left = <span class="num">0</span>
+
+    <span class="kw">for</span> right <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(s)):
+        window[s[right]] = window.get(s[right], <span class="num">0</span>) + <span class="num">1</span>
+        <span class="kw">if</span> s[right] <span class="kw">in</span> need <span class="kw">and</span> window[s[right]] == need[s[right]]:
+            have += <span class="num">1</span>
+
+        <span class="kw">while</span> have == total:
+            <span class="kw">if</span> (right - left + <span class="num">1</span>) < res_len:
+                res, res_len = [left, right], right - left + <span class="num">1</span>
+            window[s[left]] -= <span class="num">1</span>
+            <span class="kw">if</span> s[left] <span class="kw">in</span> need <span class="kw">and</span> window[s[left]] < need[s[left]]:
+                have -= <span class="num">1</span>
+            left += <span class="num">1</span>
+
+    l, r = res
+    <span class="kw">return</span> s[l:r+<span class="num">1</span>] <span class="kw">if</span> res_len != <span class="fn">float</span>(<span class="str">"inf"</span>) <span class="kw">else</span> <span class="str">""</span></code></pre>
+      </div>
+    </section>
+
+    <!-- AD IN FEED -->
+    <div class="ad-wrap">
+      <!--
+      ADSENSE IN-FEED AD
+      <ins class="adsbygoogle ad-in-feed" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <div class="ad-unit ad-in-feed">In-Feed Ad · 728 × 90</div>
+    </div>
+
+    <!-- ALL PROBLEMS -->
+    <section class="section" id="problems" aria-labelledby="h-problems">
+      <h2><span class="sec-icon">📋</span> <span id="h-problems">All Sliding Window LeetCode Problems</span></h2>
+      <p>22 curated problems across 3 sub-patterns. Start with Fixed Window, progress to Variable and Monotonic Deque.</p>
+      <div id="problems-container"></div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="section" id="tips" aria-labelledby="h-tips">
+      <h2><span class="sec-icon">💡</span> <span id="h-tips">Interview Tips & Common Mistakes</span></h2>
+
+      <div class="callout tip">
+        <div class="callout-title">Tip #1 — Identify the constraint first</div>
+        <p>Before coding, ask: "What defines a valid window?" Is it the size (fixed), a sum (variable), or a character count (frequency)? The constraint determines the pattern.</p>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-title">Tip #2 — The "at most k" trick</div>
+        <p>Problems asking for subarrays with exactly k distinct values can be solved as: f(exactly k) = f(at most k) − f(at most k−1). This converts "exact" constraints to "at most" which is easier to window.</p>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">Common Mistake — Off-by-one on window size</div>
+        <p>Remember: window size = right − left + 1. When shrinking, increment left before computing the new window size. Always verify your template on the example case before submitting.</p>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">Common Mistake — Forgetting to update result inside the while loop</div>
+        <p>In some problems, the optimal window occurs while you are shrinking, not just after expanding. Update the result inside both the expansion and shrinkage phases when needed.</p>
+      </div>
+    </section>
+
+    <!-- AD 2 -->
+    <div class="ad-wrap">
+      <!--
+      ADSENSE IN-FEED AD 2
+      <ins class="adsbygoogle ad-in-feed" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <div class="ad-unit ad-in-feed">In-Feed Ad 2 · 728 × 90</div>
+    </div>
+
+    <!-- FAQ -->
+    <!-- Explore More Patterns section + Resume CTA -->
+    <section style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:24px;margin:0 0 32px;" aria-label="Explore More Patterns">
+      <h2 style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:14px;">🗺️ Explore More DSA Patterns</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;">
+        <a href="/two-pointers.html" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">👉 Two Pointers</div>
+          <div style="font-size:11px;color:var(--muted);">Two Pointers Pattern Guide →</div>
+        </a>
+        <a href="/#cat-4" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🧮 Dynamic Programming</div>
+          <div style="font-size:11px;color:var(--muted);">11 patterns · 35 problems →</div>
+        </a>
+        <a href="/#cat-3" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🕸️ Graph Algorithms</div>
+          <div style="font-size:11px;color:var(--muted);">8 patterns · 53 problems →</div>
+        </a>
+        <a href="/resume-checker.html" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'">
+          <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px;">📄 Resume Checker</div>
+          <div style="font-size:11px;color:var(--muted);">Analyze for ATS & interviews →</div>
+        </a>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/#tracker" style="background:var(--accent);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none;">Track All 368 Problems →</a>
+        <a href="/resume-checker.html" style="background:var(--green);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none;">Analyze Your Resume →</a>
+      </div>
+    </section>
+
+    <!-- Internal cross-link before FAQ — SEO internal linking -->
+    <aside style="background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:14px 20px;margin:0 0 32px;" aria-label="Related pattern guide">
+      <p style="margin:0;font-size:13px;color:var(--muted);">
+        <strong style="color:var(--text);">Related Pattern:</strong>
+        Sliding Window and <a href="two-pointers.html" style="color:var(--accent);font-weight:600;">Two Pointers</a> are closely connected — most Sliding Window problems use two pointer indices internally.
+        Read the <a href="two-pointers.html" style="color:var(--accent);font-weight:600;" title="Two Pointers Pattern Guide">Two Pointers Pattern Guide</a> next, or
+        <a href="https://leetcodepattern.com/#tracker" style="color:var(--accent);">track all 88 patterns</a> on the main tracker.
+      </p>
+    </aside>
+    <section class="section" id="faq" aria-labelledby="h-faq">
+      <h2><span class="sec-icon">❓</span> <span id="h-faq">Sliding Window FAQ</span></h2>
+
+      <details class="faq-item" open>
+        <summary class="faq-q">What is the Sliding Window pattern in LeetCode?</summary>
+        <p class="faq-a">The Sliding Window pattern maintains a contiguous subarray or substring as a "window" that slides through the data. It reduces time complexity from O(n²) to O(n) by incrementally updating the window result — adding the entering element and removing the leaving element — instead of recomputing from scratch.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">When should I use a fixed vs variable sliding window?</summary>
+        <p class="faq-a">Use a <strong>fixed window</strong> when the problem specifies an exact window size k (e.g., "maximum average subarray of size k"). Use a <strong>variable window</strong> when the window size changes based on a constraint (e.g., "longest substring with at most k distinct characters"). The key difference is whether the window size is given or derived.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is the time complexity of Sliding Window?</summary>
+        <p class="faq-a">Most Sliding Window algorithms run in <strong>O(n)</strong> time because each element is added to and removed from the window at most once. Space complexity is typically <strong>O(1)</strong> for fixed windows or <strong>O(k)</strong> for windows using a hash map to track element frequencies, where k is the number of distinct elements.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What are the most important Sliding Window problems to practice?</summary>
+        <p class="faq-a">The five must-solve problems are: <strong>Minimum Window Substring</strong> (hard — frequency matching), <strong>Longest Substring Without Repeating Characters</strong> (medium — variable window), <strong>Sliding Window Maximum</strong> (hard — monotonic deque), <strong>Longest Repeating Character Replacement</strong> (medium — maxCount trick), and <strong>Fruit Into Baskets</strong> (medium — at most k distinct). Master these and you can handle any sliding window interview question.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">How is Sliding Window different from Two Pointers?</summary>
+        <p class="faq-a">Both use two indices, but with different semantics. <strong>Sliding Window</strong> always operates on a contiguous subarray/substring between left and right pointers, focusing on the window contents. <strong>Two Pointers</strong> are more general — the pointers can move independently, toward each other, or at different speeds (fast &amp; slow), and don't always define a contiguous window.</p>
+      </details>
+    </section>
+
+    <!-- RELATED LINKS -->
+    <section class="section" aria-labelledby="h-related">
+      <h2><span class="sec-icon">🔗</span> <span id="h-related">Related Guides & Resources</span></h2>
+      <ul>
+        <li><a href="two-pointers.html">Two Pointers Pattern Guide – LeetCode Problems &amp; Templates</a> — master the foundational two-pointer technique</li>
+        <li><a href="https://leetcodepattern.com/#cat-1">Practice Sliding Window on the Tracker</a> — track your progress across all 28 problems</li>
+        <li><a href="https://leetcodepattern.com/#tracker">Full DSA Patterns Tracker</a> — all 88 patterns in one place</li>
+        <li><a href="https://leetcodepattern.com/#study-plan">8-Week Interview Study Plan</a> — where sliding window fits</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer style="background:var(--surface,#131627);border-top:1px solid var(--border,#252a45);padding:36px 24px 20px;" role="contentinfo" aria-label="Site footer">
+  <div style="text-align:center;margin-bottom:24px;">
+    <div style="background:var(--surface2,#1a1f35);border:1px dashed var(--border,#252a45);border-radius:10px;height:90px;max-width:728px;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--muted,#64748b);text-transform:uppercase;letter-spacing:.08em;position:relative;">
+      <span style="position:absolute;top:6px;left:10px;font-size:9px;color:var(--border,#252a45);letter-spacing:.1em;">Advertisement</span>
+      728 × 90 — Footer Banner Ad
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;margin-bottom:28px;">
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--text,#e2e8f0);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;">⚡ LCPattern</div>
+      <p style="font-size:12px;color:var(--muted,#64748b);line-height:1.7;margin-bottom:10px;">Free DSA patterns tracker. 88 patterns, 368 problems. Built for FAANG interview prep.</p>
+      <a href="/#tracker" style="background:var(--accent,#6366f1);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:7px;text-decoration:none;">Start Tracking →</a>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--text,#e2e8f0);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;">Pattern Guides</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="margin-bottom:7px;"><a href="/two-pointers.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">👉 Two Pointers</a></li>
+        <li style="margin-bottom:7px;"><a href="/sliding-window.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">🪟 Sliding Window</a></li>
+        <li style="margin-bottom:7px;"><a href="/resume-checker.html" style="font-size:13px;color:var(--green,#10b981);text-decoration:none;">📄 Resume Checker</a></li>
+        <li style="margin-bottom:7px;"><a href="/#cat-4" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">🧮 Dynamic Programming</a></li>
+        <li style="margin-bottom:7px;"><a href="/#cat-3" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">🕸️ Graph Algorithms</a></li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--text,#e2e8f0);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;">Resources</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="margin-bottom:7px;"><a href="https://leetcode.com" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">LeetCode</a></li>
+        <li style="margin-bottom:7px;"><a href="https://neetcode.io" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">NeetCode</a></li>
+        <li style="margin-bottom:7px;"><a href="https://takeuforward.org" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">Striver's SDE Sheet</a></li>
+        <li style="margin-bottom:7px;"><a href="https://www.geeksforgeeks.org" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">GeeksForGeeks</a></li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:700;color:var(--text,#e2e8f0);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;">Company</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="margin-bottom:7px;"><a href="/about.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">About Us</a></li>
+        <li style="margin-bottom:7px;"><a href="/privacy-policy.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">Privacy Policy</a></li>
+        <li style="margin-bottom:7px;"><a href="/terms.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">Terms of Service</a></li>
+        <li style="margin-bottom:7px;"><a href="/contact.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">Contact Us</a></li>
+        <li style="margin-bottom:7px;"><a href="/sitemap.xml" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">Sitemap</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:18px;border-top:1px solid var(--border,#252a45);font-size:12px;color:var(--muted,#64748b);">
+    <span>© 2025 <a href="https://leetcodepattern.com/" style="color:var(--accent,#6366f1);font-weight:600;text-decoration:none;">LeetCode Pattern Tracker</a>. All rights reserved.</span>
+    <span style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="/privacy-policy.html" style="color:var(--muted,#64748b);text-decoration:none;">Privacy</a>
+      <a href="/terms.html" style="color:var(--muted,#64748b);text-decoration:none;">Terms</a>
+      <a href="/about.html" style="color:var(--muted,#64748b);text-decoration:none;">About</a>
+      <a href="/contact.html" style="color:var(--muted,#64748b);text-decoration:none;">Contact</a>
+    </span>
+  </div>
+</footer>
+
+
+<script>
+// ── Page-level tracking for sliding-window ──
+// Loads from localStorage/Firebase and renders checked state on all problem rows
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure global state is loaded
+  if (!window.state) window.state = {};
+  try {
+    const raw = localStorage.getItem('lc_tracker_v2');
+    if (raw) {
+      const saved = JSON.parse(raw);
+      window.state = saved;
+    }
+  } catch(e) {}
+
+  // Render all problem checkboxes based on state
+  document.querySelectorAll('[data-problem-id]').forEach(function(el) {
+    const id = el.getAttribute('data-problem-id');
+    const pattern = 'sliding-window';
+    const solved = LCT.isDone(pattern, id);
+    if (solved) {
+      el.classList.add('solved');
+      const chk = el.querySelector('.prob-check, .lct-check');
+      if (chk) chk.classList.add('checked');
+      const txt = el.querySelector('.prob-title-text, .lct-title');
+      if (txt) txt.style.textDecoration = 'line-through';
+    }
+  });
+
+  // Update progress display if present
+  if (typeof LCT !== 'undefined') {
+    const prog = LCT.getProgress('sliding-window');
+    const progEl = document.getElementById('page-progress-label');
+    const progBar = document.getElementById('page-progress-bar');
+    if (progEl) progEl.textContent = prog.done + ' / ' + prog.total + ' solved';
+    if (progBar) progBar.style.width = prog.pct + '%';
+  }
+});
+
+// ── Toggle a problem on/off ──
+function lctToggle(pattern, id, el) {
+  if (typeof LCT === 'undefined') return;
+  const solved = LCT.toggleDone(pattern, id);
+  const row = el.closest ? el.closest('[data-problem-id]') : el.parentElement;
+  if (row) {
+    row.classList.toggle('solved', solved);
+    const txt = row.querySelector('.prob-title-text, .lct-title');
+    if (txt) txt.style.textDecoration = solved ? 'line-through' : '';
+  }
+  el.classList.toggle('checked', solved);
+  // Update page progress display
+  const prog = LCT.getProgress(pattern);
+  const progEl = document.getElementById('page-progress-label');
+  const progBar = document.getElementById('page-progress-bar');
+  if (progEl) progEl.textContent = prog.done + ' / ' + prog.total + ' solved';
+  if (progBar) progBar.style.width = prog.pct + '%';
+  // Show feedback
+  showLCTToast(solved ? '✅ Marked as solved!' : '↩️ Unmarked', solved ? '#10b981' : '#6366f1');
+}
+
+// ── Note save ──
+function lctSaveNote(pattern, id, val) {
+  if (typeof LCT !== 'undefined') LCT.saveNote(pattern, id, val);
+}
+
+// ── Toast notification ──
+let _lctToastTimer;
+function showLCTToast(msg, color) {
+  let t = document.getElementById('lct-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'lct-toast';
+    t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1f35;border:1px solid #252a45;border-radius:10px;padding:11px 16px;font-size:13px;display:flex;align-items:center;gap:8px;transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);z-index:9999;pointer-events:none;max-width:280px;font-family:Outfit,sans-serif;color:#e2e8f0;';
+    document.body.appendChild(t);
+  }
+  t.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';flex-shrink:0;display:inline-block;"></span> ' + msg;
+  t.style.transform = 'translateY(0)'; t.style.opacity = '1';
+  clearTimeout(_lctToastTimer);
+  _lctToastTimer = setTimeout(() => { t.style.transform = 'translateY(80px)'; t.style.opacity = '0'; }, 2000);
+}
+
+
+// ══════════════════════════════════════════════════════════════
+// PAGE-LEVEL TRACKING — sliding-window
+// Uses centralized markDone / isDone / getProgress API
+// ══════════════════════════════════════════════════════════════
+const PAGE_PATTERN = 'sliding-window';
+
+function toggleTrack(slug, pattern) {
+  const isDoneNow = window.toggleDone(pattern, slug);
+  refreshPageUI();
+  if (isDoneNow) spawnTrackConfetti(document.getElementById('chk-' + slug));
+}
+
+function handleRowClick(row, event) {
+  if (event.target.tagName === 'A' || event.target.closest('.track-check') || event.target.tagName === 'BUTTON') return;
+  const slug = row.dataset.slug;
+  const pattern = row.dataset.pattern;
+  if (slug && pattern) toggleTrack(slug, pattern);
+}
+
+window.refreshPageUI = function() {
+  const rows = document.querySelectorAll('.prob-row-track');
+  let doneCount = 0;
+  rows.forEach(row => {
+    const slug = row.dataset.slug;
+    const pattern = row.dataset.pattern || PAGE_PATTERN;
+    const done = window.isDone(pattern, slug);
+    if (done) doneCount++;
+    row.classList.toggle('done-row', done);
+    const chk = document.getElementById('chk-' + slug);
+    if (chk) { chk.classList.toggle('done', done); chk.setAttribute('aria-checked', String(done)); }
+  });
+  // Update progress bars + counters
+  document.querySelectorAll('.pat-progress-count[data-pattern="sliding-window"]').forEach(el => {
+    const total = parseInt(el.dataset.total || 0);
+    el.textContent = doneCount + ' / ' + total;
+    el.style.color = doneCount > 0 && doneCount === total ? 'var(--green)' : 'var(--accent)';
+  });
+  document.querySelectorAll('.pat-progress-fill[data-pattern="sliding-window"]').forEach(el => {
+    const total = parseInt(el.dataset.total || 1);
+    el.style.width = Math.round((doneCount / total) * 100) + '%';
+  });
+};
+
+function spawnTrackConfetti(anchor) {
+  if (!anchor) return;
+  const r = anchor.getBoundingClientRect();
+  const colors = ['#10b981','#6366f1','#06b6d4','#f59e0b'];
+  for (let i = 0; i < 10; i++) {
+    const p = document.createElement('div');
+    p.style.cssText = `position:fixed;width:7px;height:7px;border-radius:2px;pointer-events:none;z-index:9999;left:${r.left + Math.random()*r.width}px;top:${r.top}px;background:${colors[i%4]};animation:confetti-fall 0.9s ease-in forwards;animation-delay:${Math.random()*0.2}s`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1200);
+  }
+}
+
+if (!document.getElementById('confetti-style')) {
+  const s = document.createElement('style');
+  s.id = 'confetti-style';
+  s.textContent = '@keyframes confetti-fall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(80px) rotate(720deg);opacity:0}}';
+  document.head.appendChild(s);
+}
+
+// ── Initialize on DOM ready ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof window.refreshPageUI === 'function') setTimeout(window.refreshPageUI, 30);
+});
+
+
+const SW_PROBLEMS = [
+  {
+    id: 'fixed-window',
+    section: 'Fixed-Size Window',
+    desc: 'Window size k is constant. Initialize first k elements, then slide by adding one and removing one.',
+    complexity: 'Time: O(n) · Space: O(1)',
+    problems: [
+      { num:'346', title:'Moving Average from Data Stream', diff:'Easy', slug:'moving-average-from-data-stream', concept:'Running sum over fixed k' },
+      { num:'643', title:'Maximum Average Subarray I', diff:'Easy', slug:'maximum-average-subarray-i', concept:'Max window sum ÷ k' },
+      { num:'2985', title:'Calculate Compressed Mean', diff:'Easy', slug:'calculate-compressed-mean', concept:'Trimmed window average' },
+      { num:'3254', title:'Find the Power of K-Size Subarrays I', diff:'Medium', slug:'find-the-power-of-k-size-subarrays-i', concept:'Consecutive sorted window' },
+      { num:'3318', title:'Find X-Sum of All K-Long Subarrays I', diff:'Medium', slug:'find-x-sum-of-all-k-long-subarrays-i', concept:'Top-x frequency in fixed window' },
+    ]
+  },
+  {
+    id: 'variable-window',
+    section: 'Variable-Size Window',
+    desc: 'Expand right unconditionally. Shrink from left when constraint is violated.',
+    complexity: 'Time: O(n) · Space: O(k)',
+    problems: [
+      { num:'3', title:'Longest Substring Without Repeating Characters', diff:'Medium', slug:'longest-substring-without-repeating-characters', concept:'Set / hashmap for duplicates' },
+      { num:'76', title:'Minimum Window Substring', diff:'Hard', slug:'minimum-window-substring', concept:'Frequency matching' },
+      { num:'209', title:'Minimum Size Subarray Sum', diff:'Medium', slug:'minimum-size-subarray-sum', concept:'Shrink when sum ≥ target' },
+      { num:'219', title:'Contains Duplicate II', diff:'Easy', slug:'contains-duplicate-ii', concept:'Window of size k with hashset' },
+      { num:'424', title:'Longest Repeating Character Replacement', diff:'Medium', slug:'longest-repeating-character-replacement', concept:'maxCount trick' },
+      { num:'713', title:'Subarray Product Less Than K', diff:'Medium', slug:'subarray-product-less-than-k', concept:'Product shrink' },
+      { num:'904', title:'Fruit Into Baskets', diff:'Medium', slug:'fruit-into-baskets', concept:'At most 2 distinct' },
+      { num:'1004', title:'Max Consecutive Ones III', diff:'Medium', slug:'max-consecutive-ones-iii', concept:'At most k zeros flipped' },
+      { num:'1438', title:'Longest Continuous Subarray With Abs Diff ≤ Limit', diff:'Medium', slug:'longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit', concept:'Min/max deque' },
+      { num:'1658', title:'Minimum Operations to Reduce X to Zero', diff:'Medium', slug:'minimum-operations-to-reduce-x-to-zero', concept:'Reverse: max middle window' },
+      { num:'1838', title:'Frequency of the Most Frequent Element', diff:'Medium', slug:'frequency-of-the-most-frequent-element', concept:'Sort + window cost ≤ k' },
+      { num:'2461', title:'Maximum Sum of Distinct Subarrays With Length K', diff:'Medium', slug:'maximum-sum-of-distinct-subarrays-with-length-k', concept:'Fixed + distinct check' },
+      { num:'2516', title:'Take K of Each Character From Left and Right', diff:'Medium', slug:'take-k-of-each-character-from-left-and-right', concept:'Reverse: max skippable middle' },
+      { num:'2762', title:'Continuous Subarrays', diff:'Medium', slug:'continuous-subarrays', concept:'Max-min ≤ 2 constraint' },
+    ]
+  },
+  {
+    id: 'monotonic-deque',
+    section: 'Monotonic Deque Window',
+    desc: 'Track max/min inside the window in O(1) using a double-ended queue of indices.',
+    complexity: 'Time: O(n) · Space: O(k)',
+    problems: [
+      { num:'239', title:'Sliding Window Maximum', diff:'Hard', slug:'sliding-window-maximum', concept:'Decreasing deque of indices' },
+      { num:'862', title:'Shortest Subarray with Sum at Least K', diff:'Hard', slug:'shortest-subarray-with-sum-at-least-k', concept:'Prefix sum + deque' },
+      { num:'1696', title:'Jump Game VI', diff:'Medium', slug:'jump-game-vi', concept:'DP + deque max' },
+    ]
+  },
+];
+
+// ══════════════════════════════════════════════════════════════
+// DYNAMIC RENDER SYSTEM — problems rendered from JS data, not HTML
+// ══════════════════════════════════════════════════════════════
+function renderProblems(dataArr, pattern, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = dataArr.map(section => `
+    <section class="section" id="${section.id}" aria-labelledby="h-${section.id}" style="scroll-margin-top:80px;">
+      <h3 id="h-${section.id}">${section.section}</h3>
+      <div class="pat-progress" aria-label="Progress for ${section.section}">
+        <span style="font-size:11px;color:var(--muted);">Progress:</span>
+        <div class="pat-progress-bar"><div class="pat-progress-fill" data-pattern="${pattern}" data-total="${section.problems.length}" style="width:0%"></div></div>
+        <span class="pat-progress-count" data-pattern="${pattern}" data-total="${section.problems.length}" style="font-size:11px;color:var(--accent);">0 / ${section.problems.length}</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">${section.desc}</p>
+      <div style="margin-bottom:12px;">
+        <span style="font-size:11px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:var(--accent);padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;">${section.complexity}</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="prob-table">
+          <thead><tr>
+            <th style="width:40px;">Done</th>
+            <th>#</th><th>Problem</th><th>Difficulty</th><th>Key Concept</th>
+          </tr></thead>
+          <tbody>
+            ${section.problems.map(p => `
+              <tr class="prob-row-track ${window.isDone(pattern, p.slug) ? 'done-row' : ''}"
+                  data-slug="${p.slug}" data-pattern="${pattern}"
+                  onclick="handleRowClick(this,event)">
+                <td style="text-align:center;padding:8px;">
+                  <div class="track-check ${window.isDone(pattern, p.slug) ? 'done' : ''}"
+                       id="chk-${p.slug}"
+                       onclick="event.stopPropagation();toggleTrack('${p.slug}','${pattern}')"
+                       role="checkbox" aria-checked="${window.isDone(pattern, p.slug)}"
+                       tabindex="0"
+                       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrack('${p.slug}','${pattern}');}">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                      <path d="M1.5 5.5l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </td>
+                <td><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">${p.num}</span></td>
+                <td><a href="https://leetcode.com/problems/${p.slug}/" target="_blank" rel="noopener" onclick="event.stopPropagation()">${p.title}</a></td>
+                <td><span class="diff-${p.diff.toLowerCase()}">${p.diff}</span></td>
+                <td style="font-size:12px;">${p.concept}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  `).join('<hr style="border:none;border-top:1px solid var(--border);margin:32px 0;">');
+}
+
+
+// Init: render problems
+document.addEventListener('DOMContentLoaded', function() {
+  renderProblems(SW_PROBLEMS, PAGE_PATTERN, 'problems-container');
+  setTimeout(window.refreshPageUI, 50);
+});
+</script>
+</body>
+</html>

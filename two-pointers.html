@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Two Pointers Pattern – Complete LeetCode Guide with Problems & Examples 2025</title>
+<meta name="description" content="Master the Two Pointers pattern for LeetCode. Learn converging pointers, fast & slow pointers, and in-place modification techniques with 33 problems, code examples, and interview tips. Free guide.">
+<meta name="keywords" content="two pointers leetcode, two pointers pattern, two pointer technique, fast and slow pointers, linked list cycle detection, palindrome two pointers, sorted array two pointers, two pointers problems list, dsa two pointers, converging pointers">
+<meta name="author" content="LeetCode Pattern Tracker">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#0d0f1a">
+<link rel="canonical" href="https://leetcodepattern.com/two-pointers.html">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Two Pointers Pattern – Complete LeetCode Guide 2025">
+<meta property="og:description" content="Master converging pointers, fast & slow pointers, and in-place modification. 33 curated LeetCode problems with code examples and interview tips.">
+<meta property="og:url" content="https://leetcodepattern.com/two-pointers.html">
+<meta property="og:site_name" content="LeetCode Pattern Tracker">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Two Pointers LeetCode Pattern – Complete Guide 2025">
+<meta name="twitter:description" content="Converging, fast & slow, in-place. 33 problems. Master Two Pointers for FAANG interviews.">
+<meta name="twitter:site" content="@lcpatterntrack">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Two Pointers Pattern – Complete LeetCode Guide with Problems and Examples",
+  "description": "Master the Two Pointers DSA pattern for coding interviews. Covers converging pointers, fast and slow pointers, and in-place modification with 33 LeetCode problems.",
+  "url": "https://leetcodepattern.com/two-pointers.html",
+  "author": { "@type": "Organization", "name": "LeetCode Pattern Tracker", "url": "https://leetcodepattern.com/" },
+  "publisher": { "@type": "Organization", "name": "LeetCode Pattern Tracker", "url": "https://leetcodepattern.com/" },
+  "datePublished": "2025-04-05",
+  "dateModified": "2025-04-05",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://leetcodepattern.com/two-pointers.html" }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://leetcodepattern.com/" },
+    { "@type": "ListItem", "position": 2, "name": "DSA Patterns", "item": "https://leetcodepattern.com/#tracker" },
+    { "@type": "ListItem", "position": 3, "name": "Two Pointers Pattern", "item": "https://leetcodepattern.com/two-pointers.html" }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Two Pointers pattern in LeetCode?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Two Pointers pattern uses two index variables that traverse a data structure — often from opposite ends or at different speeds. It reduces O(n squared) brute force to O(n) by eliminating redundant comparisons. It is used for sorted array problems, linked list cycle detection, palindrome checking, and in-place array modification." }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I use Two Pointers vs Sliding Window?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use Two Pointers when the problem involves comparing or combining elements at two positions that may be far apart, such as two-sum on a sorted array or reversing in place. Use Sliding Window when you need the contents of a contiguous subarray between the two pointers. Sliding Window is a specialized form of Two Pointers where the window contents matter." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the fast and slow pointer technique?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The fast and slow pointer technique (Floyd cycle detection) uses two pointers moving at different speeds through a linked list or array. The slow pointer moves one step at a time, the fast pointer moves two steps. If there is a cycle, they will meet. If not, the fast pointer reaches the end. It detects cycles in O(n) time and O(1) space." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most important Two Pointers LeetCode problems?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The must-solve Two Pointers problems are: Two Sum II (easy, converging), 3Sum (medium, fix one + converge), Container With Most Water (medium, greedy converging), Linked List Cycle II (medium, fast and slow), Trapping Rain Water (hard, converging), and Valid Palindrome (easy, string comparison). These six cover all major Two Pointers variants." }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Google AdSense — uncomment after approval
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<style>
+:root {
+  --bg: #0d0f1a; --surface: #131627; --surface2: #1a1f35;
+  --border: #252a45; --text: #e2e8f0; --muted: #64748b;
+  --accent: #6366f1; --accent2: #06b6d4; --green: #10b981;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 12px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-brand { font-size: 15px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
+.topbar-brand span { color: var(--accent2); }
+.topbar-nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.topbar-nav a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+.topbar-nav a:hover { color: var(--accent); text-decoration: none; }
+.topbar-cta {
+  background: var(--accent); color: #fff; border: none; border-radius: 8px;
+  font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 8px 16px; cursor: pointer; text-decoration: none; transition: opacity 0.2s;
+}
+.topbar-cta:hover { opacity: 0.85; text-decoration: none; }
+
+.breadcrumb { padding: 10px 24px; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 12px; color: var(--muted); }
+.breadcrumb ol { list-style: none; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+.breadcrumb a { color: var(--accent); }
+.breadcrumb .sep { color: var(--border); }
+
+.ad-wrap { text-align: center; margin: 28px auto; max-width: 728px; }
+.ad-unit {
+  background: var(--surface); border: 1px dashed var(--border);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em; position: relative;
+}
+.ad-unit::before { content: 'Advertisement'; position: absolute; top: 6px; left: 10px; font-size: 9px; color: var(--border); letter-spacing: 0.1em; }
+.ad-banner { width: 100%; height: 90px; min-height: 90px; }
+.ad-in-feed { width: 100%; height: 100px; min-height: 100px; }
+
+.hero {
+  padding: 56px 24px 48px; text-align: center;
+  background: linear-gradient(135deg, #0d0f1a 0%, #131627 60%, #0d0f1a 100%);
+  border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(26px, 5vw, 46px); font-weight: 800; letter-spacing: -1px; margin-bottom: 14px; line-height: 1.15; background: linear-gradient(135deg, #c7d2fe 0%, #6366f1 50%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 16px; color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+.hero-stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-num { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); }
+.hero-stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.layout { display: flex; max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; gap: 32px; }
+.sidebar-toc { width: 220px; flex-shrink: 0; position: sticky; top: 72px; align-self: flex-start; max-height: calc(100vh - 90px); overflow-y: auto; }
+.sidebar-toc::-webkit-scrollbar { width: 3px; }
+.sidebar-toc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+.toc-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 12px; }
+.toc-item { display: block; font-size: 12px; color: var(--muted); padding: 5px 8px; border-radius: 6px; margin-bottom: 2px; transition: all 0.15s; border-left: 2px solid transparent; }
+.toc-item:hover { color: var(--accent); background: rgba(99,102,241,0.06); border-left-color: var(--accent); text-decoration: none; }
+.toc-item.sub { padding-left: 16px; font-size: 11px; }
+main.content { flex: 1; min-width: 0; }
+
+.section { margin-bottom: 52px; scroll-margin-top: 80px; }
+h2 { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+h2 .sec-icon { font-size: 22px; }
+h3 { font-size: 17px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+h4 { font-size: 14px; font-weight: 700; color: var(--accent); margin: 16px 0 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+p { font-size: 14px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; }
+ul, ol { padding-left: 20px; margin-bottom: 14px; }
+li { font-size: 14px; color: var(--muted); line-height: 1.8; }
+strong { color: var(--text); }
+
+.code-block { background: #0a0c18; border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; margin: 16px 0; }
+.code-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.code-lang { color: var(--accent); }
+pre { padding: 16px 18px; overflow-x: auto; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.7; color: #c9d1d9; }
+.kw { color: #ff7b72; } .fn { color: #d2a8ff; } .str { color: #a5d6ff; }
+.cm { color: #8b949e; font-style: italic; } .num { color: #79c0ff; } .var { color: #ffa657; }
+
+.complexity-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 20px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.badge-time { background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3); color: var(--accent); }
+.badge-space { background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3); color: var(--accent2); }
+.badge-diff { font-family: 'Outfit', sans-serif; }
+.badge-easy { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: var(--green); }
+.badge-med { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; }
+.badge-hard { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; }
+
+.pattern-type-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 16px 0 24px; }
+.pattern-type-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; border-top: 3px solid var(--accent); transition: border-color 0.15s; }
+.ptc-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.ptc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.ptc-ex { font-size: 11px; color: var(--accent); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+
+.callout { border-left: 3px solid var(--accent); background: rgba(99,102,241,0.06); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0; }
+.callout.warning { border-left-color: #f59e0b; background: rgba(245,158,11,0.06); }
+.callout.tip { border-left-color: var(--green); background: rgba(16,185,129,0.06); }
+.callout-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); margin-bottom: 5px; }
+.callout.warning .callout-title { color: #f59e0b; }
+.callout.tip .callout-title { color: var(--green); }
+.callout p { margin: 0; font-size: 13px; }
+
+.prob-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+.prob-table th { background: var(--surface2); color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+.prob-table td { padding: 11px 14px; border-bottom: 1px solid rgba(37,42,69,0.5); color: var(--muted); vertical-align: middle; }
+.prob-table tr:last-child td { border-bottom: none; }
+.prob-table tr:hover td { background: rgba(99,102,241,0.03); }
+.prob-table a { color: var(--text); font-weight: 500; }
+.prob-table a:hover { color: var(--accent); text-decoration: none; }
+.diff-easy { color: var(--green); font-weight: 600; font-size: 11px; }
+.diff-med { color: #f59e0b; font-weight: 600; font-size: 11px; }
+.diff-hard { color: #ef4444; font-weight: 600; font-size: 11px; }
+
+.faq-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; }
+.faq-item[open] { border-color: var(--accent); }
+.faq-q { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; list-style: none; user-select: none; }
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after { content: '⌄'; font-size: 16px; color: var(--accent); transition: transform 0.2s; flex-shrink: 0; margin-left: 12px; }
+.faq-item[open] .faq-q::after { transform: rotate(180deg); }
+.faq-a { padding: 12px 18px 16px; font-size: 13px; color: var(--muted); line-height: 1.8; border-top: 1px solid var(--border); }
+
+.page-footer { background: var(--surface); border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+.page-footer p { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--muted); transition: color 0.15s; }
+.footer-links a:hover { color: var(--accent); text-decoration: none; }
+
+.track-check {
+  width: 20px; height: 20px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex; align-items: center;
+  justify-content: center; cursor: pointer; transition: all 0.2s;
+  margin: 0 auto; flex-shrink: 0;
+}
+.track-check.done { background: var(--green); border-color: var(--green); }
+.track-check svg { display: none; }
+.track-check.done svg { display: block; }
+.prob-row-track { cursor: default; }
+.prob-row-track.done-row td { background: rgba(16,185,129,0.04); }
+.prob-row-track.done-row td a { text-decoration: line-through; text-decoration-color: rgba(16,185,129,0.4); color: var(--green); }
+.pat-progress {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--muted); margin-bottom: 8px;
+}
+.pat-progress-bar { flex: 1; height: 4px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+.pat-progress-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width 0.4s ease; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+@media (max-width: 768px) {
+  .sidebar-toc { display: none; }
+  .layout { padding: 24px 16px 60px; }
+  .hero { padding: 36px 16px 32px; }
+}
+
+/* ── DROPDOWN NAVIGATION ── */
+.gnav-dropdown{position:relative;}
+.gnav-dropdown-btn{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;background:none;border:none;font-family:inherit;white-space:nowrap;transition:color .15s,background .15s;}
+.gnav-dropdown-btn:hover,.gnav-dropdown:hover .gnav-dropdown-btn{color:var(--text);background:var(--surface2,#1a1f35);}
+.gnav-dropdown-btn svg{transition:transform .2s;flex-shrink:0;}
+.gnav-dropdown:hover .gnav-dropdown-btn svg,.gnav-dropdown:focus-within .gnav-dropdown-btn svg{transform:rotate(180deg);}
+.gnav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;background:var(--surface,#131627);border:1px solid var(--border,#252a45);border-radius:12px;min-width:240px;padding:6px;z-index:200;box-shadow:0 8px 32px rgba(0,0,0,.45);}
+.gnav-dropdown:hover .gnav-dropdown-menu,.gnav-dropdown:focus-within .gnav-dropdown-menu{display:block;}
+.gnav-dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:500;color:var(--muted,#64748b);transition:background .12s,color .12s;}
+.gnav-dropdown-item:hover{background:var(--surface2,#1a1f35);color:var(--text,#e2e8f0);text-decoration:none;}
+.gnav-dropdown-item .di-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0;}
+.gnav-dropdown-item .di-sub{font-size:10px;color:var(--muted,#64748b);display:block;margin-top:1px;opacity:.7;}
+.gnav-dropdown-divider{height:1px;background:var(--border,#252a45);margin:4px 6px;}
+.gnav-soon{opacity:.4;cursor:default;pointer-events:none;}
+
+.section-card {
+  background: #131627;
+  border: 1px solid #252a45;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.section-header {
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.section-header:hover {
+  background: #1a1f35;
+}
+
+.section-body {
+  padding: 10px;
+}
+
+.prob-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #222;
+}
+
+.check {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #555;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.check.done {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.easy { color: #10b981; }
+.medium { color: #f59e0b; }
+.hard { color: #ef4444; }
+</style>
+
+<script src="shared.js" defer></script>
+<script src="problems.js"></script>
+<script type="module" src="firebase.js"></script>
+
+
+
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// SHARED STATE MODULE — runs on every guide/tool page
+// Provides the same markDone / isDone / getProgress API as index.html
+// ══════════════════════════════════════════════════════════════
+(function() {
+  const KEY = 'lc_tracker_v2';
+
+  // ── Load ──
+  function _load() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      window.state = raw ? JSON.parse(raw) : {};
+    } catch(e) { window.state = {}; }
+  }
+
+  // ── Persist ──
+  // Only set the localStorage fallback if firebase.js hasn't already provided
+  // a Firestore-backed persistState (firebase.js loads as type="module" before
+  // this synchronous script, so it wins when Firebase is configured).
+  if (!window.persistState) {
+    window.persistState = function() {
+      try { localStorage.setItem(KEY, JSON.stringify(window.state || {})); }
+      catch(e) { console.error('State save error:', e); }
+    };
+  }
+
+  // ── Centralized API — same surface as index.html ──
+  window.markDone = function(pattern, id, done) {
+    if (!window.state) window.state = {};
+    if (!window.state[pattern]) window.state[pattern] = {};
+    window.state[pattern][id] = (done === undefined) ? true : !!done;
+    window.persistState();
+  };
+
+  window.isDone = function(pattern, id) {
+    return !!(window.state?.[pattern]?.[id] === true);
+  };
+
+  window.getProgress = function(pattern) {
+    const s = window.state?.[pattern] || {};
+    return Object.values(s).filter(v => v === true).length;
+  };
+
+  window.toggleDone = function(pattern, id) {
+    const next = !window.isDone(pattern, id);
+    window.markDone(pattern, id, next);
+    return next;
+  };
+
+  // ── Init: always load on page start ──
+  window.state = {};
+  _load();
+
+  // ── Re-sync when user returns to this tab ──
+  window.addEventListener('focus', function() {
+    _load();
+    if (typeof window.refreshPageUI === 'function') window.refreshPageUI();
+  });
+})();
+</script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     GLOBAL NAV — shared across all pages
+══════════════════════════════════════════════ -->
+<style>
+.gnav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;}
+.gnav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px;gap:12px;}
+.gnav-brand{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.3px;text-decoration:none;flex-shrink:0;}
+.gnav-brand span{color:var(--accent);}
+.gnav-links{display:flex;align-items:center;gap:2px;flex:1;}
+.gnav-link{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;text-decoration:none;white-space:nowrap;transition:color 0.15s,background 0.15s;}
+.gnav-link:hover{color:var(--text);background:var(--surface2);text-decoration:none;}
+.gnav-link.active-page{color:var(--accent);}
+/* Dropdown */
+.gnav-dd{position:relative;}
+.gnav-dd-btn{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:color 0.15s,background 0.15s;}
+.gnav-dd-btn:hover,.gnav-dd:hover .gnav-dd-btn{color:var(--text);background:var(--surface2);}
+.gnav-dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;min-width:240px;box-shadow:0 8px 24px rgba(0,0,0,0.4);padding:6px;z-index:200;}
+.gnav-dd:hover .gnav-dd-menu,.gnav-dd:focus-within .gnav-dd-menu{display:block;}
+.gnav-dd-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;color:var(--text);}
+.gnav-dd-item:hover{background:var(--surface2);text-decoration:none;}
+.gnav-dd-icon{font-size:16px;flex-shrink:0;}
+.gnav-dd-label{font-size:13px;font-weight:600;}
+.gnav-dd-sub{font-size:11px;color:var(--muted);display:block;font-weight:400;}
+.gnav-dd-divider{border:none;border-top:1px solid var(--border);margin:4px 0;}
+.gnav-dd-soon{opacity:0.45;cursor:default;pointer-events:none;}
+.gnav-cta{background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:opacity 0.2s;flex-shrink:0;}
+.gnav-cta:hover{opacity:0.85;text-decoration:none;}
+@media(max-width:700px){.gnav-links{display:none;}.gnav-inner{justify-content:space-between;}}
+</style>
+<header class="gnav" role="banner">
+  <div class="gnav-inner">
+    <a href="/" class="gnav-brand" aria-label="LeetCode Pattern Tracker Home">⚡ <span>LC</span>Pattern</a>
+    <nav class="gnav-links" aria-label="Main navigation">
+      <a href="/" class="gnav-link ">Home</a>
+      <div class="gnav-dd" role="navigation" aria-label="Patterns menu">
+        <button class="gnav-dd-btn" aria-haspopup="true" aria-expanded="false">
+          Patterns
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="gnav-dd-menu" role="menu">
+          <a href="/two-pointers.html" class="gnav-dd-item active-page" role="menuitem">
+            <span class="gnav-dd-icon">👉</span>
+            <span><span class="gnav-dd-label">Two Pointers</span><span class="gnav-dd-sub">7 sub-patterns · 33 problems</span></span>
+          </a>
+          <a href="/sliding-window.html" class="gnav-dd-item " role="menuitem">
+            <span class="gnav-dd-icon">🪟</span>
+            <span><span class="gnav-dd-label">Sliding Window</span><span class="gnav-dd-sub">4 sub-patterns · 28 problems</span></span>
+          </a>
+          <hr class="gnav-dd-divider">
+          <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🧮</span><span><span class="gnav-dd-label">Dynamic Programming</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+          <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🕸️</span><span><span class="gnav-dd-label">Graph Algorithms</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+          <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🔍</span><span><span class="gnav-dd-label">Binary Search</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+          <hr class="gnav-dd-divider">
+          <a href="/#tracker" class="gnav-dd-item" role="menuitem"><span class="gnav-dd-icon">⚡</span><span><span class="gnav-dd-label">All 368 Problems</span><span class="gnav-dd-sub">Full tracker — all 15 categories</span></span></a>
+        </div>
+      </div>
+      <a href="/resume-checker.html" class="gnav-link " style="color:var(--green);">Resume Checker</a>
+      <a href="/about.html" class="gnav-link ">About</a>
+    </nav>
+    
+    <a href="/" class="gnav-cta" title="Free LeetCode DSA Patterns Tracker">Track Progress →</a>
+  </div>
+</header>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol>
+    <li><a href="https://leetcodepattern.com/" title="Free LeetCode DSA Patterns Tracker">LeetCode Pattern Tracker</a></li>
+    <li class="sep">›</li>
+    <li><a href="https://leetcodepattern.com/#tracker">DSA Patterns</a></li>
+    <li class="sep">›</li>
+    <li aria-current="page" style="color:var(--text)">Two Pointers</li>
+  </ol>
+</nav>
+
+<!-- ── TOP AD ── -->
+<div class="ad-wrap">
+  <!--
+  ADSENSE TOP BANNER — 728x90 leaderboard
+  <ins class="adsbygoogle ad-banner" style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="XXXXXXXXXX"
+       data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+  <div class="ad-unit ad-banner">728 × 90 — Top Banner Ad</div>
+</div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">DSA Pattern Guide</div>
+  <h1>👉 Two Pointers Pattern</h1>
+  <p class="hero-sub">From beginner to advanced — master every Two Pointers technique used in FAANG interviews with 33 real LeetCode problems, working code, and step-by-step explanations.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-label">Sub-patterns</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">33</div><div class="hero-stat-label">Problems</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">O(n)</div><div class="hero-stat-label">Typical Time</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">★★★</div><div class="hero-stat-label">Interview Freq.</div></div>
+  </div>
+</div>
+
+<!-- ── MAIN LAYOUT ── -->
+<div class="layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="sidebar-toc" aria-label="Table of contents">
+    <div class="toc-title">On This Page</div>
+    <a class="toc-item" href="#what-is-two-pointers">What Is Two Pointers?</a>
+    <a class="toc-item" href="#when-to-use">When to Use It</a>
+    <a class="toc-item" href="#sub-patterns">Sub-patterns</a>
+    <a class="toc-item sub" href="#converging">Converging Pointers</a>
+    <a class="toc-item sub" href="#fast-slow">Fast & Slow Pointers</a>
+    <a class="toc-item sub" href="#fixed-sep">Fixed Separation</a>
+    <a class="toc-item sub" href="#in-place">In-place Modification</a>
+    <a class="toc-item sub" href="#string-compare">String Comparison</a>
+    <a class="toc-item sub" href="#expand-center">Expand From Center</a>
+    <a class="toc-item sub" href="#reversal">String Reversal</a>
+    <a class="toc-item" href="#template">Code Templates</a>
+    <a class="toc-item" href="#problems">All Problems</a>
+    <a class="toc-item" href="#tips">Tips & Tricks</a>
+    <a class="toc-item" href="#faq">FAQ</a>
+  </aside>
+ 
+  <!-- CONTENT -->
+  <main class="content" id="content">
+
+    <!-- WHAT IS -->
+    <section class="section" id="what-is-two-pointers" aria-labelledby="h-what">
+      <h2><span class="sec-icon">👉</span> <span id="h-what">What Is the Two Pointers Pattern?</span></h2>
+      <p>The <strong>Two Pointers</strong> pattern uses two index variables — often called <code>left</code> and <code>right</code>, or <code>slow</code> and <code>fast</code> — that traverse a data structure. Instead of using nested loops to compare every pair in O(n²), two pointers exploit the structure of the problem (usually sorted data or a specific pointer speed relationship) to achieve <strong>O(n) time with O(1) extra space</strong>.</p>
+      <p>It is one of the foundational patterns in competitive programming and technical interviews, and appears across arrays, strings, and linked list problems at every difficulty level.</p>
+
+      <div class="callout">
+        <div class="callout-title">Core Intuition</div>
+        <p>Two pointers work because they eliminate impossible candidates. On a sorted array, if the sum of arr[left] + arr[right] is too large, you know every element to the right of left is also too large — so you move right inward. This is the key insight behind all converging pointer problems.</p>
+      </div>
+    </section>
+
+    <!-- WHEN TO USE -->
+    <section class="section" id="when-to-use" aria-labelledby="h-when">
+      <h2><span class="sec-icon">🎯</span> <span id="h-when">When to Use Two Pointers</span></h2>
+      <p>Look for these signals in the problem statement:</p>
+      <ul>
+        <li>The array or string is <strong>sorted</strong> (converging pointers)</li>
+        <li>You need to find a <strong>pair, triplet, or subarray</strong> satisfying a condition</li>
+        <li>The problem involves a <strong>linked list</strong> and cycle detection or midpoint finding</li>
+        <li>You need to <strong>modify an array in-place</strong> without extra space (remove duplicates, move zeroes)</li>
+        <li>You need to <strong>reverse</strong> a string, array, or parts of them in-place</li>
+        <li>You need to compare characters from <strong>both ends</strong> of a string (palindrome check)</li>
+        <li>A brute-force O(n²) solution exists and you want to optimize to O(n)</li>
+      </ul>
+    </section>
+
+    <!-- SUB-PATTERNS -->
+    <section class="section" id="sub-patterns" aria-labelledby="h-sub">
+      <h2><span class="sec-icon">🔬</span> <span id="h-sub">The 7 Two Pointers Sub-patterns</span></h2>
+      <div class="pattern-type-grid">
+        <div class="pattern-type-card">
+          <div class="ptc-title">1. Converging</div>
+          <div class="ptc-desc">Left and right move toward each other from opposite ends of a sorted array.</div>
+          <div class="ptc-ex">Two Sum II, 3Sum, 4Sum</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#06b6d4">
+          <div class="ptc-title">2. Fast & Slow</div>
+          <div class="ptc-desc">Two pointers at different speeds to detect cycles or find the midpoint.</div>
+          <div class="ptc-ex">Linked List Cycle, Happy Number</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#10b981">
+          <div class="ptc-title">3. Fixed Separation</div>
+          <div class="ptc-desc">Two pointers k positions apart to find the nth from end.</div>
+          <div class="ptc-ex">Remove Nth from End, Middle of List</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#f59e0b">
+          <div class="ptc-title">4. In-place Modify</div>
+          <div class="ptc-desc">Read and write pointers to filter or rearrange elements in-place.</div>
+          <div class="ptc-ex">Remove Duplicates, Move Zeroes</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#ec4899">
+          <div class="ptc-title">5. String Compare</div>
+          <div class="ptc-desc">Process two strings simultaneously, handling special characters.</div>
+          <div class="ptc-ex">Backspace String Compare</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#8b5cf6">
+          <div class="ptc-title">6. Expand Center</div>
+          <div class="ptc-desc">Start from center, expand outward symmetrically for palindromes.</div>
+          <div class="ptc-ex">Longest Palindromic Substring</div>
+        </div>
+        <div class="pattern-type-card" style="border-top-color:#a855f7">
+          <div class="ptc-title">7. Reversal</div>
+          <div class="ptc-desc">Swap elements from both ends moving inward to reverse in-place.</div>
+          <div class="ptc-ex">Reverse String, Reverse Words</div>
+        </div>
+      </div>
+
+      <!-- CONVERGING -->
+      <h3 id="converging">Pattern 1: Converging Pointers (Sorted Array Target Sum)</h3>
+      <p>The most classic Two Pointers form. Start left at index 0 and right at the last index. Move them based on whether the current combination satisfies, exceeds, or falls short of the target.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n)</span>
+        <span class="badge badge-space">💾 Space: O(1)</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Two Sum II — LC #167</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">twoSum</span>(numbers, target):
+    left, right = <span class="num">0</span>, <span class="fn">len</span>(numbers) - <span class="num">1</span>
+
+    <span class="kw">while</span> left < right:
+        s = numbers[left] + numbers[right]
+        <span class="kw">if</span> s == target:
+            <span class="kw">return</span> [left + <span class="num">1</span>, right + <span class="num">1</span>]   <span class="cm"># 1-indexed</span>
+        <span class="kw">elif</span> s < target:
+            left += <span class="num">1</span>    <span class="cm"># sum too small, move left forward</span>
+        <span class="kw">else</span>:
+            right -= <span class="num">1</span>   <span class="cm"># sum too large, move right backward</span>
+
+    <span class="kw">return</span> []</code></pre>
+      </div>
+      <p><strong>3Sum extension:</strong> Fix one element with a loop, then run Two Pointers on the remaining subarray. Handle duplicates by skipping equal elements.</p>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>3Sum — LC #15</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">threeSum</span>(nums):
+    nums.sort()
+    result = []
+
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(nums) - <span class="num">2</span>):
+        <span class="kw">if</span> i > <span class="num">0</span> <span class="kw">and</span> nums[i] == nums[i-<span class="num">1</span>]: <span class="kw">continue</span>  <span class="cm"># skip duplicate</span>
+        left, right = i + <span class="num">1</span>, <span class="fn">len</span>(nums) - <span class="num">1</span>
+
+        <span class="kw">while</span> left < right:
+            s = nums[i] + nums[left] + nums[right]
+            <span class="kw">if</span> s == <span class="num">0</span>:
+                result.append([nums[i], nums[left], nums[right]])
+                <span class="kw">while</span> left < right <span class="kw">and</span> nums[left] == nums[left+<span class="num">1</span>]: left += <span class="num">1</span>
+                <span class="kw">while</span> left < right <span class="kw">and</span> nums[right] == nums[right-<span class="num">1</span>]: right -= <span class="num">1</span>
+                left += <span class="num">1</span>; right -= <span class="num">1</span>
+            <span class="kw">elif</span> s < <span class="num">0</span>: left += <span class="num">1</span>
+            <span class="kw">else</span>: right -= <span class="num">1</span>
+
+    <span class="kw">return</span> result</code></pre>
+      </div>
+
+      <!-- FAST SLOW -->
+      <h3 id="fast-slow">Pattern 2: Fast & Slow Pointers (Floyd's Algorithm)</h3>
+      <p>The slow pointer moves one step; the fast pointer moves two. If there's a cycle, they'll meet inside it. If there's no cycle, fast reaches the end. This also finds the <strong>middle of a linked list</strong> in one pass — when fast reaches the end, slow is at the midpoint.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n)</span>
+        <span class="badge badge-space">💾 Space: O(1)</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Linked List Cycle Detection — LC #141</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">hasCycle</span>(head):
+    slow = fast = head
+
+    <span class="kw">while</span> fast <span class="kw">and</span> fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        <span class="kw">if</span> slow == fast:
+            <span class="kw">return</span> <span class="kw">True</span>    <span class="cm"># cycle detected — they met</span>
+
+    <span class="kw">return</span> <span class="kw">False</span>          <span class="cm"># fast reached end — no cycle</span>
+
+
+<span class="kw">def</span> <span class="fn">middleNode</span>(head):
+    <span class="cm"># When fast reaches end, slow is at middle</span>
+    slow = fast = head
+    <span class="kw">while</span> fast <span class="kw">and</span> fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    <span class="kw">return</span> slow</code></pre>
+      </div>
+
+      <!-- IN-PLACE -->
+      <h3 id="in-place">Pattern 4: In-place Array Modification (Read/Write Pointers)</h3>
+      <div class="pat-progress" aria-label="Progress for this pattern"><span style="font-size:11px;color:var(--muted);">Progress:</span><div class="pat-progress-bar"><div class="pat-progress-fill" data-pattern="two-pointers" data-total="11" style="width:0%"></div></div><span class="pat-progress-count" data-pattern="two-pointers" data-total="11" style="font-size:11px;color:var(--accent);">0 / 11</span></div>
+      <p>Use a <strong>write pointer</strong> (slow) that only advances when a valid element is found, and a <strong>read pointer</strong> (fast) that scans everything. This filters arrays in O(n) with O(1) space.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n)</span>
+        <span class="badge badge-space">💾 Space: O(1)</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Remove Duplicates from Sorted Array — LC #26</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">removeDuplicates</span>(nums):
+    <span class="kw">if</span> <span class="kw">not</span> nums: <span class="kw">return</span> <span class="num">0</span>
+    write = <span class="num">1</span>   <span class="cm"># position to write next unique element</span>
+
+    <span class="kw">for</span> read <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="fn">len</span>(nums)):
+        <span class="kw">if</span> nums[read] != nums[read - <span class="num">1</span>]:  <span class="cm"># found new unique</span>
+            nums[write] = nums[read]
+            write += <span class="num">1</span>
+
+    <span class="kw">return</span> write</code></pre>
+      </div>
+
+      <!-- EXPAND CENTER -->
+      <h3 id="expand-center">Pattern 6: Expand From Center (Palindromes)</h3>
+      <div class="pat-progress" aria-label="Progress for this pattern"><span style="font-size:11px;color:var(--muted);">Progress:</span><div class="pat-progress-bar"><div class="pat-progress-fill" data-pattern="two-pointers" data-total="11" style="width:0%"></div></div><span class="pat-progress-count" data-pattern="two-pointers" data-total="11" style="font-size:11px;color:var(--accent);">0 / 11</span></div>
+      <p>For each index (and each pair of adjacent indices), expand outward as long as the characters match. Track the longest expansion found. This solves all palindrome-finding problems in O(n) time.</p>
+      <div class="complexity-row">
+        <span class="badge badge-time">⏱ Time: O(n²) worst</span>
+        <span class="badge badge-space">💾 Space: O(1)</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">Python</span><span>Longest Palindromic Substring — LC #5</span></div>
+        <pre><code><span class="kw">def</span> <span class="fn">longestPalindrome</span>(s):
+    <span class="kw">def</span> <span class="fn">expand</span>(l, r):
+        <span class="kw">while</span> l >= <span class="num">0</span> <span class="kw">and</span> r < <span class="fn">len</span>(s) <span class="kw">and</span> s[l] == s[r]:
+            l -= <span class="num">1</span>; r += <span class="num">1</span>
+        <span class="kw">return</span> s[l+<span class="num">1</span>:r]   <span class="cm"># l,r went one step too far</span>
+
+    result = <span class="str">""</span>
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="fn">len</span>(s)):
+        odd  = <span class="fn">expand</span>(i, i)       <span class="cm"># odd-length palindrome</span>
+        even = <span class="fn">expand</span>(i, i + <span class="num">1</span>)   <span class="cm"># even-length palindrome</span>
+        <span class="kw">if</span> <span class="fn">len</span>(odd)  > <span class="fn">len</span>(result): result = odd
+        <span class="kw">if</span> <span class="fn">len</span>(even) > <span class="fn">len</span>(result): result = even
+
+    <span class="kw">return</span> result</code></pre>
+      </div>
+    </section>
+
+    <!-- AD IN FEED -->
+    <div class="ad-wrap">
+      <!--
+      ADSENSE IN-FEED AD
+      <ins class="adsbygoogle ad-in-feed" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <div class="ad-unit ad-in-feed">In-Feed Ad · 728 × 90</div>
+    </div>
+
+    <!-- ALL PROBLEMS -->
+    <section class="section" id="problems" aria-labelledby="h-problems">
+      <h2><span class="sec-icon">📋</span> <span id="h-problems">All Two Pointers LeetCode Problems</span></h2>
+      <p>28 curated problems across 5 sub-patterns. Start with Converging (easiest), then Fast & Slow, In-place, Palindrome, Reversal.</p>
+      <div id="problems-container"></div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="section" id="tips" aria-labelledby="h-tips">
+      <h2><span class="sec-icon">💡</span> <span id="h-tips">Interview Tips & Common Mistakes</span></h2>
+
+      <div class="callout tip">
+        <div class="callout-title">Tip #1 — Sort first for converging pointers</div>
+        <p>Converging pointers only work on sorted data. If the problem doesn't guarantee sorted order, sort first (O(n log n)) — the Two Pointers pass is still O(n), so the total is O(n log n), better than O(n²) brute force.</p>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-title">Tip #2 — Always handle duplicates explicitly</div>
+        <p>In 3Sum, 4Sum and similar, you must skip duplicate values after finding a valid triplet to avoid duplicate result sets. After a match, advance both pointers then skip equal consecutive values.</p>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-title">Tip #3 — Fast & slow for finding midpoint</div>
+        <p>The fast &amp; slow trick doubles as a midpoint finder: when fast reaches the end, slow is at the middle. This is used in Palindrome Linked List (#234) — find mid, reverse second half, compare.</p>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">Common Mistake — Wrong pointer movement direction</div>
+        <p>In converging pointers, only move <em>one</em> pointer per iteration based on the comparison result. Never move both simultaneously unless you've found a match — this skips valid pairs.</p>
+      </div>
+
+      <div class="callout warning">
+        <div class="callout-title">Common Mistake — Off-by-one in fast & slow</div>
+        <p>Always check <code>fast and fast.next</code> before advancing. Checking only <code>fast.next</code> will crash if fast is already None when entering the loop condition.</p>
+      </div>
+    </section>
+
+    <!-- AD 2 -->
+    <div class="ad-wrap">
+      <!--
+      ADSENSE IN-FEED AD 2
+      <ins class="adsbygoogle ad-in-feed" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <div class="ad-unit ad-in-feed">In-Feed Ad 2 · 728 × 90</div>
+    </div>
+
+    <!-- FAQ -->
+    <!-- Explore More Patterns section + Resume CTA -->
+    <section style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:24px;margin:0 0 32px;" aria-label="Explore More Patterns">
+      <h2 style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:14px;">🗺️ Explore More DSA Patterns</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:20px;">
+        <a href="/sliding-window.html" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🪟 Sliding Window</div>
+          <div style="font-size:11px;color:var(--muted);">Sliding Window Pattern Guide →</div>
+        </a>
+        <a href="/#cat-4" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🧮 Dynamic Programming</div>
+          <div style="font-size:11px;color:var(--muted);">11 patterns · 35 problems →</div>
+        </a>
+        <a href="/#cat-3" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🕸️ Graph Algorithms</div>
+          <div style="font-size:11px;color:var(--muted);">8 patterns · 53 problems →</div>
+        </a>
+        <a href="/resume-checker.html" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'">
+          <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px;">📄 Resume Checker</div>
+          <div style="font-size:11px;color:var(--muted);">Analyze for ATS & interviews →</div>
+        </a>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/#tracker" style="background:var(--accent);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none;">Track All 368 Problems →</a>
+        <a href="/resume-checker.html" style="background:var(--green);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none;">Analyze Your Resume →</a>
+      </div>
+    </section>
+
+    <!-- Internal cross-link before FAQ — SEO internal linking -->
+    <aside style="background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:14px 20px;margin:0 0 32px;" aria-label="Related pattern guide">
+      <p style="margin:0;font-size:13px;color:var(--muted);">
+        <strong style="color:var(--text);">Related Pattern:</strong>
+        Two Pointers is the foundation of the <a href="sliding-window.html" style="color:var(--accent);font-weight:600;">Sliding Window pattern</a> — after mastering Two Pointers, the Sliding Window technique follows naturally.
+        Read the <a href="sliding-window.html" style="color:var(--accent);font-weight:600;" title="Sliding Window Pattern Guide">Sliding Window Pattern Guide</a> next, or
+        <a href="https://leetcodepattern.com/#tracker" style="color:var(--accent);">track all 88 patterns</a> on the main tracker.
+      </p>
+    </aside>
+    <section class="section" id="faq" aria-labelledby="h-faq">
+      <h2><span class="sec-icon">❓</span> <span id="h-faq">Two Pointers FAQ</span></h2>
+
+      <details class="faq-item" open>
+        <summary class="faq-q">What is the Two Pointers pattern in LeetCode?</summary>
+        <p class="faq-a">The Two Pointers pattern uses two index variables that traverse a data structure — often from opposite ends or at different speeds. It reduces O(n²) brute force to O(n) by leveraging the sorted or structured nature of the data to eliminate impossible candidates without checking every pair.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">When should I use Two Pointers vs Sliding Window?</summary>
+        <p class="faq-a">Use <strong>Two Pointers</strong> when comparing or combining elements at two positions that may not form a contiguous range (like two ends of a sorted array), or when moving at different speeds (fast &amp; slow). Use <strong>Sliding Window</strong> when the problem cares about the contents of the subarray between the two pointers (frequency, sum, length). Sliding Window is a specialized form of Two Pointers.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What is the fast and slow pointer (Floyd's algorithm)?</summary>
+        <p class="faq-a">Floyd's cycle detection moves one pointer one step and another pointer two steps. If there is a cycle, both pointers enter it and the fast one catches up to the slow one from behind — they meet inside the cycle. This runs in O(n) time and O(1) space, making it ideal for cycle detection in linked lists and implicit graphs.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What are the most important Two Pointers problems to practice?</summary>
+        <p class="faq-a">The six must-solve problems are: <strong>Two Sum II</strong> (converging), <strong>3Sum</strong> (fix one + converge), <strong>Container With Most Water</strong> (greedy converge), <strong>Linked List Cycle II</strong> (fast &amp; slow cycle entry), <strong>Longest Palindromic Substring</strong> (expand center), and <strong>Sort Colors</strong> (Dutch National Flag with 3 pointers). These cover every major variant.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Can Two Pointers work on unsorted arrays?</summary>
+        <p class="faq-a">Converging pointers require sorted data. However, fast &amp; slow pointers, in-place modification (read/write), expand-from-center, and reversal patterns all work on unsorted or arbitrary arrays. If the problem asks for pairs from an unsorted array, sort first — the O(n log n) cost is still better than O(n²) brute force.</p>
+      </details>
+    </section>
+
+    <!-- RELATED -->
+    <section class="section" aria-labelledby="h-related">
+      <h2><span class="sec-icon">🔗</span> <span id="h-related">Related Guides & Resources</span></h2>
+      <ul>
+        <li><a href="sliding-window.html">Sliding Window Pattern Guide – LeetCode Problems &amp; Templates</a> — the natural next step after two pointers</li>
+        <li><a href="https://leetcodepattern.com/#cat-0">Practice Two Pointers on the Tracker</a> — track your progress across all 33 problems</li>
+        <li><a href="https://leetcodepattern.com/#tracker">Full DSA Patterns Tracker</a> — all 88 patterns in one place</li>
+        <li><a href="https://leetcodepattern.com/#study-plan">8-Week Interview Study Plan</a> — where Two Pointers fits</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<div id="footer"></div>
+
+<script>
+// ── Page-level tracking for two-pointers ──
+// Loads from localStorage/Firebase and renders checked state on all problem rows
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure global state is loaded
+  if (!window.state) window.state = {};
+  try {
+    const raw = localStorage.getItem('lc_tracker_v2');
+    if (raw) {
+      const saved = JSON.parse(raw);
+      window.state = saved;
+    }
+  } catch(e) {}
+
+  // Render all problem checkboxes based on state
+  document.querySelectorAll('[data-problem-id]').forEach(function(el) {
+    const id = el.getAttribute('data-problem-id');
+    const pattern = 'two-pointers';
+    const solved = LCT.isDone(pattern, id);
+    if (solved) {
+      el.classList.add('solved');
+      const chk = el.querySelector('.prob-check, .lct-check');
+      if (chk) chk.classList.add('checked');
+      const txt = el.querySelector('.prob-title-text, .lct-title');
+      if (txt) txt.style.textDecoration = 'line-through';
+    }
+  });
+
+  // Update progress display if present
+  if (typeof LCT !== 'undefined') {
+    const prog = LCT.getProgress('two-pointers');
+    const progEl = document.getElementById('page-progress-label');
+    const progBar = document.getElementById('page-progress-bar');
+    if (progEl) progEl.textContent = prog.done + ' / ' + prog.total + ' solved';
+    if (progBar) progBar.style.width = prog.pct + '%';
+  }
+});
+
+// ── Toggle a problem on/off ──
+function lctToggle(pattern, id, el) {
+  if (typeof LCT === 'undefined') return;
+  const solved = LCT.toggleDone(pattern, id);
+  const row = el.closest ? el.closest('[data-problem-id]') : el.parentElement;
+  if (row) {
+    row.classList.toggle('solved', solved);
+    const txt = row.querySelector('.prob-title-text, .lct-title');
+    if (txt) txt.style.textDecoration = solved ? 'line-through' : '';
+  }
+  el.classList.toggle('checked', solved);
+  // Update page progress display
+  const prog = LCT.getProgress(pattern);
+  const progEl = document.getElementById('page-progress-label');
+  const progBar = document.getElementById('page-progress-bar');
+  if (progEl) progEl.textContent = prog.done + ' / ' + prog.total + ' solved';
+  if (progBar) progBar.style.width = prog.pct + '%';
+  // Show feedback
+  showLCTToast(solved ? '✅ Marked as solved!' : '↩️ Unmarked', solved ? '#10b981' : '#6366f1');
+}
+
+// ── Note save ──
+function lctSaveNote(pattern, id, val) {
+  if (typeof LCT !== 'undefined') LCT.saveNote(pattern, id, val);
+}
+
+// ── Toast notification ──
+let _lctToastTimer;
+function showLCTToast(msg, color) {
+  let t = document.getElementById('lct-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'lct-toast';
+    t.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a1f35;border:1px solid #252a45;border-radius:10px;padding:11px 16px;font-size:13px;display:flex;align-items:center;gap:8px;transform:translateY(80px);opacity:0;transition:all .3s cubic-bezier(.4,0,.2,1);z-index:9999;pointer-events:none;max-width:280px;font-family:Outfit,sans-serif;color:#e2e8f0;';
+    document.body.appendChild(t);
+  }
+  t.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';flex-shrink:0;display:inline-block;"></span> ' + msg;
+  t.style.transform = 'translateY(0)'; t.style.opacity = '1';
+  clearTimeout(_lctToastTimer);
+  _lctToastTimer = setTimeout(() => { t.style.transform = 'translateY(80px)'; t.style.opacity = '0'; }, 2000);
+}
+
+
+
+// ══════════════════════════════════════════════════════════════
+// PAGE-LEVEL TRACKING — two-pointers
+// Uses centralized markDone / isDone / getProgress API
+// ══════════════════════════════════════════════════════════════
+const PAGE_PATTERN = 'two-pointers';
+
+function toggleTrack(slug, pattern) {
+  const isDoneNow = window.toggleDone(pattern, slug);
+  refreshPageUI();
+  if (isDoneNow) spawnTrackConfetti(document.getElementById('chk-' + slug));
+}
+
+function handleRowClick(row, event) {
+  if (event.target.tagName === 'A' || event.target.closest('.track-check') || event.target.tagName === 'BUTTON') return;
+  const slug = row.dataset.slug;
+  const pattern = row.dataset.pattern;
+  if (slug && pattern) toggleTrack(slug, pattern);
+}
+
+window.refreshPageUI = function() {
+  const rows = document.querySelectorAll('.prob-row-track');
+  let doneCount = 0;
+  rows.forEach(row => {
+    const slug = row.dataset.slug;
+    const pattern = row.dataset.pattern || PAGE_PATTERN;
+    const done = window.isDone(pattern, slug);
+    if (done) doneCount++;
+    row.classList.toggle('done-row', done);
+    const chk = document.getElementById('chk-' + slug);
+    if (chk) { chk.classList.toggle('done', done); chk.setAttribute('aria-checked', String(done)); }
+  });
+  // Update progress bars + counters
+  document.querySelectorAll('.pat-progress-count[data-pattern="two-pointers"]').forEach(el => {
+    const total = parseInt(el.dataset.total || 0);
+    el.textContent = doneCount + ' / ' + total;
+    el.style.color = doneCount > 0 && doneCount === total ? 'var(--green)' : 'var(--accent)';
+  });
+  document.querySelectorAll('.pat-progress-fill[data-pattern="two-pointers"]').forEach(el => {
+    const total = parseInt(el.dataset.total || 1);
+    el.style.width = Math.round((doneCount / total) * 100) + '%';
+  });
+};
+
+function spawnTrackConfetti(anchor) {
+  if (!anchor) return;
+  const r = anchor.getBoundingClientRect();
+  const colors = ['#10b981','#6366f1','#06b6d4','#f59e0b'];
+  for (let i = 0; i < 10; i++) {
+    const p = document.createElement('div');
+    p.style.cssText = `position:fixed;width:7px;height:7px;border-radius:2px;pointer-events:none;z-index:9999;left:${r.left + Math.random()*r.width}px;top:${r.top}px;background:${colors[i%4]};animation:confetti-fall 0.9s ease-in forwards;animation-delay:${Math.random()*0.2}s`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1200);
+  }
+}
+
+if (!document.getElementById('confetti-style')) {
+  const s = document.createElement('style');
+  s.id = 'confetti-style';
+  s.textContent = '@keyframes confetti-fall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(80px) rotate(720deg);opacity:0}}';
+  document.head.appendChild(s);
+}
+
+// ── Initialize on DOM ready ──
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof window.refreshPageUI === 'function') setTimeout(window.refreshPageUI, 30);
+});
+
+
+const TP_PROBLEMS = [
+  {
+    id: 'converging',
+    section: 'Converging Pointers',
+    desc: 'Left and right move toward each other from opposite ends of a sorted array.',
+    complexity: 'Time: O(n) · Space: O(1)',
+    problems: [
+      { num:'1', title:'Two Sum', diff:'Easy', slug:'two-sum', concept:'Hash map (see #167 for sorted version)' },
+      { num:'11', title:'Container With Most Water', diff:'Medium', slug:'container-with-most-water', concept:'Move shorter side inward' },
+      { num:'15', title:'3Sum', diff:'Medium', slug:'3sum', concept:'Fix one + converging on rest' },
+      { num:'16', title:'3Sum Closest', diff:'Medium', slug:'3sum-closest', concept:'Track min difference' },
+      { num:'18', title:'4Sum', diff:'Medium', slug:'4sum', concept:'Double fix + converging' },
+      { num:'167', title:'Two Sum II', diff:'Medium', slug:'two-sum-ii-input-array-is-sorted', concept:'Classic converging' },
+      { num:'259', title:'3Sum Smaller', diff:'Medium', slug:'3sum-smaller', concept:'Count pairs < target' },
+      { num:'349', title:'Intersection of Two Arrays', diff:'Easy', slug:'intersection-of-two-arrays', concept:'Sort + converge both' },
+      { num:'392', title:'Is Subsequence', diff:'Easy', slug:'is-subsequence', concept:'Match chars greedily' },
+      { num:'881', title:'Boats to Save People', diff:'Medium', slug:'boats-to-save-people', concept:'Greedy + converging' },
+      { num:'977', title:'Squares of a Sorted Array', diff:'Easy', slug:'squares-of-a-sorted-array', concept:'Fill result from back' },
+    ]
+  },
+  {
+    id: 'fast-slow',
+    section: 'Fast & Slow Pointers',
+    desc: 'Slow moves one step; fast moves two. Meets inside a cycle or finds midpoint.',
+    complexity: 'Time: O(n) · Space: O(1)',
+    problems: [
+      { num:'141', title:'Linked List Cycle', diff:'Easy', slug:'linked-list-cycle', concept:"Floyd's detection" },
+      { num:'202', title:'Happy Number', diff:'Easy', slug:'happy-number', concept:'Cycle in number sequence' },
+      { num:'287', title:'Find the Duplicate Number', diff:'Medium', slug:'find-the-duplicate-number', concept:'Array as implicit linked list' },
+    ]
+  },
+  {
+    id: 'in-place',
+    section: 'In-place Array Modification',
+    desc: 'Read pointer scans everything; write pointer only advances on valid elements.',
+    complexity: 'Time: O(n) · Space: O(1)',
+    problems: [
+      { num:'26', title:'Remove Duplicates from Sorted Array', diff:'Easy', slug:'remove-duplicates-from-sorted-array', concept:'Read/write pointers' },
+      { num:'27', title:'Remove Element', diff:'Easy', slug:'remove-element', concept:'Filter by value' },
+      { num:'75', title:'Sort Colors', diff:'Medium', slug:'sort-colors', concept:'Dutch National Flag (3 pointers)' },
+      { num:'80', title:'Remove Duplicates II', diff:'Medium', slug:'remove-duplicates-from-sorted-array-ii', concept:'Allow at most 2 duplicates' },
+      { num:'283', title:'Move Zeroes', diff:'Easy', slug:'move-zeroes', concept:'Partition zeros to end' },
+      { num:'905', title:'Sort Array By Parity', diff:'Easy', slug:'sort-array-by-parity', concept:'Converge + swap evens left' },
+    ]
+  },
+  {
+    id: 'expand-center',
+    section: 'Palindrome — Expand From Center',
+    desc: 'Expand outward from each index (odd) and each adjacent pair (even).',
+    complexity: 'Time: O(n²) worst · Space: O(1)',
+    problems: [
+      { num:'5', title:'Longest Palindromic Substring', diff:'Medium', slug:'longest-palindromic-substring', concept:'Expand from center (odd + even)' },
+      { num:'647', title:'Palindromic Substrings', diff:'Medium', slug:'palindromic-substrings', concept:'Count all expansions' },
+      { num:'125', title:'Valid Palindrome', diff:'Easy', slug:'valid-palindrome', concept:'Skip non-alphanumeric' },
+      { num:'680', title:'Valid Palindrome II', diff:'Easy', slug:'valid-palindrome-ii', concept:'Allow one deletion' },
+    ]
+  },
+  {
+    id: 'reversal',
+    section: 'String Reversal',
+    desc: 'Swap elements from both ends moving inward to reverse in-place.',
+    complexity: 'Time: O(n) · Space: O(1)',
+    problems: [
+      { num:'151', title:'Reverse Words in a String', diff:'Medium', slug:'reverse-words-in-a-string', concept:'Reverse all, then each word' },
+      { num:'344', title:'Reverse String', diff:'Easy', slug:'reverse-string', concept:'Classic swap from ends' },
+      { num:'345', title:'Reverse Vowels of a String', diff:'Easy', slug:'reverse-vowels-of-a-string', concept:'Skip non-vowels' },
+      { num:'541', title:'Reverse String II', diff:'Easy', slug:'reverse-string-ii', concept:'Reverse every 2k chunk' },
+    ]
+  },
+];
+
+// ══════════════════════════════════════════════════════════════
+// DYNAMIC RENDER SYSTEM — problems rendered from JS data, not HTML
+// ══════════════════════════════════════════════════════════════
+function renderProblems(dataArr, pattern, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = dataArr.map(section => `
+    <section class="section" id="${section.id}" aria-labelledby="h-${section.id}" style="scroll-margin-top:80px;">
+      <h3 id="h-${section.id}">${section.section}</h3>
+      <div class="pat-progress" aria-label="Progress for ${section.section}">
+        <span style="font-size:11px;color:var(--muted);">Progress:</span>
+        <div class="pat-progress-bar"><div class="pat-progress-fill" data-pattern="${pattern}" data-total="${section.problems.length}" style="width:0%"></div></div>
+        <span class="pat-progress-count" data-pattern="${pattern}" data-total="${section.problems.length}" style="font-size:11px;color:var(--accent);">0 / ${section.problems.length}</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">${section.desc}</p>
+      <div style="margin-bottom:12px;">
+        <span style="font-size:11px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);color:var(--accent);padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;">${section.complexity}</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="prob-table">
+          <thead><tr>
+            <th style="width:40px;">Done</th>
+            <th>#</th><th>Problem</th><th>Difficulty</th><th>Key Concept</th>
+          </tr></thead>
+          <tbody>
+            ${section.problems.map(p => `
+              <tr class="prob-row-track ${window.isDone(pattern, p.slug) ? 'done-row' : ''}"
+                  data-slug="${p.slug}" data-pattern="${pattern}"
+                  onclick="handleRowClick(this,event)">
+                <td style="text-align:center;padding:8px;">
+                  <div class="track-check ${window.isDone(pattern, p.slug) ? 'done' : ''}"
+                       id="chk-${p.slug}"
+                       onclick="event.stopPropagation();toggleTrack('${p.slug}','${pattern}')"
+                       role="checkbox" aria-checked="${window.isDone(pattern, p.slug)}"
+                       tabindex="0"
+                       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleTrack('${p.slug}','${pattern}');}">
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                      <path d="M1.5 5.5l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                </td>
+                <td><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">${p.num}</span></td>
+                <td><a href="https://leetcode.com/problems/${p.slug}/" target="_blank" rel="noopener" onclick="event.stopPropagation()">${p.title}</a></td>
+                <td><span class="diff-${p.diff.toLowerCase()}">${p.diff}</span></td>
+                <td style="font-size:12px;">${p.concept}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  `).join('<hr style="border:none;border-top:1px solid var(--border);margin:32px 0;">');
+}
+
+
+// Init: render problems
+document.addEventListener('DOMContentLoaded', function() {
+  renderProblems(TP_PROBLEMS, PAGE_PATTERN, 'problems-container');
+  setTimeout(window.refreshPageUI, 50);
+});
+</script>
+<script>
+function loadProblems() {
+  const container = document.getElementById("problems-container");
+  if (!container) return;
+
+  const sections = window.TP_PROBLEMS;
+
+  container.innerHTML = sections.map((section, index) => `
+    
+    <div class="section-card">
+      
+      <div class="section-header" onclick="toggleSection(${index})">
+        <span>${index + 1}. ${section.section}</span>
+        <span id="count-${index}">0 / ${section.problems.length}</span>
+      </div>
+
+      <div class="section-body" id="section-${index}">
+        ${section.problems.map(p => `
+          <div class="prob-row" data-id="${p.num}">
+            
+            <div class="prob-left">
+              <span>${p.title}</span>
+              <span class="prob-diff ${p.diff.toLowerCase()}">${p.diff}</span>
+            </div>
+
+            <div class="check" onclick="toggleProblem('${p.num}', this, ${index})"></div>
+
+          </div>
+        `).join("")}
+      </div>
+
+    </div>
+
+  `).join("");
+
+  loadStateUI();
+}
+
+// ================= TOGGLE SECTION =================
+function toggleSection(index) {
+  const el = document.getElementById(`section-${index}`);
+  el.style.display = el.style.display === "none" ? "block" : "none";
+}
+
+// ================= TOGGLE PROBLEM =================
+function toggleProblem(id, el, sectionIndex) {
+  const done = window.toggleDone("two-pointers", id);
+  el.classList.toggle("done", done);
+  updateSectionCount(sectionIndex);
+}
+
+// ================= LOAD STATE =================
+function loadStateUI() {
+  document.querySelectorAll(".prob-row").forEach(row => {
+    const id = row.dataset.id;
+    const check = row.querySelector(".check");
+
+    if (window.isDone("two-pointers", id)) {
+      check.classList.add("done");
+    }
+  });
+
+  // update all counts
+  window.TP_PROBLEMS.forEach((_, i) => updateSectionCount(i));
+}
+
+// ================= UPDATE COUNT =================
+function updateSectionCount(index) {
+  const section = window.TP_PROBLEMS[index];
+  let done = 0;
+
+  section.problems.forEach(p => {
+    if (window.isDone("two-pointers", p.num)) done++;
+  });
+
+  document.getElementById(`count-${index}`).innerText =
+    `${done} / ${section.problems.length}`;
+}
+
+// INIT
+document.addEventListener("DOMContentLoaded", loadProblems);
+</script>
+</body>
+</html>
