@@ -216,7 +216,7 @@ import { getFirestore, doc, setDoc, onSnapshot }
 // ── CONFIG ──────────────────────────────────────────────────────────────────
 // Replace these values with your own Firebase project credentials.
   const firebaseConfig = {
-    apiKey: "AIzaSyA4ihpCqfQZav2AqVX7-FOAaRt8Zai44X8",
+    apiKey: "AIzaSyCtkBhRhmznGe5kfKwpBAU6pNzjKWUZgP0",
     authDomain: "leetcode-pattern.firebaseapp.com",
     projectId: "leetcode-pattern",
     storageBucket: "leetcode-pattern.firebasestorage.app",
