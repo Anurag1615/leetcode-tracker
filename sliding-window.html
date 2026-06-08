@@ -360,6 +360,7 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height:
 .gnav-dropdown-divider{height:1px;background:var(--border,#252a45);margin:4px 6px;}
 .gnav-soon{opacity:.4;cursor:default;pointer-events:none;}
 </style>
+<script src="data.js"></script>
 <script src="shared.js" defer></script>
 <script type="module" src="firebase.js"></script>
 
@@ -805,10 +806,10 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height:
           <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;">🕸️ Graph Algorithms</div>
           <div style="font-size:11px;color:var(--muted);">8 patterns · 53 problems →</div>
         </a>
-        <a href="/resume-checker.html" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'">
+        <!-- <a href="/resume-checker.html" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='rgba(16,185,129,0.3)'">
           <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:4px;">📄 Resume Checker</div>
           <div style="font-size:11px;color:var(--muted);">Analyze for ATS & interviews →</div>
-        </a>
+        </a> -->
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <a href="/#tracker" style="background:var(--accent);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;text-decoration:none;">Track All 368 Problems →</a>
@@ -887,7 +888,7 @@ code { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height:
       <ul style="list-style:none;padding:0;">
         <li style="margin-bottom:7px;"><a href="/two-pointers.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">👉 Two Pointers</a></li>
         <li style="margin-bottom:7px;"><a href="/sliding-window.html" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">🪟 Sliding Window</a></li>
-        <li style="margin-bottom:7px;"><a href="/resume-checker.html" style="font-size:13px;color:var(--green,#10b981);text-decoration:none;">📄 Resume Checker</a></li>
+        <!-- <li style="margin-bottom:7px;"><a href="/resume-checker.html" style="font-size:13px;color:var(--green,#10b981);text-decoration:none;">📄 Resume Checker</a></li> -->
         <li style="margin-bottom:7px;"><a href="/#cat-4" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">🧮 Dynamic Programming</a></li>
         <li style="margin-bottom:7px;"><a href="/#cat-3" style="font-size:13px;color:var(--muted,#64748b);text-decoration:none;">🕸️ Graph Algorithms</a></li>
       </ul>
@@ -1073,57 +1074,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-const SW_PROBLEMS = [
-  {
-    id: 'fixed-window',
-    section: 'Fixed-Size Window',
-    desc: 'Window size k is constant. Initialize first k elements, then slide by adding one and removing one.',
-    complexity: 'Time: O(n) · Space: O(1)',
-    problems: [
-      { num:'346', title:'Moving Average from Data Stream', diff:'Easy', slug:'moving-average-from-data-stream', concept:'Running sum over fixed k' },
-      { num:'643', title:'Maximum Average Subarray I', diff:'Easy', slug:'maximum-average-subarray-i', concept:'Max window sum ÷ k' },
-      { num:'2985', title:'Calculate Compressed Mean', diff:'Easy', slug:'calculate-compressed-mean', concept:'Trimmed window average' },
-      { num:'3254', title:'Find the Power of K-Size Subarrays I', diff:'Medium', slug:'find-the-power-of-k-size-subarrays-i', concept:'Consecutive sorted window' },
-      { num:'3318', title:'Find X-Sum of All K-Long Subarrays I', diff:'Medium', slug:'find-x-sum-of-all-k-long-subarrays-i', concept:'Top-x frequency in fixed window' },
-    ]
-  },
-  {
-    id: 'variable-window',
-    section: 'Variable-Size Window',
-    desc: 'Expand right unconditionally. Shrink from left when constraint is violated.',
-    complexity: 'Time: O(n) · Space: O(k)',
-    problems: [
-      { num:'3', title:'Longest Substring Without Repeating Characters', diff:'Medium', slug:'longest-substring-without-repeating-characters', concept:'Set / hashmap for duplicates' },
-      { num:'76', title:'Minimum Window Substring', diff:'Hard', slug:'minimum-window-substring', concept:'Frequency matching' },
-      { num:'209', title:'Minimum Size Subarray Sum', diff:'Medium', slug:'minimum-size-subarray-sum', concept:'Shrink when sum ≥ target' },
-      { num:'219', title:'Contains Duplicate II', diff:'Easy', slug:'contains-duplicate-ii', concept:'Window of size k with hashset' },
-      { num:'424', title:'Longest Repeating Character Replacement', diff:'Medium', slug:'longest-repeating-character-replacement', concept:'maxCount trick' },
-      { num:'713', title:'Subarray Product Less Than K', diff:'Medium', slug:'subarray-product-less-than-k', concept:'Product shrink' },
-      { num:'904', title:'Fruit Into Baskets', diff:'Medium', slug:'fruit-into-baskets', concept:'At most 2 distinct' },
-      { num:'1004', title:'Max Consecutive Ones III', diff:'Medium', slug:'max-consecutive-ones-iii', concept:'At most k zeros flipped' },
-      { num:'1438', title:'Longest Continuous Subarray With Abs Diff ≤ Limit', diff:'Medium', slug:'longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit', concept:'Min/max deque' },
-      { num:'1658', title:'Minimum Operations to Reduce X to Zero', diff:'Medium', slug:'minimum-operations-to-reduce-x-to-zero', concept:'Reverse: max middle window' },
-      { num:'1838', title:'Frequency of the Most Frequent Element', diff:'Medium', slug:'frequency-of-the-most-frequent-element', concept:'Sort + window cost ≤ k' },
-      { num:'2461', title:'Maximum Sum of Distinct Subarrays With Length K', diff:'Medium', slug:'maximum-sum-of-distinct-subarrays-with-length-k', concept:'Fixed + distinct check' },
-      { num:'2516', title:'Take K of Each Character From Left and Right', diff:'Medium', slug:'take-k-of-each-character-from-left-and-right', concept:'Reverse: max skippable middle' },
-      { num:'2762', title:'Continuous Subarrays', diff:'Medium', slug:'continuous-subarrays', concept:'Max-min ≤ 2 constraint' },
-    ]
-  },
-  {
-    id: 'monotonic-deque',
-    section: 'Monotonic Deque Window',
-    desc: 'Track max/min inside the window in O(1) using a double-ended queue of indices.',
-    complexity: 'Time: O(n) · Space: O(k)',
-    problems: [
-      { num:'239', title:'Sliding Window Maximum', diff:'Hard', slug:'sliding-window-maximum', concept:'Decreasing deque of indices' },
-      { num:'862', title:'Shortest Subarray with Sum at Least K', diff:'Hard', slug:'shortest-subarray-with-sum-at-least-k', concept:'Prefix sum + deque' },
-      { num:'1696', title:'Jump Game VI', diff:'Medium', slug:'jump-game-vi', concept:'DP + deque max' },
-    ]
-  },
-];
+const SW_PROBLEMS = window.LC_DATA ? window.LC_DATA.getPatternPage('sliding-window') : [];
 
-// ══════════════════════════════════════════════════════════════
-// DYNAMIC RENDER SYSTEM — problems rendered from JS data, not HTML
+// ══ — problems rendered from JS data, not HTML
 // ══════════════════════════════════════════════════════════════
 function renderProblems(dataArr, pattern, containerId) {
   const container = document.getElementById(containerId);

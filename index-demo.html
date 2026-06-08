@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LeetCode Pattern Tracker — Nav Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ══ DEMO: Shows how to integrate pattern-nav-btn into your existing tracker nav ══ */
+/* In production: this entire <style> block lives in backtracking.css               */
+
+:root {
+  --bg:#0b0d12; --bg2:#10131a; --bg3:#161b26; --bg4:#1c2333;
+  --border:#222840; --border2:#2d3555;
+  --orange:#f97316; --orange-dim:rgba(249,115,22,.12);
+  --green:#22c55e;  --blue:#3b82f6;  --purple:#a855f7; --cyan:#06b6d4;
+  --t1:#f1f5f9; --t2:#94a3b8; --t3:#64748b;
+  --mono:'JetBrains Mono',monospace; --sans:'Inter',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:14px}
+
+/* ── Global nav (same as your existing .gnav) ── */
+.gnav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(11,13,18,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;display:flex;align-items:center;gap:4px;height:52px;
+  overflow-x:auto;scrollbar-width:none;
+}
+.gnav::-webkit-scrollbar{display:none}
+.gnav-logo{
+  font-weight:800;font-size:14px;color:var(--t1);
+  text-decoration:none;white-space:nowrap;margin-right:12px;
+  padding:6px 0;flex-shrink:0;
+}
+.gnav-logo span{color:var(--orange)}
+
+/* ── Standard nav links (your existing tracker tabs) ── */
+.gnav-link{
+  flex-shrink:0;padding:10px 12px;
+  font-size:12px;font-weight:500;color:var(--t3);
+  cursor:pointer;border-bottom:2px solid transparent;
+  transition:all .2s;white-space:nowrap;text-decoration:none;
+}
+.gnav-link:hover{color:var(--t2);border-bottom-color:var(--border2)}
+.gnav-link.active{color:var(--orange);border-bottom-color:var(--orange)}
+
+/* ── Separator ── */
+.gnav-sep{width:1px;height:22px;background:var(--border);flex-shrink:0;margin:0 8px}
+
+/* ════════════════════════════════════════════════════
+   PATTERN NAV BUTTON
+   Copy this block into backtracking.css in production
+   ════════════════════════════════════════════════════ */
+.pattern-nav-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 14px;
+  background:var(--bg3);border:1px solid var(--border);border-radius:7px;
+  color:var(--t2);font-family:var(--mono);font-size:11px;font-weight:600;
+  cursor:pointer;transition:all .2s;text-decoration:none;user-select:none;
+  white-space:nowrap;flex-shrink:0;
+}
+.pattern-nav-btn:hover{
+  background:var(--orange-dim);border-color:rgba(249,115,22,.35);
+  color:var(--orange);
+}
+.pattern-nav-btn.active-page{
+  background:var(--orange-dim);border-color:rgba(249,115,22,.4);
+  color:var(--orange);
+}
+.pattern-nav-btn .pnb-icon{font-size:14px;line-height:1}
+.pattern-nav-btn .pnb-arr{
+  font-size:9px;color:var(--t3);
+  transition:transform .18s;margin-left:1px;
+}
+.pattern-nav-btn:hover .pnb-arr{transform:translateX(3px);color:var(--orange)}
+
+/* Toggle wrapper label */
+.gnav-section-label{
+  font-family:var(--mono);font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--t3);flex-shrink:0;
+  padding:0 6px;white-space:nowrap;
+}
+
+/* ── Page content ── */
+.page{max-width:1060px;margin:0 auto;padding:40px 20px}
+.demo-note{
+  background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  padding:24px;margin-bottom:28px;
+}
+.demo-note h2{font-size:1rem;color:var(--t1);margin-bottom:8px}
+.demo-note p{color:var(--t2);font-size:.85rem;line-height:1.65;margin-bottom:6px}
+.demo-note code{
+  font-family:var(--mono);font-size:11px;color:var(--orange);
+  background:rgba(249,115,22,.1);padding:2px 7px;border-radius:4px;
+}
+.arrow-guide{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(249,115,22,.05);border:1px solid rgba(249,115,22,.15);
+  border-radius:10px;padding:16px 20px;margin-top:16px;
+  font-size:.82rem;color:var(--t2);
+}
+.arrow-guide span{color:var(--orange);font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ══════ GLOBAL NAV — How the toggle buttons live in your nav ══════ -->
+<nav class="gnav" aria-label="Main navigation">
+
+  <a href="/" class="gnav-logo">LC<span>Pattern</span></a>
+
+  <!-- Your existing tracker links -->
+  <a href="/" class="gnav-link active">Tracker</a>
+
+  <!-- Separator between tracker links and pattern pages -->
+  <div class="gnav-sep" aria-hidden="true"></div>
+  <span class="gnav-section-label">Study Pages</span>
+
+  <!-- ━━━ PATTERN NAV BUTTONS ━━━ 
+       Each one opens a dedicated learning page.
+       Add class="active-page" on whichever page is currently open. -->
+  <a href="two-pointers.html" class="pattern-nav-btn" title="Two Pointers — 7 sub-patterns, 33 problems">
+    <span class="pnb-icon">👉</span>
+    Two Pointers
+    <span class="pnb-arr">↗</span>
+  </a>
+
+  <a href="sliding-window.html" class="pattern-nav-btn" title="Sliding Window — 4 sub-patterns, 28 problems">
+    <span class="pnb-icon">🪟</span>
+    Sliding Window
+    <span class="pnb-arr">↗</span>
+  </a>
+
+  <a href="backtracking.html" class="pattern-nav-btn active-page" title="Backtracking — 5 types, 58 problems">
+    <span class="pnb-icon">🌳</span>
+    Backtracking
+    <span class="pnb-arr">↗</span>
+  </a>
+
+  <a href="dp.html" class="pattern-nav-btn" title="Dynamic Programming — 16 patterns, 135 problems">
+    <span class="pnb-icon">🧮</span>
+    DP
+    <span class="pnb-arr">↗</span>
+  </a>
+
+</nav>
+
+<!-- ══════ DEMO EXPLANATION ══════ -->
+<div class="page">
+
+  <div class="demo-note">
+    <h2>🔌 How to add pattern buttons to your nav</h2>
+    <p>The four buttons above are <code>.pattern-nav-btn</code> elements. Each one links to a dedicated learning HTML page. The CSS for these buttons lives in <code>backtracking.css</code> so you only need one stylesheet across all pages.</p>
+    <p>On the page that is currently open, add class <code>active-page</code> to its button — this highlights it in orange so users know which page they're on.</p>
+    <p>In your <code>index.html</code>, just paste the nav buttons block into your existing <code>.gnav-links</code> div. No JS needed — they're plain anchor tags.</p>
+    <div class="arrow-guide">
+      <span>→</span>
+      <div>Click <strong>Backtracking ↗</strong> above to open the full learning page. All 8 sections, 58 problems, recursion trees, templates, quiz — now in a separate HTML + CSS file structure.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Auto-detect current page and highlight the right nav button
+(function(){
+  const page = location.pathname.split('/').pop();
+  document.querySelectorAll('.pattern-nav-btn').forEach(btn => {
+    const href = btn.getAttribute('href');
+    if(href === page) btn.classList.add('active-page');
+    else btn.classList.remove('active-page');
+  });
+})();
+</script>
+</body>
+</html>

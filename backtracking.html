@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Backtracking – LeetCode Patterns</title>
+<meta name="description" content="Master Backtracking for FAANG interviews — 5 types, recursion trees, universal template, 58 problems. Pepcoding + LeetCode curated list."/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="backtracking.css"/>
+</head>
+<body>
+
+<!-- ──────── HERO ──────── -->
+<div class="hero">
+  <div class="hero-eyebrow">🌳 Pattern 06</div>
+  <h1>Back<span>tracking</span></h1>
+  <p class="hero-sub">Try every valid path — if it fails, undo and try the next one. Build answers piece by piece, prune bad branches early.</p>
+  <div class="hero-pills">
+    <div class="hero-pill">Core Idea: <b>Choose → Explore → Unchoose</b></div>
+    <div class="hero-pill">Problems: <b>15</b></div>
+    <div class="hero-pill">Types: <b>5</b></div>
+    <div class="hero-pill">Difficulty: <b>Medium → Hard</b></div>
+  </div>
+</div>
+
+<!-- ──────── NAV ──────── -->
+<div class="sticky-nav">
+  <div class="nav-item active" onclick="navClick(this,'s-intuition')">Intuition</div>
+  <div class="nav-item" onclick="navClick(this,'s-identify')">Identify Type</div>
+  <div class="nav-item" onclick="navClick(this,'s-template')">Template</div>
+  <div class="nav-item" onclick="navClick(this,'s-trees')">Recursion Trees</div>
+  <div class="nav-item" onclick="navClick(this,'s-types')">Type Deep Dive</div>
+  <div class="nav-item" onclick="navClick(this,'s-problems')">Problems</div>
+  <div class="nav-item" onclick="navClick(this,'s-tricks')">Cheatsheet</div>
+  <div class="nav-item" onclick="navClick(this,'s-quiz')">Quiz</div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════════════════════════════════════
+     SECTION 1 — INTUITION
+══════════════════════════════════════════════ -->
+<div class="card open" id="s-intuition">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--orange-dim);border:1px solid rgba(249,115,22,0.3)">🧠</div>
+    <div class="card-title">Intuition — What Is Backtracking?</div>
+    <div class="card-badge" style="background:var(--orange-dim);color:var(--orange)">01</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <div class="callout co-orange">
+      <div class="callout-title">💡 The Core Idea</div>
+      <p style="color:var(--t1);font-size:.95rem;font-weight:600">You explore all possibilities by <span style="color:var(--green)">making a choice</span>, going deeper, and <span style="color:var(--orange)">undoing it</span> when it leads nowhere — then trying the next option.</p>
+    </div>
+
+    <div class="prose" style="margin-top:14px">
+      <p><strong>Real-world analogy:</strong> You're solving a Sudoku. You write a number in a cell, check if it violates any rule — if it does, you erase it and try the next digit. That erase step is backtracking.</p>
+      <p><strong>Another analogy:</strong> GPS gives you a wrong turn. You don't restart from home — you go back to the last junction and take a different road.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+      <div class="callout co-red" style="margin:0">
+        <div class="callout-title">❌ Without Backtracking</div>
+        <p class="prose" style="font-size:.82rem">Generate ALL arrangements → filter valid ones → slow and wasteful</p>
+      </div>
+      <div class="callout co-green" style="margin:0">
+        <div class="callout-title">✅ With Backtracking</div>
+        <p class="prose" style="font-size:.82rem">Prune a branch the moment it's invalid → explore only promising paths</p>
+      </div>
+    </div>
+
+    <div class="callout co-blue" style="margin-top:16px">
+      <div class="callout-title">🔑 The 3-Step Loop (runs at every node in the recursion tree)</div>
+      <div style="display:flex;gap:0;margin-top:4px;flex-wrap:wrap">
+        <div style="flex:1;min-width:160px;padding:12px 14px;background:rgba(34,197,94,0.08);border-radius:8px;margin:4px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--green);font-weight:700;margin-bottom:4px">STEP 1 — CHOOSE</div>
+          <p style="font-size:.82rem;color:var(--t2)">Pick one option from available choices (a number, character, element, direction)</p>
+        </div>
+        <div style="flex:1;min-width:160px;padding:12px 14px;background:rgba(59,130,246,0.08);border-radius:8px;margin:4px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--blue);font-weight:700;margin-bottom:4px">STEP 2 — EXPLORE</div>
+          <p style="font-size:.82rem;color:var(--t2)">Recurse with that choice applied. Go deeper into the tree.</p>
+        </div>
+        <div style="flex:1;min-width:160px;padding:12px 14px;background:rgba(249,115,22,0.08);border-radius:8px;margin:4px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--orange);font-weight:700;margin-bottom:4px">STEP 3 — UNCHOOSE</div>
+          <p style="font-size:.82rem;color:var(--t2)">After recursion returns, undo the choice. Restore state for next iteration.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 2 — IDENTIFY TYPE (THE BIG ONE)
+══════════════════════════════════════════════ -->
+<div class="card open" id="s-identify">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--purple-dim);border:1px solid rgba(168,85,247,0.3)">🔍</div>
+    <div class="card-title">Identify the Type — Is It Subset, Permutation, or Something Else?</div>
+    <div class="card-badge" style="background:var(--purple-dim);color:var(--purple)">02</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <!-- DECISION FLOWCHART -->
+    <div class="callout co-purple">
+      <div class="callout-title">🗺 Decision Flowchart — Read the Problem, Answer These 3 Questions</div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-inner">
+
+        <div class="f-node question">Does the problem ask you to <strong>find/generate all valid outputs</strong>?</div>
+        <div class="f-line"></div>
+
+        <div class="f-branch">
+          <div class="f-branch-item">
+            <div class="f-label">NO → count/optimize only</div>
+            <div class="f-node" style="background:var(--red-dim);border:1px solid rgba(239,68,68,0.3);color:var(--red);font-size:.78rem">
+              ❌ Not Backtracking<br><span style="font-size:.72rem;opacity:.8">Use DP / Greedy</span>
+            </div>
+          </div>
+          <div class="f-branch-item">
+            <div class="f-label">YES → enumerate all</div>
+            <div class="f-node question">Does it involve a <strong>2D grid</strong> (word search, path)?</div>
+            <div class="f-line"></div>
+            <div class="f-branch">
+              <div class="f-branch-item">
+                <div class="f-label">YES</div>
+                <div class="f-node answer-grid">🟦 GRID TYPE<br><span style="font-size:.75rem">visited[][] + 4 dirs</span></div>
+              </div>
+              <div class="f-branch-item">
+                <div class="f-label">NO</div>
+                <div class="f-node question">Is it about <strong>splitting/partitioning</strong> a string?</div>
+                <div class="f-line"></div>
+                <div class="f-branch">
+                  <div class="f-branch-item">
+                    <div class="f-label">YES</div>
+                    <div class="f-node answer-part">🟦 PARTITION TYPE<br><span style="font-size:.75rem">cut at every index</span></div>
+                  </div>
+                  <div class="f-branch-item">
+                    <div class="f-label">NO</div>
+                    <div class="f-node question">Does <strong>order of elements matter</strong> in the output?</div>
+                    <div class="f-line"></div>
+                    <div class="f-branch">
+                      <div class="f-branch-item">
+                        <div class="f-label">YES → [1,2] ≠ [2,1]</div>
+                        <div class="f-node answer-perm">🟣 PERMUTATION TYPE<br><span style="font-size:.75rem">visited[] array</span></div>
+                      </div>
+                      <div class="f-branch-item">
+                        <div class="f-label">NO → [1,2] = [2,1]</div>
+                        <div class="f-node question">Are there hard constraints per placement<br>(Sudoku, N-Queens)?</div>
+                        <div class="f-line"></div>
+                        <div class="f-branch">
+                          <div class="f-branch-item">
+                            <div class="f-label">YES</div>
+                            <div class="f-node answer-cst">🟠 CONSTRAINT TYPE<br><span style="font-size:.75rem">isValid() check</span></div>
+                          </div>
+                          <div class="f-branch-item">
+                            <div class="f-label">NO</div>
+                            <div class="f-node answer-sub">🟢 SUBSET TYPE<br><span style="font-size:.75rem">start index (i+1)</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5 TYPE CARDS -->
+    <div class="clf-grid" style="margin-top:20px">
+
+      <div class="clf-type t-sub">
+        <div class="clf-type-tag">TYPE 1</div>
+        <div class="clf-type-name">🟢 Subset / Combination</div>
+        <div class="clf-type-signal">
+          Order does NOT matter<br>
+          [1,2] and [2,1] = same result<br>
+          Keywords: <em>all subsets, combinations, choose k from n</em>
+        </div>
+        <div class="clf-type-eg">LC 78, 77, 39, 40, 90, 216</div>
+        <div class="clf-type-key">
+          <b>Code Identifier</b>
+          Use <code style="color:var(--green)">start index</code> — loop from <code>i = start</code>, recurse with <code>i+1</code> (or <code>i</code> for repetition)
+        </div>
+      </div>
+
+      <div class="clf-type t-perm">
+        <div class="clf-type-tag">TYPE 2</div>
+        <div class="clf-type-name">🟣 Permutation</div>
+        <div class="clf-type-signal">
+          Order DOES matter<br>
+          [1,2] and [2,1] = different results<br>
+          Keywords: <em>all arrangements, permutations, orderings</em>
+        </div>
+        <div class="clf-type-eg">LC 46, 47, 60, 943</div>
+        <div class="clf-type-key">
+          <b>Code Identifier</b>
+          Use <code style="color:var(--purple)">boolean used[]</code> — loop always from <code>i = 0</code>, skip <code>used[i]</code>
+        </div>
+      </div>
+
+      <div class="clf-type t-cst">
+        <div class="clf-type-tag">TYPE 3</div>
+        <div class="clf-type-name">🟠 Constraint Satisfaction</div>
+        <div class="clf-type-signal">
+          Each placement has hard rules<br>
+          Must call <em>isValid()</em> before placing<br>
+          Keywords: <em>N-Queens, Sudoku, valid board</em>
+        </div>
+        <div class="clf-type-eg">LC 51, 52, 37</div>
+        <div class="clf-type-key">
+          <b>Code Identifier</b>
+          <code style="color:var(--orange)">if (!isValid()) continue</code> inside loop — place, recurse row+1, unplace
+        </div>
+      </div>
+
+      <div class="clf-type t-grid">
+        <div class="clf-type-tag">TYPE 4</div>
+        <div class="clf-type-name">🟦 Grid / Path Search</div>
+        <div class="clf-type-signal">
+          2D matrix navigation<br>
+          DFS in 4 directions<br>
+          Keywords: <em>word search, island, path exists</em>
+        </div>
+        <div class="clf-type-eg">LC 79, 212, 489, 980</div>
+        <div class="clf-type-key">
+          <b>Code Identifier</b>
+          Mark cell <code style="color:var(--blue)">grid[r][c]='#'</code>, explore 4 dirs, then restore original char
+        </div>
+      </div>
+
+      <div class="clf-type t-part">
+        <div class="clf-type-tag">TYPE 5</div>
+        <div class="clf-type-name">🩵 String Partition</div>
+        <div class="clf-type-signal">
+          Cut a string at various positions<br>
+          Validate each segment before adding<br>
+          Keywords: <em>palindrome partition, decode ways, IP addresses</em>
+        </div>
+        <div class="clf-type-eg">LC 131, 93, 140</div>
+        <div class="clf-type-key">
+          <b>Code Identifier</b>
+          Loop <code style="color:var(--cyan)">end from start to n</code>, check substring validity, recurse with <code>end+1</code>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- QUICK COMPARE TABLE -->
+    <div style="margin-top:20px">
+    <div class="callout co-yellow">
+      <div class="callout-title">⚡ Quick Comparison — The Most Confusing Part</div>
+      <table class="t-table" style="margin-top:4px">
+        <tr>
+          <th>Question to Ask</th>
+          <th style="color:var(--green)">Subset Type</th>
+          <th style="color:var(--purple)">Permutation Type</th>
+        </tr>
+        <tr><td>Does [1,2] == [2,1] ?</td><td style="color:var(--green)">✅ Yes, same</td><td style="color:var(--purple)">❌ No, different</td></tr>
+        <tr><td>Loop starts at</td><td><code>i = start</code> (forward only)</td><td><code>i = 0</code> (always full scan)</td></tr>
+        <tr><td>State variable</td><td><code>int start</code></td><td><code>boolean[] used</code></td></tr>
+        <tr><td>Recurse with</td><td><code>i + 1</code> (or <code>i</code> for reuse)</td><td>same used[] passed down</td></tr>
+        <tr><td>Result added when</td><td>Every node (subsets) / leaf (combos)</td><td>Only at leaf (path.size == n)</td></tr>
+        <tr><td>Example problem</td><td>LC 78 Subsets, LC 39 Comb Sum</td><td>LC 46 Permutations</td></tr>
+      </table>
+    </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 3 — TEMPLATE
+══════════════════════════════════════════════ -->
+<div class="card open" id="s-template">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--orange-dim);border:1px solid rgba(249,115,22,0.3)">📐</div>
+    <div class="card-title">Universal Template — Memorize This One Structure</div>
+    <div class="card-badge" style="background:var(--orange-dim);color:var(--orange)">03</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <div class="callout co-orange">
+      <div class="callout-title">📋 5-Part Structure — Every Backtracking Function Has These</div>
+      <div class="steps" style="margin-top:8px">
+        <div class="step"><div class="step-n" style="background:var(--blue)">1</div><div class="step-body"><strong>Base Case</strong><p>Goal reached? Save result and return. (path complete, sum == target, row == n)</p></div></div>
+        <div class="step"><div class="step-n" style="background:var(--red)">2</div><div class="step-body"><strong>Prune</strong><p>Invalid state? Return immediately. (out of bounds, constraint violated, sum exceeded)</p></div></div>
+        <div class="step"><div class="step-n" style="background:var(--t3)">3</div><div class="step-body"><strong>Loop Over Choices</strong><p>For each available option at this level...</p></div></div>
+        <div class="step"><div class="step-n" style="background:var(--green)">4</div><div class="step-body"><strong>Choose + Explore</strong><p>Apply the choice (add to path, mark used), then recurse.</p></div></div>
+        <div class="step"><div class="step-n" style="background:var(--orange)">5</div><div class="step-body"><strong>Unchoose</strong><p>After recursion returns, undo the choice. This is the backtrack step. Never skip it.</p></div></div>
+      </div>
+    </div>
+
+    <div class="code-wrap">
+      <div class="code-bar">
+        <div class="code-bar-tabs">
+          <div class="ctab on" onclick="ct(this,'tpl-j')">Java</div>
+          <div class="ctab" onclick="ct(this,'tpl-p')">Python</div>
+          <div class="ctab" onclick="ct(this,'tpl-c')">C++</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--t3)">Universal Template</div>
+      </div>
+      <div class="cpanel on" id="tpl-j"><pre><span class="cm">// ── UNIVERSAL BACKTRACKING TEMPLATE ──────────────────────────</span>
+<span class="kw">void</span> <span class="fn">backtrack</span>(<span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; path, <span class="kw">int</span> start <span class="cm">/* or other state */</span>) {
+
+    <span class="cm">// ① BASE CASE ── goal reached?</span>
+    <span class="kw">if</span> (<span class="bs">goalReached()</span>) {
+        result.add(<span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(path));   <span class="cm">// ← copy, not reference!</span>
+        <span class="kw">return</span>;
+    }
+
+    <span class="cm">// ② PRUNE ── invalid state?</span>
+    <span class="kw">if</span> (<span class="pu">isInvalid()</span>) <span class="kw">return</span>;
+
+    <span class="cm">// ③ LOOP OVER CHOICES</span>
+    <span class="kw">for</span> (<span class="kw">int</span> i = start; i &lt; choices.length; i++) {
+
+        <span class="cm">// ④ CHOOSE + EXPLORE</span>
+        path.add(choices[i]);             <span class="cm">// make the move</span>
+        <span class="fn">backtrack</span>(path, i + <span class="nm">1</span>);           <span class="cm">// go deeper</span>
+
+        <span class="cm">// ⑤ UNCHOOSE ← the backtrack step</span>
+        path.remove(path.size() - <span class="nm">1</span>);    <span class="cm">// undo the move</span>
+    }
+}</pre></div>
+      <div class="cpanel" id="tpl-p"><pre><span class="cm"># ── UNIVERSAL BACKTRACKING TEMPLATE ──────────────────────────</span>
+<span class="kw">def</span> <span class="fn">backtrack</span>(path, start):
+
+    <span class="cm"># ① BASE CASE</span>
+    <span class="kw">if</span> <span class="bs">goal_reached()</span>:
+        result.append(path[:])   <span class="cm"># shallow copy</span>
+        <span class="kw">return</span>
+
+    <span class="cm"># ② PRUNE</span>
+    <span class="kw">if</span> <span class="pu">is_invalid()</span>: <span class="kw">return</span>
+
+    <span class="cm"># ③ LOOP</span>
+    <span class="kw">for</span> i <span class="kw">in</span> range(start, len(choices)):
+
+        <span class="cm"># ④ CHOOSE + EXPLORE</span>
+        path.append(choices[i])
+        backtrack(path, i + <span class="nm">1</span>)
+
+        <span class="cm"># ⑤ UNCHOOSE ← the backtrack step</span>
+        path.pop()</pre></div>
+      <div class="cpanel" id="tpl-c"><pre><span class="cm">// ── UNIVERSAL BACKTRACKING TEMPLATE ──────────────────────────</span>
+<span class="kw">void</span> <span class="fn">backtrack</span>(vector&lt;<span class="kw">int</span>&gt;&amp; path, <span class="kw">int</span> start) {
+
+    <span class="cm">// ① BASE CASE</span>
+    <span class="kw">if</span> (<span class="bs">goalReached()</span>) {
+        result.push_back(path);
+        <span class="kw">return</span>;
+    }
+
+    <span class="cm">// ② PRUNE</span>
+    <span class="kw">if</span> (<span class="pu">isInvalid()</span>) <span class="kw">return</span>;
+
+    <span class="cm">// ③ LOOP</span>
+    <span class="kw">for</span> (<span class="kw">int</span> i = start; i &lt; choices.size(); i++) {
+
+        <span class="cm">// ④ CHOOSE + EXPLORE</span>
+        path.push_back(choices[i]);
+        <span class="fn">backtrack</span>(path, i + <span class="nm">1</span>);
+
+        <span class="cm">// ⑤ UNCHOOSE</span>
+        path.pop_back();
+    }
+}</pre></div>
+    </div>
+
+    <div class="callout co-red">
+      <div class="callout-title">⚠️ #1 Beginner Mistake</div>
+      <div class="prose">
+        <ul>
+          <li><strong>Missing the unchoose step</strong> — the state gets corrupted. All subsequent branches will produce wrong answers.</li>
+          <li><strong>Adding reference instead of copy</strong> — <code style="font-family:var(--mono);color:var(--orange)">result.add(path)</code> adds a reference. When path changes, the stored list changes too. Always use <code style="font-family:var(--mono);color:var(--green)">new ArrayList&lt;&gt;(path)</code>.</li>
+          <li><strong>Not unmark-ing visited[]</strong> in permutation / grid problems.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 4 — RECURSION TREES
+══════════════════════════════════════════════ -->
+<div class="card open" id="s-trees">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--green-dim);border:1px solid rgba(34,197,94,0.3)">🌳</div>
+    <div class="card-title">Recursion Trees — See Exactly What Happens</div>
+    <div class="card-badge" style="background:var(--green-dim);color:var(--green)">04</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <div class="tree-tabs">
+      <div class="tree-tab tt-sub on" onclick="treTab(this,'tr-sub')">🟢 Subsets [1,2,3]</div>
+      <div class="tree-tab tt-perm"   onclick="treTab(this,'tr-perm')">🟣 Permutations [1,2,3]</div>
+      <div class="tree-tab tt-comb"   onclick="treTab(this,'tr-comb')">🟠 Combination Sum (target=7)</div>
+      <div class="tree-tab tt-grid"   onclick="treTab(this,'tr-grid')">🟦 Word Search Grid</div>
+    </div>
+
+    <!-- TREE 1: Subsets -->
+    <div class="tree-panel on" id="tr-sub">
+      <div class="callout co-green" style="margin-bottom:12px">
+        <div class="callout-title">🟢 TYPE 1 — Subset Tree — Result added at EVERY node, not just leaves</div>
+        <p class="prose" style="font-size:.8rem">Each node = a subset. At each level, you decide: <strong>include</strong> next element or <strong>skip to next</strong>. Start index moves forward so you never re-pick.</p>
+      </div>
+      <div class="tree-canvas"><div class="tree-pre"><span class="tc-cm">Input: [1, 2, 3]    Each branch = "include this element, then recurse with start+1"</span>
+<span class="tc-cm">────────────────────────────────────────────────────────────────────────</span>
+
+                      <span class="tc-cu">backtrack(start=0, path=[])</span>
+                               <span class="tc-lf">add [] ✓</span>
+             <span class="tc-r">┌───────────────┬───────────────┐</span>
+          <span class="tc-ch">take 1</span>         <span class="tc-ch">take 2</span>         <span class="tc-ch">take 3</span>
+             <span class="tc-r">│</span>               <span class="tc-r">│</span>               <span class="tc-r">│</span>
+    <span class="tc-cu">path=[1]</span>       <span class="tc-cu">path=[2]</span>       <span class="tc-cu">path=[3]</span>
+    <span class="tc-lf">add [1] ✓</span>      <span class="tc-lf">add [2] ✓</span>      <span class="tc-lf">add [3] ✓</span>
+    <span class="tc-r">┌─────┬──┐</span>      <span class="tc-r">┌─────┐</span>
+  <span class="tc-ch">+2</span>    <span class="tc-ch">+3</span>         <span class="tc-ch">+3</span>
+    <span class="tc-r">│</span>      <span class="tc-r">│</span>           <span class="tc-r">│</span>
+<span class="tc-cu">[1,2]</span>  <span class="tc-cu">[1,3]</span>       <span class="tc-cu">[2,3]</span>
+<span class="tc-lf">✓</span>      <span class="tc-lf">✓</span>           <span class="tc-lf">✓</span>
+  <span class="tc-r">│</span>
+<span class="tc-ch">+3</span>
+  <span class="tc-r">│</span>
+<span class="tc-cu">[1,2,3]</span>
+<span class="tc-lf">✓</span>
+
+<span class="tc-cm">All 8 subsets: [], [1], [2], [3], [1,2], [1,3], [2,3], [1,2,3]  →  2ⁿ = 2³ = 8</span>
+<span class="tc-cm">KEY: start index increments (i+1) so we never look back → no duplicates</span>
+<span class="tc-cm">KEY: We add result at EVERY node (not just leaves) → that's what makes it "subsets"</span></div></div>
+    </div>
+
+    <!-- TREE 2: Permutations -->
+    <div class="tree-panel" id="tr-perm">
+      <div class="callout co-purple" style="margin-bottom:12px">
+        <div class="callout-title">🟣 TYPE 2 — Permutation Tree — Result added only at LEAVES, used[] tracks state</div>
+        <p class="prose" style="font-size:.8rem">Every level = one position in the output. At each node, loop from 0 (not start), skip already-used elements via <code>used[]</code>.</p>
+      </div>
+      <div class="tree-canvas"><div class="tree-pre"><span class="tc-cm">Input: [1, 2, 3]   used[] starts as [F, F, F]   Result added when path.size == 3</span>
+<span class="tc-cm">────────────────────────────────────────────────────────────────────────</span>
+
+                     <span class="tc-cu">path=[], used=[F,F,F]</span>
+           <span class="tc-r">┌─────────────┬─────────────┐</span>
+        <span class="tc-ch">pick 1</span>        <span class="tc-ch">pick 2</span>        <span class="tc-ch">pick 3</span>
+           <span class="tc-r">│</span>              <span class="tc-r">│</span>              <span class="tc-r">│</span>
+    <span class="tc-cu">[1] used=[T,F,F]</span>  <span class="tc-cu">[2] used=[F,T,F]</span>  <span class="tc-cu">[3] used=[F,F,T]</span>
+       <span class="tc-r">┌────┐</span>             <span class="tc-r">┌────┐</span>             <span class="tc-r">┌────┐</span>
+     <span class="tc-ch">p2</span>   <span class="tc-ch">p3</span>           <span class="tc-ch">p1</span>   <span class="tc-ch">p3</span>           <span class="tc-ch">p1</span>   <span class="tc-ch">p2</span>
+      <span class="tc-r">│</span>     <span class="tc-r">│</span>             <span class="tc-r">│</span>     <span class="tc-r">│</span>             <span class="tc-r">│</span>     <span class="tc-r">│</span>
+   <span class="tc-cu">[1,2]</span><span class="tc-cu">[1,3]</span>         <span class="tc-cu">[2,1]</span><span class="tc-cu">[2,3]</span>         <span class="tc-cu">[3,1]</span><span class="tc-cu">[3,2]</span>
+     <span class="tc-r">│</span>      <span class="tc-r">│</span>              <span class="tc-r">│</span>     <span class="tc-r">│</span>              <span class="tc-r">│</span>     <span class="tc-r">│</span>
+    <span class="tc-ch">+3</span>    <span class="tc-ch">+2</span>             <span class="tc-ch">+3</span>   <span class="tc-ch">+1</span>             <span class="tc-ch">+2</span>   <span class="tc-ch">+1</span>
+   <span class="tc-lf">[1,2,3]</span><span class="tc-lf">[1,3,2]</span>      <span class="tc-lf">[2,1,3]</span><span class="tc-lf">[2,3,1]</span>      <span class="tc-lf">[3,1,2]</span><span class="tc-lf">[3,2,1]</span>
+      <span class="tc-un">↑ unchoose: used[i]=false, path.remove()</span>
+
+<span class="tc-cm">n! = 3! = 6 permutations   Width at each level = (n - depth) remaining elements</span>
+<span class="tc-cm">KEY: loop always starts at i=0, NOT at start  →  that's the permutation signal</span>
+<span class="tc-cm">KEY: used[i]=true before recurse, used[i]=false after  →  classic backtrack</span></div></div>
+    </div>
+
+    <!-- TREE 3: Combination Sum with pruning -->
+    <div class="tree-panel" id="tr-comb">
+      <div class="callout co-orange" style="margin-bottom:12px">
+        <div class="callout-title">🟠 TYPE 1 (with pruning) — Combination Sum — Red nodes = PRUNED branches</div>
+        <p class="prose" style="font-size:.8rem">Candidates=[2,3,6,7], target=7. Same element CAN be reused (recurse with same i, not i+1). Prune when sum exceeds target.</p>
+      </div>
+      <div class="tree-canvas"><div class="tree-pre"><span class="tc-cm">Candidates: [2,3,6,7]   target=7   Sort first! Prune when sum > target</span>
+<span class="tc-cm">────────────────────────────────────────────────────────────────────────</span>
+
+                    <span class="tc-cu">sum=0, path=[]</span>
+       <span class="tc-r">┌──────────┬──────────┬──────────┐</span>
+     <span class="tc-ch">+2</span>         <span class="tc-ch">+3</span>         <span class="tc-ch">+6</span>         <span class="tc-ch">+7</span>
+      <span class="tc-r">│</span>           <span class="tc-r">│</span>           <span class="tc-r">│</span>           <span class="tc-r">│</span>
+  <span class="tc-cu">sum=2</span>      <span class="tc-cu">sum=3</span>      <span class="tc-cu">sum=6</span>      <span class="tc-lf">sum=7 → [7] ✓</span>
+  <span class="tc-r">┌──┬──┬──┐</span>  <span class="tc-r">┌──┬──┬──┐</span>  <span class="tc-r">┌──┬────┐</span>
+ <span class="tc-ch">+2</span> <span class="tc-ch">+3</span> <span class="tc-ch">+6</span> <span class="tc-ch">+7</span> <span class="tc-ch">+3</span> <span class="tc-ch">+6</span> <span class="tc-ch">+7</span> <span class="tc-ch">+6</span> <span class="tc-pr">+7→13❌</span>
+  <span class="tc-r">│</span>   <span class="tc-r">│</span>  <span class="tc-pr">+6→8❌</span><span class="tc-pr">+7→9❌</span>       <span class="tc-pr">9❌</span><span class="tc-pr">10❌</span>  <span class="tc-pr">12❌</span>
+ <span class="tc-cu">4</span>  <span class="tc-cu">5</span>  <span class="tc-pr">↑prune</span>                     <span class="tc-pr">↑prune</span>
+ <span class="tc-r">┌─┬─┐</span>  <span class="tc-r">┌─┬─┐</span>
+<span class="tc-ch">+2</span><span class="tc-ch">+3</span>  <span class="tc-ch">+2</span><span class="tc-ch">+3</span>
+ <span class="tc-r">│</span>  <span class="tc-r">│</span>    <span class="tc-r">│</span>  <span class="tc-pr">+3→8❌</span>
+<span class="tc-cu">6</span> <span class="tc-cu">7</span>   <span class="tc-cu">7</span>
+ <span class="tc-r">│</span>  <span class="tc-r">│</span>    <span class="tc-r">└─→</span> <span class="tc-lf">[2,2,3] ✓</span>
+<span class="tc-ch">+3</span> <span class="tc-lf">[2,2,3]✓</span>
+<span class="tc-lf">[2,3,2]?</span> <span class="tc-cm">← No! We reuse same i (not i+1) but never go back → sorted order avoids dup</span>
+
+<span class="tc-cm">✅ Valid answers: [7], [2,2,3], [3,3+?→nope]</span>
+<span class="tc-cm">   Final: [[2,2,3], [7]]</span>
+<span class="tc-cm">KEY PRUNE: if (sum + candidates[i] > target) break;  ← works because array is sorted</span></div></div>
+    </div>
+
+    <!-- TREE 4: Grid Word Search -->
+    <div class="tree-panel" id="tr-grid">
+      <div class="callout co-blue" style="margin-bottom:12px">
+        <div class="callout-title">🟦 TYPE 4 — Grid DFS Tree — Prune out-of-bounds + wrong char + already visited</div>
+        <p class="prose" style="font-size:.8rem">Word="CAT". Starting at (0,0)='C'. Each node = one cell. 4 children = Up/Down/Left/Right. Mark '#' to avoid re-visiting same cell.</p>
+      </div>
+      <div class="tree-canvas"><div class="tree-pre"><span class="tc-cm">Grid:                    Word: "CAT"</span>
+<span class="tc-cm">  C  A  B              Starting cell = (0,0) = 'C'</span>
+<span class="tc-cm">  X  T  E              idx=0 → need 'C', idx=1 → need 'A', idx=2 → need 'T'</span>
+<span class="tc-cm">  D  F  G</span>
+<span class="tc-cm">────────────────────────────────────────────────────────────────────────</span>
+
+              <span class="tc-cu">dfs(r=0,c=0,idx=0)  grid[0][0]='C' ✓ → mark '#'</span>
+         <span class="tc-r">┌──────────┬──────────┬──────────┐</span>
+       <span class="tc-ch">UP</span>        <span class="tc-ch">DOWN</span>      <span class="tc-ch">LEFT</span>      <span class="tc-ch">RIGHT</span>
+         <span class="tc-r">│</span>           <span class="tc-r">│</span>           <span class="tc-r">│</span>           <span class="tc-r">│</span>
+   <span class="tc-pr">r=-1 ❌</span>   <span class="tc-pr">(1,0)='X'≠'A'❌</span> <span class="tc-pr">c=-1 ❌</span>   <span class="tc-cu">(0,1)='A' ✓ → mark '#'</span>
+   <span class="tc-pr">outofbound</span>  <span class="tc-pr">char mismatch</span>  <span class="tc-pr">outofbound</span>       <span class="tc-r">┌────┬────┬────┐</span>
+                                                 <span class="tc-ch">UP</span>   <span class="tc-ch">DOWN</span>  <span class="tc-ch">LEFT</span>  <span class="tc-ch">RIGHT</span>
+                                                  <span class="tc-pr">❌</span>     <span class="tc-r">│</span>    <span class="tc-pr">#❌</span>   <span class="tc-pr">❌</span>
+                                                    <span class="tc-cm">(already visited↑)</span>
+                                              <span class="tc-cu">(1,1)='T' ✓ → mark '#'</span>
+                                                       <span class="tc-r">│</span>
+                                              <span class="tc-lf">idx=3 == word.length() → return TRUE ✓</span>
+
+   <span class="tc-un">← After each return: restore grid[r][c] = original char (unchoose)</span>
+
+<span class="tc-cm">KEY: grid[r][c]='#' to mark visited  →  serves as both "choose" and "visited check"</span>
+<span class="tc-cm">KEY: grid[r][c]=tmp to restore       →  that IS the unchoose step</span>
+<span class="tc-cm">PRUNE conditions: out of bounds, char != word[idx], already visited (#)</span></div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 5 — TYPE DEEP DIVE WITH CODE
+══════════════════════════════════════════════ -->
+<div class="card open" id="s-types">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--blue-dim);border:1px solid rgba(59,130,246,0.3)">💻</div>
+    <div class="card-title">Type Deep Dive — Full Code per Type</div>
+    <div class="card-badge" style="background:var(--blue-dim);color:var(--blue)">05</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <!-- TYPE 1 -->
+    <div class="callout co-green">
+      <div class="callout-title">🟢 TYPE 1 — Subset / Combination — LC 78 Subsets & LC 39 Combination Sum</div>
+      <p class="prose" style="font-size:.8rem"><strong>Signal:</strong> "All subsets / combinations" — order doesn't matter — use <code>start</code> index.</p>
+    </div>
+    <div class="code-wrap">
+      <div class="code-bar">
+        <div class="code-bar-tabs">
+          <div class="ctab on" onclick="ct(this,'sub-j')">Java — LC 78</div>
+          <div class="ctab" onclick="ct(this,'sub-sum-j')">Java — LC 39 (with reuse)</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--green)">SUBSET TYPE</div>
+      </div>
+      <div class="cpanel on" id="sub-j"><pre><span class="tp">List</span>&lt;<span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt;&gt; result = <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;();
+
+<span class="kw">public</span> <span class="tp">List</span>&lt;<span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt;&gt; <span class="fn">subsets</span>(<span class="kw">int</span>[] nums) {
+    <span class="fn">backtrack</span>(nums, <span class="nm">0</span>, <span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;());
+    <span class="kw">return</span> result;
+}
+
+<span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] nums, <span class="kw">int</span> start, <span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; path) {
+    result.add(<span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(path));  <span class="cm">// ① add at EVERY node</span>
+
+    <span class="kw">for</span> (<span class="kw">int</span> i = start; i &lt; nums.length; i++) {  <span class="cm">// ③ start from 'start'</span>
+        path.add(nums[i]);                         <span class="cm">// ④ choose</span>
+        <span class="fn">backtrack</span>(nums, i + <span class="nm">1</span>, path);            <span class="cm">// ④ explore (i+1 = no repeat)</span>
+        path.remove(path.size() - <span class="nm">1</span>);            <span class="cm">// ⑤ unchoose</span>
+    }
+}
+<span class="cm">// Signal: "start" param + loop from start → SUBSET type</span></pre></div>
+      <div class="cpanel" id="sub-sum-j"><pre><span class="cm">// LC 39 — Combination Sum (element CAN be reused)</span>
+<span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] cands, <span class="kw">int</span> start, <span class="kw">int</span> remain, <span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; path) {
+    <span class="kw">if</span> (remain == <span class="nm">0</span>) {                 <span class="cm">// ① base case: exact sum</span>
+        result.add(<span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(path));
+        <span class="kw">return</span>;
+    }
+    <span class="kw">if</span> (remain &lt; <span class="nm">0</span>) <span class="kw">return</span>;           <span class="cm">// ② prune: exceeded target</span>
+
+    <span class="kw">for</span> (<span class="kw">int</span> i = start; i &lt; cands.length; i++) {
+        <span class="kw">if</span> (cands[i] > remain) <span class="kw">break</span>;  <span class="cm">// sorted → no point continuing</span>
+        path.add(cands[i]);
+        <span class="fn">backtrack</span>(cands, i, remain - cands[i], path);  <span class="cm">// i not i+1 (reuse ok)</span>
+        path.remove(path.size() - <span class="nm">1</span>);
+    }
+}
+<span class="cm">// Note: recurse with 'i' (not i+1) = same element can be reused</span>
+<span class="cm">// Note: recurse with 'i+1' = each element used at most once (LC 40)</span></pre></div>
+    </div>
+
+    <!-- TYPE 2 -->
+    <div class="callout co-purple" style="margin-top:20px">
+      <div class="callout-title">🟣 TYPE 2 — Permutation — LC 46 Permutations</div>
+      <p class="prose" style="font-size:.8rem"><strong>Signal:</strong> "All arrangements / orderings" — order matters — use <code>visited[]</code> array, loop always from 0.</p>
+    </div>
+    <div class="code-wrap">
+      <div class="code-bar">
+        <div class="code-bar-tabs">
+          <div class="ctab on" onclick="ct(this,'perm-j')">Java — LC 46</div>
+          <div class="ctab" onclick="ct(this,'perm-dup-j')">Java — LC 47 (with duplicates)</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--purple)">PERMUTATION TYPE</div>
+      </div>
+      <div class="cpanel on" id="perm-j"><pre><span class="kw">boolean</span>[] used;
+
+<span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] nums, <span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; path) {
+    <span class="kw">if</span> (path.size() == nums.length) {  <span class="cm">// ① base: all elements placed</span>
+        result.add(<span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(path));
+        <span class="kw">return</span>;
+    }
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; nums.length; i++) {  <span class="cm">// ③ always loop from 0!</span>
+        <span class="kw">if</span> (used[i]) <span class="kw">continue</span>;               <span class="cm">// skip already in path</span>
+        used[i] = <span class="kw">true</span>;                       <span class="cm">// ④ choose</span>
+        path.add(nums[i]);
+        <span class="fn">backtrack</span>(nums, path);               <span class="cm">// ④ explore</span>
+        used[i] = <span class="kw">false</span>;                      <span class="cm">// ⑤ unchoose</span>
+        path.remove(path.size() - <span class="nm">1</span>);
+    }
+}
+<span class="cm">// Signal: loop from 0 + used[] array → PERMUTATION type</span></pre></div>
+      <div class="cpanel" id="perm-dup-j"><pre><span class="cm">// LC 47 — Permutations II (with duplicates)</span>
+<span class="cm">// Extra: sort first + skip condition</span>
+<span class="tp">Arrays</span>.sort(nums);  <span class="cm">// sort first!</span>
+<span class="kw">boolean</span>[] used = <span class="kw">new boolean</span>[nums.length];
+
+<span class="kw">void</span> <span class="fn">backtrack</span>(<span class="kw">int</span>[] nums, <span class="tp">List</span>&lt;<span class="tp">Integer</span>&gt; path) {
+    <span class="kw">if</span> (path.size() == nums.length) {
+        result.add(<span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(path));
+        <span class="kw">return</span>;
+    }
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="nm">0</span>; i &lt; nums.length; i++) {
+        <span class="kw">if</span> (used[i]) <span class="kw">continue</span>;
+        <span class="cm">// Skip duplicate: same value, previous sibling already explored</span>
+        <span class="kw">if</span> (i > <span class="nm">0</span> &amp;&amp; nums[i] == nums[i-<span class="nm">1</span>] &amp;&amp; !used[i-<span class="nm">1</span>]) <span class="kw">continue</span>;
+        used[i] = <span class="kw">true</span>;
+        path.add(nums[i]);
+        <span class="fn">backtrack</span>(nums, path);
+        used[i] = <span class="kw">false</span>;
+        path.remove(path.size() - <span class="nm">1</span>);
+    }
+}
+<span class="cm">// !used[i-1] means: same value's "first" use hasn't finished yet → skip</span></pre></div>
+    </div>
+
+    <!-- TYPE 3 -->
+    <div class="callout co-orange" style="margin-top:20px">
+      <div class="callout-title">🟠 TYPE 3 — Constraint Satisfaction — LC 51 N-Queens</div>
+      <p class="prose" style="font-size:.8rem"><strong>Signal:</strong> Hard placement rules — must call <code>isValid()</code> before every placement. Place → recurse row+1 → unplace.</p>
+    </div>
+    <div class="code-wrap">
+      <div class="code-bar"><div class="code-bar-tabs"><div class="ctab on" onclick="ct(this,'cst-j')">Java — LC 51 N-Queens</div></div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--orange)">CONSTRAINT TYPE</div>
+      </div>
+      <div class="cpanel on" id="cst-j"><pre><span class="kw">void</span> <span class="fn">solve</span>(<span class="kw">char</span>[][] board, <span class="kw">int</span> row) {
+    <span class="kw">if</span> (row == board.length) {       <span class="cm">// ① base: all rows filled</span>
+        result.add(<span class="fn">build</span>(board));
+        <span class="kw">return</span>;
+    }
+    <span class="kw">for</span> (<span class="kw">int</span> col = <span class="nm">0</span>; col &lt; board.length; col++) {
+        <span class="kw">if</span> (!<span class="fn">isValid</span>(board, row, col)) <span class="kw">continue</span>;  <span class="cm">// ② prune invalid</span>
+        board[row][col] = <span class="st">'Q'</span>;               <span class="cm">// ④ choose: place queen</span>
+        <span class="fn">solve</span>(board, row + <span class="nm">1</span>);               <span class="cm">// ④ explore next row</span>
+        board[row][col] = <span class="st">'.'</span>;               <span class="cm">// ⑤ unchoose: remove queen</span>
+    }
+}
+
+<span class="kw">boolean</span> <span class="fn">isValid</span>(<span class="kw">char</span>[][] board, <span class="kw">int</span> row, <span class="kw">int</span> col) {
+    <span class="cm">// Check column (no queen in same column above)</span>
+    <span class="kw">for</span> (<span class="kw">int</span> r = <span class="nm">0</span>; r &lt; row; r++)
+        <span class="kw">if</span> (board[r][col] == <span class="st">'Q'</span>) <span class="kw">return false</span>;
+    <span class="cm">// Check diagonals</span>
+    <span class="kw">for</span> (<span class="kw">int</span> r = row-<span class="nm">1</span>, c = col-<span class="nm">1</span>; r>=<span class="nm">0</span>&amp;&amp;c>=<span class="nm">0</span>; r--,c--)
+        <span class="kw">if</span> (board[r][c] == <span class="st">'Q'</span>) <span class="kw">return false</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> r = row-<span class="nm">1</span>, c = col+<span class="nm">1</span>; r>=<span class="nm">0</span>&amp;&amp;c&lt;board.length; r--,c++)
+        <span class="kw">if</span> (board[r][c] == <span class="st">'Q'</span>) <span class="kw">return false</span>;
+    <span class="kw">return true</span>;
+}
+<span class="cm">// Signal: isValid() before placement + go row by row → CONSTRAINT type</span></pre></div>
+    </div>
+
+    <!-- TYPE 4 -->
+    <div class="callout co-blue" style="margin-top:20px">
+      <div class="callout-title">🟦 TYPE 4 — Grid / Path — LC 79 Word Search</div>
+      <p class="prose" style="font-size:.8rem"><strong>Signal:</strong> 2D grid, DFS in 4 directions, mark visited using <code>'#'</code> overwrite trick.</p>
+    </div>
+    <div class="code-wrap">
+      font-size:10px;color:var(--blue)">GRID TYPE</div>
+      </div>
+      <div class="cpanel on" id="grid-j"><pre><span class="kw">boolean</span> <span class="fn">exist</span>(<span class="kw">char</span>[][] board, <span class="tp">String</span> word) {
+    <span class="kw">for</span> (<span class="kw">int</span> r = <span class="nm">0</span>; r &lt; board.length; r++)
+        <span class="kw">for</span> (<span class="kw">int</span> c = <span class="nm">0</span>; c &lt; board[<span class="nm">0</span>].length; c++)
+            <span class="kw">if</span> (<span class="fn">dfs</span>(board, word, r, c, <span class="nm">0</span>)) <span class="kw">return true</span>;
+    <span class="kw">return false</span>;
+}
+
+<span class="kw">boolean</span> <span class="fn">dfs</span>(<span class="kw">char</span>[][] board, <span class="tp">String</span> word, <span class="kw">int</span> r, <span class="kw">int</span> c, <span class="kw">int</span> idx) {
+    <span class="kw">if</span> (idx == word.length()) <span class="kw">return true</span>;  <span class="cm">// base: full word matched</span>
+    <span class="kw">if</span> (r &lt; <span class="nm">0</span> || r >= board.length || c &lt; <span class="nm">0</span> || c >= board[<span class="nm">0</span>].length
+        || board[r][c] != word.charAt(idx)) <span class="kw">return false</span>;  <span class="cm">// prune</span>
+
+    <span class="kw">char</span> tmp = board[r][c];
+    board[r][c] = <span class="st">'#'</span>;          <span class="cm">// choose: mark visited in-place</span>
+    <span class="kw">boolean</span> found = <span class="fn">dfs</span>(board, word, r+<span class="nm">1</span>, c, idx+<span class="nm">1</span>)
+                  || <span class="fn">dfs</span>(board, word, r-<span class="nm">1</span>, c, idx+<span class="nm">1</span>)
+                  || <span class="fn">dfs</span>(board, word, r, c+<span class="nm">1</span>, idx+<span class="nm">1</span>)
+                  || <span class="fn">dfs</span>(board, word, r, c-<span class="nm">1</span>, idx+<span class="nm">1</span>);
+    board[r][c] = tmp;            <span class="cm">// unchoose: restore cell</span>
+    <span class="kw">return</span> found;
+}
+<span class="cm">// Signal: r/c params + 4 direction recursion + '#' overwrite → GRID type</span></pre></div>
+    </div>
+
+    <!-- TYPE 5 -->
+    <div class="callout co-cyan" style="margin-top:20px">
+      <div class="callout-title">🩵 TYPE 5 — String Partition — LC 131 Palindrome Partitioning</div>
+      <p class="prose" style="font-size:.8rem"><strong>Signal:</strong> "Partition into valid segments" — loop end index, validate each substring, recurse from end+1.</p>
+    </div>
+    <div class="code-wrap">
+      <div class="code-bar"><div class="code-bar-tabs"><div class="ctab on" onclick="ct(this,'part-j')">Java — LC 131</div></div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--cyan)">PARTITION TYPE</div>
+      </div>
+      <div class="cpanel on" id="part-j"><pre><span class="kw">void</span> <span class="fn">backtrack</span>(<span class="tp">String</span> s, <span class="kw">int</span> start, <span class="tp">List</span>&lt;<span class="tp">String</span>&gt; path) {
+    <span class="kw">if</span> (start == s.length()) {          <span class="cm">// base: consumed whole string</span>
+        result.add(<span class="kw">new</span> <span class="tp">ArrayList</span>&lt;&gt;(path));
+        <span class="kw">return</span>;
+    }
+    <span class="kw">for</span> (<span class="kw">int</span> end = start; end &lt; s.length(); end++) {
+        <span class="tp">String</span> sub = s.substring(start, end + <span class="nm">1</span>);
+        <span class="kw">if</span> (!<span class="fn">isPalindrome</span>(sub)) <span class="kw">continue</span>;  <span class="cm">// prune: invalid segment</span>
+        path.add(sub);                        <span class="cm">// choose</span>
+        <span class="fn">backtrack</span>(s, end + <span class="nm">1</span>, path);        <span class="cm">// explore from next char</span>
+        path.remove(path.size() - <span class="nm">1</span>);       <span class="cm">// unchoose</span>
+    }
+}
+<span class="cm">// Signal: loop 'end' from start, validate substring → PARTITION type</span>
+<span class="cm">// Same pattern for LC 93 (valid IP) — just validate IP segment instead</span></pre></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 6 — PROBLEMS -->
+<div class="card open" id="s-problems">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--yellow-dim);border:1px solid rgba(234,179,8,0.3)">🎯</div>
+    <div class="card-title">Practice Problems — Filtered by Type</div>
+    <div class="card-badge" style="background:var(--yellow-dim);color:var(--yellow)">06</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <div class="prog-wrap">
+      <div class="prog-meta">Progress: <span id="plabel">0 / 58 solved</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="pfill" style="width:0%"></div></div>
+    </div>
+
+    <div class="prob-filter">
+      <button class="pf-btn f-all on" onclick="filterProbs('all',this)">All (58)</button>
+      <button class="pf-btn f-sub"  onclick="filterProbs('sub',this)">🟢 Subset</button>
+      <button class="pf-btn f-perm" onclick="filterProbs('perm',this)">🟣 Permutation</button>
+      <button class="pf-btn f-cst"  onclick="filterProbs('cst',this)">🟠 Constraint</button>
+      <button class="pf-btn f-grid" onclick="filterProbs('grid',this)">🟦 Grid</button>
+      <button class="pf-btn f-part" onclick="filterProbs('part',this)">🩵 Partition</button>
+    </div>
+
+    <div class="prob-list" id="prob-list">
+
+      <!-- ── PEPCODING LEVEL 1 — Recursion Basics ── -->
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">📺 Pepcoding Level 1 — Recursion Basics</div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep1"><div class="prob-check" id="ck-p-pep1" onclick="chk('p-pep1',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Print 1 to N or N to 1 using Recursion <a href="https://www.geeksforgeeks.org/print-1-to-n-without-using-loops/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep2"><div class="prob-check" id="ck-p-pep2" onclick="chk('p-pep2',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Calculate Height of Binary Tree <a href="https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-cst">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep3"><div class="prob-check" id="ck-p-pep3" onclick="chk('p-pep3',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Sort an Array using Recursion <a href="https://www.geeksforgeeks.org/sort-a-stack-using-recursion/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep4"><div class="prob-check" id="ck-p-pep4" onclick="chk('p-pep4',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Sort a Stack using Recursion <a href="https://www.geeksforgeeks.org/sort-a-stack-using-recursion/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep5"><div class="prob-check" id="ck-p-pep5" onclick="chk('p-pep5',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Delete Middle Element from Stack <a href="https://www.geeksforgeeks.org/delete-middle-element-stack/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep6"><div class="prob-check" id="ck-p-pep6" onclick="chk('p-pep6',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Reverse a Stack using Recursion <a href="https://www.geeksforgeeks.org/reverse-a-stack-using-recursion/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep7"><div class="prob-check" id="ck-p-pep7" onclick="chk('p-pep7',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Kth Symbol in Grammar <a href="https://leetcode.com/problems/k-th-symbol-in-grammar/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 779↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep8"><div class="prob-check" id="ck-p-pep8" onclick="chk('p-pep8',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Tower of Hanoi <a href="https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-cst">BASICS</span></div>
+
+      <!-- ── PEPCODING — Subsets / Subsequences ── -->
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">📺 Pepcoding — Subsets &amp; Permutations</div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep9"><div class="prob-check" id="ck-p-pep9" onclick="chk('p-pep9',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Print Subsets / Subsequences / Power Set of String <a href="https://leetcode.com/problems/subsets/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 78↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep10"><div class="prob-check" id="ck-p-pep10" onclick="chk('p-pep10',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Print Unique Subsets / Unique Subsequences <a href="https://leetcode.com/problems/subsets-ii/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 90↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep11"><div class="prob-check" id="ck-p-pep11" onclick="chk('p-pep11',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Permutations with Spaces <a href="https://www.geeksforgeeks.org/print-all-permutations-of-a-string-with-spaces/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep12"><div class="prob-check" id="ck-p-pep12" onclick="chk('p-pep12',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Permutation with Case Change <a href="https://www.geeksforgeeks.org/permutation-case-change-string/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep13"><div class="prob-check" id="ck-p-pep13" onclick="chk('p-pep13',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Letter Case Permutation (digits allowed) <a href="https://leetcode.com/problems/letter-case-permutation/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 784↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep14"><div class="prob-check" id="ck-p-pep14" onclick="chk('p-pep14',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Generate All Balanced Parentheses <a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 22↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep15"><div class="prob-check" id="ck-p-pep15" onclick="chk('p-pep15',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print N-Bit Binary Numbers having #1s ≥ #0s <a href="https://www.geeksforgeeks.org/print-n-bit-binary-numbers-having-more-1s-than-0s-for-any-prefix/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep16"><div class="prob-check" id="ck-p-pep16" onclick="chk('p-pep16',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Josephus Problem <a href="https://leetcode.com/problems/find-the-winner-of-the-circular-game/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 1823↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <!-- ── PEPCODING — Get Methods (return array) ── -->
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">📺 Pepcoding — Array Index &amp; Get Methods</div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep17"><div class="prob-check" id="ck-p-pep17" onclick="chk('p-pep17',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">First Index of Occurrence in Array <a href="https://www.geeksforgeeks.org/find-index-of-an-extra-element-present-in-one-sorted-array/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep18"><div class="prob-check" id="ck-p-pep18" onclick="chk('p-pep18',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Last Index of Occurrence in Array <a href="https://www.geeksforgeeks.org/find-last-index-character-string/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep19"><div class="prob-check" id="ck-p-pep19" onclick="chk('p-pep19',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">All Indices of Occurrence in Array <a href="https://www.geeksforgeeks.org/find-all-occurrences-of-a-string-in-another-string/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep20"><div class="prob-check" id="ck-p-pep20" onclick="chk('p-pep20',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Get Subsequences (return array) <a href="https://leetcode.com/problems/subsets/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 78↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep21"><div class="prob-check" id="ck-p-pep21" onclick="chk('p-pep21',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Get Keypad Combinations (return array) <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 17↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep22"><div class="prob-check" id="ck-p-pep22" onclick="chk('p-pep22',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Get Stair Paths (1,2,3 steps) <a href="https://www.geeksforgeeks.org/count-ways-reach-nth-stair/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID/PATH</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep23"><div class="prob-check" id="ck-p-pep23" onclick="chk('p-pep23',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Get Maze Paths (h/v moves only) <a href="https://www.geeksforgeeks.org/print-all-possible-paths-from-top-left-to-bottom-right-of-a-mxn-matrix/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID/PATH</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep24"><div class="prob-check" id="ck-p-pep24" onclick="chk('p-pep24',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Get Maze Paths with Jumps (h,v,diagonal) <a href="https://www.geeksforgeeks.org/find-all-possible-paths-from-top-to-bottom/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID/PATH</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep25"><div class="prob-check" id="ck-p-pep25" onclick="chk('p-pep25',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print Keypad Combinations <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 17↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep26"><div class="prob-check" id="ck-p-pep26" onclick="chk('p-pep26',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Print Stair Paths <a href="https://www.geeksforgeeks.org/count-ways-reach-nth-stair/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID/PATH</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep27"><div class="prob-check" id="ck-p-pep27" onclick="chk('p-pep27',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">Print Maze Paths <a href="https://www.geeksforgeeks.org/print-all-possible-paths-from-top-left-to-bottom-right-of-a-mxn-matrix/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID/PATH</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep28"><div class="prob-check" id="ck-p-pep28" onclick="chk('p-pep28',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print Maze Paths with Jumps <a href="https://www.geeksforgeeks.org/find-all-possible-paths-from-top-to-bottom/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID/PATH</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep29"><div class="prob-check" id="ck-p-pep29" onclick="chk('p-pep29',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print Permutations of String <a href="https://leetcode.com/problems/permutations/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 46↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <div class="prob-row" data-type="part" data-id="p-pep30"><div class="prob-check" id="ck-p-pep30" onclick="chk('p-pep30',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print Encodings (decode ways) <a href="https://leetcode.com/problems/decode-ways/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 91↗</a></span><span class="type-chip tc-part">PARTITION</span></div>
+
+      <!-- ── PEPCODING — Backtracking ── -->
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">📺 Pepcoding — Backtracking (Grid + Constraint)</div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep31"><div class="prob-check" id="ck-p-pep31" onclick="chk('p-pep31',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Flood Fill <a href="https://leetcode.com/problems/flood-fill/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 733↗</a></span><span class="type-chip tc-grid">GRID</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep32"><div class="prob-check" id="ck-p-pep32" onclick="chk('p-pep32',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Target Sum Subsets <a href="https://www.geeksforgeeks.org/subset-sum-problem-dp-25/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep33"><div class="prob-check" id="ck-p-pep33" onclick="chk('p-pep33',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">N Queens <a href="https://leetcode.com/problems/n-queens/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 51↗</a></span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep34"><div class="prob-check" id="ck-p-pep34" onclick="chk('p-pep34',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">Knight's Tour Problem <a href="https://www.geeksforgeeks.org/the-knights-tour-problem-backtracking-1/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+
+      <!-- ── PEPCODING LEVEL 2 — Advanced ── -->
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">📺 Pepcoding Level 2 — Advanced Backtracking</div>
+
+      <div class="prob-row" data-type="part" data-id="p-pep35"><div class="prob-check" id="ck-p-pep35" onclick="chk('p-pep35',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print Abbreviations <a href="https://www.geeksforgeeks.org/generate-all-the-abbreviations-of-a-string/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-part">PARTITION</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep36"><div class="prob-check" id="ck-p-pep36" onclick="chk('p-pep36',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">N Queens using Branch and Bound <a href="https://leetcode.com/problems/n-queens/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 51↗</a></span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep37"><div class="prob-check" id="ck-p-pep37" onclick="chk('p-pep37',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">Max Score of Words <a href="https://leetcode.com/problems/maximum-score-words-formed-by-letters/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 1255↗</a></span><span class="type-chip tc-sub">SUBSET</span></div>
+
+      <div class="prob-row" data-type="sub" data-id="p-pep38"><div class="prob-check" id="ck-p-pep38" onclick="chk('p-pep38',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Print Numbers in Lexicographical Order <a href="https://leetcode.com/problems/lexicographical-numbers/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 386↗</a></span><span class="type-chip tc-sub">BASICS</span></div>
+
+      <div class="prob-row" data-type="grid" data-id="p-pep39"><div class="prob-check" id="ck-p-pep39" onclick="chk('p-pep39',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Gold Mine (Max connected gold) <a href="https://www.geeksforgeeks.org/gold-mine-problem/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-grid">GRID</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep40"><div class="prob-check" id="ck-p-pep40" onclick="chk('p-pep40',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">Sudoku Solver <a href="https://leetcode.com/problems/sudoku-solver/" target="_blank" style="color:var(--orange);font-size:10px;font-family:var(--mono);margin-left:6px">LC 37↗</a></span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep41"><div class="prob-check" id="ck-p-pep41" onclick="chk('p-pep41',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">Crossword Puzzle <a href="https://www.geeksforgeeks.org/crossword-puzzle-solution-using-backtracking/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+
+      <div class="prob-row" data-type="cst" data-id="p-pep42"><div class="prob-check" id="ck-p-pep42" onclick="chk('p-pep42',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">Cryptarithmetic Puzzle <a href="https://www.geeksforgeeks.org/crypt-arithmetics-problem/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+
+      <div class="prob-row" data-type="perm" data-id="p-pep43"><div class="prob-check" id="ck-p-pep43" onclick="chk('p-pep43',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">Friends Pairing Problem <a href="https://www.geeksforgeeks.org/friends-pairing-problem/" target="_blank" style="color:var(--green);font-size:10px;font-family:var(--mono);margin-left:6px">GFG↗</a></span><span class="type-chip tc-perm">PERMUTATION</span></div>
+
+      <!-- ── Original LC Problems ── -->
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">🎯 Classic LeetCode Problems</div>
+
+      <div class="prob-row" data-type="sub"  data-id="p1"><div class="prob-check" id="ck-p1"  onclick="chk('p1',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">LC 78 — Subsets</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p2"><div class="prob-check" id="ck-p2"  onclick="chk('p2',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">LC 77 — Combinations</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p3"><div class="prob-check" id="ck-p3"  onclick="chk('p3',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 39 — Combination Sum</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p4"><div class="prob-check" id="ck-p4" onclick="chk('p4',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 40 — Combination Sum II (duplicates)</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p5"><div class="prob-check" id="ck-p5"  onclick="chk('p5',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 90 — Subsets II (duplicates)</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p6"><div class="prob-check" id="ck-p6"  onclick="chk('p6',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 22 — Generate Parentheses</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="perm" data-id="p7"><div class="prob-check" id="ck-p7"  onclick="chk('p7',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 46 — Permutations</span><span class="type-chip tc-perm">PERMUTATION</span></div>
+      <div class="prob-row" data-type="perm" data-id="p8"><div class="prob-check" id="ck-p8"  onclick="chk('p8',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 47 — Permutations II (duplicates)</span><span class="type-chip tc-perm">PERMUTATION</span></div>
+      <div class="prob-row" data-type="perm" data-id="p9"><div class="prob-check" id="ck-p9"  onclick="chk('p9',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 17 — Letter Combinations of a Phone Number</span><span class="type-chip tc-perm">PERMUTATION</span></div>
+      <div class="prob-row" data-type="cst"  data-id="p10"><div class="prob-check" id="ck-p10" onclick="chk('p10',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 51 — N-Queens</span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+      <div class="prob-row" data-type="cst"  data-id="p11"><div class="prob-check" id="ck-p11" onclick="chk('p11',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 52 — N-Queens II</span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+      <div class="prob-row" data-type="cst"  data-id="p12"><div class="prob-check" id="ck-p12" onclick="chk('p12',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 37 — Sudoku Solver</span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+      <div class="prob-row" data-type="grid" data-id="p13"><div class="prob-check" id="ck-p13" onclick="chk('p13',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 79 — Word Search</span><span class="type-chip tc-grid">GRID</span></div>
+      <div class="prob-row" data-type="grid" data-id="p14"><div class="prob-check" id="ck-p14" onclick="chk('p14',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 212 — Word Search II</span><span class="type-chip tc-grid">GRID</span></div>
+      <div class="prob-row" data-type="part" data-id="p15"><div class="prob-check" id="ck-p15" onclick="chk('p15',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 131 — Palindrome Partitioning</span><span class="type-chip tc-part">PARTITION</span></div>
+    </div>    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 — CHEATSHEET -->
+<div class="card open" id="s-tricks">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--cyan-dim);border:1px solid rgba(6,182,212,0.3)">⚡</div>
+    <div class="card-title">Cheatsheet — Patterns, Tricks & Complexity</div>
+    <div class="card-badge" style="background:var(--cyan-dim);color:var(--cyan)">07</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <div class="callout co-orange">
+      <div class="callout-title">🔑 3 Questions to Identify Any Backtracking Type</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:8px">
+        <div style="background:var(--bg4);border:1px solid var(--border);border-radius:9px;padding:14px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--orange);font-weight:700;margin-bottom:6px">Q1</div>
+          <p style="font-size:.85rem;color:var(--t1);font-weight:600">Does order matter?</p>
+          <p style="font-size:.78rem;color:var(--t2);margin-top:4px">YES → Permutation (used[])<br>NO → Subset (start index)</p>
+        </div>
+        <div style="background:var(--bg4);border:1px solid var(--border);border-radius:9px;padding:14px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--orange);font-weight:700;margin-bottom:6px">Q2</div>
+          <p style="font-size:.85rem;color:var(--t1);font-weight:600">Is it a 2D grid?</p>
+          <p style="font-size:.78rem;color:var(--t2);margin-top:4px">YES → Grid (r,c + 4 dirs)<br>NO → Not grid</p>
+        </div>
+        <div style="background:var(--bg4);border:1px solid var(--border);border-radius:9px;padding:14px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--orange);font-weight:700;margin-bottom:6px">Q3</div>
+          <p style="font-size:.85rem;color:var(--t1);font-weight:600">Hard placement rules?</p>
+          <p style="font-size:.78rem;color:var(--t2);margin-top:4px">YES → Constraint (isValid())<br>String splits? → Partition</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout co-yellow" style="margin-top:14px">
+      <div class="callout-title">🔁 Duplicates Handling — Sort + Skip Pattern</div>
+      <div class="code-wrap" style="margin-top:8px">
+<pre><span class="cm">// Subset with duplicates (LC 40, LC 90)</span>
+<span class="tp">Arrays</span>.sort(nums);
+<span class="kw">for</span> (<span class="kw">int</span> i = start; i &lt; nums.length; i++) {
+    <span class="kw">if</span> (i > start &amp;&amp; nums[i] == nums[i-<span class="nm">1</span>]) <span class="kw">continue</span>;  <span class="cm">// skip same-level dup</span>
+    <span class="cm">// ... backtrack body</span>
+}
+<span class="cm">// i > start = same value already tried at this level → skip</span>
+
+<span class="cm">// Permutation with duplicates (LC 47)</span>
+<span class="kw">if</span> (i > <span class="nm">0</span> &amp;&amp; nums[i] == nums[i-<span class="nm">1</span>] &amp;&amp; !used[i-<span class="nm">1</span>]) <span class="kw">continue</span>;
+<span class="cm">// !used[i-1] = previous same-value already explored and backtracked → skip</span></pre>
+      </div>
+    </div>
+
+    <div class="callout co-green" style="margin-top:14px">
+      <div class="callout-title">📊 Time Complexity Reference</div>
+      <table class="t-table" style="margin-top:4px">
+        <tr><th>Type</th><th>Time</th><th>Space</th><th>Why</th></tr>
+        <tr><td>🟢 Subsets</td><td>O(2ⁿ × n)</td><td>O(n)</td><td>2 choices per element, n to copy</td></tr>
+        <tr><td>🟣 Permutations</td><td>O(n! × n)</td><td>O(n)</td><td>n! leaves, copy each takes O(n)</td></tr>
+        <tr><td>🟠 Combination Sum</td><td>O(2^t)</td><td>O(t)</td><td>t = target value</td></tr>
+        <tr><td>🟠 N-Queens</td><td>O(n!)</td><td>O(n²)</td><td>Board storage per state</td></tr>
+        <tr><td>🟦 Word Search</td><td>O(m×n×4^L)</td><td>O(L)</td><td>4 dirs from every cell, L=word len</td></tr>
+        <tr><td>🩵 Palindrome Part.</td><td>O(n × 2ⁿ)</td><td>O(n)</td><td>2ⁿ⁻¹ ways to partition</td></tr>
+      </table>
+    </div>
+
+    <div class="callout co-purple" style="margin-top:14px">
+      <div class="callout-title">💬 5 Sentences to Say in Every Interview</div>
+      <ol style="list-style:decimal;padding-left:20px;display:flex;flex-direction:column;gap:8px;margin-top:4px">
+        <li style="color:var(--t2);font-size:.85rem">"I recognize this as backtracking — we need all valid [subsets / arrangements / paths]."</li>
+        <li style="color:var(--t2);font-size:.85rem">"My state at each node is [current path + start index / used[] array]."</li>
+        <li style="color:var(--t2);font-size:.85rem">"Base case is [path.size == n / remain == 0 / start == s.length()]."</li>
+        <li style="color:var(--t2);font-size:.85rem">"I'll prune when [sum exceeds target / placement is invalid / out of bounds]."</li>
+        <li style="color:var(--t2);font-size:.85rem">"After each recursive call, I undo the change to restore state for the next branch."</li>
+      </ol>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 8 — QUIZ -->
+<div class="card open" id="s-quiz">
+  <div class="card-hd" onclick="tog(this)">
+    <div class="card-icon" style="background:var(--red-dim);border:1px solid rgba(239,68,68,0.3)">🧪</div>
+    <div class="card-title">Quiz — Can You Identify the Type?</div>
+    <div class="card-badge" style="background:var(--red-dim);color:var(--red)">08</div>
+    <div class="chev">▾</div>
+  </div>
+  <div class="card-body">
+
+    <div class="quiz-q">
+      <div class="quiz-num">Q1 / 5 — TYPE IDENTIFICATION</div>
+      <div class="quiz-text">"Find all unique combinations of numbers that sum to a target. Each number may be used multiple times." — What backtracking type is this?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="ans(this,false,'e1')">🟣 Permutation — use visited[] array</button>
+        <button class="quiz-opt" onclick="ans(this,true,'e1')">🟢 Subset / Combination — start index, recurse with same i (reuse ok)</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e1')">🟠 Constraint — use isValid() before each placement</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e1')">🟦 Grid — 4-directional DFS on a matrix</button>
+      </div>
+      <div class="quiz-explain" id="e1">✅ "Combinations" + order doesn't matter ([2,3] = [3,2]) = <strong>Subset type</strong>. Use start index. Since reuse is allowed, recurse with same <code>i</code> (not <code>i+1</code>). Base case: remain == 0.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="quiz-num">Q2 / 5 — CODE SIGNAL</div>
+      <div class="quiz-text">You see this in a backtracking function: <code style="font-family:var(--mono);color:var(--purple);background:var(--bg4);padding:2px 8px;border-radius:4px">if (used[i]) continue;</code> — What type is this?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="ans(this,false,'e2')">🟢 Subset — it uses start index</button>
+        <button class="quiz-opt" onclick="ans(this,true,'e2')">🟣 Permutation — loops from 0, skips used elements via visited[]</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e2')">🟦 Grid — it checks visited cells on a board</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e2')">🩵 Partition — it validates a substring</button>
+      </div>
+      <div class="quiz-explain" id="e2">✅ <code>used[i]</code> + loop always from <code>i=0</code> = <strong>Permutation type</strong>. This is the single clearest code signal. Subset type uses an <code>int start</code> parameter and loops from <code>start</code>, never from 0.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="quiz-num">Q3 / 5 — MISTAKE DETECTION</div>
+      <div class="quiz-text">A student writes: <code style="font-family:var(--mono);color:var(--red);background:var(--bg4);padding:2px 8px;border-radius:4px">result.add(path);</code> inside their backtrack function. What is wrong?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="ans(this,false,'e3')">Nothing — this is correct</button>
+        <button class="quiz-opt" onclick="ans(this,true,'e3')">It adds a reference to path — when path changes later, the stored entry changes too</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e3')">Should call result.set() not result.add()</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e3')">Missing a base case check before this line</button>
+      </div>
+      <div class="quiz-explain" id="e3">✅ Classic bug. <code>path</code> is an object reference. After unchoose modifies it, the "saved" result also changes — they're the same object. Fix: <code>result.add(new ArrayList&lt;&gt;(path))</code> to create an independent copy.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="quiz-num">Q4 / 5 — PRUNING</div>
+      <div class="quiz-text">In Combination Sum with sorted candidates, why use <code>break</code> instead of <code>continue</code> when <code>candidates[i] &gt; remain</code>?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="ans(this,false,'e4')">They do the same thing here</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e4')">You should use return, not break</button>
+        <button class="quiz-opt" onclick="ans(this,true,'e4')">Array is sorted — if candidates[i] exceeds remain, all elements after it do too, so break skips all of them</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e4')">break exits the entire recursion</button>
+      </div>
+      <div class="quiz-explain" id="e4">✅ Sorted array means candidates are monotonically increasing. If <code>candidates[i] &gt; remain</code>, then <code>candidates[i+1]</code> and beyond are also too large. <code>break</code> exits the loop entirely (better pruning). <code>continue</code> would wastefully check the next element which is also invalid.</div>
+    </div>
+
+    <div class="quiz-q">
+      <div class="quiz-num">Q5 / 5 — UNCHOOSE IN GRID</div>
+      <div class="quiz-text">In Word Search, after marking <code>board[r][c] = '#'</code> and the DFS returns, you MUST restore the cell. Why?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" onclick="ans(this,false,'e5')">You don't — '#' stays to permanently mark visited</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e5')">Set board[r][c] = ' ' (empty space)</button>
+        <button class="quiz-opt" onclick="ans(this,true,'e5')">Restore to original char — other paths (different starting cells or routes) still need this cell available</button>
+        <button class="quiz-opt" onclick="ans(this,false,'e5')">Clear the entire row after each DFS call</button>
+      </div>
+      <div class="quiz-explain" id="e5">✅ The '#' prevents cycles only within the CURRENT path. Once that path is done (DFS returned), the cell must be freed for other paths to use. This is exactly the unchoose step — <code>board[r][c] = tmp</code> restores the cell for all other branches.</div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+function tog(hd){hd.closest('.card').classList.toggle('open')}
+
+function navClick(el,id){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function ct(tab,panelId){
+  const wrap=tab.closest('.code-wrap');
+  wrap.querySelectorAll('.ctab').forEach(t=>t.classList.remove('on'));
+  wrap.querySelectorAll('.cpanel').forEach(p=>p.classList.remove('on'));
+  tab.classList.add('on');
+  document.getElementById(panelId)?.classList.add('on');
+}
+
+function treTab(tab,panelId){
+  document.querySelectorAll('.tree-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tree-panel').forEach(p=>p.classList.remove('on'));
+  tab.classList.add('on');
+  document.getElementById(panelId)?.classList.add('on');
+}
+
+function filterProbs(type,btn){
+  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.prob-row').forEach(r=>{
+    r.classList.toggle('hidden', type!=='all' && r.dataset.type!==type);
+  });
+}
+
+const SK='bt_v2_done';
+let done=JSON.parse(localStorage.getItem(SK)||'[]'.replace('[]','{}'));
+const TOTAL=58;
+
+function updProg(){
+  const n=Object.values(done).filter(Boolean).length;
+  document.getElementById('plabel').textContent=`${n} / ${TOTAL} solved`;
+  document.getElementById('pfill').style.width=`${(n/TOTAL)*100}%`;
+}
+function chk(id,e){
+  e.stopPropagation();
+  done[id]=!done[id];
+  localStorage.setItem(SK,JSON.stringify(done));
+  const el=document.getElementById('ck-'+id);
+  el.classList.toggle('done',done[id]);
+  el.textContent=done[id]?'✓':'';
+  updProg();
+}
+(function init(){
+  try{ done=JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){done={}}
+  Object.keys(done).forEach(id=>{
+    if(!done[id])return;
+    const el=document.getElementById('ck-'+id);
+    if(el){el.classList.add('done');el.textContent='✓';}
+  });
+  updProg();
+
+  // scroll spy
+  const secs=['s-intuition','s-identify','s-template','s-trees','s-types','s-problems','s-tricks','s-quiz'];
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const idx=secs.indexOf(e.target.id);
+        document.querySelectorAll('.nav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
+      }
+    });
+  },{threshold:0.25});
+  secs.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});
+})();
+
+function ans(btn,correct,expId){
+  const q=btn.closest('.quiz-q');
+  if(q.dataset.done)return;
+  q.dataset.done='1';
+  q.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+  btn.classList.add(correct?'correct':'wrong');
+  const exp=document.getElementById(expId);
+  if(exp)exp.style.display='block';
+}
+</script>
+</body>
+</html>

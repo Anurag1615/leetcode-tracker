@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Programming Patterns | LeetCode Pattern Tracker</title>
+<meta name="description" content="Master Dynamic Programming for FAANG interviews. 16 DP patterns, 135 problems with LeetCode & GFG links. Covers 0/1 Knapsack, LCS, LIS, MCM, Stocks, Bitmask, Digit DP, Game Theory & more.">
+<meta name="keywords" content="dynamic programming leetcode, aditya verma dp playlist, 0/1 knapsack, LCS, LIS, matrix chain multiplication, dp on trees, dp on grid, dp patterns interview">
+<link rel="canonical" href="https://leetcodepattern.com/dp.html">
+
+<!-- OG -->
+<meta property="og:title" content="Dynamic Programming Patterns — Aditya Verma Style">
+<meta property="og:description" content="10 DP patterns, 70 problems. Covers 0/1 Knapsack, Unbounded Knapsack, LCS, LIS, MCM, Kadane's, DP on Trees & Grid.">
+<meta property="og:url" content="https://leetcodepattern.com/dp.html">
+<meta property="og:type" content="website">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Dynamic Programming Patterns (Aditya Verma Order)",
+  "description": "Comprehensive DP guide covering 16 patterns and 135 problems across LeetCode and GFG — Aditya Verma order + Stocks, Bitmask, Digit DP, Game Theory.",
+  "url": "https://leetcodepattern.com/dp.html",
+  "educationalLevel": "Intermediate to Advanced",
+  "teaches": ["0/1 Knapsack", "Unbounded Knapsack", "LCS", "LIS", "MCM", "Kadane's", "DP on Trees", "DP on Grid", "Stock DP", "Bitmask DP", "Digit DP", "Game Theory DP", "Probability DP"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:      #0d1117;
+  --surface: #161b22;
+  --surface2:#1c2128;
+  --border:  #30363d;
+  --text:    #e6edf3;
+  --muted:   #8b949e;
+  --accent:  #6366f1;
+  --accent2: #818cf8;
+  --green:   #10b981;
+  --yellow:  #f59e0b;
+  --red:     #ef4444;
+  --cyan:    #06b6d4;
+  --orange:  #f97316;
+  --purple:  #a855f7;
+  --radius:  10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.6;min-height:100vh;}
+
+/* ── NAV ── */
+.gnav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:16px;height:56px;}
+.gnav-logo{font-weight:700;font-size:15px;color:var(--text);text-decoration:none;white-space:nowrap;}
+.gnav-logo span{color:var(--accent);}
+.gnav-links{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none;}
+.gnav-links::-webkit-scrollbar{display:none;}
+.gnav-link{color:var(--muted);text-decoration:none;padding:5px 10px;border-radius:6px;font-size:13px;white-space:nowrap;transition:all .15s;}
+.gnav-link:hover,.gnav-link.active{background:rgba(99,102,241,.12);color:var(--accent);}
+.gnav-link.active{font-weight:600;}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,rgba(99,102,241,.08) 0%,rgba(16,185,129,.05) 100%);border-bottom:1px solid var(--border);padding:48px 24px 40px;text-align:center;}
+.hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.hero-title{font-size:clamp(26px,5vw,44px);font-weight:800;line-height:1.15;margin-bottom:14px;background:linear-gradient(135deg,var(--text),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:16px;color:var(--muted);max-width:640px;margin:0 auto 24px;}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
+.badge{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:500;}
+.badge-accent{border-color:rgba(99,102,241,.4);color:var(--accent);background:rgba(99,102,241,.08);}
+.badge-green{border-color:rgba(16,185,129,.4);color:var(--green);background:rgba(16,185,129,.08);}
+.badge-yellow{border-color:rgba(245,158,11,.4);color:var(--yellow);background:rgba(245,158,11,.08);}
+
+/* ── PROGRESS GLOBAL ── */
+.global-prog{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 24px;max-width:560px;margin:0 auto;}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.prog-label{font-size:13px;color:var(--muted);min-width:80px;}
+.prog-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:4px;width:0%;transition:width .4s ease;}
+.prog-num{font-size:13px;font-weight:600;color:var(--accent);min-width:48px;text-align:right;}
+
+/* ── LAYOUT ── */
+.page-wrap{max-width:1100px;margin:0 auto;padding:32px 24px 80px;}
+
+/* ── TOC ── */
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:32px;}
+.toc-title{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:12px;}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;}
+.toc-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;text-decoration:none;color:var(--text);font-size:13px;transition:all .15s;border:1px solid transparent;}
+.toc-item:hover{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.2);color:var(--accent);}
+.toc-num{font-size:10px;font-weight:700;background:rgba(99,102,241,.15);color:var(--accent);padding:2px 7px;border-radius:10px;min-width:28px;text-align:center;}
+
+/* ── AV NOTE ── */
+.av-note{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-left:3px solid var(--yellow);border-radius:var(--radius);padding:14px 18px;margin-bottom:32px;font-size:13px;color:var(--muted);}
+.av-note strong{color:var(--yellow);}
+.av-note a{color:var(--accent);text-decoration:none;}
+.av-note a:hover{text-decoration:underline;}
+
+/* ── SECTION ── */
+.pat-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;overflow:hidden;}
+.pat-header{padding:20px 24px 0;cursor:pointer;}
+.pat-header-top{display:flex;align-items:flex-start;gap:12px;}
+.pat-number{flex-shrink:0;width:36px;height:36px;border-radius:8px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--accent);}
+.pat-info{flex:1;}
+.pat-name{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.pat-meta{font-size:12px;color:var(--muted);}
+.pat-collapse-btn{flex-shrink:0;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;border-radius:4px;display:flex;align-items:center;transition:transform .2s;}
+.pat-collapse-btn.open{transform:rotate(180deg);}
+.pat-body{padding:16px 24px 20px;}
+.pat-desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.6;}
+.pat-complexity{display:inline-block;font-size:11px;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);color:var(--accent);padding:3px 10px;border-radius:20px;font-family:'JetBrains Mono',monospace;margin-bottom:16px;}
+
+/* ── PROGRESS BAR ── */
+.sub-prog{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.sub-prog-bar{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+.sub-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px;width:0%;transition:width .3s;}
+.sub-prog-label{font-size:11px;color:var(--accent);min-width:44px;text-align:right;}
+
+/* ── TABLE ── */
+.prob-table{width:100%;border-collapse:collapse;font-size:13px;}
+.prob-table th{background:var(--surface2);padding:10px 12px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--border);}
+.prob-table td{padding:10px 12px;border-bottom:1px solid rgba(48,54,61,.5);vertical-align:middle;}
+.prob-row:last-child td{border-bottom:none;}
+.prob-row{cursor:pointer;transition:background .12s;}
+.prob-row:hover{background:rgba(99,102,241,.05);}
+.prob-row.done-row{background:rgba(16,185,129,.04);}
+.prob-row.done-row td:nth-child(3) a{color:var(--green);}
+
+/* ── CHECK BOX ── */
+.track-check{width:22px;height:22px;border-radius:5px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;flex-shrink:0;margin:0 auto;}
+.track-check:hover{border-color:var(--accent);}
+.track-check.done{background:var(--green);border-color:var(--green);}
+
+/* ── DIFF PILLS ── */
+.diff-easy{color:var(--green);font-size:11px;font-weight:600;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:2px 8px;border-radius:10px;}
+.diff-medium{color:var(--yellow);font-size:11px;font-weight:600;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);padding:2px 8px;border-radius:10px;}
+.diff-hard{color:var(--red);font-size:11px;font-weight:600;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);padding:2px 8px;border-radius:10px;}
+
+/* ── LINKS ── */
+.link-lc{color:var(--accent);text-decoration:none;font-weight:500;}
+.link-lc:hover{text-decoration:underline;}
+.link-gfg{color:var(--green);text-decoration:none;font-size:11px;font-weight:500;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);padding:2px 7px;border-radius:10px;margin-left:6px;white-space:nowrap;}
+.link-gfg:hover{background:rgba(16,185,129,.15);}
+.link-gfg-only{color:var(--green);text-decoration:none;font-weight:500;}
+.link-gfg-only:hover{text-decoration:underline;}
+
+/* ── COLLAPSE ── */
+.pat-body.collapsed{display:none;}
+
+/* ── TAGS ROW ── */
+.tags-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+.tag{font-size:10px;padding:2px 7px;border-radius:8px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.15);color:var(--accent2);}
+
+/* ── STUDY TIP ── */
+.tip-box{background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.15);border-left:3px solid var(--accent);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+.tip-box strong{color:var(--accent);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .prob-table{font-size:12px;}
+  .prob-table th:nth-child(5),.prob-table td:nth-child(5){display:none;}
+  .hero-title{font-size:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="gnav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="gnav-logo">LC<span>Pattern</span></a>
+  <div class="gnav-links">
+    <a href="/" class="gnav-link">Tracker</a>
+    <a href="/two-pointers.html" class="gnav-link">Two Pointers</a>
+    <a href="/sliding-window.html" class="gnav-link">Sliding Window</a>
+    <a href="/dp.html" class="gnav-link active">Dynamic Programming</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-eyebrow">🧮 Pattern Guide</div>
+  <h1 class="hero-title">Dynamic Programming</h1>
+  <p class="hero-sub">Aditya Verma order + Complete FAANG coverage — 16 patterns, 135 problems. LeetCode + GFG dono links.</p>
+  <div class="hero-badges">
+    <span class="badge badge-accent">16 Patterns</span>
+    <span class="badge badge-green">135 Problems</span>
+    <span class="badge badge-yellow">LC + GFG Links</span>
+  </div>
+  <div class="global-prog" id="global-prog">
+    <div class="prog-row">
+      <span class="prog-label">Progress</span>
+      <div class="prog-bar"><div class="prog-fill" id="global-fill"></div></div>
+      <span class="prog-num" id="global-num">0 / 0</span>
+    </div>
+  </div>
+</header>
+
+<main class="page-wrap">
+
+  <!-- Aditya Verma reference note -->
+  <div class="av-note">
+    <strong>📺 Based on Aditya Verma's DP Playlist</strong> — Yeh page uske YouTube playlist ke exact order mein hai:
+    0/1 Knapsack → Unbounded Knapsack → Fibonacci DP → LCS → LIS → Kadane's → MCM → DP on Trees → DP on Grid → DP on Strings.
+    GFG-only problems ke saath <span style="color:var(--green);font-weight:600;">GFG only</span> badge show hoga. Patterns 11–16 (Stocks, Counting, Digit DP, Bitmask, Probability, Game Theory) are extra beyond AV playlist — full FAANG coverage.
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Pattern navigation">
+    <div class="toc-title">Jump to Pattern</div>
+    <div class="toc-grid" id="toc-grid"></div>
+  </nav>
+
+  <!-- Problems container -->
+  <div id="problems-container"></div>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="data.js"></script>
+<script src="shared.js" defer></script>
+<script src="firebase.js" defer></script>
+
+<script>
+const PAGE_PATTERN = 'dp';
+const DP_PROBLEMS  = window.LC_DATA ? window.LC_DATA.getPatternPage('dp') : [];
+
+// Pattern icons matching AV playlist topics
+const PATTERN_ICONS = ['🎒','♾️','🌿','🔡','📈','⚡','🔗','🌳','🗺️','📝','📈','🔢','🔢','🔳','🎲','🎯'];
+
+// ── LINK BUILDER ──
+// p.lc   = LeetCode slug (null if not on LC)
+// p.gfg  = GFG slug (null if not on GFG)
+function buildProblemLink(p) {
+  const lcUrl  = p.lc  ? `https://leetcode.com/problems/${p.lc}/`                          : null;
+  const gfgUrl = p.gfg ? `https://www.geeksforgeeks.org/problems/${p.gfg}/`                : null;
+
+  if (lcUrl && gfgUrl) {
+    return `<a href="${lcUrl}" class="link-lc" target="_blank" rel="noopener" onclick="event.stopPropagation()">${p.title}</a>`
+         + `<a href="${gfgUrl}" class="link-gfg" target="_blank" rel="noopener" onclick="event.stopPropagation()">GFG</a>`;
+  } else if (lcUrl) {
+    return `<a href="${lcUrl}" class="link-lc" target="_blank" rel="noopener" onclick="event.stopPropagation()">${p.title}</a>`;
+  } else if (gfgUrl) {
+    return `<a href="${gfgUrl}" class="link-gfg-only" target="_blank" rel="noopener" onclick="event.stopPropagation()">${p.title}</a>`
+         + `<span class="link-gfg" style="margin-left:6px;">GFG only</span>`;
+  }
+  return `<span style="color:var(--muted)">${p.title}</span>`;
+}
+
+// ── TRACKING HELPERS ──
+// Use lc slug if available, else gfg slug as the unique key
+function getProblemKey(p) {
+  return p.lc || p.gfg || p.title.toLowerCase().replace(/\s+/g,'-');
+}
+function isDoneDP(p) {
+  return window.isDone ? window.isDone(PAGE_PATTERN, getProblemKey(p)) : false;
+}
+function toggleDP(p, el) {
+  const key = getProblemKey(p);
+  const nowDone = window.toggleDone ? window.toggleDone(PAGE_PATTERN, key) : false;
+  const row = el.closest('tr');
+  row.classList.toggle('done-row', nowDone);
+  el.classList.toggle('done', nowDone);
+  updateSectionCount(row.closest('tbody')?.dataset.sectionIdx | 0);
+  updateGlobal();
+}
+
+// ── RENDER ──
+function renderAll() {
+  const container = document.getElementById('problems-container');
+  const tocGrid   = document.getElementById('toc-grid');
+  if (!container || !DP_PROBLEMS.length) return;
+
+  // TOC
+  tocGrid.innerHTML = DP_PROBLEMS.map((sec, i) => `
+    <a class="toc-item" href="#pat-${sec.id}">
+      <span class="toc-num">${PATTERN_ICONS[i] || (i+1)}</span>
+      <span>${sec.section}</span>
+    </a>
+  `).join('');
+
+  // Sections
+  container.innerHTML = DP_PROBLEMS.map((sec, si) => {
+    const total = sec.problems.length;
+    const done  = sec.problems.filter(p => isDoneDP(p)).length;
+    const pct   = total ? Math.round(done/total*100) : 0;
+
+    const rows = sec.problems.map(p => {
+      const key    = getProblemKey(p);
+      const solved = isDoneDP(p);
+      return `
+        <tr class="prob-row ${solved ? 'done-row' : ''}"
+            data-key="${key}" data-si="${si}"
+            onclick="handleRowClick(this,event)">
+          <td style="text-align:center;padding:10px 12px;">
+            <div class="track-check ${solved ? 'done' : ''}"
+                 id="chk-${key}"
+                 onclick="event.stopPropagation();toggleDP(DP_PROBLEMS[${si}].problems.find(x=>getProblemKey(x)==='${key}'),this)"
+                 role="checkbox" aria-checked="${solved}" tabindex="0"
+                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                <path d="M1.5 5.5l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </td>
+          <td><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">${p.num || '—'}</span></td>
+          <td>${buildProblemLink(p)}</td>
+          <td><span class="diff-${p.diff.toLowerCase()}">${p.diff}</span></td>
+          <td style="font-size:12px;color:var(--muted);">${p.concept}</td>
+        </tr>`;
+    }).join('');
+
+    return `
+      <div class="pat-section" id="pat-${sec.id}" style="scroll-margin-top:70px;">
+        <div class="pat-header" onclick="toggleSection('body-${sec.id}','chev-${sec.id}')">
+          <div class="pat-header-top">
+            <div class="pat-number">${PATTERN_ICONS[si] || (si+1)}</div>
+            <div class="pat-info">
+              <div class="pat-name">${sec.section}</div>
+              <div class="pat-meta">${total} problems &nbsp;·&nbsp; ${si < 10 ? 'AV Playlist ' + (si+1) : 'Extra Pattern'}</div>
+            </div>
+            <button class="pat-collapse-btn open" id="chev-${sec.id}" aria-label="Toggle section">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3.5 6l4.5 4.5L12.5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="sub-prog" style="margin-top:12px;">
+            <span style="font-size:11px;color:var(--muted);">Progress</span>
+            <div class="sub-prog-bar"><div class="sub-prog-fill" id="fill-${sec.id}" style="width:${pct}%"></div></div>
+            <span class="sub-prog-label" id="cnt-${sec.id}">${done} / ${total}</span>
+          </div>
+        </div>
+        <div class="pat-body" id="body-${sec.id}" style="padding-top:0;">
+          <div class="pat-body" style="padding:16px 24px 20px;">
+            <p class="pat-desc">${sec.desc}</p>
+            <span class="pat-complexity">${sec.complexity}</span>
+            <div style="overflow-x:auto;">
+              <table class="prob-table">
+                <thead><tr>
+                  <th style="width:40px;">Done</th>
+                  <th>#</th>
+                  <th>Problem</th>
+                  <th>Difficulty</th>
+                  <th>Key Concept</th>
+                </tr></thead>
+                <tbody data-section-idx="${si}">${rows}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  updateGlobal();
+}
+
+// ── COLLAPSE TOGGLE ──
+function toggleSection(bodyId, chevId) {
+  const body = document.getElementById(bodyId);
+  const chev = document.getElementById(chevId);
+  if (!body) return;
+  const isOpen = !body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', isOpen);
+  chev?.classList.toggle('open', !isOpen);
+}
+
+// ── ROW CLICK (open LC or GFG link) ──
+function handleRowClick(row, e) {
+  if (e.target.closest('.track-check') || e.target.closest('a')) return;
+  const key = row.dataset.key;
+  const si  = parseInt(row.dataset.si);
+  const sec = DP_PROBLEMS[si];
+  if (!sec) return;
+  const p = sec.problems.find(x => getProblemKey(x) === key);
+  if (!p) return;
+  const url = p.lc
+    ? `https://leetcode.com/problems/${p.lc}/`
+    : p.gfg ? `https://www.geeksforgeeks.org/problems/${p.gfg}/` : null;
+  if (url) window.open(url, '_blank', 'noopener');
+}
+
+// ── PROGRESS COUNTERS ──
+function updateSectionCount(si) {
+  const sec = DP_PROBLEMS[si];
+  if (!sec) return;
+  const done  = sec.problems.filter(p => isDoneDP(p)).length;
+  const total = sec.problems.length;
+  const pct   = total ? Math.round(done/total*100) : 0;
+  const fill  = document.getElementById(`fill-${sec.id}`);
+  const cnt   = document.getElementById(`cnt-${sec.id}`);
+  if (fill) fill.style.width = pct + '%';
+  if (cnt)  cnt.textContent  = `${done} / ${total}`;
+}
+
+function updateGlobal() {
+  const total = DP_PROBLEMS.reduce((s,sec) => s + sec.problems.length, 0);
+  const done  = DP_PROBLEMS.reduce((s,sec) => s + sec.problems.filter(p => isDoneDP(p)).length, 0);
+  const pct   = total ? Math.round(done/total*100) : 0;
+  const fill  = document.getElementById('global-fill');
+  const num   = document.getElementById('global-num');
+  if (fill) fill.style.width = pct + '%';
+  if (num)  num.textContent  = `${done} / ${total}`;
+  // Update section counts
+  DP_PROBLEMS.forEach((_, si) => updateSectionCount(si));
+}
+
+// ── FIREBASE SYNC ──
+window.addEventListener('DOMContentLoaded', function() {
+  renderAll();
+  // Re-render after Firebase loads state
+  setTimeout(() => {
+    updateGlobal();
+    // Refresh checkboxes
+    DP_PROBLEMS.forEach(sec => {
+      sec.problems.forEach(p => {
+        const key  = getProblemKey(p);
+        const chk  = document.getElementById(`chk-${key}`);
+        const row  = chk?.closest('tr');
+        const done = isDoneDP(p);
+        if (chk) chk.classList.toggle('done', done);
+        if (row) row.classList.toggle('done-row', done);
+      });
+    });
+    updateGlobal();
+  }, 400);
+});
+
+// Listen for shared.js state refresh events
+window.refreshPageUI = function() {
+  DP_PROBLEMS.forEach(sec => {
+    sec.problems.forEach(p => {
+      const key  = getProblemKey(p);
+      const chk  = document.getElementById(`chk-${key}`);
+      const row  = chk?.closest('tr');
+      const done = isDoneDP(p);
+      if (chk) chk.classList.toggle('done', done);
+      if (row) row.classList.toggle('done-row', done);
+    });
+  });
+  updateGlobal();
+};
+</script>
+
+</body>
+</html>
