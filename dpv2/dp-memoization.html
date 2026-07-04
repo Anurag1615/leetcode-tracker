@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>💾 Memoization — DP Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-eyebrow">🧮 Module 3</div>
+    <h1 class="page-title" style="margin-bottom:8px">💾 Memoization</h1>
+    
+<p class="page-desc" style="margin-bottom:24px">Top-Down DP. Add a cache to your recursion — 3 lines of code, exponential → polynomial speedup.</p>
+
+<div class="callout co-orange">
+  <div class="callout-title">💡 The 3-Line Memo Pattern</div>
+  <p>Every memoized solution follows the exact same structure:<br>
+  <strong>1.</strong> Create memo table (size = changing parameters)<br>
+  <strong>2.</strong> Check cache before computing: <code>if (memo[i] != -1) return memo[i];</code><br>
+  <strong>3.</strong> Compute, store, return: <code>return memo[i] = recursion(...);</code></p>
+</div>
+
+<div class="sh">Step-by-Step: Adding Memo to House Robber</div>
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="ctabs">
+      <button class="ctab on" onclick="sw(this,'m-c1')">Before (Exponential)</button>
+      <button class="ctab" onclick="sw(this,'m-c2')">After (Memoized)</button>
+      <button class="ctab" onclick="sw(this,'m-c3')">Diff highlighted</button>
+    </div>
+    <button class="code-copy" onclick="copyCode(this)">copy</button>
+  </div>
+  <div id="m-c1" class="cpanel on"><pre><span style="color:#8b949e">// Before memoization — O(2ⁿ)</span>
+int rob(int[] nums, int i) {
+    if (i >= nums.length) return 0;
+    return Math.max(
+        nums[i] + rob(nums, i + 2),
+        rob(nums, i + 1)
+    );
+}
+<span style="color:#ef4444">// rob(3) computed from rob(1) AND rob(2)
+// rob(5) computed: 2⁵ = 32 calls for n=5
+// rob(50): 2⁵⁰ = 10¹⁵ calls — impossible</span></pre></div>
+
+  <div id="m-c2" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// After memoization — O(n)</span>
+int[] memo;
+
+int rob(int[] nums) {
+    memo = new int[nums.length];
+    Arrays.fill(memo, -1);        <span style="color:#22c55e">// -1 = not computed yet</span>
+    return robHelper(nums, 0);
+}
+
+int robHelper(int[] nums, int i) {
+    if (i >= nums.length) return 0;
+    <span style="color:#f97316">if (memo[i] != -1) return memo[i];   // ✅ CACHE HIT</span>
+    <span style="color:#22c55e">return memo[i] = Math.max(           // ✅ STORE THEN RETURN</span>
+        nums[i] + robHelper(nums, i + 2),
+        robHelper(nums, i + 1)
+    );
+}
+<span style="color:#22c55e">// Each robHelper(i) computed exactly once → O(n) total</span></pre></div>
+
+  <div id="m-c3" class="cpanel" style="display:none"><pre>int[] memo;  <span style="color:#f97316">// ← ADD 1: declare memo table</span>
+
+int rob(int[] nums) {
+    memo = new int[nums.length]; <span style="color:#f97316">// ← ADD 2: allocate</span>
+    Arrays.fill(memo, -1);      <span style="color:#f97316">// ← ADD 3: fill with sentinel</span>
+    return robHelper(nums, 0);
+}
+
+int robHelper(int[] nums, int i) {
+    if (i >= nums.length) return 0;
+    <span style="color:#f97316">if (memo[i] != -1) return memo[i]; // ← ADD 4: check cache</span>
+    return <span style="color:#f97316">memo[i] =</span> Math.max(      <span style="color:#f97316">// ← ADD 5: store result</span>
+        nums[i] + robHelper(nums, i + 2),
+        robHelper(nums, i + 1)
+    );
+}
+<span style="color:#8b949e">// Total changes: 5 lines added. Same logic, O(2ⁿ) → O(n).</span></pre></div>
+</div>
+
+<div class="sh">Memoization for Every Pattern</div>
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="ctabs">
+      <button class="ctab on" onclick="sw(this,'m2-c1')">1D Memo</button>
+      <button class="ctab" onclick="sw(this,'m2-c2')">2D Memo (LCS)</button>
+      <button class="ctab" onclick="sw(this,'m2-c3')">2D Memo (Knapsack)</button>
+      <button class="ctab" onclick="sw(this,'m2-c4')">HashMap Memo</button>
+    </div>
+    <button class="code-copy" onclick="copyCode(this)">copy</button>
+  </div>
+  <div id="m2-c1" class="cpanel on"><pre><span style="color:#8b949e">// 1D Memo — 1 changing parameter
+// Coin Change, Climbing Stairs, House Robber, Decode Ways</span>
+int[] memo = new int[n + 1];
+Arrays.fill(memo, -1);
+
+int solve(int rem) {
+    if (rem == 0) return 0;
+    if (rem < 0) return Integer.MAX_VALUE;
+    if (memo[rem] != -1) return memo[rem];   <span style="color:#f97316">// check</span>
+    int best = Integer.MAX_VALUE;
+    for (int coin : coins) {
+        int sub = solve(rem - coin);
+        if (sub != Integer.MAX_VALUE)
+            best = Math.min(best, sub + 1);
+    }
+    return memo[rem] = best;                 <span style="color:#22c55e">// store</span>
+}</pre></div>
+
+  <div id="m2-c2" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// 2D Memo — 2 changing parameters
+// LCS, Edit Distance, Interleaving String, Distinct Subsequences</span>
+int[][] memo = new int[m + 1][n + 1];
+for (int[] row : memo) Arrays.fill(row, -1);
+
+int lcs(int i, int j) {
+    if (i == 0 || j == 0) return 0;
+    if (memo[i][j] != -1) return memo[i][j];  <span style="color:#f97316">// check</span>
+    if (s1.charAt(i-1) == s2.charAt(j-1))
+        return memo[i][j] = 1 + lcs(i-1, j-1); <span style="color:#22c55e">// store</span>
+    return memo[i][j] = Math.max(lcs(i-1,j), lcs(i,j-1));
+}
+<span style="color:#8b949e">// 2 parameters change (i, j) → 2D memo table
+// Rule: #dimensions = #changing parameters</span></pre></div>
+
+  <div id="m2-c3" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// 2D Memo — Knapsack (i = item index, w = remaining weight)</span>
+int[][] memo = new int[n + 1][W + 1];
+for (int[] row : memo) Arrays.fill(row, -1);
+
+int knapsack(int i, int w) {
+    if (i == 0 || w == 0) return 0;
+    if (memo[i][w] != -1) return memo[i][w];  <span style="color:#f97316">// check</span>
+    int skip = knapsack(i-1, w);
+    int take = 0;
+    if (wt[i-1] <= w)
+        take = val[i-1] + knapsack(i-1, w-wt[i-1]);
+    return memo[i][w] = Math.max(skip, take);  <span style="color:#22c55e">// store</span>
+}
+<span style="color:#8b949e">// memo[i][w] = max value using first i items with capacity w</span></pre></div>
+
+  <div id="m2-c4" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// HashMap Memo — for non-integer or multi-param keys
+// Use when parameters can't be array indices cleanly</span>
+Map&lt;String, Integer&gt; memo = new HashMap&lt;&gt;();
+
+int solve(int i, int j, boolean flag) {
+    String key = i + "," + j + "," + flag;  <span style="color:#f97316">// composite key</span>
+    if (memo.containsKey(key)) return memo.get(key);
+    <span style="color:#8b949e">// ... compute result ...</span>
+    memo.put(key, result);
+    return result;
+}
+<span style="color:#8b949e">// Alternative: encode as single integer
+// key = i * (n+1) * 2 + j * 2 + (flag ? 1 : 0)</span></pre></div>
+</div>
+
+<div class="sh">Memo Rules — The Non-Negotiables</div>
+<div class="grid-2" style="margin-bottom:16px">
+  <div class="callout co-blue" style="margin:0">
+    <div class="callout-title">📐 Dimensions = Changing Parameters</div>
+    <p>Count the parameters that change between calls.<br>
+    1 changing param → <code>int[] memo = new int[n]</code><br>
+    2 changing params → <code>int[][] memo = new int[m][n]</code><br>
+    The constant params (the full array, the coins list) are NOT state — they never change.</p>
+  </div>
+  <div class="callout co-orange" style="margin:0">
+    <div class="callout-title">⚠️ Initialize to -1, NOT 0</div>
+    <p>If you initialize to 0 and 0 is a valid answer (common!), you get false cache hits.<br>
+    Use <code>-1</code> as "not computed yet".<br>
+    Exception: if -1 is valid, use <code>Integer.MIN_VALUE</code> or a <code>boolean[] computed</code> array.</p>
+  </div>
+  <div class="callout co-green" style="margin:0">
+    <div class="callout-title">✅ Check BEFORE computing</div>
+    <p>Put the cache check as the FIRST thing after the base case — before any recursive calls or loops. Otherwise you do work before realizing it's cached.</p>
+  </div>
+  <div class="callout co-red" style="margin:0">
+    <div class="callout-title">🚫 Never memoize global state</div>
+    <p>The memo key must uniquely identify a subproblem. If your function modifies a list/array in place (like backtracking), you can't memoize — each call has different side effects.</p>
+  </div>
+</div>
+
+<div class="sh">Why does Memoization Work?</div>
+<div class="callout co-blue">
+  <div class="callout-title">🔢 The math</div>
+  <p>
+  Without memo: same subproblem computed <strong>exponentially many times</strong> → O(2ⁿ)<br>
+  With memo: each unique subproblem computed <strong>exactly once</strong><br><br>
+  For 1D problems: there are n distinct subproblems (i from 0 to n) → O(n) time<br>
+  For 2D problems: there are m×n distinct subproblems → O(m·n) time<br><br>
+  The recursion tree might have 2ⁿ nodes, but with memo, each unique node is computed once and cached — all other "visits" are O(1) cache hits.
+  </p>
+</div>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){initDPPage('memoization');});</script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Backtracking – LeetCode Patterns</title>
-<meta name="description" content="Master Backtracking for FAANG interviews — 5 types, recursion trees, universal template, 58 problems. Pepcoding + LeetCode curated list."/>
+<meta name="description" content="Master Backtracking — 5 types, 62 problems, Call Stack Visualizer, Java code, quiz. Pepcoding + LeetCode."/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="backtracking.css"/>
 </head>
@@ -878,21 +878,21 @@
       <!-- ── Original LC Problems ── -->
       <div style="font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 4px 6px;margin-top:6px">🎯 Classic LeetCode Problems</div>
 
-      <div class="prob-row" data-type="sub"  data-id="p1"><div class="prob-check" id="ck-p1"  onclick="chk('p1',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">LC 78 — Subsets</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p1" onclick="openCSV('lc78',event)"><div class="prob-check" id="ck-p1"  onclick="chk('p1',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">LC 78 — Subsets</span><span class="type-chip tc-sub">SUBSET</span><button class="csv-btn" onclick="event.stopPropagation();openCSV('lc78',event)">⚡ Call Stack</button></div>
       <div class="prob-row" data-type="sub"  data-id="p2"><div class="prob-check" id="ck-p2"  onclick="chk('p2',event)"></div><span class="diff-badge d-easy">Easy</span><span class="prob-name">LC 77 — Combinations</span><span class="type-chip tc-sub">SUBSET</span></div>
-      <div class="prob-row" data-type="sub"  data-id="p3"><div class="prob-check" id="ck-p3"  onclick="chk('p3',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 39 — Combination Sum</span><span class="type-chip tc-sub">SUBSET</span></div>
+      <div class="prob-row" data-type="sub"  data-id="p3" onclick="openCSV('lc39',event)"><div class="prob-check" id="ck-p3"  onclick="chk('p3',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 39 — Combination Sum</span><span class="type-chip tc-sub">SUBSET</span><button class="csv-btn" onclick="event.stopPropagation();openCSV('lc39',event)">⚡ Call Stack</button></div>
       <div class="prob-row" data-type="sub"  data-id="p4"><div class="prob-check" id="ck-p4" onclick="chk('p4',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 40 — Combination Sum II (duplicates)</span><span class="type-chip tc-sub">SUBSET</span></div>
       <div class="prob-row" data-type="sub"  data-id="p5"><div class="prob-check" id="ck-p5"  onclick="chk('p5',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 90 — Subsets II (duplicates)</span><span class="type-chip tc-sub">SUBSET</span></div>
       <div class="prob-row" data-type="sub"  data-id="p6"><div class="prob-check" id="ck-p6"  onclick="chk('p6',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 22 — Generate Parentheses</span><span class="type-chip tc-sub">SUBSET</span></div>
-      <div class="prob-row" data-type="perm" data-id="p7"><div class="prob-check" id="ck-p7"  onclick="chk('p7',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 46 — Permutations</span><span class="type-chip tc-perm">PERMUTATION</span></div>
+      <div class="prob-row" data-type="perm" data-id="p7" onclick="openCSV('lc46',event)"><div class="prob-check" id="ck-p7"  onclick="chk('p7',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 46 — Permutations</span><span class="type-chip tc-perm">PERMUTATION</span><button class="csv-btn" onclick="event.stopPropagation();openCSV('lc46',event)">⚡ Call Stack</button></div>
       <div class="prob-row" data-type="perm" data-id="p8"><div class="prob-check" id="ck-p8"  onclick="chk('p8',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 47 — Permutations II (duplicates)</span><span class="type-chip tc-perm">PERMUTATION</span></div>
       <div class="prob-row" data-type="perm" data-id="p9"><div class="prob-check" id="ck-p9"  onclick="chk('p9',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 17 — Letter Combinations of a Phone Number</span><span class="type-chip tc-perm">PERMUTATION</span></div>
-      <div class="prob-row" data-type="cst"  data-id="p10"><div class="prob-check" id="ck-p10" onclick="chk('p10',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 51 — N-Queens</span><span class="type-chip tc-cst">CONSTRAINT</span></div>
+      <div class="prob-row" data-type="cst"  data-id="p10" onclick="openCSV('lc51',event)"><div class="prob-check" id="ck-p10" onclick="chk('p10',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 51 — N-Queens</span><span class="type-chip tc-cst">CONSTRAINT</span><button class="csv-btn" onclick="event.stopPropagation();openCSV('lc51',event)">⚡ Call Stack</button></div>
       <div class="prob-row" data-type="cst"  data-id="p11"><div class="prob-check" id="ck-p11" onclick="chk('p11',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 52 — N-Queens II</span><span class="type-chip tc-cst">CONSTRAINT</span></div>
       <div class="prob-row" data-type="cst"  data-id="p12"><div class="prob-check" id="ck-p12" onclick="chk('p12',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 37 — Sudoku Solver</span><span class="type-chip tc-cst">CONSTRAINT</span></div>
-      <div class="prob-row" data-type="grid" data-id="p13"><div class="prob-check" id="ck-p13" onclick="chk('p13',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 79 — Word Search</span><span class="type-chip tc-grid">GRID</span></div>
+      <div class="prob-row" data-type="grid" data-id="p13" onclick="openCSV('lc79',event)"><div class="prob-check" id="ck-p13" onclick="chk('p13',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 79 — Word Search</span><span class="type-chip tc-grid">GRID</span><button class="csv-btn" onclick="event.stopPropagation();openCSV('lc79',event)">⚡ Call Stack</button></div>
       <div class="prob-row" data-type="grid" data-id="p14"><div class="prob-check" id="ck-p14" onclick="chk('p14',event)"></div><span class="diff-badge d-hard">Hard</span><span class="prob-name">LC 212 — Word Search II</span><span class="type-chip tc-grid">GRID</span></div>
-      <div class="prob-row" data-type="part" data-id="p15"><div class="prob-check" id="ck-p15" onclick="chk('p15',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 131 — Palindrome Partitioning</span><span class="type-chip tc-part">PARTITION</span></div>
+      <div class="prob-row" data-type="part" data-id="p15" onclick="openCSV('lc131',event)"><div class="prob-check" id="ck-p15" onclick="chk('p15',event)"></div><span class="diff-badge d-med">Med</span><span class="prob-name">LC 131 — Palindrome Partitioning</span><span class="type-chip tc-part">PARTITION</span><button class="csv-btn" onclick="event.stopPropagation();openCSV('lc131',event)">⚡ Call Stack</button></div>
     </div>    </div>
   </div>
 </div>
@@ -1047,6 +1047,71 @@
 
 </div><!-- /page -->
 
+<!-- ════════════════════════════════════════════════════
+     CALL STACK VISUALIZER MODAL
+════════════════════════════════════════════════════ -->
+<div class="csv-overlay" id="csv-modal" onclick="closeCSVBg(event)">
+  <div class="csv-box">
+
+    <!-- Header -->
+    <div class="csv-hd">
+      <div class="csv-hd-title" id="csv-title">Call Stack Visualizer</div>
+      <a class="csv-lc-link" id="csv-lc-link" href="#" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open LC ↗</a>
+      <button class="csv-close" onclick="closeCSV()">✕</button>
+    </div>
+
+    <!-- Progress -->
+    <div class="csv-prog"><div class="csv-prog-fill" id="csv-prog-fill"></div></div>
+
+    <!-- Controls -->
+    <div class="csv-ctrl">
+      <button class="csv-ctrl-btn back"  onclick="csvBack()">◀ Back</button>
+      <button class="csv-ctrl-btn play"  id="csv-play-btn" onclick="csvPlay()">▶ Play</button>
+      <button class="csv-ctrl-btn step"  onclick="csvStep()">Step ▶</button>
+      <button class="csv-ctrl-btn reset" onclick="csvReset()">↺ Reset</button>
+      <select class="csv-speed" onchange="csvSetSpeed(this.value)">
+        <option value="1200">Slow</option>
+        <option value="700" selected>Normal</option>
+        <option value="300">Fast</option>
+      </select>
+      <span class="csv-depth" id="csv-depth">Depth: 0</span>
+      <span class="csv-result" id="csv-result"></span>
+      <span class="csv-counter" id="csv-counter">Step 0 / 0</span>
+    </div>
+
+    <!-- Body: stack (left) + code (right) -->
+    <div class="csv-body" style="flex:1;overflow:hidden;min-height:0;">
+
+      <!-- LEFT: Call Stack -->
+      <div class="csv-stack-panel">
+        <div class="csv-panel-hd">
+          <div class="csv-panel-hd-dot" style="background:#6366f1"></div>
+          Call Stack
+          <span style="margin-left:auto;font-size:9px;font-weight:400;color:#2d3555">TOP → BOTTOM</span>
+        </div>
+        <div class="csv-stack" id="csv-stack">
+          <div style="text-align:center;padding:40px 20px;color:var(--t3)">
+            <div style="font-size:28px;margin-bottom:8px">🔵</div>
+            <div style="font-family:var(--mono);font-size:11px">Press Play or Step to start</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Code + Note -->
+      <div class="csv-code-panel">
+        <div class="csv-panel-hd">
+          <div class="csv-panel-hd-dot" style="background:#f59e0b"></div>
+          Code  <span style="font-size:9px;font-weight:400;color:#2d3555;margin-left:4px">→ highlighted line = currently executing</span>
+        </div>
+        <div class="csv-code" id="csv-code"></div>
+        <div class="csv-note-bar" id="csv-note">Press ▶ Play or Step ▶ to start the visualization.</div>
+      </div>
+
+    </div><!-- /csv-body -->
+  </div><!-- /csv-box -->
+</div>
+
+
 <script>
 function tog(hd){hd.closest('.card').classList.toggle('open')}
 
@@ -1128,6 +1193,971 @@ function ans(btn,correct,expId){
   const exp=document.getElementById(expId);
   if(exp)exp.style.display='block';
 }
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   CALL STACK VISUALIZER — leetcodepattern.com / backtracking.html
+   Each problem defines:
+     code[]   : array of code lines (shown in right panel)
+     frames[] : sequence of stack states. Each state = {
+       stack : [ {fn, args, vars, line} , ... ]   (bottom → top)
+       line  : index into code[] currently executing
+       note  : plain-English explanation of this step
+       action: 'push' | 'pop' | 'highlight' | 'result'
+     }
+═══════════════════════════════════════════════════════════════════ */
+
+// ── PROBLEM DATA ──────────────────────────────────────────────────
+const CS_PROBLEMS = {
+
+  /* ───────────────────────────────────────────────
+     LC 78  SUBSETS   nums=[1,2,3]
+  ─────────────────────────────────────────────── */
+  lc78: {
+    title: 'LC 78 — Subsets  (nums=[1,2,3])',
+    link:  'https://leetcode.com/problems/subsets/',
+    code: [
+      /*  0 */ 'void backtrack(int[] nums, int start, List<Integer> path) {',
+      /*  1 */ '    result.add(new ArrayList<>(path));  // ADD at every node',
+      /*  2 */ '    for (int i = start; i < nums.length; i++) {',
+      /*  3 */ '        path.add(nums[i]);              // CHOOSE',
+      /*  4 */ '        backtrack(nums, i + 1, path);   // EXPLORE',
+      /*  5 */ '        path.remove(path.size() - 1);  // UNCHOOSE',
+      /*  6 */ '    }',
+      /*  7 */ '}',
+    ],
+    result: '[], [1], [1,2], [1,2,3], [1,3], [2], [2,3], [3]',
+    frames: [
+      { line:0, action:'push',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'i=—',color:'#6366f1'}],
+        note:'🔵 First call. path=[] → immediately add [] to result.' },
+      { line:1, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'i=—',color:'#6366f1'}],
+        note:'✅ ADD [] to result. (Result collected at EVERY node, not just leaves)' },
+      { line:3, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'i=0',color:'#6366f1'}],
+        note:'CHOOSE: i=0, nums[0]=1. path becomes [1].' },
+      { line:4, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=—',color:'#f97316'},
+        ],
+        note:'🔵 PUSH new frame. Recurse with start=1, path=[1].' },
+      { line:1, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=—',color:'#f97316'},
+        ],
+        note:'✅ ADD [1] to result.' },
+      { line:3, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=1',color:'#f97316'},
+        ],
+        note:'CHOOSE: i=1, nums[1]=2. path becomes [1,2].' },
+      { line:4, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2]',vars:'i=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH new frame. Recurse with start=2, path=[1,2].' },
+      { line:1, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2]',vars:'i=—',color:'#10b981'},
+        ],
+        note:'✅ ADD [1,2] to result.' },
+      { line:3, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2]',vars:'i=2',color:'#10b981'},
+        ],
+        note:'CHOOSE: i=2, nums[2]=3. path becomes [1,2,3].' },
+      { line:4, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2,3]',vars:'i=2',color:'#10b981'},
+          {fn:'backtrack',args:'start=3, path=[1,2,3]',vars:'i=—',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH. Recurse with start=3.' },
+      { line:1, action:'result',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2,3]',vars:'i=2',color:'#10b981'},
+          {fn:'backtrack',args:'start=3, path=[1,2,3]',vars:'i=—',color:'#a855f7'},
+        ],
+        note:'✅ ADD [1,2,3]. Loop: i=3, 3<3 is FALSE → loop skipped. Base condition.' },
+      { line:7, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2,3]',vars:'i=2',color:'#10b981'},
+        ],
+        note:'🔴 POP frame (start=3). Return to start=2 frame.' },
+      { line:5, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=[1,2]',vars:'i=2',color:'#10b981'},
+        ],
+        note:'↩ UNCHOOSE: remove 3. path back to [1,2]. i loop ends (i=2 was last).' },
+      { line:7, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,2]',vars:'i=1',color:'#f97316'},
+        ],
+        note:'🔴 POP frame (start=2). Return to start=1 frame.' },
+      { line:5, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=1',color:'#f97316'},
+        ],
+        note:'↩ UNCHOOSE: remove 2. path back to [1]. Try i=2 next.' },
+      { line:3, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=2',color:'#f97316'},
+        ],
+        note:'CHOOSE: i=2, nums[2]=3. path becomes [1,3].' },
+      { line:4, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,3]',vars:'i=2',color:'#f97316'},
+          {fn:'backtrack',args:'start=3, path=[1,3]',vars:'i=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH. Recurse with start=3.' },
+      { line:1, action:'result',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1,3]',vars:'i=2',color:'#f97316'},
+          {fn:'backtrack',args:'start=3, path=[1,3]',vars:'i=—',color:'#10b981'},
+        ],
+        note:'✅ ADD [1,3]. Loop skipped (start=3). Returning.' },
+      { line:7, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=2',color:'#f97316'},
+        ],
+        note:'🔴 POP. Back to start=1.' },
+      { line:5, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=[1]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=[1]',vars:'i=2',color:'#f97316'},
+        ],
+        note:'↩ UNCHOOSE: remove 3. path=[1]. i loop done.' },
+      { line:7, action:'pop',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'i=0',color:'#6366f1'}],
+        note:'🔴 POP frame (start=1). Back to root frame.' },
+      { line:5, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'i=0',color:'#6366f1'}],
+        note:'↩ UNCHOOSE: remove 1. path=[]. Now try i=1 (start with 2)...' },
+      { line:3, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'i=1',color:'#6366f1'}],
+        note:'CHOOSE: i=1, nums[1]=2. path=[2]. (Continues similarly for [2],[2,3],[3])' },
+      { line:7, action:'pop',
+        stack:[],
+        note:'🔴 All frames popped. Call stack EMPTY. Algorithm complete!' },
+    ]
+  },
+
+  /* ───────────────────────────────────────────────
+     LC 46  PERMUTATIONS   nums=[1,2,3]
+  ─────────────────────────────────────────────── */
+  lc46: {
+    title: 'LC 46 — Permutations  (nums=[1,2,3])',
+    link:  'https://leetcode.com/problems/permutations/',
+    code: [
+      /*  0 */ 'void backtrack(int[] nums, List<Integer> path) {',
+      /*  1 */ '    if (path.size() == nums.length) {   // BASE CASE',
+      /*  2 */ '        result.add(new ArrayList<>(path));',
+      /*  3 */ '        return;',
+      /*  4 */ '    }',
+      /*  5 */ '    for (int i = 0; i < nums.length; i++) {',
+      /*  6 */ '        if (used[i]) continue;           // PRUNE',
+      /*  7 */ '        used[i] = true;                  // CHOOSE',
+      /*  8 */ '        path.add(nums[i]);',
+      /*  9 */ '        backtrack(nums, path);           // EXPLORE',
+      /* 10 */ '        path.remove(path.size() - 1);   // UNCHOOSE',
+      /* 11 */ '        used[i] = false;',
+      /* 12 */ '    }',
+      /* 13 */ '}',
+    ],
+    result: '[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]',
+    frames: [
+      { line:0, action:'push',
+        stack:[{fn:'backtrack',args:'path=[]',vars:'used=[F,F,F]  i=—',color:'#6366f1'}],
+        note:'🔵 Root call. path empty. used all false. Loop from i=0.' },
+      { line:7, action:'highlight',
+        stack:[{fn:'backtrack',args:'path=[]',vars:'used=[T,F,F]  i=0',color:'#6366f1'}],
+        note:'CHOOSE: i=0, used[0]=true. path=[1].' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=—',color:'#f97316'},
+        ],
+        note:'🔵 PUSH new frame. path=[1].' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#f97316'},
+        ],
+        note:'PRUNE: i=0, used[0]=true → skip 1 (already in path).' },
+      { line:7, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+        ],
+        note:'CHOOSE: i=1, used[1]=true. path=[1,2].' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH. path=[1,2].' },
+      { line:7, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,T]  i=2',color:'#10b981'},
+        ],
+        note:'CHOOSE: i=2, used[2]=true. path=[1,2,3].' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,2,3]',vars:'used=[T,T,T]  i=2',color:'#10b981'},
+          {fn:'backtrack',args:'path=[1,2,3]',vars:'used=[T,T,T]  i=—',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH. path=[1,2,3]. path.size==3==nums.length → BASE CASE!' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,2,3]',vars:'used=[T,T,T]  i=2',color:'#10b981'},
+          {fn:'backtrack',args:'path=[1,2,3]',vars:'used=[T,T,T]  i=—',color:'#a855f7'},
+        ],
+        note:'🎉 ADD [1,2,3] to result! First permutation found.' },
+      { line:13, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,2,3]',vars:'used=[T,T,T]  i=2',color:'#10b981'},
+        ],
+        note:'🔴 POP (base case frame). return; executed.' },
+      { line:10, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=2',color:'#10b981'},
+        ],
+        note:'↩ UNCHOOSE: remove 3. used[2]=false. path=[1,2]. i loop ends.' },
+      { line:13, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,2]',vars:'used=[T,T,F]  i=1',color:'#f97316'},
+        ],
+        note:'🔴 POP frame (path=[1,2]).' },
+      { line:10, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=1',color:'#f97316'},
+        ],
+        note:'↩ UNCHOOSE: remove 2. used[1]=false. path=[1]. Try i=2 next.' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,3]',vars:'used=[T,F,T]  i=2',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,3]',vars:'used=[T,F,T]  i=—',color:'#10b981'},
+        ],
+        note:'CHOOSE i=2 (nums[2]=3), PUSH. path=[1,3]. Eventually adds [1,3,2].' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'backtrack',args:'path=[1]',vars:'used=[T,F,F]  i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'path=[1,3]',vars:'used=[T,F,T]  i=2',color:'#f97316'},
+          {fn:'backtrack',args:'path=[1,3,2]',vars:'used=[T,T,T]  i=—',color:'#10b981'},
+        ],
+        note:'🎉 ADD [1,3,2] to result! Second permutation.' },
+      { line:13, action:'pop',
+        stack:[{fn:'backtrack',args:'path=[]',vars:'used=[F,F,F]  i=0',color:'#6366f1'}],
+        note:'🔴 All [1,x,x] permutations done. POP back to root. Try i=1 (start with 2)...' },
+      { line:13, action:'pop',
+        stack:[],
+        note:'🔴 All 6 permutations found. Stack EMPTY. Done!' },
+    ]
+  },
+
+  /* ───────────────────────────────────────────────
+     LC 39  COMBINATION SUM  candidates=[2,3,6,7] target=7
+  ─────────────────────────────────────────────── */
+  lc39: {
+    title: 'LC 39 — Combination Sum  (cands=[2,3,6,7], target=7)',
+    link:  'https://leetcode.com/problems/combination-sum/',
+    code: [
+      /*  0 */ 'void backtrack(int[] cands, int start, int remain, List<Integer> path) {',
+      /*  1 */ '    if (remain == 0) {                  // BASE: exact sum',
+      /*  2 */ '        result.add(new ArrayList<>(path));',
+      /*  3 */ '        return;',
+      /*  4 */ '    }',
+      /*  5 */ '    for (int i = start; i < cands.length; i++) {',
+      /*  6 */ '        if (cands[i] > remain) break;   // PRUNE (sorted)',
+      /*  7 */ '        path.add(cands[i]);             // CHOOSE',
+      /*  8 */ '        backtrack(cands, i, remain - cands[i], path); // i=reuse',
+      /*  9 */ '        path.remove(path.size() - 1);  // UNCHOOSE',
+      /* 10 */ '    }',
+      /* 11 */ '}',
+    ],
+    result: '[2,2,3], [7]',
+    frames: [
+      { line:0, action:'push',
+        stack:[{fn:'backtrack',args:'start=0, remain=7, path=[]',vars:'i=—',color:'#6366f1'}],
+        note:'🔵 Root. remain=7. Try each candidate from start=0.' },
+      { line:7, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'}],
+        note:'CHOOSE: i=0, cands[0]=2. remain becomes 7-2=5.' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2]',vars:'i=—',color:'#f97316'},
+        ],
+        note:'🔵 PUSH. remain=5. Note: recurse with i=0 (same index) → allows reuse of 2!' },
+      { line:7, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+        ],
+        note:'CHOOSE again: i=0, cands[0]=2. remain=5-2=3. Reuse 2!' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=0, remain=3, path=[2,2]',vars:'i=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH. remain=3.' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=0, remain=3, path=[2,2]',vars:'i=0  cands[0]=2',color:'#10b981'},
+        ],
+        note:'i=0: cands[0]=2 ≤ 3 → OK. But 2+2+2=6 < 7, so CHOOSE 2.' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=0, remain=3, path=[2,2,2]',vars:'i=0',color:'#10b981'},
+          {fn:'backtrack',args:'start=0, remain=1, path=[2,2,2]',vars:'i=—',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH. remain=1. Any candidate ≥ 2 > 1 → PRUNE by break.' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=0, remain=3, path=[2,2,2]',vars:'i=0',color:'#10b981'},
+          {fn:'backtrack',args:'start=0, remain=1, path=[2,2,2]',vars:'i=0  cands[0]=2>1',color:'#a855f7'},
+        ],
+        note:'✂ PRUNE: cands[0]=2 > remain=1 → break. Dead end.' },
+      { line:11, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=0, remain=3, path=[2,2]',vars:'i=0',color:'#10b981'},
+        ],
+        note:'🔴 POP (remain=1 dead end). Back to remain=3 frame.' },
+      { line:9, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=0, remain=3, path=[2,2]',vars:'i=1',color:'#10b981'},
+        ],
+        note:'↩ UNCHOOSE 2. path=[2,2]. Try i=1: cands[1]=3.' },
+      { line:7, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=1, remain=3, path=[2,2,3]',vars:'i=1',color:'#10b981'},
+        ],
+        note:'CHOOSE: cands[1]=3. remain=3-3=0! About to hit base case.' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=1, remain=3, path=[2,2,3]',vars:'i=1',color:'#10b981'},
+          {fn:'backtrack',args:'start=1, remain=0, path=[2,2,3]',vars:'i=—',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH. remain=0 → BASE CASE!' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[2]',vars:'i=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=0, remain=5, path=[2,2]',vars:'i=0',color:'#f97316'},
+          {fn:'backtrack',args:'start=1, remain=3, path=[2,2,3]',vars:'i=1',color:'#10b981'},
+          {fn:'backtrack',args:'start=1, remain=0, path=[2,2,3]',vars:'i=—',color:'#a855f7'},
+        ],
+        note:'🎉 ADD [2,2,3] to result! First answer found!' },
+      { line:11, action:'pop',
+        stack:[{fn:'backtrack',args:'start=0, remain=7, path=[]',vars:'i=—',color:'#6366f1'}],
+        note:'🔴 Backtrack all the way. Continue from root, try i=3: cands[3]=7.' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'backtrack',args:'start=0, remain=7, path=[]',vars:'i=3',color:'#6366f1'},
+          {fn:'backtrack',args:'start=3, remain=0, path=[7]',vars:'i=—',color:'#f97316'},
+        ],
+        note:'🎉 ADD [7] to result! remain=7-7=0 directly.' },
+      { line:11, action:'pop',
+        stack:[],
+        note:'🔴 Stack EMPTY. All combinations found: [2,2,3] and [7]. ✓' },
+    ]
+  },
+
+  /* ───────────────────────────────────────────────
+     LC 51  N-QUEENS   N=4
+  ─────────────────────────────────────────────── */
+  lc51: {
+    title: 'LC 51 — N-Queens  (N=4)',
+    link:  'https://leetcode.com/problems/n-queens/',
+    code: [
+      /*  0 */ 'void solve(char[][] board, int row) {',
+      /*  1 */ '    if (row == board.length) {       // BASE: all rows filled',
+      /*  2 */ '        result.add(build(board));',
+      /*  3 */ '        return;',
+      /*  4 */ '    }',
+      /*  5 */ '    for (int col = 0; col < board.length; col++) {',
+      /*  6 */ '        if (!isValid(board, row, col)) continue; // PRUNE',
+      /*  7 */ '        board[row][col] = \'Q\';        // CHOOSE',
+      /*  8 */ '        solve(board, row + 1);        // EXPLORE',
+      /*  9 */ '        board[row][col] = \'.\';        // UNCHOOSE',
+      /* 10 */ '    }',
+      /* 11 */ '}',
+    ],
+    result: '.Q..  /  ...Q  /  Q...  /  ..Q.',
+    frames: [
+      { line:0, action:'push',
+        stack:[{fn:'solve',args:'row=0',vars:'board=....×4  col=—',color:'#6366f1'}],
+        note:'🔵 Root: place queen in row 0.' },
+      { line:6, action:'highlight',
+        stack:[{fn:'solve',args:'row=0',vars:'col=0  isValid?YES',color:'#6366f1'}],
+        note:'col=0: isValid? YES (empty board). Place Q at (0,0).' },
+      { line:7, action:'highlight',
+        stack:[{fn:'solve',args:'row=0',vars:'board[0][0]=Q',color:'#6366f1'}],
+        note:'CHOOSE: board[0][0]=Q. Board: Q... / .... / .... / ....' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'col=—',color:'#f97316'},
+        ],
+        note:'🔵 PUSH: solve(row=1). Place queen in row 1.' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'col=0  isValid?NO(col)',color:'#f97316'},
+        ],
+        note:'✂ col=0: same column as (0,0) → PRUNE.' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'col=1  isValid?NO(diag)',color:'#f97316'},
+        ],
+        note:'✂ col=1: diagonal from (0,0) hits (1,1) → PRUNE.' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'col=2  isValid?YES',color:'#f97316'},
+        ],
+        note:'col=2: valid! Place Q. Board: Q... / ..Q. / .... / ....' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][2]=Q  col=2',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'col=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH: solve(row=2).' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][2]=Q  col=2',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'ALL cols fail (0,1,2,3)',color:'#10b981'},
+        ],
+        note:'✂ All 4 cols pruned in row 2. Dead end! Must backtrack.' },
+      { line:11, action:'pop',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'col=2  UNCHOOSE next',color:'#f97316'},
+        ],
+        note:'🔴 POP row=2 (all cols failed).' },
+      { line:9, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][2]=.  col=3',color:'#f97316'},
+        ],
+        note:'↩ UNCHOOSE: board[1][2]=\'.\'. Try col=3.' },
+      { line:7, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][3]=Q  col=3',color:'#f97316'},
+        ],
+        note:'col=3: valid! Board: Q... / ...Q / .... / ....' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][3]=Q  col=3',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'col=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH: solve(row=2) again.' },
+      { line:7, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][3]=Q  col=3',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'board[2][1]=Q  col=1',color:'#10b981'},
+        ],
+        note:'col=1 valid! Board: Q... / ...Q / .Q.. / ....' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][3]=Q  col=3',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'board[2][1]=Q  col=1',color:'#10b981'},
+          {fn:'solve',args:'row=3',vars:'col=—',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH: solve(row=3). Last row!' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'board[0][0]=Q  col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'board[1][3]=Q  col=3',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'board[2][1]=Q  col=1',color:'#10b981'},
+          {fn:'solve',args:'row=3',vars:'col=2  isValid?YES',color:'#a855f7'},
+        ],
+        note:'col=2 valid! Board: Q... / ...Q / .Q.. / ..Q. → row=3 placed!' },
+      { line:8, action:'push',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'Q at col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'Q at col=3',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'Q at col=1',color:'#10b981'},
+          {fn:'solve',args:'row=3',vars:'Q at col=2',color:'#a855f7'},
+          {fn:'solve',args:'row=4',vars:'BASE CASE!',color:'#ef4444'},
+        ],
+        note:'🔵 PUSH: solve(row=4). row==board.length → BASE CASE!' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'solve',args:'row=0',vars:'Q at col=0',color:'#6366f1'},
+          {fn:'solve',args:'row=1',vars:'Q at col=3',color:'#f97316'},
+          {fn:'solve',args:'row=2',vars:'Q at col=1',color:'#10b981'},
+          {fn:'solve',args:'row=3',vars:'Q at col=2',color:'#a855f7'},
+          {fn:'solve',args:'row=4',vars:'BASE CASE!',color:'#ef4444'},
+        ],
+        note:'🎉 ADD solution 1: Q... / ...Q / .Q.. / ..Q.' },
+      { line:11, action:'pop',
+        stack:[{fn:'solve',args:'row=0',vars:'col=0 → try col=1...',color:'#6366f1'}],
+        note:'🔴 All 4 frames popped. Continue search → finds solution 2: .Q.. / ...Q / Q... / ..Q.' },
+      { line:11, action:'pop',
+        stack:[],
+        note:'🔴 Stack EMPTY. All solutions found. For N=4: 2 solutions total. ✓' },
+    ]
+  },
+
+  /* ───────────────────────────────────────────────
+     LC 79  WORD SEARCH   board=[[C,A,B],[X,T,E]]  word="CAT"
+  ─────────────────────────────────────────────── */
+  lc79: {
+    title: 'LC 79 — Word Search  (word="CAT")',
+    link:  'https://leetcode.com/problems/word-search/',
+    code: [
+      /*  0 */ 'boolean dfs(char[][] board, String word, int r, int c, int idx) {',
+      /*  1 */ '    if (idx == word.length()) return true;   // BASE',
+      /*  2 */ '    if (r<0||r>=R||c<0||c>=C',
+      /*  3 */ '        ||board[r][c]!=word.charAt(idx)) return false; // PRUNE',
+      /*  4 */ '    char tmp = board[r][c];',
+      /*  5 */ '    board[r][c] = \'#\';               // CHOOSE: mark visited',
+      /*  6 */ '    boolean found = dfs(r+1,c,idx+1) || dfs(r-1,c,idx+1)',
+      /*  7 */ '                 || dfs(r,c+1,idx+1) || dfs(r,c-1,idx+1);',
+      /*  8 */ '    board[r][c] = tmp;               // UNCHOOSE: restore',
+      /*  9 */ '    return found;',
+      /* 10 */ '}',
+    ],
+    result: 'true  (path: (0,0)→(0,1)→(1,1))',
+    frames: [
+      { line:0, action:'push',
+        stack:[{fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='C', word[0]='C'",color:'#6366f1'}],
+        note:"🔵 Try starting at (0,0). board[0][0]='C' == word[0]='C'. Match!" },
+      { line:5, action:'highlight',
+        stack:[{fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#' (visited)",color:'#6366f1'}],
+        note:"CHOOSE: board[0][0]='#'. Cell marked visited." },
+      { line:6, action:'push',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=1,c=0,idx=1',vars:"board[1][0]='X', word[1]='A'",color:'#f97316'},
+        ],
+        note:"🔵 PUSH: try DOWN (r+1). board[1][0]='X' ≠ 'A' → PRUNE." },
+      { line:3, action:'highlight',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=1,c=0,idx=1',vars:"'X'≠'A' → false",color:'#f97316'},
+        ],
+        note:"✂ PRUNE: 'X'≠'A'. Return false immediately." },
+      { line:10, action:'pop',
+        stack:[{fn:'dfs',args:'r=0,c=0,idx=0',vars:"try next dir: UP r=-1",color:'#6366f1'}],
+        note:'🔴 POP (r=1). Try UP: r=-1 → out of bounds → PRUNE. Try RIGHT next.' },
+      { line:6, action:'push',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"board[0][1]='A', word[1]='A'",color:'#f97316'},
+        ],
+        note:"🔵 PUSH: try RIGHT (c+1). board[0][1]='A' == word[1]='A'. Match!" },
+      { line:5, action:'highlight',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"board[0][1]='#' (visited)",color:'#f97316'},
+        ],
+        note:"CHOOSE: board[0][1]='#'. Now find T from (0,1)." },
+      { line:6, action:'push',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"board[0][1]='#'",color:'#f97316'},
+          {fn:'dfs',args:'r=1,c=1,idx=2',vars:"board[1][1]='T', word[2]='T'",color:'#10b981'},
+        ],
+        note:"🔵 PUSH: try DOWN from (0,1). board[1][1]='T' == word[2]='T'. Match!" },
+      { line:5, action:'highlight',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"board[0][0]='#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"board[0][1]='#'",color:'#f97316'},
+          {fn:'dfs',args:'r=1,c=1,idx=2',vars:"board[1][1]='#'",color:'#10b981'},
+        ],
+        note:"CHOOSE: board[1][1]='#'. Now recurse with idx=3." },
+      { line:6, action:'push',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"'#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"'#'",color:'#f97316'},
+          {fn:'dfs',args:'r=1,c=1,idx=2',vars:"'#'",color:'#10b981'},
+          {fn:'dfs',args:'r=?,c=?,idx=3',vars:'idx==word.length()!',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH with idx=3.' },
+      { line:1, action:'result',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"'#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"'#'",color:'#f97316'},
+          {fn:'dfs',args:'r=1,c=1,idx=2',vars:"'#'",color:'#10b981'},
+          {fn:'dfs',args:'r=?,c=?,idx=3',vars:'BASE CASE → return true',color:'#a855f7'},
+        ],
+        note:'🎉 BASE CASE: idx==word.length() → return TRUE! "CAT" found!' },
+      { line:10, action:'pop',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"'#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"'#'",color:'#f97316'},
+          {fn:'dfs',args:'r=1,c=1,idx=2',vars:"found=true → return true",color:'#10b981'},
+        ],
+        note:'🔴 POP. found=true propagates up.' },
+      { line:10, action:'pop',
+        stack:[
+          {fn:'dfs',args:'r=0,c=0,idx=0',vars:"'#'",color:'#6366f1'},
+          {fn:'dfs',args:'r=0,c=1,idx=1',vars:"found=true → return true",color:'#f97316'},
+        ],
+        note:"🔴 POP. board[1][1] restored to 'T'. true propagates." },
+      { line:10, action:'pop',
+        stack:[{fn:'dfs',args:'r=0,c=0,idx=0',vars:"found=true → return true",color:'#6366f1'}],
+        note:"🔴 POP. board[0][1] restored to 'A'. true propagates." },
+      { line:10, action:'pop',
+        stack:[],
+        note:"🔴 POP final frame. board[0][0] restored to 'C'. exist() returns TRUE. ✓" },
+    ]
+  },
+
+  /* ───────────────────────────────────────────────
+     LC 131  PALINDROME PARTITIONING  s="aab"
+  ─────────────────────────────────────────────── */
+  lc131: {
+    title: 'LC 131 — Palindrome Partitioning  (s="aab")',
+    link:  'https://leetcode.com/problems/palindrome-partitioning/',
+    code: [
+      /*  0 */ 'void backtrack(String s, int start, List<String> path) {',
+      /*  1 */ '    if (start == s.length()) {          // BASE',
+      /*  2 */ '        result.add(new ArrayList<>(path));',
+      /*  3 */ '        return;',
+      /*  4 */ '    }',
+      /*  5 */ '    for (int end = start; end < s.length(); end++) {',
+      /*  6 */ '        String sub = s.substring(start, end + 1);',
+      /*  7 */ '        if (!isPalindrome(sub)) continue; // PRUNE',
+      /*  8 */ '        path.add(sub);                  // CHOOSE',
+      /*  9 */ '        backtrack(s, end + 1, path);   // EXPLORE',
+      /* 10 */ '        path.remove(path.size() - 1); // UNCHOOSE',
+      /* 11 */ '    }',
+      /* 12 */ '}',
+    ],
+    result: '["a","a","b"]  and  ["aa","b"]',
+    frames: [
+      { line:0, action:'push',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'end=—',color:'#6366f1'}],
+        note:'🔵 Root. s="aab". Try all cuts from start=0.' },
+      { line:6, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'end=0  sub="a"',color:'#6366f1'}],
+        note:'end=0: sub="a". isPalindrome("a")? YES.' },
+      { line:8, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'}],
+        note:'CHOOSE "a". path=["a"].' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a"]',vars:'end=—',color:'#f97316'},
+        ],
+        note:'🔵 PUSH: backtrack(start=1). Partition remaining "ab".' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a"]',vars:'end=1  sub="a"',color:'#f97316'},
+        ],
+        note:'end=1: sub="a" (s[1..1]). isPalindrome? YES.' },
+      { line:8, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+        ],
+        note:'CHOOSE "a". path=["a","a"].' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=["a","a"]',vars:'end=—',color:'#10b981'},
+        ],
+        note:'🔵 PUSH: backtrack(start=2). Partition remaining "b".' },
+      { line:6, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=["a","a"]',vars:'end=2  sub="b"',color:'#10b981'},
+        ],
+        note:'end=2: sub="b". isPalindrome? YES.' },
+      { line:8, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=["a","a","b"]',vars:'end=2',color:'#10b981'},
+        ],
+        note:'CHOOSE "b". path=["a","a","b"].' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=["a","a","b"]',vars:'end=2',color:'#10b981'},
+          {fn:'backtrack',args:'start=3, path=["a","a","b"]',vars:'BASE CASE',color:'#a855f7'},
+        ],
+        note:'🔵 PUSH: start=3 == s.length() → BASE CASE!' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=["a","a","b"]',vars:'end=2',color:'#10b981'},
+          {fn:'backtrack',args:'start=3, path=["a","a","b"]',vars:'start==length',color:'#a855f7'},
+        ],
+        note:'🎉 ADD ["a","a","b"] to result! First valid partition.' },
+      { line:12, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a","a"]',vars:'end=1',color:'#f97316'},
+          {fn:'backtrack',args:'start=2, path=["a","a"]',vars:'end=2  loop done',color:'#10b981'},
+        ],
+        note:'🔴 POP (base frame). Loop ends (end=2 was last). Return.' },
+      { line:10, action:'highlight',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a"]',vars:'end=1  UNCHOOSE',color:'#f97316'},
+        ],
+        note:'🔴 POP start=2 frame. ↩ UNCHOOSE "b". back to path=["a","a"]... wait.' },
+      { line:12, action:'pop',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["a"]',vars:'end=0',color:'#6366f1'},
+          {fn:'backtrack',args:'start=1, path=["a"]',vars:'end=2  sub="ab"',color:'#f97316'},
+        ],
+        note:'↩ UNCHOOSE "a". path=["a"]. Try end=2: sub="ab". isPalindrome("ab")? NO → skip.' },
+      { line:12, action:'pop',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'end=1  sub="aa"',color:'#6366f1'}],
+        note:'🔴 POP start=1 frame. Back to root. ↩ UNCHOOSE "a". Try end=1: sub="aa".' },
+      { line:6, action:'highlight',
+        stack:[{fn:'backtrack',args:'start=0, path=[]',vars:'end=1  sub="aa"',color:'#6366f1'}],
+        note:'end=1: sub="aa". isPalindrome("aa")? YES.' },
+      { line:9, action:'push',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["aa"]',vars:'end=1',color:'#6366f1'},
+          {fn:'backtrack',args:'start=2, path=["aa"]',vars:'end=2  sub="b"',color:'#f97316'},
+          {fn:'backtrack',args:'start=3, path=["aa","b"]',vars:'BASE CASE',color:'#10b981'},
+        ],
+        note:'🔵 PUSH chain → ["aa","b"]. start=3==length → BASE CASE!' },
+      { line:2, action:'result',
+        stack:[
+          {fn:'backtrack',args:'start=0, path=["aa"]',vars:'end=1',color:'#6366f1'},
+          {fn:'backtrack',args:'start=2, path=["aa"]',vars:'end=2  sub="b"',color:'#f97316'},
+          {fn:'backtrack',args:'start=3, path=["aa","b"]',vars:'BASE CASE',color:'#10b981'},
+        ],
+        note:'🎉 ADD ["aa","b"] to result! Second valid partition.' },
+      { line:12, action:'pop',
+        stack:[],
+        note:'🔴 Stack EMPTY. All partitions found: ["a","a","b"] and ["aa","b"]. ✓' },
+    ]
+  },
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   CALL STACK VISUALIZER — UI & ENGINE
+═══════════════════════════════════════════════════════════════ */
+let CS = { probId:null, cur:0, playing:false, timer:null, speed:700 };
+
+// ── Open modal ──────────────────────────────────────────────────
+function openCSV(id, e) {
+  if (e) e.stopPropagation();
+  const prob = CS_PROBLEMS[id];
+  if (!prob) return;
+  CS.probId = id; CS.cur = 0; CS.playing = false;
+  if (CS.timer) { clearInterval(CS.timer); CS.timer = null; }
+
+  document.getElementById('csv-title').textContent = prob.title;
+  const lk = document.getElementById('csv-lc-link');
+  lk.href = prob.link; lk.textContent = 'Open LC ↗';
+
+  renderCSV();
+  document.getElementById('csv-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCSV() {
+  document.getElementById('csv-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (CS.timer) { clearInterval(CS.timer); CS.timer = null; }
+  CS.playing = false;
+  document.getElementById('csv-play-btn').textContent = '▶ Play';
+}
+
+function closeCSVBg(e) { if (e.target===document.getElementById('csv-modal')) closeCSV(); }
+
+// ── Render full visualizer ───────────────────────────────────────
+function renderCSV() {
+  const prob   = CS_PROBLEMS[CS.probId];
+  const frames = prob.frames;
+  const frame  = frames[CS.cur] || frames[frames.length - 1];
+  const total  = frames.length;
+
+  // counter
+  document.getElementById('csv-counter').textContent = `Step ${CS.cur} / ${total}`;
+
+  // progress bar
+  const pct = Math.round((CS.cur / total) * 100);
+  document.getElementById('csv-prog-fill').style.width = pct + '%';
+
+  // ── LEFT: Call Stack ──────────────────────────────────────────
+  const stackEl = document.getElementById('csv-stack');
+  if (!frame || frame.stack.length === 0) {
+    stackEl.innerHTML = `
+      <div style="text-align:center;padding:40px 20px;color:var(--t3)">
+        <div style="font-size:28px;margin-bottom:8px">✅</div>
+        <div style="font-family:var(--mono);font-size:12px">Stack empty — execution complete</div>
+      </div>`;
+  } else {
+    // Render bottom→top. Top frame = last in array = "active"
+    const frames_rev = [...frame.stack].reverse(); // top first in display
+    stackEl.innerHTML = frames_rev.map((fr, idx) => {
+      const isTop = idx === 0;
+      const topCls = isTop ? 'cs-frame cs-frame-top' : 'cs-frame';
+      const actionBadge = isTop ? getActionBadge(frame.action) : '';
+      return `
+        <div class="${topCls}" style="border-left:3px solid ${fr.color}">
+          <div class="cs-frame-fn" style="color:${fr.color}">${escH(fr.fn)}() ${actionBadge}</div>
+          <div class="cs-frame-args">${escH(fr.args)}</div>
+          <div class="cs-frame-vars">${escH(fr.vars)}</div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── RIGHT: Code panel ─────────────────────────────────────────
+  const codeEl = document.getElementById('csv-code');
+  const activeLine = frame ? frame.line : -1;
+  const lineClass = frame ? frame.action : 'highlight';
+  codeEl.innerHTML = prob.code.map((ln, i) => {
+    let cls = 'csv-code-line';
+    if (i === activeLine) cls += ' csv-line-' + lineClass;
+    return `<div class="${cls}"><span class="csv-ln">${i}</span><span>${escH(ln)}</span></div>`;
+  }).join('');
+
+  // scroll active line into view
+  const activeEl = codeEl.querySelector('.csv-line-' + lineClass);
+  if (activeEl) activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+  // ── BOTTOM: Note ──────────────────────────────────────────────
+  const note = frame ? frame.note : '✅ Execution complete!';
+  document.getElementById('csv-note').innerHTML = note;
+
+  // ── Stack depth indicator ─────────────────────────────────────
+  const depth = frame ? frame.stack.length : 0;
+  document.getElementById('csv-depth').textContent = `Depth: ${depth}`;
+
+  // result pill
+  const res = document.getElementById('csv-result');
+  if (frame && frame.action === 'result') {
+    res.style.display = 'block';
+    res.textContent = '🎉 Result found!';
+  } else if (!frame || frame.stack.length === 0) {
+    res.style.display = 'block';
+    res.textContent = `✅ Final: ${prob.result}`;
+  } else {
+    res.style.display = 'none';
+  }
+}
+
+function getActionBadge(action) {
+  const badges = {
+    push:      '<span class="cs-badge cs-push">PUSH ↑</span>',
+    pop:       '<span class="cs-badge cs-pop">POP ↓</span>',
+    highlight: '<span class="cs-badge cs-exec">EXECUTING</span>',
+    result:    '<span class="cs-badge cs-res">RESULT ✓</span>',
+  };
+  return badges[action] || '';
+}
+
+// ── Controls ─────────────────────────────────────────────────────
+function csvPlay() {
+  const btn = document.getElementById('csv-play-btn');
+  if (CS.playing) {
+    CS.playing = false;
+    clearInterval(CS.timer); CS.timer = null;
+    btn.textContent = '▶ Play';
+  } else {
+    const prob = CS_PROBLEMS[CS.probId];
+    if (CS.cur >= prob.frames.length) csvReset();
+    CS.playing = true;
+    btn.textContent = '⏸ Pause';
+    CS.timer = setInterval(() => {
+      if (CS.cur >= prob.frames.length) {
+        CS.playing = false; clearInterval(CS.timer); CS.timer = null;
+        btn.textContent = '▶ Play'; return;
+      }
+      CS.cur++; renderCSV();
+    }, CS.speed);
+  }
+}
+
+function csvStep() {
+  if (CS.playing) csvPlay(); // pause
+  const prob = CS_PROBLEMS[CS.probId];
+  if (CS.cur < prob.frames.length) { CS.cur++; renderCSV(); }
+}
+
+function csvBack() {
+  if (CS.playing) csvPlay();
+  if (CS.cur > 0) { CS.cur--; renderCSV(); }
+}
+
+function csvReset() {
+  if (CS.timer) { clearInterval(CS.timer); CS.timer = null; }
+  CS.playing = false; CS.cur = 0;
+  document.getElementById('csv-play-btn').textContent = '▶ Play';
+  renderCSV();
+}
+
+function csvSetSpeed(v) { CS.speed = parseInt(v); }
+
+function escH(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 </script>
 </body>
 </html>

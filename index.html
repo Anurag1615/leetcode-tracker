@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2757179368786294"
-     crossorigin="anonymous"></script>
 
 <!-- ═══════════════════════════════════════════
      SEO META TAGS
@@ -251,7 +249,6 @@
   .gnav-link:hover{color:var(--text);background:var(--surface2);text-decoration:none;}
   .gnav-link.active-page{color:var(--accent);}
   /* Dropdown */
-  
   .gnav-dd{position:relative;}
   .gnav-dd-btn{font-size:13px;font-weight:500;color:var(--muted);padding:6px 10px;border-radius:6px;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:inherit;transition:color 0.15s,background 0.15s;}
   .gnav-dd-btn:hover,.gnav-dd:hover .gnav-dd-btn{color:var(--text);background:var(--surface2);}
@@ -273,7 +270,6 @@
   </style>
   
   <header class="gnav" role="banner">
-    
     <div class="gnav-inner">
       <a href="/" class="gnav-brand" aria-label="LeetCode Pattern Tracker Home">⚡ <span>LC</span>Pattern</a>
       <nav class="gnav-links" aria-label="Main navigation">
@@ -293,11 +289,15 @@
               <span><span class="gnav-dd-label">Sliding Window</span><span class="gnav-dd-sub">4 sub-patterns · 28 problems</span></span>
             </a>
             <hr class="gnav-dd-divider">
-            <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🧮</span><span><span class="gnav-dd-label">Dynamic Programming</span><span class="gnav-dd-sub">Coming soon</span></span></span>
+            <a href="/backtracking.html" class="gnav-dd-item" role="menuitem">
+              <span class="gnav-dd-icon">🌳</span>
+              <span><span class="gnav-dd-label">Backtracking</span><span class="gnav-dd-sub">5 types · 58 problems</span></span>
+            </a>
+            <a href="/dpv2/dp-index.html" class="gnav-dd-item" role="menuitem"><span class="gnav-dd-icon">🧮</span><span><span class="gnav-dd-label">Dynamic Programming</span><span class="gnav-dd-sub">16 patterns · 102 problems</span></span></a>
             <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🕸️</span><span><span class="gnav-dd-label">Graph Algorithms</span><span class="gnav-dd-sub">Coming soon</span></span></span>
             <span class="gnav-dd-item gnav-dd-soon" aria-disabled="true"><span class="gnav-dd-icon">🔍</span><span><span class="gnav-dd-label">Binary Search</span><span class="gnav-dd-sub">Coming soon</span></span></span>
             <hr class="gnav-dd-divider">
-            <a href="/#tracker" class="gnav-dd-item" role="menuitem"><span class="gnav-dd-icon">⚡</span><span><span class="gnav-dd-label">All 368 Problems</span><span class="gnav-dd-sub">Full tracker — all 15 categories</span></span></a>
+            <a href="/#tracker" class="gnav-dd-item" role="menuitem"><span class="gnav-dd-icon">⚡</span><span><span class="gnav-dd-label">All <span data-total>368</span> Problems</span><span class="gnav-dd-sub">Full tracker — all 15 categories</span></span></a>
           </div>
         </div>
            <!-- commented for now-->
@@ -370,7 +370,7 @@
   <div class="overall-bar-wrap" role="progressbar" aria-label="Overall LeetCode progress">
     <div class="overall-bar-label">
       <span>Overall Progress</span>
-      <span id="overall-label">0 / 368 solved</span>
+      <span id="overall-label">0 / <span data-total>368</span> solved</span>
     </div>
     <div class="bar-outer">
       <div class="bar-inner" id="overall-bar"></div>
@@ -383,7 +383,7 @@
       <div class="stat-label">Solved</div>
     </div>
     <div class="stat-card" style="--accent-color:#ef4444">
-      <div class="stat-num" id="stat-remaining">368</div>
+      <div class="stat-num" id="stat-remaining" data-remaining>368</div>
       <div class="stat-label">Remaining</div>
     </div>
     <div class="stat-card" style="--accent-color:#06b6d4">
@@ -391,7 +391,7 @@
       <div class="stat-label">Complete</div>
     </div>
     <div class="stat-card" style="--accent-color:#10b981">
-      <div class="stat-num">368</div>
+      <div class="stat-num" data-total id="stat-total-display">368</div>
       <div class="stat-label">Total</div>
     </div>
     <div class="stat-card" style="--accent-color:#f59e0b">
@@ -731,7 +731,7 @@
   </div>
 </div>
 
-<!-- <div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-label="Contact Us">
+<div class="modal-overlay" id="contact-modal" role="dialog" aria-modal="true" aria-label="Contact Us">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal('contact-modal')" aria-label="Close">✕</button>
     <h2>Contact Us</h2>
@@ -743,7 +743,7 @@
     </ul>
     <p style="margin-top:16px"><a href="/contact.html" style="color:var(--accent);font-weight:600;">Open full contact page →</a></p>
   </div>
-</div> -->
+</div>
 
 <!-- TOAST -->
 <div class="toast" id="toast" role="status" aria-live="polite">
@@ -758,7 +758,14 @@
 // ── DATA ──
 const COLORS  = ['#6366f1','#06b6d4','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316','#84cc16','#a855f7','#3b82f6','#22d3ee','#fb923c','#4ade80'];
 const EMOJIS  = ['👉','🪟','🌲','🕸️','🧮','🏔️','🔙','💰','🔍','📚','⚡','🔗','📐','🔤','🏗️'];
-const TOTAL   = 368;
+// Dynamic total — always matches data.js, never needs manual update
+const TOTAL = (function() {
+  let t = 0;
+  (window.LC_DATA ? window.LC_DATA.getIndexData() : []).forEach(function(cat) {
+    cat.patterns.forEach(function(p) { t += p.problems.length; });
+  });
+  return t || 368; // fallback if data.js not loaded
+})();
 
 const DATA = window.LC_DATA.getIndexData();
 
@@ -770,7 +777,18 @@ let filterMode = 'all';
 const getKey  = (ci,pi,qi) => `${ci}-${pi}-${qi}`;
 const isSolved = (ci,pi,qi) => !!window.state[getKey(ci,pi,qi)]?.solved;
 const getNote  = (ci,pi,qi) => window.state[getKey(ci,pi,qi)]?.note || '';
-const countSolved   = ()   => Object.values(window.state).filter(v=>v.solved).length;
+const countSolved = () => {
+  let n = 0;
+  // Count index-page format: {solved: true}
+  Object.values(window.state).forEach(function(v) {
+    if (v && typeof v === 'object' && v.solved === true) n++;
+    // Count pattern-page format: namespace key → {slug: true, slug2: true}
+    if (v && typeof v === 'object' && !v.hasOwnProperty('solved')) {
+      Object.values(v).forEach(function(pv) { if (pv === true) n++; });
+    }
+  });
+  return n;
+};
 const countCatTotal = (ci) => DATA[ci].patterns.reduce((s,p)=>s+p.problems.length,0);
 const countCatSolved = (ci) => {
   let n=0; DATA[ci].patterns.forEach((p,pi)=>p.problems.forEach((_,qi)=>{if(isSolved(ci,pi,qi))n++;})); return n;
@@ -779,6 +797,10 @@ const countPatSolved = (ci,pi) => DATA[ci].patterns[pi].problems.filter((_,qi)=>
 
 // ── UI REFRESH ──
 function refreshAllUI() {
+  // Update any element showing the dynamic total problem count
+  document.querySelectorAll('[data-total]').forEach(el => el.textContent = TOTAL);
+  document.querySelectorAll('[data-remaining]').forEach(el => el.textContent = TOTAL - countSolved());
+
   DATA.forEach((_,ci) => { updateCategoryUI(ci); DATA[ci].patterns.forEach((_,pi) => updatePatternUI(ci,pi)); });
   DATA.forEach((_,ci) => DATA[ci].patterns.forEach((_,pi) =>
     DATA[ci].patterns[pi].problems.forEach((_,qi) => {
@@ -800,7 +822,13 @@ function updateGlobal() {
   document.getElementById('stat-pct').textContent       = pct+'%';
   document.getElementById('overall-bar').style.width    = pct+'%';
   document.getElementById('overall-label').textContent  = `${solved} / ${TOTAL} solved`;
-  // Update per-pattern progress pills
+  // Dynamically update any static "368" text nodes in the page
+  document.querySelectorAll('[data-total]').forEach(function(el) {
+    el.textContent = TOTAL;
+  });
+  document.querySelectorAll('[data-remaining]').forEach(function(el) {
+    el.textContent = TOTAL - solved;
+  });
   updatePatternProgress();
 }
 
@@ -830,11 +858,17 @@ window.markDone = function(pattern, id, done) {
   if (!window.state) window.state = {};
   if (!window.state[pattern]) window.state[pattern] = {};
   window.state[pattern][id] = done === undefined ? true : done;
-  window.persistState?.();
+  window.persistState?.();   // Firebase or localStorage sync
+  // If index.html is open in same tab, refresh its stats
+  if (typeof updateGlobal === 'function') updateGlobal();
 };
 
 window.isDone = function(pattern, id) {
-  return !!(window.state?.[pattern]?.[id] === true);
+  // Check pattern-namespaced key (pattern pages: dp, backtracking, etc.)
+  if (window.state?.[pattern]?.[id] === true) return true;
+  // Check flat key format used by some older pages
+  if (window.state?.[pattern + ':' + id] === true) return true;
+  return false;
 };
 
 window.getProgress = function(pattern) {

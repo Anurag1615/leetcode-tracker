@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>🗺️ Pattern Recognition — DP Guide | LeetCode Pattern Tracker</title>
+<meta name="description" content="Evolution maps, interview signal cards, keywords and traps for every DP pattern."/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-header">
+      <div class="page-eyebrow">🧮 Module 6</div>
+      <h1 class="page-title">🗺️ Pattern Recognition</h1>
+      <p class="page-desc">Evolution maps, interview signal cards, keywords and traps for every DP pattern.</p>
+    </div>
+    
+<div class="callout co-orange" style="margin-bottom:20px">
+  <div class="callout-title">🗺️ Pattern Recognition is a Skill, Not Magic</div>
+  <p>Experienced engineers don't "see" DP problems — they have trained pattern matching from solving hundreds of problems.
+  This module gives you the mental models to shortcut that process.</p>
+</div>
+
+<div class="sh">Pattern Evolution Maps</div>
+<p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">See how simple problems evolve into complex ones. Each arrow adds ONE new constraint.</p>
+
+<div class="sh-sm">Fibonacci Family</div>
+<div class="evo-map">
+  <div class="evo-node start"><div class="en-lc">LC 509</div><div class="en-name">Fibonacci</div><div class="en-diff"><span class="pill pill-easy">Easy</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node start"><div class="en-lc">LC 70</div><div class="en-name">Climbing Stairs</div><div class="en-diff"><span class="pill pill-easy">Easy</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 198</div><div class="en-name">House Robber</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 213</div><div class="en-name">House Robber II</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node end"><div class="en-lc">LC 740</div><div class="en-name">Delete &amp; Earn</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+</div>
+
+<div class="sh-sm">Knapsack Family</div>
+<div class="evo-map">
+  <div class="evo-node start"><div class="en-lc">GFG</div><div class="en-name">0/1 Knapsack</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node start"><div class="en-lc">GFG</div><div class="en-name">Subset Sum</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 416</div><div class="en-name">Partition Equal</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 494</div><div class="en-name">Target Sum</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node end"><div class="en-lc">LC 474</div><div class="en-name">Ones &amp; Zeroes</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+</div>
+
+<div class="sh-sm">LCS Family</div>
+<div class="evo-map">
+  <div class="evo-node start"><div class="en-lc">LC 1143</div><div class="en-name">LCS</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 72</div><div class="en-name">Edit Distance</div><div class="en-diff"><span class="pill pill-hard">Hard</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 1092</div><div class="en-name">Shortest Superseq</div><div class="en-diff"><span class="pill pill-hard">Hard</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node end"><div class="en-lc">LC 115</div><div class="en-name">Distinct Subseq</div><div class="en-diff"><span class="pill pill-hard">Hard</span></div></div>
+</div>
+
+<div class="sh-sm">Stock Family</div>
+<div class="evo-map">
+  <div class="evo-node start"><div class="en-lc">LC 121</div><div class="en-name">Stock I</div><div class="en-diff"><span class="pill pill-easy">Easy</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node start"><div class="en-lc">LC 122</div><div class="en-name">Stock II (∞)</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 309</div><div class="en-name">+Cooldown</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node mid"><div class="en-lc">LC 714</div><div class="en-name">+Fee</div><div class="en-diff"><span class="pill pill-med">Med</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node end"><div class="en-lc">LC 123</div><div class="en-name">2 Transactions</div><div class="en-diff"><span class="pill pill-hard">Hard</span></div></div>
+  <div class="evo-arr">→</div>
+  <div class="evo-node end"><div class="en-lc">LC 188</div><div class="en-name">k Transactions</div><div class="en-diff"><span class="pill pill-hard">Hard</span></div></div>
+</div>
+
+<div class="sh">Interview Signal Cards</div>
+<p style="font-size:.82rem;color:var(--t2);margin-bottom:16px">For each pattern: keywords to listen for, traps to avoid, instant state template.</p>
+
+<div id="signal-cards"></div>
+
+<script>
+var SIGNALS = [
+  { name:'0/1 Knapsack', icon:'🎒',
+    keywords:['at most once','include or exclude','pick or skip','subset','partition','0/1'],
+    traps:['Using forward loop (should be reverse for 0/1)','Forgetting to copy when subset sum returns boolean'],
+    state:'dp[i][w] = max value, first i items, capacity w',
+    recurrence:'dp[i][w] = max(dp[i-1][w], dp[i-1][w-wt[i]]+val[i])' },
+  { name:'Unbounded Knapsack', icon:'♾️',
+    keywords:['unlimited','reuse','any number of times','coin','rod','ribbon'],
+    traps:['Using reverse loop (should be forward for unbounded)','Confusing with Combination Sum IV loop order'],
+    state:'dp[w] = max value with capacity w (items reusable)',
+    recurrence:'dp[w] = max(dp[w], dp[w-wt[i]]+val[i]) — forward loop' },
+  { name:'LCS', icon:'🔡',
+    keywords:['two strings','common','longest','subsequence','edit','delete','insert'],
+    traps:['Confusing subsequence (non-contiguous) with substring (contiguous)','Off-by-1 in dp table size'],
+    state:'dp[i][j] = LCS of s1[0..i-1] and s2[0..j-1]',
+    recurrence:'match: dp[i-1][j-1]+1 | no match: max(dp[i-1][j],dp[i][j-1])' },
+  { name:'LIS', icon:'📈',
+    keywords:['strictly increasing','longest','sequence','chain','envelopes','stacking'],
+    traps:['Using sort incorrectly for Russian Doll (need h desc when w equal)','Forgetting O(n log n) patience sort for large n'],
+    state:'dp[i] = LIS length ending at index i',
+    recurrence:'dp[i] = max(dp[j]+1) for j<i where arr[j]<arr[i]' },
+  { name:"Kadane's", icon:'⚡',
+    keywords:['subarray','contiguous','maximum sum','maximum product','circular'],
+    traps:['Not handling all-negative array','Forgetting to track min for product variant'],
+    state:'curr = max running sum ending at current index',
+    recurrence:'curr = max(nums[i], curr+nums[i])' },
+  { name:'Interval/MCM DP', icon:'🔗',
+    keywords:['split','partition into k parts','merge','burst','optimal cost','matrix chain'],
+    traps:['Choosing first element to process instead of LAST (Burst Balloons)','Wrong fill order — must fill by increasing length'],
+    state:'dp[i][j] = optimal cost for subproblem on range [i..j]',
+    recurrence:'dp[i][j] = min/max over all split k: dp[i][k] + dp[k+1][j] + cost' },
+  { name:'Grid DP', icon:'🗺️',
+    keywords:['grid','matrix','paths','right or down','robot','minimum path'],
+    traps:['Not handling obstacle cells (set to 0/infinity)','Forgetting to initialise first row and column as base cases'],
+    state:'dp[i][j] = optimal value reachable at cell (i,j)',
+    recurrence:'dp[i][j] = grid[i][j] + min/max(dp[i-1][j], dp[i][j-1])' },
+  { name:'Stock DP', icon:'💹',
+    keywords:['buy and sell','profit','cooldown','transaction fee','at most k transactions'],
+    traps:['Missing cooldown state in LC 309','Not updating states correctly (use prevSold for cooldown)'],
+    state:'hold = max profit if holding; cash/sold/rest = if not holding',
+    recurrence:'varies by variant — draw state machine first' },
+];
+
+var el = document.getElementById('signal-cards');
+if (el) {
+  el.innerHTML = SIGNALS.map(function(s) {
+    return '<div class="signal-card"><div class="sc-title">'+s.icon+' '+s.name+'</div>'
+      + '<div class="sc-row"><div class="sc-key">Keywords</div><div class="sc-val">'
+      + s.keywords.map(k=>'<span class="kw-chip">'+k+'</span>').join('') + '</div></div>'
+      + '<div class="sc-row"><div class="sc-key">Traps</div><div class="sc-val">'
+      + s.traps.map(t=>'<span class="trap-chip">'+t+'</span>').join('') + '</div></div>'
+      + '<div class="sc-row"><div class="sc-key">State</div><div class="sc-val"><code>'+s.state+'</code></div></div>'
+      + '<div class="sc-row"><div class="sc-key">Recurrence</div><div class="sc-val"><code>'+s.recurrence+'</code></div></div>'
+      + '</div>';
+  }).join('');
+}
+</script>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initDPPage('patterns');
+});
+</script>
+</body>
+</html>

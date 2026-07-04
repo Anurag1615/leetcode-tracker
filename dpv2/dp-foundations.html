@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>🧱 DP Foundations — DP Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-eyebrow">🧮 Module 1</div>
+    <h1 class="page-title" style="margin-bottom:8px">🧱 DP Foundations</h1>
+    
+<p class="page-desc" style="margin-bottom:24px">Why does Dynamic Programming exist? What problems does it solve? How is it different from recursion, greedy, and divide & conquer?</p>
+
+<div class="callout co-orange">
+  <div class="callout-title">🧠 One-sentence definition</div>
+  <p><strong>Dynamic Programming = Recursion + Memoization.</strong><br>
+  If a recursive solution recomputes the same subproblem multiple times, store the result and reuse it. That's the entire idea.</p>
+</div>
+
+<div class="sh">The Problem with Pure Recursion</div>
+<p style="color:var(--t2);font-size:.88rem;line-height:1.7;margin-bottom:12px">
+  Consider computing <code>fib(5)</code>. The recursive call tree looks like this:
+</p>
+<div class="code-wrap">
+<pre style="color:#8b949e">
+                    fib(5)
+                   /       \
+             fib(4)         fib(3)  ← recomputed!
+            /      \        /    \
+       fib(3)    fib(2)  fib(2) fib(1)
+       /    \    /    \
+   fib(2) fib(1) fib(1) fib(0)
+   /    \
+fib(1) fib(0)
+
+fib(3) is called 2 times
+fib(2) is called 3 times      → T(n) = O(2ⁿ) without memoization
+fib(1) is called 5 times      → T(n) = O(n)   WITH memoization</pre>
+</div>
+
+<div class="sh">Two Conditions for DP</div>
+<div class="grid-2" style="margin-bottom:20px">
+  <div class="callout co-green" style="margin:0">
+    <div class="callout-title">1️⃣ Overlapping Subproblems</div>
+    <p>The same subproblem appears more than once in the recursion tree.<br><br>
+    <strong>How to spot:</strong> Draw a small call tree. Do the same arguments appear at multiple nodes?<br><br>
+    fib(3) called twice → YES → DP will help.</p>
+  </div>
+  <div class="callout co-blue" style="margin:0">
+    <div class="callout-title">2️⃣ Optimal Substructure</div>
+    <p>The optimal answer to the full problem can be built from optimal answers to smaller subproblems.<br><br>
+    <strong>How to spot:</strong> "If I knew the best solution for input of size n-1, could I compute it for size n?"<br><br>
+    If yes → optimal substructure exists.</p>
+  </div>
+</div>
+
+<div class="sh">DP vs Greedy vs Divide & Conquer</div>
+<table class="dp-table" style="margin-bottom:20px">
+  <thead><tr><th>Approach</th><th>Subproblems</th><th>Overlap?</th><th>Choice</th><th>Classic Examples</th></tr></thead>
+  <tbody>
+    <tr><td><strong style="color:var(--orange)">Dynamic Programming</strong></td><td>Overlapping</td><td>✅ Yes — cache them</td><td>All choices, pick best</td><td>Fibonacci, Knapsack, LCS</td></tr>
+    <tr><td><strong style="color:var(--green)">Divide & Conquer</strong></td><td>Independent</td><td>❌ No</td><td>Split and merge</td><td>Merge Sort, Binary Search</td></tr>
+    <tr><td><strong style="color:var(--blue)">Greedy</strong></td><td>N/A</td><td>❌ No</td><td>Local best at each step</td><td>Huffman, Activity Selection</td></tr>
+  </tbody>
+</table>
+
+<div class="sh">Three Approaches to DP</div>
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="ctabs">
+      <button class="ctab on" onclick="sw(this,'f-c1')">1. Pure Recursion</button>
+      <button class="ctab" onclick="sw(this,'f-c2')">2. Memoization</button>
+      <button class="ctab" onclick="sw(this,'f-c3')">3. Tabulation</button>
+      <button class="ctab" onclick="sw(this,'f-c4')">4. Space Optimised</button>
+    </div>
+  </div>
+  <div id="f-c1" class="cpanel on"><pre><span style="color:#8b949e">// Fibonacci — Pure Recursion   Time: O(2ⁿ)   Space: O(n) stack</span>
+int fib(int n) {
+    if (n <= 1) return n;              <span style="color:#22c55e">// base case</span>
+    return fib(n-1) + fib(n-2);       <span style="color:#ef4444">// recomputes same subproblems!</span>
+}</pre></div>
+  <div id="f-c2" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// Fibonacci — Memoization (Top-Down DP)   Time: O(n)   Space: O(n)</span>
+int[] memo = new int[n+1];
+Arrays.fill(memo, -1);
+
+int fib(int n) {
+    if (n <= 1) return n;
+    <span style="color:#f97316">if (memo[n] != -1) return memo[n];   // cache hit — return stored</span>
+    <span style="color:#22c55e">return memo[n] = fib(n-1) + fib(n-2); // store THEN return</span>
+}
+<span style="color:#8b949e">// Each subproblem computed EXACTLY once → O(n) time</span></pre></div>
+  <div id="f-c3" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// Fibonacci — Tabulation (Bottom-Up DP)   Time: O(n)   Space: O(n)</span>
+int fib(int n) {
+    if (n <= 1) return n;
+    int[] dp = new int[n+1];
+    dp[0] = 0;  dp[1] = 1;           <span style="color:#22c55e">// base cases</span>
+    for (int i = 2; i <= n; i++)
+        dp[i] = dp[i-1] + dp[i-2];   <span style="color:#22c55e">// fill bottom-up</span>
+    return dp[n];
+}
+<span style="color:#8b949e">// No recursion overhead. Easier to space-optimise.</span></pre></div>
+  <div id="f-c4" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// Fibonacci — Space Optimised   Time: O(n)   Space: O(1)</span>
+int fib(int n) {
+    if (n <= 1) return n;
+    int a = 0, b = 1;
+    for (int i = 2; i <= n; i++) {
+        int c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+<span style="color:#8b949e">// Only need previous 2 values → drop the array entirely</span></pre></div>
+</div>
+
+<div class="sh">Top-Down vs Bottom-Up — When to use which</div>
+<table class="dp-table" style="margin-bottom:20px">
+  <thead><tr><th></th><th>Top-Down (Memoization)</th><th>Bottom-Up (Tabulation)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Write order</strong></td><td>Easy — same structure as recursion</td><td>Need to figure out fill order</td></tr>
+    <tr><td><strong>Stack overflow</strong></td><td>Risk with deep recursion (n &gt; 10⁴)</td><td>No risk — iterative</td></tr>
+    <tr><td><strong>Space opt</strong></td><td>Harder (recursion stack is implicit)</td><td>Easy — just keep previous row</td></tr>
+    <tr><td><strong>Sparse states</strong></td><td>✅ Only visited states computed</td><td>❌ All states filled</td></tr>
+    <tr><td><strong>Interview</strong></td><td>Easier to explain step by step</td><td>Looks more polished</td></tr>
+  </tbody>
+</table>
+
+<div class="callout co-green">
+  <div class="callout-title">✅ Key Takeaway</div>
+  <p>Before applying DP, ask: <strong>"If I solve this recursively, do I re-solve the same subproblem?"</strong>
+  If yes → DP. The memo table is just a cache. The recurrence is just the recursion written differently. 
+  Always start with the recursive brute force. That makes the DP natural.</p>
+</div>
+
+<div class="sh">What's Next?</div>
+<p style="color:var(--t2);font-size:.85rem;line-height:1.7">
+  The next three modules walk you through the exact process:<br>
+  <strong>Module 2</strong> — How to think recursively for any DP problem (IBH Method)<br>
+  <strong>Module 3</strong> — How to add memoization to any recursion (3-line pattern)<br>
+  <strong>Module 4</strong> — How to convert to tabulation and optimise space
+</p>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){initDPPage('foundations');});</script>
+</body>
+</html>

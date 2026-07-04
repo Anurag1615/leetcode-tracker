@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>♾️ Unbounded Knapsack — DP Guide</title>
+<meta name="description" content="Same item usable unlimited times. Rod Cutting, Coin Change, Ribbon."/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+
+<style>
+.lc-link  { color: var(--blue); text-decoration:none; font-weight:500; }
+.lc-link:hover { text-decoration:underline; }
+.gfg-tag  { font-size:.65rem; color:var(--green); background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.2); padding:1px 6px; border-radius:8px; text-decoration:none; margin-left:5px; }
+.gfg-link { color:var(--green); text-decoration:none; font-weight:500; }
+.gfg-only-badge { font-size:.65rem; color:var(--green); background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.2); padding:1px 6px; border-radius:8px; margin-left:5px; }
+.prob-check-btn { width:20px; height:20px; border-radius:5px; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; margin:0 auto; cursor:pointer; transition:all .15s; }
+.prob-check-btn:hover { border-color:var(--orange); }
+.prob-check-btn.done { background:var(--green); border-color:var(--green); }
+.prob-tr { cursor:pointer; transition:background .12s; }
+.prob-tr:hover td { background:rgba(249,115,22,.03); }
+.prob-tr.done-tr td { background:rgba(34,197,94,.04); }
+</style>
+
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-header">
+      <div class="page-eyebrow">🧮 Pattern Module</div>
+      <h1 class="page-title">♾️ Unbounded Knapsack</h1>
+      <p class="page-desc">Same item usable unlimited times. Rod Cutting, Coin Change, Ribbon.</p>
+    </div>
+    
+<div class="callout co-orange" style="margin-bottom:20px">
+  <div class="callout-title">📍 AV Playlist 2</div>
+  <p>Same item usable unlimited times. Rod Cutting, Coin Change, Ribbon.</p>
+</div>
+<div class="callout co-blue" style="margin-bottom:20px">
+  <div class="callout-title">⏱ Complexity</div>
+  <p>Time: O(n·W) · Space: O(W)</p>
+</div>
+
+<div class="sh">Core Code</div>
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="ctabs"><button class="ctab on" onclick="sw(this,'unbounded-c0')">Unbounded</button><button class="ctab" onclick="sw(this,'unbounded-c1')">Coin Change</button><button class="ctab" onclick="sw(this,'unbounded-c2')">Coin Change II</button><button class="ctab" onclick="sw(this,'unbounded-c3')">Ordered (LC 377)</button></div>
+    <button class="code-copy" onclick="copyCode(this)">copy</button>
+  </div>
+  <div id="unbounded-c0" class="cpanel on" style="display:block"><pre>int[] dp = new int[W+1];
+for (int i = 0; i < n; i++)
+    for (int w = wt[i]; w <= W; w++)  // FORWARD = unbounded
+        dp[w] = Math.max(dp[w], dp[w-wt[i]] + val[i]);
+return dp[W];</pre></div><div id="unbounded-c1" class="cpanel" style="display:none"><pre>// Min coins
+int[] dp = new int[amount+1];
+Arrays.fill(dp, amount+1);
+dp[0] = 0;
+for (int coin : coins)
+    for (int j = coin; j <= amount; j++)
+        dp[j] = Math.min(dp[j], dp[j-coin]+1);
+return dp[amount] > amount ? -1 : dp[amount];</pre></div><div id="unbounded-c2" class="cpanel" style="display:none"><pre>// Count ways (combinations)
+long[] dp = new long[amount+1];
+dp[0] = 1;
+for (int coin : coins)        // coins OUTER = combinations
+    for (int j = coin; j <= amount; j++)
+        dp[j] += dp[j-coin];
+return dp[amount];</pre></div><div id="unbounded-c3" class="cpanel" style="display:none"><pre>// Count ordered ways (permutations)
+int[] dp = new int[target+1];
+dp[0] = 1;
+for (int j = 1; j <= target; j++)  // amounts OUTER = permutations
+    for (int coin : coins)
+        if (j >= coin) dp[j] += dp[j-coin];
+return dp[target];</pre></div>
+</div>
+
+<div class="callout co-green" style="margin:16px 0">
+  <div class="callout-title">💡 Key Insight</div>
+  <p>Coins outer loop → unordered combinations. Amounts outer loop → ordered permutations. This is LC 518 vs LC 377.</p>
+</div>
+
+<div class="sh">Pattern Evolution</div><div class="evo-map"><div class="evo-node start">
+              <div class="en-lc">GFG</div>
+              <div class="en-name">Unbounded Knapsack</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node start">
+              <div class="en-lc">GFG</div>
+              <div class="en-name">Rod Cutting</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node mid">
+              <div class="en-lc">LC 322</div>
+              <div class="en-name">Coin Change</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node mid">
+              <div class="en-lc">LC 518</div>
+              <div class="en-name">Coin Change II</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node end">
+              <div class="en-lc">LC 377</div>
+              <div class="en-name">Combination Sum IV</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div></div>
+<div class="sh">Interview Signals</div>
+        <div class="signal-card">
+          <div class="sc-title">♾️ When to recognise this pattern</div>
+          <div class="sc-row"><div class="sc-key">Keywords</div><div class="sc-val"><span class="kw-chip">unlimited</span><span class="kw-chip">reuse</span><span class="kw-chip">any number</span><span class="kw-chip">coin</span><span class="kw-chip">rod</span><span class="kw-chip">ribbon</span><span class="kw-chip">integer break</span></div></div>
+          <div class="sc-row"><div class="sc-key">Traps</div><div class="sc-val"><span class="trap-chip">Reverse loop (should be forward)</span><span class="trap-chip">Confusing combinations vs permutations loop order</span></div></div>
+          <div class="sc-row"><div class="sc-key">State</div><div class="sc-val"><code>dp[w] = optimal value achievable with capacity/amount w</code></div></div>
+          <div class="sc-row"><div class="sc-key">Recurrence</div><div class="sc-val"><code>dp[w] = max(dp[w], dp[w-wt[i]]+val[i]) — iterate w FORWARD</code></div></div>
+        </div>
+
+<div class="sh" style="margin-top:24px">Problems in This Pattern</div>
+
+<div class="sh" style="margin-top:28px">Problems in This Pattern</div>
+<div class="mod-progress" style="margin-bottom:12px">
+  <span style="font-size:12px;color:var(--t2)">Progress</span>
+  <div class="mp-bar"><div class="mp-fill" id="pp-fill" style="width:0%"></div></div>
+  <span class="mp-label" id="pp-label">0 / —</span>
+</div>
+<div id="pat-probs"><div style="color:var(--t3);font-family:var(--mono);font-size:12px;padding:20px">Loading problems...</div></div>
+
+<script>
+(function() {
+  function renderProbs() {
+    if (!window.DP_DATA_INLINE) return false;
+    var sec = DP_DATA_INLINE.find(function(s) { return s.id === 'knapsack-unbounded'; });
+    if (!sec) { document.getElementById('pat-probs').innerHTML = '<p style="color:var(--t3);font-size:.85rem">No problems found for section id: knapsack-unbounded</p>'; return true; }
+
+    var total = sec.problems.length;
+    var done  = 0;
+
+    var html = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.8rem">';
+    html += '<thead><tr style="background:var(--bg4)">'
+      + '<th style="padding:8px 10px;width:36px;text-align:center;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">&#10003;</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">#</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">Problem</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">Diff</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">Key Concept</th>'
+      + '</tr></thead><tbody>';
+
+    sec.problems.forEach(function(p) {
+      var key  = p.lc || p.gfg || (p.title||'').toLowerCase().replace(/\s+/g,'-');
+      var isDone = window.isDone ? window.isDone('dp', key)
+        : !!(function(){try{var st=JSON.parse(localStorage.getItem('lc_tracker_v2')||'{}');return st.dp&&st.dp[key];}catch(e){return false;}}());
+      if (isDone) done++;
+
+      var diff = p.diff || 'Medium';
+      var diffCls = diff.toLowerCase();
+      var num  = p.num || '&mdash;';
+
+      // Build link safely — no nested quotes
+      var linkHtml = '';
+      if (p.lc && p.gfg) {
+        linkHtml = '<a class="lc-link" href="https://leetcode.com/problems/' + p.lc + '/" target="_blank" rel="noopener">' + (p.title||'') + '</a>'
+          + '<a class="gfg-tag" href="https://www.geeksforgeeks.org/problems/' + p.gfg + '/" target="_blank" rel="noopener">GFG</a>';
+      } else if (p.lc) {
+        linkHtml = '<a class="lc-link" href="https://leetcode.com/problems/' + p.lc + '/" target="_blank" rel="noopener">' + (p.title||'') + '</a>';
+      } else if (p.gfg) {
+        linkHtml = '<a class="gfg-link" href="https://www.geeksforgeeks.org/problems/' + p.gfg + '/" target="_blank" rel="noopener">' + (p.title||'') + '</a>'
+          + '<span class="gfg-only-badge">GFG only</span>';
+      } else {
+        linkHtml = '<span style="color:var(--t3)">' + (p.title||'') + '</span>';
+      }
+
+      html += '<tr class="prob-tr' + (isDone ? ' done-tr' : '') + '" data-lc="' + (p.lc||'') + '" data-gfg="' + (p.gfg||'') + '">'
+        + '<td style="text-align:center;padding:7px 10px">'
+        + '<div class="prob-check-btn' + (isDone ? ' done' : '') + '" data-key="' + key + '">'
+        + (isDone ? '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>' : '')
+        + '</div></td>'
+        + '<td style="padding:7px 10px"><code style="font-size:.7rem;color:var(--t3)">' + num + '</code></td>'
+        + '<td style="padding:7px 10px">' + linkHtml + '</td>'
+        + '<td style="padding:7px 10px"><span class="pill pill-' + diffCls + '">' + diff + '</span></td>'
+        + '<td style="padding:7px 10px;font-size:.72rem;color:var(--t3)">' + (p.concept||'') + '</td>'
+        + '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+    document.getElementById('pat-probs').innerHTML = html;
+
+    // Progress bar
+    var pct = total ? Math.round(done/total*100) : 0;
+    var fill = document.getElementById('pp-fill');
+    var lbl  = document.getElementById('pp-label');
+    if (fill) fill.style.width = pct + '%';
+    if (lbl)  lbl.textContent  = done + ' / ' + total;
+
+    // Attach click handlers
+    document.querySelectorAll('.prob-check-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var k = btn.dataset.key;
+        var nowDone = window.toggleDone ? window.toggleDone('dp', k)
+          : (function(){
+              try{
+                var st=JSON.parse(localStorage.getItem('lc_tracker_v2')||'{}');
+                if(!st.dp) st.dp={};
+                st.dp[k] = !st.dp[k];
+                localStorage.setItem('lc_tracker_v2', JSON.stringify(st));
+                return st.dp[k];
+              }catch(ex){return false;}
+            })();
+        btn.classList.toggle('done', nowDone);
+        btn.innerHTML = nowDone
+          ? '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>'
+          : '';
+        var tr = btn.closest('tr');
+        if (tr) tr.classList.toggle('done-tr', nowDone);
+        // update progress
+        var d2 = document.querySelectorAll('.prob-check-btn.done').length;
+        var pct2 = total ? Math.round(d2/total*100) : 0;
+        if (fill) fill.style.width = pct2 + '%';
+        if (lbl)  lbl.textContent  = d2 + ' / ' + total;
+      });
+    });
+
+    // Row click → open problem
+    document.querySelectorAll('.prob-tr').forEach(function(tr) {
+      tr.addEventListener('click', function(e) {
+        if (e.target.closest('.prob-check-btn') || e.target.tagName === 'A') return;
+        var lc = tr.dataset.lc, gfg = tr.dataset.gfg;
+        var url = lc ? 'https://leetcode.com/problems/'+lc+'/'
+                     : gfg ? 'https://www.geeksforgeeks.org/problems/'+gfg+'/' : null;
+        if (url) window.open(url, '_blank', 'noopener');
+      });
+    });
+
+    return true;
+  }
+
+  // Try immediately, then retry with backoff
+  if (!renderProbs()) {
+    var attempts = 0;
+    var iv = setInterval(function() {
+      attempts++;
+      if (renderProbs() || attempts > 20) clearInterval(iv);
+    }, 150);
+  }
+})();
+</script>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initDPPage('unbounded');
+});
+</script>
+</body>
+</html>

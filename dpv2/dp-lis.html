@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>📈 LIS & Variants — DP Guide</title>
+<meta name="description" content="Longest Increasing Subsequence. O(n²) DP or O(n log n) patience sort."/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+
+<style>
+.lc-link  { color: var(--blue); text-decoration:none; font-weight:500; }
+.lc-link:hover { text-decoration:underline; }
+.gfg-tag  { font-size:.65rem; color:var(--green); background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.2); padding:1px 6px; border-radius:8px; text-decoration:none; margin-left:5px; }
+.gfg-link { color:var(--green); text-decoration:none; font-weight:500; }
+.gfg-only-badge { font-size:.65rem; color:var(--green); background:rgba(34,197,94,.08); border:1px solid rgba(34,197,94,.2); padding:1px 6px; border-radius:8px; margin-left:5px; }
+.prob-check-btn { width:20px; height:20px; border-radius:5px; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; margin:0 auto; cursor:pointer; transition:all .15s; }
+.prob-check-btn:hover { border-color:var(--orange); }
+.prob-check-btn.done { background:var(--green); border-color:var(--green); }
+.prob-tr { cursor:pointer; transition:background .12s; }
+.prob-tr:hover td { background:rgba(249,115,22,.03); }
+.prob-tr.done-tr td { background:rgba(34,197,94,.04); }
+</style>
+
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-header">
+      <div class="page-eyebrow">🧮 Pattern Module</div>
+      <h1 class="page-title">📈 LIS & Variants</h1>
+      <p class="page-desc">Longest Increasing Subsequence. O(n²) DP or O(n log n) patience sort.</p>
+    </div>
+    
+<div class="callout co-orange" style="margin-bottom:20px">
+  <div class="callout-title">📍 AV Playlist 5</div>
+  <p>Longest Increasing Subsequence. O(n²) DP or O(n log n) patience sort.</p>
+</div>
+<div class="callout co-blue" style="margin-bottom:20px">
+  <div class="callout-title">⏱ Complexity</div>
+  <p>Time: O(n²) dp / O(n log n) patience sort · Space: O(n)</p>
+</div>
+
+<div class="sh">Core Code</div>
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="ctabs"><button class="ctab on" onclick="sw(this,'lis-c0')">LIS O(n²)</button><button class="ctab" onclick="sw(this,'lis-c1')">Patience Sort O(n log n)</button><button class="ctab" onclick="sw(this,'lis-c2')">Russian Doll</button><button class="ctab" onclick="sw(this,'lis-c3')">Number of LIS</button></div>
+    <button class="code-copy" onclick="copyCode(this)">copy</button>
+  </div>
+  <div id="lis-c0" class="cpanel on" style="display:block"><pre>int lengthOfLIS(int[] nums) {
+    int n = nums.length, ans = 1;
+    int[] dp = new int[n];
+    Arrays.fill(dp, 1);
+    for (int i = 1; i < n; i++)
+        for (int j = 0; j < i; j++)
+            if (nums[j] < nums[i])
+                dp[i] = Math.max(dp[i], dp[j]+1);
+    for (int x : dp) ans = Math.max(ans, x);
+    return ans;
+}</pre></div><div id="lis-c1" class="cpanel" style="display:none"><pre>int lisOptimal(int[] nums) {
+    // tails[i] = smallest tail of IS of length i+1
+    List<Integer> tails = new ArrayList<>();
+    for (int num : nums) {
+        int pos = Collections.binarySearch(tails, num);
+        if (pos < 0) pos = -(pos+1);  // insertion point
+        if (pos == tails.size()) tails.add(num);
+        else tails.set(pos, num);
+    }
+    return tails.size();
+}</pre></div><div id="lis-c2" class="cpanel" style="display:none"><pre>// Sort: width ASC, height DESC (for equal width)
+int maxEnvelopes(int[][] env) {
+    Arrays.sort(env, (a,b) ->
+        a[0]!=b[0] ? a[0]-b[0] : b[1]-a[1]);
+    // Now LIS on heights only
+    return lisOptimal(Arrays.stream(env)
+        .mapToInt(e->e[1]).toArray());
+}
+// The DESC sort for equal widths prevents counting
+// same-width envelopes in same LIS</pre></div><div id="lis-c3" class="cpanel" style="display:none"><pre>int findNumberOfLIS(int[] nums) {
+    int n = nums.length, maxLen = 0, res = 0;
+    int[] len = new int[n], cnt = new int[n];
+    Arrays.fill(len, 1); Arrays.fill(cnt, 1);
+    for (int i = 1; i < n; i++)
+        for (int j = 0; j < i; j++)
+            if (nums[j] < nums[i]) {
+                if (len[j]+1 > len[i]) { len[i]=len[j]+1; cnt[i]=cnt[j]; }
+                else if (len[j]+1 == len[i]) cnt[i] += cnt[j];
+            }
+    for (int l : len) maxLen = Math.max(maxLen, l);
+    for (int i = 0; i < n; i++) if (len[i]==maxLen) res += cnt[i];
+    return res;
+}</pre></div>
+</div>
+
+<div class="callout co-green" style="margin:16px 0">
+  <div class="callout-title">💡 Key Insight</div>
+  <p>Patience sort: tails[i] = smallest ending of any IS of length i+1. Binary search to find position. Russian Doll: sort height DESC for equal widths to prevent cheating.</p>
+</div>
+
+<div class="sh">Pattern Evolution</div><div class="evo-map"><div class="evo-node start">
+              <div class="en-lc">LC 300</div>
+              <div class="en-name">LIS</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node mid">
+              <div class="en-lc">LC 673</div>
+              <div class="en-name">Number of LIS</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node mid">
+              <div class="en-lc">LC 368</div>
+              <div class="en-name">Largest Div Subset</div>
+              <div class="en-diff"><span class="pill pill-med">Med</span></div>
+            </div><div class="evo-arr">→</div><div class="evo-node end">
+              <div class="en-lc">LC 354</div>
+              <div class="en-name">Russian Doll</div>
+              <div class="en-diff"><span class="pill pill-hard">Hard</span></div>
+            </div></div>
+<div class="sh">Interview Signals</div>
+        <div class="signal-card">
+          <div class="sc-title">📈 When to recognise this pattern</div>
+          <div class="sc-row"><div class="sc-key">Keywords</div><div class="sc-val"><span class="kw-chip">strictly increasing</span><span class="kw-chip">longest subsequence</span><span class="kw-chip">chain</span><span class="kw-chip">stacking</span><span class="kw-chip">envelopes</span></div></div>
+          <div class="sc-row"><div class="sc-key">Traps</div><div class="sc-val"><span class="trap-chip">Russian Doll sort — height must be DESC for equal widths</span><span class="trap-chip">O(n²) too slow for n=10^5, need patience sort</span></div></div>
+          <div class="sc-row"><div class="sc-key">State</div><div class="sc-val"><code>dp[i] = length of LIS ending at index i</code></div></div>
+          <div class="sc-row"><div class="sc-key">Recurrence</div><div class="sc-val"><code>dp[i] = max(dp[j]+1) for all j<i where nums[j]<nums[i]</code></div></div>
+        </div>
+
+<div class="sh" style="margin-top:24px">Problems in This Pattern</div>
+
+<div class="sh" style="margin-top:28px">Problems in This Pattern</div>
+<div class="mod-progress" style="margin-bottom:12px">
+  <span style="font-size:12px;color:var(--t2)">Progress</span>
+  <div class="mp-bar"><div class="mp-fill" id="pp-fill" style="width:0%"></div></div>
+  <span class="mp-label" id="pp-label">0 / —</span>
+</div>
+<div id="pat-probs"><div style="color:var(--t3);font-family:var(--mono);font-size:12px;padding:20px">Loading problems...</div></div>
+
+<script>
+(function() {
+  function renderProbs() {
+    if (!window.DP_DATA_INLINE) return false;
+    var sec = DP_DATA_INLINE.find(function(s) { return s.id === 'lis'; });
+    if (!sec) { document.getElementById('pat-probs').innerHTML = '<p style="color:var(--t3);font-size:.85rem">No problems found for section id: lis</p>'; return true; }
+
+    var total = sec.problems.length;
+    var done  = 0;
+
+    var html = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.8rem">';
+    html += '<thead><tr style="background:var(--bg4)">'
+      + '<th style="padding:8px 10px;width:36px;text-align:center;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">&#10003;</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">#</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">Problem</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">Diff</th>'
+      + '<th style="padding:8px 10px;text-align:left;font-size:.7rem;color:var(--t3);border-bottom:1px solid var(--border)">Key Concept</th>'
+      + '</tr></thead><tbody>';
+
+    sec.problems.forEach(function(p) {
+      var key  = p.lc || p.gfg || (p.title||'').toLowerCase().replace(/\s+/g,'-');
+      var isDone = window.isDone ? window.isDone('dp', key)
+        : !!(function(){try{var st=JSON.parse(localStorage.getItem('lc_tracker_v2')||'{}');return st.dp&&st.dp[key];}catch(e){return false;}}());
+      if (isDone) done++;
+
+      var diff = p.diff || 'Medium';
+      var diffCls = diff.toLowerCase();
+      var num  = p.num || '&mdash;';
+
+      // Build link safely — no nested quotes
+      var linkHtml = '';
+      if (p.lc && p.gfg) {
+        linkHtml = '<a class="lc-link" href="https://leetcode.com/problems/' + p.lc + '/" target="_blank" rel="noopener">' + (p.title||'') + '</a>'
+          + '<a class="gfg-tag" href="https://www.geeksforgeeks.org/problems/' + p.gfg + '/" target="_blank" rel="noopener">GFG</a>';
+      } else if (p.lc) {
+        linkHtml = '<a class="lc-link" href="https://leetcode.com/problems/' + p.lc + '/" target="_blank" rel="noopener">' + (p.title||'') + '</a>';
+      } else if (p.gfg) {
+        linkHtml = '<a class="gfg-link" href="https://www.geeksforgeeks.org/problems/' + p.gfg + '/" target="_blank" rel="noopener">' + (p.title||'') + '</a>'
+          + '<span class="gfg-only-badge">GFG only</span>';
+      } else {
+        linkHtml = '<span style="color:var(--t3)">' + (p.title||'') + '</span>';
+      }
+
+      html += '<tr class="prob-tr' + (isDone ? ' done-tr' : '') + '" data-lc="' + (p.lc||'') + '" data-gfg="' + (p.gfg||'') + '">'
+        + '<td style="text-align:center;padding:7px 10px">'
+        + '<div class="prob-check-btn' + (isDone ? ' done' : '') + '" data-key="' + key + '">'
+        + (isDone ? '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>' : '')
+        + '</div></td>'
+        + '<td style="padding:7px 10px"><code style="font-size:.7rem;color:var(--t3)">' + num + '</code></td>'
+        + '<td style="padding:7px 10px">' + linkHtml + '</td>'
+        + '<td style="padding:7px 10px"><span class="pill pill-' + diffCls + '">' + diff + '</span></td>'
+        + '<td style="padding:7px 10px;font-size:.72rem;color:var(--t3)">' + (p.concept||'') + '</td>'
+        + '</tr>';
+    });
+
+    html += '</tbody></table></div>';
+    document.getElementById('pat-probs').innerHTML = html;
+
+    // Progress bar
+    var pct = total ? Math.round(done/total*100) : 0;
+    var fill = document.getElementById('pp-fill');
+    var lbl  = document.getElementById('pp-label');
+    if (fill) fill.style.width = pct + '%';
+    if (lbl)  lbl.textContent  = done + ' / ' + total;
+
+    // Attach click handlers
+    document.querySelectorAll('.prob-check-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var k = btn.dataset.key;
+        var nowDone = window.toggleDone ? window.toggleDone('dp', k)
+          : (function(){
+              try{
+                var st=JSON.parse(localStorage.getItem('lc_tracker_v2')||'{}');
+                if(!st.dp) st.dp={};
+                st.dp[k] = !st.dp[k];
+                localStorage.setItem('lc_tracker_v2', JSON.stringify(st));
+                return st.dp[k];
+              }catch(ex){return false;}
+            })();
+        btn.classList.toggle('done', nowDone);
+        btn.innerHTML = nowDone
+          ? '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>'
+          : '';
+        var tr = btn.closest('tr');
+        if (tr) tr.classList.toggle('done-tr', nowDone);
+        // update progress
+        var d2 = document.querySelectorAll('.prob-check-btn.done').length;
+        var pct2 = total ? Math.round(d2/total*100) : 0;
+        if (fill) fill.style.width = pct2 + '%';
+        if (lbl)  lbl.textContent  = d2 + ' / ' + total;
+      });
+    });
+
+    // Row click → open problem
+    document.querySelectorAll('.prob-tr').forEach(function(tr) {
+      tr.addEventListener('click', function(e) {
+        if (e.target.closest('.prob-check-btn') || e.target.tagName === 'A') return;
+        var lc = tr.dataset.lc, gfg = tr.dataset.gfg;
+        var url = lc ? 'https://leetcode.com/problems/'+lc+'/'
+                     : gfg ? 'https://www.geeksforgeeks.org/problems/'+gfg+'/' : null;
+        if (url) window.open(url, '_blank', 'noopener');
+      });
+    });
+
+    return true;
+  }
+
+  // Try immediately, then retry with backoff
+  if (!renderProbs()) {
+    var attempts = 0;
+    var iv = setInterval(function() {
+      attempts++;
+      if (renderProbs() || attempts > 20) clearInterval(iv);
+    }, 150);
+  }
+})();
+</script>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initDPPage('lis');
+});
+</script>
+</body>
+</html>

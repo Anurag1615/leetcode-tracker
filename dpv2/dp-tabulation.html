@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>📊 Tabulation — DP Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-eyebrow">🧮 Module 4</div>
+    <h1 class="page-title" style="margin-bottom:8px">📊 Tabulation</h1>
+    
+<p class="page-desc" style="margin-bottom:24px">Bottom-Up DP. Fill a table iteratively from base cases. No recursion, no stack overflow, easy to space-optimise.</p>
+
+<div class="callout co-orange">
+  <div class="callout-title">🔄 Memo → Tabulation: The 4-Step Recipe</div>
+  <p>Memoization is recursive (top-down). Tabulation is iterative (bottom-up). Same recurrence — different direction.<br>
+  <strong>Step 1:</strong> Reverse the recursion direction<br>
+  <strong>Step 2:</strong> Replace recursive calls with table lookups<br>
+  <strong>Step 3:</strong> Seed base cases at the start<br>
+  <strong>Step 4:</strong> Try to drop a dimension (space optimise)</p>
+</div>
+
+<div class="sh">Complete Conversion Examples</div>
+<div class="code-wrap">
+  <div class="code-bar">
+    <div class="ctabs">
+      <button class="ctab on" onclick="sw(this,'t-c1')">House Robber</button>
+      <button class="ctab" onclick="sw(this,'t-c2')">Coin Change</button>
+      <button class="ctab" onclick="sw(this,'t-c3')">LCS</button>
+      <button class="ctab" onclick="sw(this,'t-c4')">Knapsack</button>
+    </div>
+    <button class="code-copy" onclick="copyCode(this)">copy</button>
+  </div>
+
+  <div id="t-c1" class="cpanel on"><pre><span style="color:#8b949e">// House Robber — full progression</span>
+
+<span style="color:#8b949e">// 1. Memoization (top-down, O(n) space)</span>
+int robMemo(int[] nums, int i, int[] memo) {
+    if (i >= nums.length) return 0;
+    if (memo[i] != -1) return memo[i];
+    return memo[i] = Math.max(nums[i]+robMemo(nums,i+2,memo), robMemo(nums,i+1,memo));
+}
+
+<span style="color:#8b949e">// 2. Tabulation (bottom-up, O(n) space)</span>
+int robTab(int[] nums) {
+    int n = nums.length;
+    if (n == 1) return nums[0];
+    int[] dp = new int[n];
+    dp[0] = nums[0];                           <span style="color:#22c55e">// base case</span>
+    dp[1] = Math.max(nums[0], nums[1]);        <span style="color:#22c55e">// base case</span>
+    for (int i = 2; i &lt; n; i++)
+        dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]); <span style="color:#f97316">// recurrence</span>
+    return dp[n-1];
+}
+
+<span style="color:#8b949e">// 3. Space optimised (O(1) — dp[i] only needs dp[i-1] and dp[i-2])</span>
+int robOpt(int[] nums) {
+    int prev2 = 0, prev1 = 0;
+    for (int num : nums) {
+        int curr = Math.max(prev1, prev2 + num);
+        prev2 = prev1;
+        prev1 = curr;
+    }
+    return prev1;
+}</pre></div>
+
+  <div id="t-c2" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// Coin Change — LC 322</span>
+
+<span style="color:#8b949e">// Memo version (reference)</span>
+int solveMemo(int rem) {
+    if (rem == 0) return 0;
+    if (memo[rem] != -1) return memo[rem];
+    int best = Integer.MAX_VALUE;
+    for (int c : coins) if (c &lt;= rem) {
+        int sub = solveMemo(rem - c);
+        if (sub != Integer.MAX_VALUE) best = Math.min(best, sub+1);
+    }
+    return memo[rem] = best;
+}
+
+<span style="color:#8b949e">// Tabulation version (bottom-up)</span>
+int coinChange(int[] coins, int amount) {
+    int[] dp = new int[amount + 1];
+    Arrays.fill(dp, amount + 1);               <span style="color:#22c55e">// "infinity" sentinel</span>
+    dp[0] = 0;                                 <span style="color:#22c55e">// base: 0 coins for amount 0</span>
+    for (int i = 1; i &lt;= amount; i++)         <span style="color:#f97316">// fill from 1 to amount</span>
+        for (int coin : coins)
+            if (coin &lt;= i)
+                dp[i] = Math.min(dp[i], dp[i-coin] + 1); <span style="color:#f97316">// same recurrence!</span>
+    return dp[amount] &gt; amount ? -1 : dp[amount];
+}
+<span style="color:#8b949e">// dp[i-coin] replaces the recursive call solveMemo(rem-coin)</span></pre></div>
+
+  <div id="t-c3" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// LCS — LC 1143</span>
+
+<span style="color:#8b949e">// 1. Full 2D table — O(m×n) space</span>
+int lcs2D(String s1, String s2) {
+    int m = s1.length(), n = s2.length();
+    int[][] dp = new int[m+1][n+1];
+    <span style="color:#22c55e">// base: dp[0][j]=0 and dp[i][0]=0 (already 0 by default)</span>
+    for (int i = 1; i &lt;= m; i++)
+        for (int j = 1; j &lt;= n; j++)
+            if (s1.charAt(i-1) == s2.charAt(j-1))
+                dp[i][j] = dp[i-1][j-1] + 1;   <span style="color:#f97316">// match: diagonal + 1</span>
+            else
+                dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]); <span style="color:#f97316">// skip</span>
+    return dp[m][n];
+}
+
+<span style="color:#8b949e">// 2. Space optimised — O(n) rolling array
+// dp[i] only needs dp[i-1] row AND diagonal value dp[i-1][j-1]</span>
+int lcs1D(String s1, String s2) {
+    int m = s1.length(), n = s2.length();
+    int[] dp = new int[n+1];
+    for (int i = 1; i &lt;= m; i++) {
+        int prev = 0;                  <span style="color:#f97316">// saves dp[i-1][j-1] (diagonal)</span>
+        for (int j = 1; j &lt;= n; j++) {
+            int temp = dp[j];
+            if (s1.charAt(i-1) == s2.charAt(j-1))
+                dp[j] = prev + 1;
+            else
+                dp[j] = Math.max(dp[j], dp[j-1]);
+            prev = temp;               <span style="color:#f97316">// next iteration's diagonal</span>
+        }
+    }
+    return dp[n];
+}</pre></div>
+
+  <div id="t-c4" class="cpanel" style="display:none"><pre><span style="color:#8b949e">// 0/1 Knapsack — full progression</span>
+
+<span style="color:#8b949e">// 1. 2D Tabulation — O(n×W) space</span>
+int knap2D(int[] wt, int[] val, int W) {
+    int n = wt.length;
+    int[][] dp = new int[n+1][W+1];
+    for (int i = 1; i &lt;= n; i++)
+        for (int w = 1; w &lt;= W; w++) {
+            dp[i][w] = dp[i-1][w];             <span style="color:#f97316">// skip item i</span>
+            if (wt[i-1] &lt;= w)
+                dp[i][w] = Math.max(dp[i][w],
+                    dp[i-1][w-wt[i-1]] + val[i-1]); <span style="color:#f97316">// take item i</span>
+        }
+    return dp[n][W];
+}
+
+<span style="color:#8b949e">// 2. 1D Optimised — O(W) space
+// CRITICAL: iterate W in REVERSE for 0/1 (each item once)</span>
+int knap1D(int[] wt, int[] val, int W) {
+    int[] dp = new int[W+1];
+    for (int i = 0; i &lt; wt.length; i++)
+        for (int w = W; w &gt;= wt[i]; w--)  <span style="color:#f97316">// REVERSE = 0/1</span>
+            dp[w] = Math.max(dp[w], dp[w-wt[i]] + val[i]);
+    return dp[W];
+}
+<span style="color:#8b949e">// Change reverse→forward for Unbounded Knapsack (reuse allowed)</span></pre></div>
+</div>
+
+<div class="sh">Space Optimisation Patterns</div>
+<table class="dp-table" style="margin-bottom:20px">
+  <thead><tr><th>Pattern</th><th>Original Space</th><th>Optimised</th><th>Trick</th></tr></thead>
+  <tbody>
+    <tr><td>Fibonacci / House Robber</td><td>O(n)</td><td>O(1)</td><td>Keep prev2 and prev1 variables</td></tr>
+    <tr><td>0/1 Knapsack</td><td>O(n·W)</td><td>O(W)</td><td>1D array, iterate W in REVERSE</td></tr>
+    <tr><td>Unbounded Knapsack</td><td>O(n·W)</td><td>O(W)</td><td>1D array, iterate W FORWARD</td></tr>
+    <tr><td>LCS / Edit Distance</td><td>O(m·n)</td><td>O(n)</td><td>Rolling array + save diagonal in <code>prev</code></td></tr>
+    <tr><td>Grid DP</td><td>O(m·n)</td><td>O(n)</td><td>Process row by row, reuse 1D array</td></tr>
+    <tr><td>MCM / Interval DP</td><td>O(n²)</td><td>O(n²)</td><td>Can't reduce — needs full interval</td></tr>
+  </tbody>
+</table>
+
+<div class="sh">Fill Order — The One Thing Tabulation Requires</div>
+<div class="callout co-blue" style="margin-bottom:12px">
+  <div class="callout-title">📐 Rule: When filling dp[i], all dp[j] that dp[i] depends on must already be filled</div>
+  <p>
+  <strong>1D (left-to-right):</strong> dp[i] depends on dp[i-1], dp[i-2] → fill i from 0 to n ✅<br>
+  <strong>2D (row by row):</strong> dp[i][j] depends on dp[i-1][j] and dp[i][j-1] → fill i then j ✅<br>
+  <strong>Interval DP (by length):</strong> dp[i][j] depends on dp[i][k] and dp[k+1][j] where k&lt;j → fill by <em>increasing length</em> ✅<br><br>
+  If you fill in the wrong order, you read uncomputed values → wrong answers.
+  </p>
+</div>
+
+<div class="sh">The 5-Step Template for Any DP Problem</div>
+<div class="step-list">
+  <div class="step-item">
+    <div class="step-title">Define the state — what does dp[i] (or dp[i][j]) mean?</div>
+    <div class="step-body">Write it in one English sentence. This is your hypothesis from Module 2.</div>
+  </div>
+  <div class="step-item">
+    <div class="step-title">Identify base cases</div>
+    <div class="step-body">What are the trivially known values? Fill these before the loop.</div>
+  </div>
+  <div class="step-item">
+    <div class="step-title">Write the recurrence</div>
+    <div class="step-body">How does dp[i] depend on previous states? This is your induction from Module 2.</div>
+  </div>
+  <div class="step-item">
+    <div class="step-title">Determine fill order</div>
+    <div class="step-body">Ensure all dependencies are filled before dp[i] is computed.</div>
+  </div>
+  <div class="step-item">
+    <div class="step-title">Extract answer + optimise space</div>
+    <div class="step-body">Where is the answer in the table? Can you reduce 2D → 1D → O(1)?</div>
+  </div>
+</div>
+
+<div class="callout co-green" style="margin-top:16px">
+  <div class="callout-title">✅ You're now ready for patterns</div>
+  <p>You know: why DP (Module 1), how to think recursively (Module 2), how to memoize (Module 3), and how to tabulate (Module 4). Every pattern in the sidebar is just a specific application of these 4 ideas. State Design (Module 5) teaches you how to figure out what to put in dp[] for any new problem.</p>
+</div>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>document.addEventListener('DOMContentLoaded',function(){initDPPage('tabulation');});</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>🎛️ DP State Design — DP Guide | LeetCode Pattern Tracker</title>
+<meta name="description" content="The most important DP skill: what to put in dp[]. Derive state from first principles."/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="dp-shared.css"/>
+
+</head>
+<body>
+<nav id="gnav" class="gnav"></nav>
+<div class="dp-layout">
+  <aside id="dp-sidebar" class="dp-sidebar"></aside>
+  <main class="dp-content">
+    <div class="page-header">
+      <div class="page-eyebrow">🧮 Module 5</div>
+      <h1 class="page-title">🎛️ DP State Design</h1>
+      <p class="page-desc">The most important DP skill: what to put in dp[]. Derive state from first principles.</p>
+    </div>
+    
+<div class="callout co-orange" style="margin-bottom:20px">
+  <div class="callout-title">🎛️ The Most Important DP Skill</div>
+  <p>Beginners struggle with DP not because the math is hard, but because they don't know <strong>what to put in dp[]</strong>.
+  This module teaches you to derive the state definition from first principles — every time.</p>
+</div>
+
+<div class="sh">The 3 Questions to Find Your State</div>
+<div class="step-list" style="margin-bottom:24px">
+  <div class="step-item">
+    <div class="step-title">What changes between recursive calls?</div>
+    <div class="step-body">The parameters that change = your state dimensions.
+    <br>House Robber: only <code>i</code> (current index) changes → 1D state <code>dp[i]</code>
+    <br>LCS: both <code>i</code> and <code>j</code> (positions in two strings) change → 2D state <code>dp[i][j]</code>
+    <br>Stocks with k transactions: <code>day</code>, <code>k</code>, <code>holding</code> → 3D state <code>dp[day][k][holding]</code></div>
+  </div>
+  <div class="step-item">
+    <div class="step-title">What affects future decisions?</div>
+    <div class="step-body">Only include in state what is <em>necessary</em> to make the optimal decision going forward.
+    <br>Knapsack: need <code>remaining_capacity</code> because it limits future choices.
+    <br>House Robber: do NOT need "how I got here" — only current index matters.
+    <br>Stock cooldown: need <code>holding</code> flag because you can't buy if you already hold.</div>
+  </div>
+  <div class="step-item">
+    <div class="step-title">What does dp[state] represent?</div>
+    <div class="step-body">Write it in English. This IS your recurrence.
+    <br><code>dp[i]</code> = max money robbing from house i to end
+    <br><code>dp[i][w]</code> = max value using first i items with capacity w
+    <br><code>dp[i][j]</code> = LCS length of s1[0..i] and s2[0..j]</div>
+  </div>
+</div>
+
+<div class="sh">State Dimension Reference</div>
+<table class="dp-table" style="margin-bottom:24px">
+  <thead><tr><th>State</th><th>When to use</th><th>Examples</th><th>Space</th></tr></thead>
+  <tbody>
+    <tr><td><code>dp[i]</code></td><td>Single sequence, one changing param</td><td>Fibonacci, House Robber, LIS</td><td>O(n)</td></tr>
+    <tr><td><code>dp[i][j]</code></td><td>Two sequences OR index + constraint</td><td>LCS, Edit Distance, Knapsack</td><td>O(n²)</td></tr>
+    <tr><td><code>dp[i][j][k]</code></td><td>Three constraints (often reducible)</td><td>Stocks with k txns, 3D Grid</td><td>O(n³)</td></tr>
+    <tr><td><code>dp[row][col]</code></td><td>2D grid movement</td><td>Unique Paths, Min Path Sum</td><td>O(m·n)</td></tr>
+    <tr><td><code>dp[day][hold]</code></td><td>State machine at each step</td><td>Stock Buy/Sell with cooldown</td><td>O(n)</td></tr>
+    <tr><td><code>dp[mask]</code></td><td>Subset of items visited (n≤20)</td><td>TSP, Bitmask DP</td><td>O(2ⁿ)</td></tr>
+    <tr><td><code>dp[i][j]</code> interval</td><td>Subarray/substring of length j-i</td><td>MCM, Burst Balloons</td><td>O(n²)</td></tr>
+    <tr><td><code>dp[node]</code></td><td>Tree — depends on subtree results</td><td>House Robber III, Diameter</td><td>O(n)</td></tr>
+  </tbody>
+</table>
+
+<div class="sh">Worked Examples — Deriving State from Scratch</div>
+
+<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+  <div style="background:var(--bg4);padding:12px 16px;display:flex;gap:8px;flex-wrap:wrap">
+    <button class="ctab on" onclick="sw(this,'sd-e1')">Coin Change</button>
+    <button class="ctab" onclick="sw(this,'sd-e2')">Stock + Cooldown</button>
+    <button class="ctab" onclick="sw(this,'sd-e3')">LCS</button>
+    <button class="ctab" onclick="sw(this,'sd-e4')">Knapsack</button>
+  </div>
+  <div id="sd-e1" class="cpanel on" style="padding:20px">
+    <div class="sh-sm">Coin Change — LC 322</div>
+    <div class="callout co-blue" style="margin-bottom:12px">
+      <div class="callout-title">Problem: min coins to make amount</div>
+      <p>Q1: What changes? → <strong>remaining amount</strong> (after picking a coin)<br>
+      Q2: What affects future? → only <code>rem</code> matters — once I choose a coin, the remaining amount fully determines future options<br>
+      Q3: dp[rem] = <strong>min coins to make exactly rem</strong></p>
+    </div>
+<div class="code-wrap"><pre>// State: dp[rem] = min coins to make amount rem
+int[] dp = new int[amount+1];
+Arrays.fill(dp, amount+1);  // "infinity"
+dp[0] = 0;                  // base: 0 coins to make 0
+
+for (int rem = 1; rem &lt;= amount; rem++)
+    for (int coin : coins)
+        if (coin &lt;= rem)
+            dp[rem] = Math.min(dp[rem], dp[rem-coin] + 1);
+// Recurrence: dp[rem] = min over all coins of (dp[rem-coin] + 1)
+// "Use 1 coin + solve smaller subproblem"</pre></div>
+  </div>
+  <div id="sd-e2" class="cpanel" style="display:none;padding:20px">
+    <div class="sh-sm">Stock with Cooldown — LC 309</div>
+    <div class="callout co-blue" style="margin-bottom:12px">
+      <div class="callout-title">Problem: max profit with 1-day cooldown after sell</div>
+      <p>Q1: What changes? → <strong>day</strong> and <strong>current state</strong><br>
+      Q2: What affects future? → whether I'm <strong>holding</strong> a stock, just <strong>sold</strong>, or in <strong>rest</strong><br>
+      Q3: Need 3 states: hold (max profit if holding), sold (just sold today), rest (in cooldown or idle)</p>
+    </div>
+<div class="code-wrap"><pre>// States: hold, sold, rest
+// Transitions:
+//   hold = max(hold, rest - price)   // keep holding OR buy (only from rest)
+//   sold = hold + price              // sell today
+//   rest = max(rest, sold)           // stay rest OR come from sold (cooldown)
+
+int hold = Integer.MIN_VALUE, sold = 0, rest = 0;
+for (int price : prices) {
+    int prevSold = sold;
+    sold = hold + price;              // sell: was holding
+    hold = Math.max(hold, rest-price);// buy: was resting; or keep holding
+    rest = Math.max(rest, prevSold);  // cooldown or stay idle
+}
+return Math.max(sold, rest);</pre></div>
+  </div>
+  <div id="sd-e3" class="cpanel" style="display:none;padding:20px">
+    <div class="sh-sm">LCS — LC 1143</div>
+    <div class="callout co-blue" style="margin-bottom:12px">
+      <div class="callout-title">Problem: longest common subsequence of two strings</div>
+      <p>Q1: What changes? → position <code>i</code> in s1 AND position <code>j</code> in s2<br>
+      Q2: What affects future? → both indices — current position in each string determines what's available<br>
+      Q3: dp[i][j] = <strong>LCS length of s1[0..i-1] and s2[0..j-1]</strong></p>
+    </div>
+<div class="code-wrap"><pre>// State: dp[i][j] = LCS of s1[0..i-1] and s2[0..j-1]
+int[][] dp = new int[m+1][n+1];
+
+for (int i=1; i&lt;=m; i++)
+    for (int j=1; j&lt;=n; j++)
+        if (s1.charAt(i-1) == s2.charAt(j-1))
+            dp[i][j] = dp[i-1][j-1] + 1;  // characters match → extend
+        else
+            dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]); // skip from either</pre></div>
+  </div>
+  <div id="sd-e4" class="cpanel" style="display:none;padding:20px">
+    <div class="sh-sm">0/1 Knapsack</div>
+    <div class="callout co-blue" style="margin-bottom:12px">
+      <div class="callout-title">Problem: max value with weight capacity W</div>
+      <p>Q1: What changes? → <strong>item index i</strong> (which items considered) AND <strong>remaining capacity w</strong><br>
+      Q2: What affects future? → both — we need to know which items remain AND how much capacity left<br>
+      Q3: dp[i][w] = <strong>max value using first i items with capacity w</strong></p>
+    </div>
+<div class="code-wrap"><pre>// State: dp[i][w] = max value, first i items, capacity w
+// Recurrence:
+//   skip item i: dp[i-1][w]
+//   take item i (if fits): val[i] + dp[i-1][w-wt[i]]
+//   dp[i][w] = max(skip, take)
+
+// Space-optimised to 1D: dp[w] with REVERSE inner loop
+int[] dp = new int[W+1];
+for (int i=0; i&lt;n; i++)
+    for (int w=W; w&gt;=wt[i]; w--)   // REVERSE = 0/1 (each item once)
+        dp[w] = Math.max(dp[w], dp[w-wt[i]] + val[i]);</pre></div>
+  </div>
+</div>
+
+<div class="sh">State Reduction — From 3D to 1D</div>
+<div class="callout co-green" style="margin-bottom:12px">
+  <div class="callout-title">💡 Always try to reduce dimensions</div>
+  <p>If dp[i] only depends on dp[i-1] → use two variables. If dp[i][j] only depends on row i-1 → use 1D rolling array. This is what separates good solutions from great ones.</p>
+</div>
+<table class="dp-table">
+  <thead><tr><th>Original</th><th>Reduced</th><th>Trick</th></tr></thead>
+  <tbody>
+    <tr><td><code>dp[n]</code> Fibonacci</td><td><code>a, b</code> — O(1)</td><td>Only need prev 2 values</td></tr>
+    <tr><td><code>dp[n][W]</code> Knapsack</td><td><code>dp[W]</code> — O(W)</td><td>Iterate weights in reverse</td></tr>
+    <tr><td><code>dp[m][n]</code> LCS</td><td><code>dp[n]</code> with prev var — O(n)</td><td>Row i only needs row i-1; save diagonal in <code>prev</code></td></tr>
+    <tr><td><code>dp[n][k][2]</code> Stocks</td><td><code>buy, sell</code> arrays — O(k)</td><td>At each day only 2 states per transaction count</td></tr>
+  </tbody>
+</table>
+
+    <nav class="pn-nav" id="pn-nav"></nav>
+  </main>
+</div>
+<script src="dp-shared.js"></script>
+<script src="dp-data.js"></script>
+<script src="shared.js" defer onerror="console.warn('shared.js not loaded')"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initDPPage('state-design');
+});
+</script>
+</body>
+</html>
