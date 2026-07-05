@@ -400,281 +400,365 @@
     },
 
     // ══════════════════════════════════════════════════════
-    // V. DYNAMIC PROGRAMMING  (Aditya Verma + Full FAANG Coverage)
+    // V. DYNAMIC PROGRAMMING  (Aditya Verma + Complete FAANG Coverage)
     // ══════════════════════════════════════════════════════
-    // lc  : LeetCode slug  → https://leetcode.com/problems/<slug>/
-    // gfg : GFG slug       → https://www.geeksforgeeks.org/problems/<slug>/
-    // If lc is null → GFG-only. Both = exists on both platforms.
+    // HOW LINKS WORK:
+    //   lc   : LeetCode slug  → https://leetcode.com/problems/<slug>/
+    //   gfg  : GFG slug       → https://www.geeksforgeeks.org/problems/<slug>/
+    //   If lc is null → GFG-only problem
+    //   Both given → problem exists on both platforms
     {
       category: "V. Dynamic Programming (DP) Patterns",
       pageId: "dp",
       patterns: [
-        // ── AV PLAYLIST 1: 0/1 KNAPSACK ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 1  —  0/1 KNAPSACK & VARIANTS
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 27: DP - 0/1 Knapsack & Variants",
+          name: "Pattern 27: DP - 0/1 Knapsack (Classic & Variants)",
           subId: "knapsack-01",
           section: "0/1 Knapsack",
-          desc: "Each item picked at most once. dp[i][w] = max(exclude item i, include if weight fits). Variants: Subset Sum, Equal Partition, Count Subsets, Min Subset Diff, Target Sum, 2D Knapsack.",
-          complexity: "Time: O(n·W) · Space: O(W)",
+          desc: "Each item can be picked at most once. dp[i][w] = max(exclude item i, include item i if weight fits). Variants cover Subset Sum, Equal Partition, Count Subsets, Min Subset Diff, Target Sum, Ones & Zeroes.",
+          complexity: "Time: O(n·W) · Space: O(W) after optimisation",
           problems: [
-            { num:null,  lc:null,                              gfg:"0-1-knapsack-problem",                    title:"0/1 Knapsack",                              diff:"Medium", concept:"Classic — pick or skip each item once" },
-            { num:null,  lc:null,                              gfg:"subset-sum-problem",                      title:"Subset Sum",                                diff:"Medium", concept:"Can we reach target sum with a subset?" },
-            { num:"416", lc:"partition-equal-subset-sum",      gfg:"subset-sum-problem",                      title:"Partition Equal Subset Sum",                diff:"Medium", concept:"Subset Sum where target = totalSum / 2" },
-            { num:null,  lc:null,                              gfg:"perfect-sum-problem",                     title:"Count Subsets with Given Sum",              diff:"Medium", concept:"Count subsets (not just yes/no)" },
-            { num:null,  lc:null,                              gfg:"minimum-sum-partition",                   title:"Minimum Subset Sum Difference",             diff:"Medium", concept:"Split array — minimise |S1 − S2|" },
-            { num:"494", lc:"target-sum",                      gfg:"target-sum",                              title:"Target Sum (+/− assignment)",               diff:"Medium", concept:"Count subsets: P−N=target → count=(target+sum)/2" },
-            { num:null,  lc:null,                              gfg:"number-of-subsets-with-given-difference", title:"Count Subsets with Given Difference",       diff:"Medium", concept:"Reduce to count subsets with sum=(diff+total)/2" },
-            { num:"474", lc:"ones-and-zeroes",                 gfg:"0-1-knapsack-problem",                    title:"Ones and Zeroes (2D Knapsack)",             diff:"Medium", concept:"2D capacity: W=max 0s, H=max 1s" },
-            { num:"1049",lc:"last-stone-weight-ii",            gfg:"minimum-sum-partition",                   title:"Last Stone Weight II",                      diff:"Medium", concept:"Min diff partition = min subset sum diff" },
+            { num:null,  lc:null,                              gfg:"0-1-knapsack-problem",                           title:"0/1 Knapsack",                                       diff:"Medium", concept:"Classic — pick or skip each item once" },
+            { num:null,  lc:null,                              gfg:"subset-sum-problem",                             title:"Subset Sum",                                          diff:"Medium", concept:"Can we reach target sum with subset?" },
+            { num:"416", lc:"partition-equal-subset-sum",      gfg:"subset-sum-problem",                             title:"Partition Equal Subset Sum",                          diff:"Medium", concept:"Subset Sum where target = totalSum / 2" },
+            { num:null,  lc:null,                              gfg:"perfect-sum-problem",                            title:"Count of Subsets with Given Sum",                    diff:"Medium", concept:"Count subsets (not just yes/no)" },
+            { num:null,  lc:null,                              gfg:"minimum-sum-partition",                          title:"Minimum Subset Sum Difference",                      diff:"Medium", concept:"Split array — minimise |S1 - S2|" },
+            { num:"494", lc:"target-sum",                      gfg:"target-sum",                                     title:"Target Sum (+/− assignment)",                        diff:"Medium", concept:"Count subsets: P−N=target → count(P)=(target+sum)/2" },
+            { num:null,  lc:null,                              gfg:"number-of-subsets-with-given-difference",        title:"Count Subsets with Given Difference",                diff:"Medium", concept:"Reduce to count subsets with sum=(diff+total)/2" },
+            { num:"474", lc:"ones-and-zeroes",                 gfg:"0-1-knapsack-problem",                           title:"Ones and Zeroes (2D Knapsack)",                      diff:"Medium", concept:"2D capacity knapsack: W=max 0s, H=max 1s" },
+            { num:"1049",lc:"last-stone-weight-ii",            gfg:"minimum-sum-partition",                          title:"Last Stone Weight II",                               diff:"Medium", concept:"Min diff partition = variant of min subset sum diff" },
+            { num:"2787",lc:"ways-to-express-an-integer-as-sum-of-powers", gfg:"perfect-sum-problem",              title:"Ways to Express Integer as Sum of Powers",           diff:"Medium", concept:"Count subsets of k-th powers summing to n" },
           ]
         },
-        // ── AV PLAYLIST 2: UNBOUNDED KNAPSACK ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 2  —  UNBOUNDED KNAPSACK
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 28: DP - Unbounded Knapsack (Items Reusable)",
           subId: "knapsack-unbounded",
           section: "Unbounded Knapsack",
-          desc: "Each item usable unlimited times. Inner loop does NOT skip current item. Variants: Rod Cutting, Coin Change, Integer Break.",
+          desc: "Each item can be used unlimited times. In the inner loop do NOT skip the current item. Variants: Rod Cutting, Coin Change (min / count), Max Ribbon Cut, Integer Break.",
           complexity: "Time: O(n·W) · Space: O(W)",
           problems: [
-            { num:null,  lc:null,                              gfg:"knapsack-with-duplicate-items",           title:"Unbounded Knapsack",                        diff:"Medium", concept:"Same as 0/1 but pick same item again allowed" },
-            { num:null,  lc:null,                              gfg:"rod-cutting",                             title:"Rod Cutting",                               diff:"Medium", concept:"Lengths = items, prices = profits; unbounded" },
-            { num:"322", lc:"coin-change",                     gfg:"number-of-coins",                         title:"Coin Change (Min Coins)",                   diff:"Medium", concept:"Unbounded knapsack — minimise coin count" },
-            { num:"518", lc:"coin-change-ii",                  gfg:"coin-change2",                            title:"Coin Change II (Count Ways)",               diff:"Medium", concept:"Count combinations to reach amount" },
-            { num:"377", lc:"combination-sum-iv",              gfg:"count-of-strings-that-can-be-formed-using-a-b-and-c", title:"Combination Sum IV (Ordered)", diff:"Medium", concept:"Ordered = permutations — outer loop over targets" },
-            { num:"343", lc:"integer-break",                   gfg:"maximum-product-cutting",                 title:"Integer Break",                             diff:"Medium", concept:"Unbounded: break n into parts, max product" },
-            { num:null,  lc:null,                              gfg:"maximum-number-of-segments-of-lengths-a-b-and-c", title:"Maximum Ribbon Cut",              diff:"Medium", concept:"Max pieces of ribbon of given lengths" },
+            { num:null,  lc:null,                              gfg:"knapsack-with-duplicate-items",                  title:"Unbounded Knapsack",                                 diff:"Medium", concept:"Same as 0/1 but pick same item again allowed" },
+            { num:null,  lc:null,                              gfg:"rod-cutting",                                    title:"Rod Cutting",                                        diff:"Medium", concept:"Lengths = items, prices = profits; unbounded" },
+            { num:"322", lc:"coin-change",                     gfg:"number-of-coins",                                title:"Coin Change (Min Coins)",                            diff:"Medium", concept:"Unbounded knapsack — minimise coin count" },
+            { num:"518", lc:"coin-change-ii",                  gfg:"coin-change2",                                   title:"Coin Change II (Count Ways)",                        diff:"Medium", concept:"Count combinations to reach amount" },
+            { num:"377", lc:"combination-sum-iv",              gfg:"count-of-strings-that-can-be-formed-using-a-b-and-c", title:"Combination Sum IV (Ordered)",              diff:"Medium", concept:"Ordered = permutations — outer loop over targets" },
+            { num:"343", lc:"integer-break",                   gfg:"maximum-product-cutting",                        title:"Integer Break",                                      diff:"Medium", concept:"Unbounded: break n into parts, max product" },
+            { num:null,  lc:null,                              gfg:"maximum-number-of-segments-of-lengths-a-b-and-c", title:"Maximum Ribbon Cut",                               diff:"Medium", concept:"Max pieces of ribbon of given lengths" },
           ]
         },
-        // ── AV PLAYLIST 3: FIBONACCI / 1D DP ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 3  —  FIBONACCI / 1D DP
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 29: DP - Fibonacci Style (1D DP)",
           subId: "fibonacci-dp",
           section: "Fibonacci / 1D DP",
-          desc: "dp[i] depends on previous 1–2 states. Covers stair climbing, house robber, and linear recurrences. Optimise space to two variables.",
-          complexity: "Time: O(n) · Space: O(1)",
+          desc: "dp[i] depends on previous 1–2 states. Covers stair climbing, house robber, and any linear recurrence. Base: dp[0] and dp[1]; optimise space to two variables.",
+          complexity: "Time: O(n) · Space: O(1) after optimisation",
           problems: [
-            { num:"509", lc:"fibonacci-number",                gfg:"nth-fibonacci-number",                    title:"Fibonacci Number",                          diff:"Easy",   concept:"dp[i] = dp[i-1] + dp[i-2]" },
-            { num:"70",  lc:"climbing-stairs",                 gfg:"count-ways-to-reach-the-nth-stair",       title:"Climbing Stairs",                           diff:"Easy",   concept:"Same recurrence as Fibonacci" },
-            { num:"746", lc:"min-cost-climbing-stairs",        gfg:"min-cost-climbing-stairs",                title:"Min Cost Climbing Stairs",                  diff:"Easy",   concept:"dp[i] = cost[i] + min(dp[i-1], dp[i-2])" },
-            { num:"198", lc:"house-robber",                    gfg:"house-robber",                            title:"House Robber",                              diff:"Medium", concept:"dp[i] = max(dp[i-1], dp[i-2] + nums[i])" },
-            { num:"213", lc:"house-robber-ii",                 gfg:"house-robber-ii",                         title:"House Robber II (Circular)",                diff:"Medium", concept:"Run house robber twice: [0,n-2] and [1,n-1]" },
-            { num:"91",  lc:"decode-ways",                     gfg:"count-ways-to-decode",                    title:"Decode Ways",                               diff:"Medium", concept:"1-digit + 2-digit choices — like climbing stairs" },
-            { num:"740", lc:"delete-and-earn",                 gfg:"delete-and-earn",                         title:"Delete and Earn",                           diff:"Medium", concept:"Freq array → house robber on values" },
-            { num:"983", lc:"minimum-cost-for-tickets",        gfg:"minimum-cost-for-tickets",                title:"Minimum Cost For Tickets",                  diff:"Medium", concept:"Choose 1/7/30-day pass optimally" },
-            { num:"2140",lc:"solving-questions-with-brainpower",gfg:"solving-questions-with-brainpower",      title:"Solving Questions with Brainpower",         diff:"Medium", concept:"Solve or skip; skip blocks next k questions" },
+            { num:"509", lc:"fibonacci-number",                gfg:"nth-fibonacci-number",                           title:"Fibonacci Number",                                   diff:"Easy",   concept:"dp[i] = dp[i-1] + dp[i-2]" },
+            { num:"70",  lc:"climbing-stairs",                 gfg:"count-ways-to-reach-the-nth-stair",              title:"Climbing Stairs",                                    diff:"Easy",   concept:"Same recurrence as Fibonacci" },
+            { num:"746", lc:"min-cost-climbing-stairs",        gfg:"min-cost-climbing-stairs",                       title:"Min Cost Climbing Stairs",                           diff:"Easy",   concept:"dp[i] = cost[i] + min(dp[i-1], dp[i-2])" },
+            { num:"198", lc:"house-robber",                    gfg:"house-robber",                                   title:"House Robber",                                       diff:"Medium", concept:"dp[i] = max(dp[i-1], dp[i-2] + nums[i])" },
+            { num:"213", lc:"house-robber-ii",                 gfg:"house-robber-ii",                                title:"House Robber II (Circular)",                         diff:"Medium", concept:"Run house robber twice: [0,n-2] and [1,n-1]" },
+            { num:"91",  lc:"decode-ways",                     gfg:"count-ways-to-decode",                           title:"Decode Ways",                                        diff:"Medium", concept:"1-digit + 2-digit choices — like climbing stairs" },
+            { num:"740", lc:"delete-and-earn",                 gfg:"delete-and-earn",                                title:"Delete and Earn",                                    diff:"Medium", concept:"Freq array → house robber on values" },
+            { num:"1137",lc:"n-th-tribonacci-number",          gfg:"tribonacci-sequence",                            title:"N-th Tribonacci Number",                             diff:"Easy",   concept:"dp[i] = dp[i-1]+dp[i-2]+dp[i-3]" },
+            { num:"983", lc:"minimum-cost-for-tickets",        gfg:"minimum-cost-for-tickets",                       title:"Minimum Cost For Tickets",                           diff:"Medium", concept:"Travel days — choose 1/7/30-day pass optimally" },
+            { num:"2140",lc:"solving-questions-with-brainpower", gfg:"solving-questions-with-brainpower",           title:"Solving Questions with Brainpower",                  diff:"Medium", concept:"Solve or skip; skip skips next k questions" },
           ]
         },
-        // ── AV PLAYLIST 4: LCS & VARIANTS ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 4  —  LCS & VARIANTS
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 30: DP - Longest Common Subsequence & Variants",
+          name: "Pattern 30: DP - Longest Common Subsequence (LCS) & Variants",
           subId: "lcs",
           section: "LCS & Variants",
-          desc: "2D dp: dp[i][j] = LCS of s1[0..i] and s2[0..j]. Match → 1+dp[i-1][j-1]; else max(skip either). Variants: Print LCS, LCSubstring, Edit Distance, SCS, LPS, Distinct Subsequences, Wildcard.",
+          desc: "2D dp: dp[i][j] = LCS of s1[0..i] and s2[0..j]. Match → 1+dp[i-1][j-1]; else max(skip from either). Variants: Print LCS, LCSubstring, Edit Distance, SCS, Min Deletions/Insertions, LPS, Distinct Subsequences, Wildcard/Regex.",
           complexity: "Time: O(m·n) · Space: O(n)",
           problems: [
-            { num:"1143",lc:"longest-common-subsequence",      gfg:"longest-common-subsequence",              title:"Longest Common Subsequence",                diff:"Medium", concept:"Classic 2D DP — match or skip" },
-            { num:null,  lc:null,                              gfg:"print-longest-common-subsequence",        title:"Print LCS",                                diff:"Medium", concept:"Backtrack from dp table to reconstruct" },
-            { num:null,  lc:null,                              gfg:"longest-common-substring",                title:"Longest Common Substring",                 diff:"Medium", concept:"Reset to 0 on mismatch (contiguous)" },
-            { num:"583", lc:"delete-operation-for-two-strings",gfg:"minimum-number-of-deletions-and-insertions", title:"Min Deletions & Insertions to Convert", diff:"Medium", concept:"Del=len1-LCS, Ins=len2-LCS" },
-            { num:"72",  lc:"edit-distance",                   gfg:"edit-distance",                           title:"Edit Distance (Levenshtein)",               diff:"Hard",   concept:"Insert/delete/replace; dp[i][j]=1+min(3 ops)" },
-            { num:"1092",lc:"shortest-common-supersequence",   gfg:"shortest-common-supersequence",           title:"Shortest Common Supersequence",             diff:"Hard",   concept:"len1+len2-LCS" },
-            { num:"516", lc:"longest-palindromic-subsequence", gfg:"longest-palindromic-subsequence",         title:"Longest Palindromic Subsequence",           diff:"Medium", concept:"LCS(s, reverse(s))" },
-            { num:"1312",lc:"minimum-insertion-steps-to-make-a-string-palindrome", gfg:"minimum-insertions-to-make-a-string-palindrome", title:"Min Insertions to Make Palindrome", diff:"Hard", concept:"len - LPS" },
-            { num:"97",  lc:"interleaving-string",             gfg:"interleaved-strings",                     title:"Interleaving String",                       diff:"Hard",   concept:"dp[i][j] = can form s3 from s1[0..i]+s2[0..j]" },
-            { num:"1035",lc:"uncrossed-lines",                 gfg:"longest-common-subsequence",              title:"Uncrossed Lines",                           diff:"Medium", concept:"Exactly LCS on the two arrays" },
-            { num:"115", lc:"distinct-subsequences",           gfg:"number-of-distinct-subsequences",         title:"Distinct Subsequences",                     diff:"Hard",   concept:"Count ways s is a subseq of t" },
+            { num:"1143",lc:"longest-common-subsequence",      gfg:"longest-common-subsequence",                     title:"Longest Common Subsequence",                         diff:"Medium", concept:"Classic 2D DP — match or skip from either end" },
+            { num:null,  lc:null,                              gfg:"print-longest-common-subsequence",               title:"Print LCS",                                          diff:"Medium", concept:"Backtrack from dp table to reconstruct string" },
+            { num:null,  lc:null,                              gfg:"longest-common-substring",                       title:"Longest Common Substring",                           diff:"Medium", concept:"Reset to 0 on mismatch (must be contiguous)" },
+            { num:"583", lc:"delete-operation-for-two-strings",gfg:"minimum-number-of-deletions-and-insertions",     title:"Min Deletions & Insertions to Convert",              diff:"Medium", concept:"Del=len1-LCS, Ins=len2-LCS" },
+            { num:"72",  lc:"edit-distance",                   gfg:"edit-distance",                                  title:"Edit Distance (Levenshtein)",                        diff:"Hard",   concept:"Insert / delete / replace; dp[i][j]=1+min(3 ops)" },
+            { num:"1092",lc:"shortest-common-supersequence",   gfg:"shortest-common-supersequence",                  title:"Shortest Common Supersequence",                      diff:"Hard",   concept:"len1+len2-LCS or reconstruct from table" },
+            { num:"516", lc:"longest-palindromic-subsequence", gfg:"longest-palindromic-subsequence",                title:"Longest Palindromic Subsequence",                    diff:"Medium", concept:"LCS(s, reverse(s))" },
+            { num:"1312",lc:"minimum-insertion-steps-to-make-a-string-palindrome", gfg:"minimum-insertions-to-make-a-string-palindrome", title:"Min Insertions to Make String Palindrome", diff:"Hard", concept:"len - LPS" },
+            { num:null,  lc:null,                              gfg:"sequence-pattern-matching",                      title:"Sequence Pattern Matching (Is Subsequence via LCS)", diff:"Easy",   concept:"Check if s1 is subsequence of s2" },
+            { num:"97",  lc:"interleaving-string",             gfg:"interleaved-strings",                            title:"Interleaving String",                                diff:"Hard",   concept:"dp[i][j] = can form s3[0..i+j] from s1[0..i]+s2[0..j]" },
+            { num:"1035",lc:"uncrossed-lines",                 gfg:"longest-common-subsequence",                     title:"Uncrossed Lines",                                    diff:"Medium", concept:"Exactly LCS — connecting equal elements without crossing" },
+            { num:"115", lc:"distinct-subsequences",           gfg:"number-of-distinct-subsequences",                title:"Distinct Subsequences",                              diff:"Hard",   concept:"Count ways s is a subseq of t" },
+            { num:"1458",lc:"max-dot-product-of-two-subsequences", gfg:"max-dot-product-of-two-subsequences",       title:"Max Dot Product of Two Subsequences",                diff:"Hard",   concept:"LCS variant — maximise sum of products" },
           ]
         },
-        // ── AV PLAYLIST 5: LIS & VARIANTS ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 5  —  LIS & VARIANTS
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 31: DP - Longest Increasing Subsequence & Variants",
+          name: "Pattern 31: DP - Longest Increasing Subsequence (LIS) & Variants",
           subId: "lis",
           section: "LIS & Variants",
-          desc: "dp[i] = LIS ending at index i. For each i check all j<i where arr[j]<arr[i]. O(n log n) via patience sort on tails array.",
+          desc: "dp[i] = LIS ending at index i. For each i, check all j<i where arr[j]<arr[i]. O(n log n) patience-sort variant uses binary search on a tails array.",
           complexity: "Time: O(n²) dp / O(n log n) patience · Space: O(n)",
           problems: [
-            { num:"300", lc:"longest-increasing-subsequence",  gfg:"longest-increasing-subsequence",          title:"Longest Increasing Subsequence",            diff:"Medium", concept:"dp[i]=max(dp[j]+1) for j<i, arr[j]<arr[i]" },
-            { num:null,  lc:null,                              gfg:"print-longest-increasing-subsequence",    title:"Print LIS",                                diff:"Medium", concept:"Backtrack from dp array" },
+            { num:"300", lc:"longest-increasing-subsequence",  gfg:"longest-increasing-subsequence",                 title:"Longest Increasing Subsequence",                     diff:"Medium", concept:"dp[i]=max(dp[j]+1) for j<i, arr[j]<arr[i]" },
+            { num:null,  lc:null,                              gfg:"print-longest-increasing-subsequence",           title:"Print LIS",                                          diff:"Medium", concept:"Backtrack from dp array" },
             { num:"674", lc:"longest-continuous-increasing-subsequence", gfg:"longest-increasing-consecutive-subsequence", title:"Longest Continuous Increasing Subsequence", diff:"Easy", concept:"Contiguous — reset when decreasing" },
-            { num:null,  lc:null,                              gfg:"longest-bitonic-subsequence",             title:"Longest Bitonic Subsequence",               diff:"Medium", concept:"LIS from left + LIS from right at each index" },
-            { num:"646", lc:"maximum-length-of-pair-chain",    gfg:"maximum-length-chain-of-pairs",           title:"Maximum Length Chain of Pairs",             diff:"Medium", concept:"Sort by end, LIS variant on pairs" },
-            { num:"354", lc:"russian-doll-envelopes",          gfg:"russian-dolls-envelopes",                 title:"Russian Doll Envelopes",                    diff:"Hard",   concept:"Sort w asc + h desc, then LIS on h" },
-            { num:"673", lc:"number-of-longest-increasing-subsequence", gfg:"number-of-longest-increasing-subsequence", title:"Number of LIS",               diff:"Medium", concept:"Track count[] alongside dp[]" },
-            { num:"368", lc:"largest-divisible-subset",        gfg:"largest-divisible-subset",                title:"Largest Divisible Subset",                  diff:"Medium", concept:"Sort then LIS where arr[i]%arr[j]==0" },
+            { num:null,  lc:null,                              gfg:"longest-bitonic-subsequence",                    title:"Longest Bitonic Subsequence",                        diff:"Medium", concept:"LIS from left + LIS from right at each index" },
+            { num:"646", lc:"maximum-length-of-pair-chain",    gfg:"maximum-length-chain-of-pairs",                  title:"Maximum Length Chain of Pairs",                      diff:"Medium", concept:"Sort by end, LIS variant on pairs" },
+            { num:"354", lc:"russian-doll-envelopes",          gfg:"russian-dolls-envelopes",                        title:"Russian Doll Envelopes (Box Stacking)",              diff:"Hard",   concept:"Sort w asc + h desc, then LIS on h" },
+            { num:"1671",lc:"minimum-number-of-removals-to-make-mountain-array", gfg:"minimum-number-of-deletions-to-make-a-sorted-sequence", title:"Min Removals to Make Mountain Array", diff:"Hard", concept:"LIS from left + from right; mountain peak" },
+            { num:"673", lc:"number-of-longest-increasing-subsequence", gfg:"number-of-longest-increasing-subsequence", title:"Number of Longest Increasing Subsequences",   diff:"Medium", concept:"Track count array alongside dp array" },
+            { num:"368", lc:"largest-divisible-subset",        gfg:"largest-divisible-subset",                       title:"Largest Divisible Subset",                           diff:"Medium", concept:"Sort then LIS where arr[i] % arr[j] == 0" },
+            { num:null,  lc:null,                              gfg:"building-bridges",                               title:"Building Bridges",                                   diff:"Hard",   concept:"Sort one dimension, LIS on other" },
           ]
         },
-        // ── AV PLAYLIST 6: KADANE'S ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 6  —  KADANE'S ALGORITHM
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 32: DP - Kadane's Algorithm (Max Subarray)",
+          name: "Pattern 32: DP - Kadane's Algorithm (Max Subarray Family)",
           subId: "kadane",
           section: "Kadane's Algorithm",
-          desc: "Greedy DP: dp[i] = max(arr[i], dp[i-1]+arr[i]). Variants: max product, circular, 2D max sum rectangle.",
+          desc: "Greedy DP: dp[i] = max(arr[i], dp[i-1]+arr[i]). Variants: max product, circular, 2D max sum rectangle, no-two-adjacent.",
           complexity: "Time: O(n) · Space: O(1)",
           problems: [
-            { num:"53",  lc:"maximum-subarray",                gfg:"kadanes-algorithm",                       title:"Maximum Subarray (Kadane's)",               diff:"Medium", concept:"Reset when running sum drops below 0" },
-            { num:"152", lc:"maximum-product-subarray",        gfg:"maximum-product-subarray",                title:"Maximum Product Subarray",                  diff:"Medium", concept:"Track max and min (negatives flip sign)" },
-            { num:"918", lc:"maximum-sum-circular-subarray",   gfg:"max-circular-subarray",                   title:"Maximum Sum Circular Subarray",             diff:"Medium", concept:"max(kadane normal, total − kadane min)" },
-            { num:null,  lc:null,                              gfg:"max-sum-rectangle",                       title:"Max Sum Rectangle in 2D Matrix",            diff:"Hard",   concept:"Fix top/bottom rows, run Kadane on col sums" },
+            { num:"53",  lc:"maximum-subarray",                gfg:"kadanes-algorithm",                              title:"Maximum Subarray (Kadane's)",                        diff:"Medium", concept:"Reset when running sum drops below 0" },
+            { num:"152", lc:"maximum-product-subarray",        gfg:"maximum-product-subarray",                       title:"Maximum Product Subarray",                           diff:"Medium", concept:"Track max and min (negatives flip sign)" },
+            { num:"918", lc:"maximum-sum-circular-subarray",   gfg:"max-circular-subarray",                          title:"Maximum Sum Circular Subarray",                      diff:"Medium", concept:"max(kadane normal, total − kadane min subarray)" },
+            { num:null,  lc:null,                              gfg:"max-sum-rectangle",                              title:"Max Sum Rectangle in 2D Matrix",                     diff:"Hard",   concept:"Fix top & bottom rows, run Kadane on column sums" },
+            { num:null,  lc:null,                              gfg:"maximum-sum-of-non-adjacent-elements",           title:"Max Sum of Non-Adjacent Elements",                   diff:"Medium", concept:"dp[i] = max(dp[i-1], dp[i-2]+arr[i])" },
+            { num:"1567",lc:"maximum-length-of-subarray-with-positive-product", gfg:"maximum-length-of-subarray-with-positive-product", title:"Max Length Subarray with Positive Product", diff:"Medium", concept:"Track pos/neg lengths like max product variant" },
           ]
         },
-        // ── AV PLAYLIST 7: MCM / INTERVAL DP ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 7  —  MATRIX CHAIN / INTERVAL DP
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 33: DP - Matrix Chain Multiplication (Interval DP)",
           subId: "mcm",
           section: "Matrix Chain / Interval DP",
-          desc: "Partition problems: try every split k in [i,j]. Template: for len=2..n, for i, j=i+len-1, try all k. dp[i][j] = optimal cost for subproblem [i..j].",
+          desc: "Partition problems: try every split k in range [i,j]. Template: for length l=2..n, for i, j=i+l-1, try all k. dp[i][j] = optimal cost for subproblem on [i..j].",
           complexity: "Time: O(n³) · Space: O(n²)",
           problems: [
-            { num:null,  lc:null,                              gfg:"matrix-chain-multiplication",             title:"Matrix Chain Multiplication",               diff:"Hard",   concept:"Try all split points; cost = left+right+dims" },
-            { num:"1039",lc:"minimum-score-triangulation-of-polygon", gfg:"minimum-score-triangulation-of-polygon", title:"Min Score Triangulation of Polygon", diff:"Medium", concept:"MCM on polygon vertices" },
-            { num:"312", lc:"burst-balloons",                  gfg:"burst-balloons",                          title:"Burst Balloons",                            diff:"Hard",   concept:"Last balloon burst in range [i,j]" },
-            { num:"1547",lc:"minimum-cost-to-cut-a-stick",     gfg:"minimum-cost-to-cut-a-stick",             title:"Minimum Cost to Cut a Stick",               diff:"Hard",   concept:"Interval DP on cut positions" },
-            { num:"375", lc:"guess-number-higher-or-lower-ii", gfg:"optimal-strategy-for-a-game",             title:"Guess Number Higher or Lower II",           diff:"Medium", concept:"Minimax interval DP" },
-            { num:null,  lc:null,                              gfg:"boolean-parenthesization",                title:"Boolean Parenthesization",                  diff:"Hard",   concept:"Count ways to parenthesise to get True/False" },
-            { num:"241", lc:"different-ways-to-add-parentheses",gfg:"different-ways-to-add-parentheses",      title:"Different Ways to Add Parentheses",         diff:"Medium", concept:"Split at each operator, recurse both sides" },
-            { num:"410", lc:"split-array-largest-sum",         gfg:"split-array-largest-sum",                 title:"Split Array Largest Sum",                   diff:"Hard",   concept:"Partition into k subsets, minimise max sum" },
-            { num:"664", lc:"strange-printer",                 gfg:"strange-printer",                         title:"Strange Printer",                           diff:"Hard",   concept:"Interval DP: range merges with matching chars" },
+            { num:null,  lc:null,                              gfg:"matrix-chain-multiplication",                    title:"Matrix Chain Multiplication",                        diff:"Hard",   concept:"Try all split points; cost = left + right + dims" },
+            { num:"1039",lc:"minimum-score-triangulation-of-polygon", gfg:"minimum-score-triangulation-of-polygon",  title:"Min Score Triangulation of Polygon",                 diff:"Medium", concept:"MCM on polygon vertices" },
+            { num:"312", lc:"burst-balloons",                  gfg:"burst-balloons",                                 title:"Burst Balloons",                                     diff:"Hard",   concept:"Think of last balloon burst in range [i,j]" },
+            { num:"1547",lc:"minimum-cost-to-cut-a-stick",     gfg:"minimum-cost-to-cut-a-stick",                    title:"Minimum Cost to Cut a Stick",                        diff:"Hard",   concept:"Interval DP on cut positions" },
+            { num:"375", lc:"guess-number-higher-or-lower-ii", gfg:"optimal-strategy-for-a-game",                    title:"Guess Number Higher or Lower II (Minimax)",          diff:"Medium", concept:"Minimax interval DP; pay worst-case at each guess" },
+            { num:null,  lc:null,                              gfg:"boolean-parenthesization",                       title:"Boolean Parenthesization (True / False Count)",      diff:"Hard",   concept:"Count ways to parenthesise to get True / False" },
+            { num:"241", lc:"different-ways-to-add-parentheses",gfg:"different-ways-to-add-parentheses",             title:"Different Ways to Add Parentheses",                  diff:"Medium", concept:"Split at each operator, recurse both sides" },
+            { num:null,  lc:null,                              gfg:"scramble-string",                                title:"Scramble String",                                    diff:"Hard",   concept:"Interval DP with memo on (s1, s2) pairs" },
+            { num:"410", lc:"split-array-largest-sum",         gfg:"split-array-largest-sum",                        title:"Split Array Largest Sum",                            diff:"Hard",   concept:"Partition into k subsets, minimise max sum" },
+            { num:"1000",lc:"minimum-cost-to-merge-stones",    gfg:"minimum-cost-to-merge-stones",                   title:"Minimum Cost to Merge Stones",                       diff:"Hard",   concept:"MCM variant: merge piles with cost" },
+            { num:"664", lc:"strange-printer",                 gfg:"strange-printer",                                title:"Strange Printer",                                    diff:"Hard",   concept:"Interval DP: range [i,j] merges with matching chars" },
+            { num:"877", lc:"stone-game",                      gfg:"stone-game",                                     title:"Stone Game",                                         diff:"Medium", concept:"Minimax game; piles alternate picks" },
+            { num:"1140",lc:"stone-game-ii",                   gfg:"stone-game-ii",                                  title:"Stone Game II",                                      diff:"Medium", concept:"DP with suffix sums; choose 1..2M piles" },
           ]
         },
-        // ── AV PLAYLIST 8: DP ON TREES ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 8  —  DP ON TREES
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 34: DP on Trees",
           subId: "dp-trees",
           section: "DP on Trees",
-          desc: "State at each node depends on children. Postorder processing. Return pair [include, exclude] from each subtree.",
-          complexity: "Time: O(n) · Space: O(h)",
+          desc: "State at each node depends on children. Process postorder (children first). Two choices: include or exclude. Return pair [rob, skip] or [include, exclude] from each subtree.",
+          complexity: "Time: O(n) · Space: O(h) recursion stack",
           problems: [
-            { num:"337", lc:"house-robber-iii",                gfg:"house-robber-iii",                        title:"House Robber III",                          diff:"Medium", concept:"Return [rob, skip] pair from each subtree" },
-            { num:"543", lc:"diameter-of-binary-tree",         gfg:"diameter-of-a-binary-tree",               title:"Diameter of Binary Tree",                   diff:"Easy",   concept:"At each node: ans = max(ans, L+R depth)" },
-            { num:"124", lc:"binary-tree-maximum-path-sum",    gfg:"binary-tree-maximum-path-sum",            title:"Binary Tree Maximum Path Sum",              diff:"Hard",   concept:"gain=max(0,left,right); path=L+R+val" },
-            { num:"968", lc:"binary-tree-cameras",             gfg:"binary-tree-cameras",                     title:"Binary Tree Cameras",                       diff:"Hard",   concept:"DP states: covered, has camera, needs camera" },
-            { num:"2246",lc:"longest-path-with-different-adjacent-characters", gfg:"longest-path-in-tree",    title:"Longest Path with Different Adjacent Chars", diff:"Hard",   concept:"DFS returning top-2 child paths; combine" },
+            { num:"337", lc:"house-robber-iii",                gfg:"house-robber-iii",                               title:"House Robber III",                                   diff:"Medium", concept:"Return [rob, skip] pair from each subtree" },
+            { num:"543", lc:"diameter-of-binary-tree",         gfg:"diameter-of-a-binary-tree",                      title:"Diameter of Binary Tree",                            diff:"Easy",   concept:"At each node: ans = max(ans, L+R depth)" },
+            { num:"124", lc:"binary-tree-maximum-path-sum",    gfg:"binary-tree-maximum-path-sum",                   title:"Binary Tree Maximum Path Sum",                       diff:"Hard",   concept:"gain = max(0, left, right); path through = L+R+val" },
+            { num:"968", lc:"binary-tree-cameras",             gfg:"binary-tree-cameras",                            title:"Binary Tree Cameras",                                diff:"Hard",   concept:"DP states: covered, has camera, needs camera" },
+            { num:"894", lc:"all-possible-full-binary-trees",  gfg:"all-possible-full-binary-trees",                 title:"All Possible Full Binary Trees",                     diff:"Medium", concept:"Catalan structure; memoize on n" },
+            { num:null,  lc:null,                              gfg:"maximum-path-sum-from-any-node",                 title:"Max Sum Path (Any Node to Any Node) in Tree",        diff:"Medium", concept:"For each node return (include, exclude) max" },
+            { num:"2246",lc:"longest-path-with-different-adjacent-characters", gfg:"longest-path-in-tree",          title:"Longest Path with Different Adjacent Characters",    diff:"Hard",   concept:"DFS returning top-2 child paths; combine at node" },
+            { num:"1617",lc:"count-subtrees-with-max-distance-between-cities", gfg:"count-subtrees-with-max-distance-between-cities", title:"Count Subtrees with Max Distance", diff:"Hard", concept:"Enumerate subsets; tree DP to check diameter" },
           ]
         },
-        // ── AV PLAYLIST 9: DP ON GRID ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 9  —  DP ON GRID
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 35: DP on Grid",
           subId: "dp-grid",
           section: "DP on Grid",
-          desc: "2D dp where movement is right/down. dp[i][j] = optimal value at (i,j). Optimise space to O(n) by reusing one row.",
+          desc: "2D dp where movement is right/down (or all 4 dirs). dp[i][j] = optimal value at (i,j). Build row by row. Optimise space to one row by reusing.",
           complexity: "Time: O(m·n) · Space: O(n)",
           problems: [
-            { num:"62",  lc:"unique-paths",                    gfg:"count-all-possible-paths",                title:"Unique Paths",                              diff:"Medium", concept:"dp[i][j] = dp[i-1][j] + dp[i][j-1]" },
-            { num:"63",  lc:"unique-paths-ii",                 gfg:"unique-paths-in-a-grid",                  title:"Unique Paths II (With Obstacles)",          diff:"Medium", concept:"Zero out obstacle cells" },
-            { num:"64",  lc:"minimum-path-sum",                gfg:"minimum-path-sum",                        title:"Minimum Path Sum",                          diff:"Medium", concept:"dp[i][j] = grid[i][j] + min(top, left)" },
-            { num:"120", lc:"triangle",                        gfg:"triangle-path-sum",                       title:"Triangle (Min Path Top to Bottom)",         diff:"Medium", concept:"Bottom-up: dp[j] = tri[i][j]+min(dp[j],dp[j+1])" },
-            { num:"931", lc:"minimum-falling-path-sum",        gfg:"minimum-falling-path-sum",                title:"Minimum Falling Path Sum",                  diff:"Medium", concept:"Min of 3 cells in row above" },
-            { num:"221", lc:"maximal-square",                  gfg:"maximum-size-rectangle-binary-sub-matrix-with-all-1s", title:"Maximal Square of 1s",        diff:"Medium", concept:"dp[i][j]=min(top,left,diagonal)+1" },
-            { num:"174", lc:"dungeon-game",                    gfg:"dungeon-game",                            title:"Dungeon Game",                              diff:"Hard",   concept:"Reverse DP: min hp at each cell from bottom-right" },
-            { num:"576", lc:"out-of-boundary-paths",           gfg:"out-of-boundary-paths",                   title:"Out of Boundary Paths",                     diff:"Medium", concept:"Count paths leaving grid in max N moves" },
+            { num:"62",  lc:"unique-paths",                    gfg:"count-all-possible-paths",                       title:"Unique Paths",                                       diff:"Medium", concept:"dp[i][j] = dp[i-1][j] + dp[i][j-1]" },
+            { num:"63",  lc:"unique-paths-ii",                 gfg:"unique-paths-in-a-grid",                         title:"Unique Paths II (With Obstacles)",                   diff:"Medium", concept:"Zero out obstacle cells" },
+            { num:"64",  lc:"minimum-path-sum",                gfg:"minimum-path-sum",                               title:"Minimum Path Sum",                                   diff:"Medium", concept:"dp[i][j] = grid[i][j] + min(top, left)" },
+            { num:"120", lc:"triangle",                        gfg:"triangle-path-sum",                              title:"Triangle (Min Path Top to Bottom)",                  diff:"Medium", concept:"Bottom-up: dp[j] = tri[i][j] + min(dp[j], dp[j+1])" },
+            { num:"931", lc:"minimum-falling-path-sum",        gfg:"minimum-falling-path-sum",                       title:"Minimum Falling Path Sum",                           diff:"Medium", concept:"Min of 3 cells in row above" },
+            { num:"221", lc:"maximal-square",                  gfg:"maximum-size-rectangle-binary-sub-matrix-with-all-1s", title:"Maximal Square of 1s",                         diff:"Medium", concept:"dp[i][j] = min(top, left, diagonal) + 1" },
+            { num:"174", lc:"dungeon-game",                    gfg:"dungeon-game",                                   title:"Dungeon Game",                                       diff:"Hard",   concept:"Reverse DP: min hp at each cell from bottom-right" },
+            { num:"741", lc:"cherry-pickup",                   gfg:"chocolate-pickup",                               title:"Cherry Pickup (Two Trips)",                          diff:"Hard",   concept:"Two simultaneous paths sharing grid; 3D DP" },
+            { num:"1463",lc:"cherry-pickup-ii",                gfg:"chocolate-pickup",                               title:"Cherry Pickup II (Two Robots)",                      diff:"Hard",   concept:"Both robots start top; 3D DP (row, c1, c2)" },
+            { num:null,  lc:null,                              gfg:"gold-mine-problem",                              title:"Gold Mine Problem",                                  diff:"Medium", concept:"Start any cell in col-0, move right + diagonals" },
+            { num:"576", lc:"out-of-boundary-paths",           gfg:"out-of-boundary-paths",                          title:"Out of Boundary Paths",                              diff:"Medium", concept:"Count paths leaving grid in max N moves" },
+            { num:"688", lc:"knight-probability-in-chessboard",gfg:"knight-probability-in-chessboard",               title:"Knight Probability in Chessboard",                   diff:"Medium", concept:"DP probability: sum probabilities reaching (r,c)" },
           ]
         },
-        // ── AV PLAYLIST 10: DP ON STRINGS ──
+
+        // ──────────────────────────────────────────────────────────
+        // AV PLAYLIST 10  —  DP ON STRINGS (WORD BREAK / REGEX)
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 36: DP on Strings (Word Break & Pattern Matching)",
           subId: "dp-strings",
           section: "DP on Strings",
-          desc: "dp[i] = can we form/count ways for string[0..i]. Try all valid words/partitions ending at i. Memoize on index.",
+          desc: "dp[i] = can we form / count ways for string[0..i]. Try all valid words/partitions ending at i. Memoize on index. Palindrome partition: dp[i] = min cuts for s[0..i].",
           complexity: "Time: O(n²·L) · Space: O(n)",
           problems: [
-            { num:"139", lc:"word-break",                      gfg:"word-break",                              title:"Word Break",                                diff:"Medium", concept:"dp[i] = any j: dp[j] && s[j..i] in dict" },
-            { num:"140", lc:"word-break-ii",                   gfg:"word-break-part-2",                       title:"Word Break II (All Sentences)",             diff:"Hard",   concept:"Backtrack with memoized suffix solutions" },
-            { num:"132", lc:"palindrome-partitioning-ii",      gfg:"palindromic-partitioning",                title:"Palindrome Partitioning II (Min Cuts)",     diff:"Hard",   concept:"dp[i] = min cuts for s[0..i]" },
-            { num:"10",  lc:"regular-expression-matching",     gfg:"match-specific-pattern",                  title:"Regular Expression Matching",               diff:"Hard",   concept:"Handle * with zero or more prev char" },
-            { num:"44",  lc:"wildcard-matching",               gfg:"wildcard-pattern-matching",               title:"Wildcard Pattern Matching",                 diff:"Hard",   concept:"* matches empty or any sequence" },
+            { num:"139", lc:"word-break",                      gfg:"word-break",                                     title:"Word Break",                                         diff:"Medium", concept:"dp[i] = any j: dp[j] && s[j..i] in dict" },
+            { num:"140", lc:"word-break-ii",                   gfg:"word-break-part-2",                              title:"Word Break II (All Sentences)",                      diff:"Hard",   concept:"Backtrack with memoized suffix solutions" },
+            { num:"132", lc:"palindrome-partitioning-ii",      gfg:"palindromic-partitioning",                       title:"Palindrome Partitioning II (Min Cuts)",              diff:"Hard",   concept:"dp[i] = min cuts for s[0..i]" },
+            { num:"115", lc:"distinct-subsequences",           gfg:"number-of-distinct-subsequences",                title:"Distinct Subsequences",                              diff:"Hard",   concept:"dp[i][j] = count of s's subsequences matching t[0..j]" },
+            { num:"10",  lc:"regular-expression-matching",     gfg:"match-specific-pattern",                         title:"Regular Expression Matching",                        diff:"Hard",   concept:"Handle * with zero or more of prev char" },
+            { num:"44",  lc:"wildcard-matching",               gfg:"wildcard-pattern-matching",                      title:"Wildcard Pattern Matching",                          diff:"Hard",   concept:"* matches empty or any sequence" },
+            { num:"472", lc:"concatenated-words",              gfg:"concatenated-words",                             title:"Concatenated Words",                                 diff:"Hard",   concept:"Word Break for every word in list" },
           ]
         },
-        // ── NEW PATTERN 11: DP ON STOCKS ──
+
+        // ──────────────────────────────────────────────────────────
+        // NEW PATTERN 11  —  DP ON STOCKS
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 37: DP - Stock Buy & Sell (State Machine)",
           subId: "dp-stocks",
           section: "DP on Stocks",
-          desc: "State machine DP: at each day you are in one of (hold, sold, rest) states. Transitions define the recurrence. Most variants solved with 2-4 states.",
+          desc: "State machine DP: at each day, you are in one of (hold, sold, rest) states. Recurrence defines transitions. Most variants are solved by defining states: hold=−∞ initially; rest=0; sold=profit. Transaction fee / cooldown change transitions.",
           complexity: "Time: O(n) · Space: O(1)",
           problems: [
-            { num:"121", lc:"best-time-to-buy-and-sell-stock",        gfg:"stock-buy-and-sell",               title:"Best Time to Buy/Sell Stock (1 tx)",        diff:"Easy",   concept:"Track min price; ans = max(ans, price−min)" },
-            { num:"122", lc:"best-time-to-buy-and-sell-stock-ii",     gfg:"stock-buy-and-sell-2",             title:"Best Time to Buy/Sell Stock II (∞ tx)",     diff:"Medium", concept:"Greedy: collect every upward difference" },
-            { num:"123", lc:"best-time-to-buy-and-sell-stock-iii",    gfg:"buy-and-sell-a-share-at-most-twice", title:"Stock III (2 transactions)",              diff:"Hard",   concept:"4 states: buy1, sell1, buy2, sell2" },
-            { num:"188", lc:"best-time-to-buy-and-sell-stock-iv",     gfg:"best-time-to-buy-and-sell-stock-iv", title:"Stock IV (k transactions)",              diff:"Hard",   concept:"dp[k][day]: generalise III to k" },
-            { num:"309", lc:"best-time-to-buy-and-sell-stock-with-cooldown", gfg:"buy-stock-with-cooldown",   title:"Stock with Cooldown",                       diff:"Medium", concept:"3 states: hold, sold, rest" },
-            { num:"714", lc:"best-time-to-buy-and-sell-stock-with-transaction-fee", gfg:"buy-stock-with-transaction-fee", title:"Stock with Transaction Fee",   diff:"Medium", concept:"2 states: hold, cash; subtract fee on sell" },
+            { num:"121", lc:"best-time-to-buy-and-sell-stock",        gfg:"stock-buy-and-sell",                      title:"Best Time to Buy and Sell Stock (1 transaction)",    diff:"Easy",   concept:"Track min price seen; ans = max(ans, price−min)" },
+            { num:"122", lc:"best-time-to-buy-and-sell-stock-ii",     gfg:"stock-buy-and-sell-2",                    title:"Best Time to Buy and Sell Stock II (∞ transactions)",diff:"Medium", concept:"Greedy: collect every upward difference" },
+            { num:"123", lc:"best-time-to-buy-and-sell-stock-iii",    gfg:"buy-and-sell-a-share-at-most-twice",      title:"Best Time to Buy and Sell Stock III (2 transactions)",diff:"Hard",  concept:"4 states: buy1, sell1, buy2, sell2" },
+            { num:"188", lc:"best-time-to-buy-and-sell-stock-iv",     gfg:"best-time-to-buy-and-sell-stock-iv",      title:"Best Time to Buy and Sell Stock IV (k transactions)",diff:"Hard",   concept:"dp[k][day] or 2D state: generalise III to k" },
+            { num:"309", lc:"best-time-to-buy-and-sell-stock-with-cooldown", gfg:"buy-stock-with-cooldown",         title:"Stock with Cooldown",                                diff:"Medium", concept:"3 states: hold, sold, rest; sold→rest→hold" },
+            { num:"714", lc:"best-time-to-buy-and-sell-stock-with-transaction-fee", gfg:"buy-stock-with-transaction-fee", title:"Stock with Transaction Fee",                 diff:"Medium", concept:"2 states: hold, cash; subtract fee on sell" },
           ]
         },
-        // ── NEW PATTERN 12: BITMASK DP ──
+
+        // ──────────────────────────────────────────────────────────
+        // NEW PATTERN 12  —  DP ON SUBSEQUENCES (ADVANCED)
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 38: DP - Bitmask DP",
-          subId: "dp-bitmask",
-          section: "Bitmask DP",
-          desc: "State = bitmask of visited items. dp[mask] = optimal cost when items in mask chosen. Fits when n ≤ 20 (2²⁰ ≈ 10⁶ states).",
-          complexity: "Time: O(2ⁿ · n) · Space: O(2ⁿ)",
+          name: "Pattern 38: DP - Counting Subsequences & Subarrays",
+          subId: "dp-subsequences",
+          section: "Counting Subsequences",
+          desc: "Count number of subsequences / subarrays satisfying a condition. State = index (or index pair for 2-string). Careful with modular arithmetic for large counts.",
+          complexity: "Time: O(n²) or O(n·target) · Space: O(n)",
           problems: [
-            { num:null,  lc:null,                              gfg:"travelling-salesman-problem",             title:"Travelling Salesman Problem (TSP)",          diff:"Hard",   concept:"dp[mask][i] = min cost to visit cities in mask ending at i" },
-            { num:"691", lc:"stickers-to-spell-word",          gfg:"stickers-to-spell-word",                  title:"Stickers to Spell Word",                    diff:"Hard",   concept:"Bitmask on target chars; min stickers to cover" },
-            { num:"847", lc:"shortest-path-visiting-all-nodes",gfg:"shortest-path-visiting-all-nodes",        title:"Shortest Path Visiting All Nodes",           diff:"Hard",   concept:"BFS + bitmask state (node, visited set)" },
-            { num:"1125",lc:"smallest-sufficient-team",        gfg:"smallest-sufficient-team",                title:"Smallest Sufficient Team",                  diff:"Hard",   concept:"Bitmask on skills; min people covering all" },
-            { num:"2305",lc:"fair-distribution-of-cookies",    gfg:"fair-distribution-of-cookies",            title:"Fair Distribution of Cookies",              diff:"Medium", concept:"Bitmask over cookie bags; assign to k children" },
+            { num:"940", lc:"distinct-subsequences-ii",         gfg:"number-of-distinct-subsequences",               title:"Distinct Subsequences II",                           diff:"Hard",   concept:"Count distinct (non-empty) subsequences; subtract duplicates" },
+            { num:"1987",lc:"number-of-unique-good-subsequences", gfg:"number-of-unique-good-subsequences",          title:"Number of Unique Good Subsequences",                 diff:"Hard",   concept:"Binary strings; track end-with-0 and end-with-1" },
+            { num:"2369",lc:"check-if-there-is-a-valid-partition-for-the-array", gfg:"valid-partition-for-array",   title:"Valid Partition for Array",                          diff:"Medium", concept:"dp[i] = can we validly partition nums[0..i]" },
+            { num:"1048",lc:"longest-string-chain",             gfg:"longest-string-chain",                          title:"Longest String Chain",                               diff:"Medium", concept:"Sort by length; LIS variant on word predecessors" },
+            { num:"516", lc:"longest-palindromic-subsequence",  gfg:"longest-palindromic-subsequence",               title:"Longest Palindromic Subsequence",                    diff:"Medium", concept:"LCS(s, reverse(s))" },
+            { num:"647", lc:"palindromic-substrings",           gfg:"count-palindrome-sub-strings-of-a-string",      title:"Palindromic Substrings (Count)",                     diff:"Medium", concept:"Expand from centre or dp[i][j] = is palindrome" },
+            { num:"5",   lc:"longest-palindromic-substring",    gfg:"longest-palindromic-substring-in-a-string",     title:"Longest Palindromic Substring",                      diff:"Medium", concept:"Expand from centre O(n²) or Manacher O(n)" },
           ]
         },
-        // ── NEW PATTERN 13: DIGIT DP ──
+
+        // ──────────────────────────────────────────────────────────
+        // NEW PATTERN 13  —  DIGIT DP
+        // ──────────────────────────────────────────────────────────
         {
           name: "Pattern 39: DP - Digit DP",
           subId: "dp-digit",
           section: "Digit DP",
-          desc: "Count integers in [lo, hi] satisfying a digit-level constraint. State: (position, tight, started). Build f(n) = count in [0,n], answer = f(hi) − f(lo−1).",
+          desc: "Count integers in [lo, hi] satisfying a digit-level constraint. State: (position, tight, started, accumulated). Build f(n) = count in [0,n], answer = f(hi) − f(lo−1). Memoize on (pos, tight, ...) for O(digits × states).",
           complexity: "Time: O(digits × states) · Space: O(same)",
           problems: [
-            { num:"357", lc:"count-numbers-with-unique-digits",  gfg:"count-numbers-with-unique-digits",      title:"Count Numbers with Unique Digits",           diff:"Medium", concept:"Digit DP or combinatorics — no repeated digit" },
-            { num:"600", lc:"non-negative-integers-without-consecutive-ones", gfg:"count-of-integers-in-a-range-with-no-two-consecutive-1s", title:"No Consecutive Ones", diff:"Hard", concept:"Binary digit DP; no two adjacent 1-bits" },
-            { num:"902", lc:"numbers-at-most-n-given-digit-set", gfg:"count-all-numbers-with-unique-digits",  title:"Numbers At Most N Given Digit Set",          diff:"Hard",   concept:"Digit DP with restricted digit set" },
-            { num:"233", lc:"number-of-digit-one",               gfg:"number-of-digit-one",                   title:"Number of Digit One",                       diff:"Hard",   concept:"Count 1s in all numbers from 1 to n" },
+            { num:"357", lc:"count-numbers-with-unique-digits",  gfg:"count-numbers-with-unique-digits",             title:"Count Numbers with Unique Digits",                   diff:"Medium", concept:"Digit DP or combinatorics — no repeated digit" },
+            { num:"600", lc:"non-negative-integers-without-consecutive-ones", gfg:"count-of-integers-in-a-range-with-no-two-consecutive-1s", title:"Non-negative Integers Without Consecutive Ones",  diff:"Hard", concept:"Binary digit DP; no two adjacent 1-bits" },
+            { num:"902", lc:"numbers-at-most-n-given-digit-set", gfg:"count-all-numbers-with-unique-digits",         title:"Numbers At Most N Given Digit Set",                  diff:"Hard",   concept:"Digit DP with restricted digit set" },
+            { num:"233", lc:"number-of-digit-one",               gfg:"number-of-digit-one",                          title:"Number of Digit One",                                diff:"Hard",   concept:"Count 1s in all numbers from 1 to n" },
+            { num:null,  lc:null,                                gfg:"count-of-numbers-with-even-number-of-digits",  title:"Count Numbers with Even Number of Digits",           diff:"Easy",   concept:"Digit DP: track parity of digit count" },
+            { num:"1397",lc:"find-all-good-strings",             gfg:"find-all-good-strings",                        title:"Find All Good Strings",                              diff:"Hard",   concept:"Digit DP combined with KMP failure function" },
           ]
         },
-        // ── NEW PATTERN 14: PROBABILITY DP ──
+
+        // ──────────────────────────────────────────────────────────
+        // NEW PATTERN 14  —  BITMASK DP
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 40: DP - Probability & Expected Value",
+          name: "Pattern 40: DP - Bitmask DP",
+          subId: "dp-bitmask",
+          section: "Bitmask DP",
+          desc: "State = bitmask of visited/assigned items. dp[mask] = optimal cost when exactly the items in mask have been chosen. Transition: try adding one more item to mask. Fits when n ≤ 20 (2²⁰ ≈ 10⁶ states).",
+          complexity: "Time: O(2ⁿ · n) · Space: O(2ⁿ)",
+          problems: [
+            { num:null,  lc:null,                              gfg:"travelling-salesman-problem",                    title:"Travelling Salesman Problem (TSP)",                   diff:"Hard",   concept:"dp[mask][i] = min cost to visit cities in mask, ending at i" },
+            { num:"691", lc:"stickers-to-spell-word",          gfg:"stickers-to-spell-word",                        title:"Stickers to Spell Word",                             diff:"Hard",   concept:"Bitmask on target characters; min stickers to cover" },
+            { num:"847", lc:"shortest-path-visiting-all-nodes",gfg:"shortest-path-visiting-all-nodes",              title:"Shortest Path Visiting All Nodes",                   diff:"Hard",   concept:"BFS + bitmask state (node, visited set)" },
+            { num:"1125",lc:"smallest-sufficient-team",        gfg:"smallest-sufficient-team",                      title:"Smallest Sufficient Team",                           diff:"Hard",   concept:"Bitmask on skills; min people covering all skills" },
+            { num:"943", lc:"find-the-shortest-superstring",   gfg:"find-the-shortest-superstring",                 title:"Shortest Superstring",                               diff:"Hard",   concept:"TSP variant on string overlap graph" },
+            { num:"1349",lc:"maximum-students-taking-exam",    gfg:"maximum-students-taking-exam",                  title:"Maximum Students Taking Exam",                       diff:"Hard",   concept:"Row-by-row bitmask DP; no two cheating neighbours" },
+            { num:"2305",lc:"fair-distribution-of-cookies",    gfg:"fair-distribution-of-cookies",                  title:"Fair Distribution of Cookies",                       diff:"Medium", concept:"Bitmask over cookie bags; assign to k children" },
+            { num:"1681",lc:"minimum-incompatibility",         gfg:"minimum-incompatibility",                       title:"Minimum Incompatibility",                            diff:"Hard",   concept:"Partition n elements into k subsets; bitmask DP" },
+          ]
+        },
+
+        // ──────────────────────────────────────────────────────────
+        // NEW PATTERN 15  —  PROBABILITY / EXPECTED VALUE DP
+        // ──────────────────────────────────────────────────────────
+        {
+          name: "Pattern 41: DP - Probability & Expected Value",
           subId: "dp-probability",
           section: "Probability DP",
-          desc: "dp[state] = probability of reaching state or expected moves. Transition probabilities must sum to 1. Common in random-walk, dice, card problems.",
+          desc: "dp[state] = probability of reaching or expected moves from state. Transition probabilities must sum to 1. Floating-point DP; use memoisation. Common in random-walk, dice, and card problems.",
           complexity: "Time: O(states) · Space: O(states)",
           problems: [
-            { num:"688", lc:"knight-probability-in-chessboard", gfg:"knight-probability-in-chessboard",       title:"Knight Probability in Chessboard",           diff:"Medium", concept:"dp[r][c][k] = prob of being at (r,c) after k moves" },
-            { num:"808", lc:"soup-servings",                    gfg:"soup-servings",                           title:"Soup Servings",                             diff:"Medium", concept:"Expected value DP; probability A empties first" },
-            { num:"837", lc:"new-21-game",                      gfg:"new-21-game",                             title:"New 21 Game",                               diff:"Medium", concept:"dp[i] = prob score exactly i; prefix sum optimisation" },
+            { num:"688", lc:"knight-probability-in-chessboard", gfg:"knight-probability-in-chessboard",             title:"Knight Probability in Chessboard",                   diff:"Medium", concept:"dp[r][c][k] = prob of knight being at (r,c) after k moves" },
+            { num:"808", lc:"soup-servings",                    gfg:"soup-servings",                                 title:"Soup Servings",                                      diff:"Medium", concept:"Expected value DP; probability A empties first" },
+            { num:"837", lc:"new-21-game",                      gfg:"new-21-game",                                   title:"New 21 Game",                                        diff:"Medium", concept:"dp[i] = prob score exactly i; prefix sum optimisation" },
+            { num:"1227",lc:"airplane-seat-assignment-probability", gfg:"airplane-seat-assignment-probability",      title:"Airplane Seat Assignment Probability",               diff:"Medium", concept:"Math insight: prob = 0.5 for n>1; verify with DP" },
+            { num:"1467",lc:"probability-of-a-two-boxes-having-the-same-number-of-distinct-balls", gfg:"probability-two-boxes-same-distinct-balls", title:"Probability of Two Boxes with Same Distinct Balls", diff:"Hard", concept:"DP over ball counts; multinomial probability" },
           ]
         },
-        // ── NEW PATTERN 15: GAME THEORY DP ──
+
+        // ──────────────────────────────────────────────────────────
+        // NEW PATTERN 16  —  GAME THEORY DP (MINIMAX)
+        // ──────────────────────────────────────────────────────────
         {
-          name: "Pattern 41: DP - Game Theory (Minimax)",
+          name: "Pattern 42: DP - Game Theory (Minimax / Optimal Play)",
           subId: "dp-game-theory",
           section: "Game Theory DP",
-          desc: "Two players alternate, both play optimally. dp[state] = true if current player wins, or dp[i][j] = max score current player can guarantee from [i,j].",
+          desc: "Two players alternate, both play optimally. dp[state] = true if current player wins, or dp[i][j] = max score current player can guarantee from [i,j]. Minimax: current player maximises, opponent minimises.",
           complexity: "Time: O(n²) or O(n) · Space: O(n²) or O(1)",
           problems: [
-            { num:"292", lc:"nim-game",                         gfg:"nim-game",                                title:"Nim Game",                                   diff:"Easy",   concept:"Win if n%4 != 0" },
-            { num:"877", lc:"stone-game",                       gfg:"stone-game",                              title:"Stone Game",                                diff:"Medium", concept:"dp[i][j] = max score gap current player can guarantee" },
-            { num:"486", lc:"predict-the-winner",               gfg:"predict-the-winner",                      title:"Predict the Winner",                        diff:"Medium", concept:"dp[i][j] = max score diff (my − opp) in [i,j]" },
-            { num:"375", lc:"guess-number-higher-or-lower-ii",  gfg:"optimal-strategy-for-a-game",             title:"Guess Number Higher or Lower II",            diff:"Medium", concept:"Minimax: dp[i][j] = min guaranteed cost to win in [i,j]" },
-            { num:"464", lc:"can-i-win",                        gfg:"can-i-win",                               title:"Can I Win",                                 diff:"Medium", concept:"Bitmask game theory: track used numbers" },
+            { num:"292", lc:"nim-game",                         gfg:"nim-game",                                       title:"Nim Game",                                           diff:"Easy",   concept:"Win if n % 4 != 0; verify with DP" },
+            { num:"877", lc:"stone-game",                       gfg:"stone-game",                                     title:"Stone Game (First Player Always Wins?)",             diff:"Medium", concept:"Parity insight or dp[i][j] = max coins for current player" },
+            { num:"486", lc:"predict-the-winner",               gfg:"predict-the-winner",                             title:"Predict the Winner",                                 diff:"Medium", concept:"dp[i][j] = max score gap (my − opp) in range [i,j]" },
+            { num:"375", lc:"guess-number-higher-or-lower-ii",  gfg:"optimal-strategy-for-a-game",                    title:"Guess Number Higher or Lower II",                    diff:"Medium", concept:"Minimax: dp[i][j] = min guaranteed cost to win in [i,j]" },
+            { num:"464", lc:"can-i-win",                        gfg:"can-i-win",                                      title:"Can I Win",                                          diff:"Medium", concept:"Bitmask game theory: track used numbers" },
+            { num:"1140",lc:"stone-game-ii",                    gfg:"stone-game-ii",                                  title:"Stone Game II",                                      diff:"Medium", concept:"dp[i][m] = max piles current player gets from pile i with M" },
+            { num:"1406",lc:"stone-game-iii",                   gfg:"stone-game-iii",                                 title:"Stone Game III",                                     diff:"Hard",   concept:"dp[i] = max score diff taking 1/2/3 piles from i" },
           ]
         },
-        // ── NEW PATTERN 16: COUNTING SUBSEQUENCES ──
-        {
-          name: "Pattern 42: DP - Counting Subsequences & Palindromes",
-          subId: "dp-subsequences",
-          section: "Counting Subsequences",
-          desc: "Count subsequences/substrings satisfying a condition. State = index or index pair. Careful with modular arithmetic for large counts.",
-          complexity: "Time: O(n²) · Space: O(n)",
-          problems: [
-            { num:"5",   lc:"longest-palindromic-substring",    gfg:"longest-palindromic-substring-in-a-string", title:"Longest Palindromic Substring",           diff:"Medium", concept:"Expand from centre O(n²) or Manacher O(n)" },
-            { num:"647", lc:"palindromic-substrings",           gfg:"count-palindrome-sub-strings-of-a-string",  title:"Palindromic Substrings (Count)",          diff:"Medium", concept:"Expand from centre or dp[i][j] = is palindrome" },
-            { num:"1048",lc:"longest-string-chain",             gfg:"longest-string-chain",                    title:"Longest String Chain",                      diff:"Medium", concept:"Sort by length; LIS variant on word predecessors" },
-            { num:"940", lc:"distinct-subsequences-ii",         gfg:"number-of-distinct-subsequences",         title:"Distinct Subsequences II",                  diff:"Hard",   concept:"Count distinct subsequences; subtract duplicates" },
-          ]
-        },
+
       ]
     },
 
-        // ══════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════
     // VI. HEAP (PRIORITY QUEUE) PATTERNS
     // ══════════════════════════════════════════════════════
     {
@@ -1073,25 +1157,29 @@
    * getIndexData()
    * Returns data in the shape index.html's DATA array expects.
    * Each pattern only exposes { name, problems: [{num, title, slug}] }
+   * For DP-style problems with lc/gfg instead of slug, slug = lc (may be null).
    */
   function getIndexData() {
     return CATEGORIES.map(cat => ({
       category: cat.category,
       patterns: cat.patterns.map(p => ({
         name: p.name,
-        problems: p.problems.map(q => ({ num: q.num, title: q.title, slug: q.slug }))
+        problems: p.problems
+          .filter(q => q.lc || q.slug)   // only include if has a LC link (trackable)
+          .map(q => ({
+            num: q.num || '',
+            title: q.title,
+            slug: q.lc || q.slug || ''
+          }))
       }))
     }));
   }
 
   /**
    * getPatternPage(pageId)
-   * Returns array in the shape pattern pages expect:
-   * [{ id, section, desc, complexity, problems: [{num, title, diff, slug, concept}] }]
-   *
-   * Usage in two-pointers.html / sliding-window.html:
-   *   const TP_PROBLEMS = window.LC_DATA.getPatternPage('two-pointers');
-   *   const SW_PROBLEMS = window.LC_DATA.getPatternPage('sliding-window');
+   * Returns array in the shape pattern pages expect.
+   * Problems now include: num, title, diff, concept, lc, gfg, slug (compat alias for lc).
+   * Pattern pages use lc/gfg to build the correct links.
    */
   function getPatternPage(pageId) {
     const cat = CATEGORIES.find(c => c.pageId === pageId);
@@ -1107,7 +1195,8 @@
           num:     q.num  || null,
           title:   q.title,
           diff:    q.diff,
-          lc:      q.lc   || q.slug || null,   // LC slug (new schema)
+          // lc/gfg links (new schema for DP page)
+          lc:      q.lc   || q.slug || null,   // LeetCode slug or existing slug field
           gfg:     q.gfg  || null,             // GFG slug
           slug:    q.lc   || q.slug || null,   // backward-compat alias
           concept: q.concept

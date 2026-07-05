@@ -1,3 +1,47 @@
+
+/* ═══════════════ NAV TOGGLE BUTTON ═══════════════ */
+/* Used in tracker/index to open learning pages */
+.pattern-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--t2);
+  font-family: var(--mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+  user-select: none;
+}
+.pattern-nav-btn:hover {
+  background: var(--orange-dim);
+  border-color: rgba(249,115,22,.4);
+  color: var(--orange);
+}
+.pattern-nav-btn .btn-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+.pattern-nav-btn .btn-arrow {
+  margin-left: 2px;
+  font-size: 10px;
+  color: var(--t3);
+  transition: transform .2s;
+}
+.pattern-nav-btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* ═══════════════ CONTENT REVIEW FIXES ═══════════════ */
+/* Minor improvements from code review */
+.prob-row { cursor: pointer; }
+.prob-row:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+
+
 :root {
   --bg:      #0b0d12;
   --bg2:     #10131a;
@@ -376,197 +420,3 @@ pre{
   .f-branch{flex-direction:column;align-items:center}
   .f-row{flex-direction:column;align-items:center}
 }
-
-
-/* ══════════════════════════════════════════════════
-   CALL STACK VISUALIZER — STYLES
-══════════════════════════════════════════════════ */
-
-/* ── Trigger button on prob-rows ── */
-.csv-btn {
-  flex-shrink:0; margin-left:auto;
-  padding:3px 11px;
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  background:rgba(99,102,241,.12); border:1px solid rgba(99,102,241,.3);
-  color:#818cf8; border-radius:5px; cursor:pointer;
-  transition:all .18s; white-space:nowrap;
-}
-.csv-btn:hover { background:rgba(99,102,241,.22); border-color:#6366f1; color:#e0e7ff; }
-
-/* ── Modal overlay ── */
-.csv-overlay {
-  display:none; position:fixed; inset:0; z-index:1000;
-  background:rgba(0,0,0,.8); backdrop-filter:blur(8px);
-  align-items:center; justify-content:center; padding:12px;
-}
-.csv-overlay.open { display:flex; }
-
-/* ── Modal box ── */
-.csv-box {
-  background:#0d0f1a; border:1px solid #1e2235;
-  border-radius:14px; width:100%; max-width:960px;
-  max-height:96vh; display:flex; flex-direction:column;
-  overflow:hidden; box-shadow:0 24px 64px rgba(0,0,0,.7);
-}
-
-/* ── Header ── */
-.csv-hd {
-  display:flex; align-items:center; gap:10px;
-  padding:14px 18px; background:#13151f;
-  border-bottom:1px solid #1e2235; flex-shrink:0;
-}
-.csv-hd-title { flex:1; font-size:.9rem; font-weight:700; color:#e2e8f0; }
-.csv-lc-link {
-  font-family:var(--mono); font-size:10px; color:var(--orange);
-  text-decoration:none; padding:4px 10px;
-  border:1px solid rgba(249,115,22,.3); border-radius:5px;
-  flex-shrink:0; transition:all .15s;
-}
-.csv-lc-link:hover { background:rgba(249,115,22,.1); }
-.csv-close {
-  background:none; border:none; color:#64748b;
-  font-size:18px; cursor:pointer; padding:2px 7px;
-  border-radius:4px; line-height:1; transition:color .15s;
-}
-.csv-close:hover { color:#e2e8f0; }
-
-/* ── Progress bar ── */
-.csv-prog {
-  height:3px; background:#1e2235; flex-shrink:0;
-}
-.csv-prog-fill {
-  height:100%; width:0%;
-  background:linear-gradient(90deg,#6366f1,#10b981);
-  transition:width .25s ease;
-}
-
-/* ── Controls bar ── */
-.csv-ctrl {
-  display:flex; align-items:center; gap:8px;
-  padding:10px 18px; background:#13151f;
-  border-bottom:1px solid #1e2235; flex-shrink:0; flex-wrap:wrap;
-}
-.csv-ctrl-btn {
-  padding:6px 14px; border-radius:7px;
-  font-family:var(--mono); font-size:11px; font-weight:700;
-  cursor:pointer; border:1px solid #1e2235; transition:all .15s;
-}
-.csv-ctrl-btn.play  { background:rgba(99,102,241,.15); border-color:rgba(99,102,241,.4); color:#818cf8; }
-.csv-ctrl-btn.play:hover { background:rgba(99,102,241,.25); }
-.csv-ctrl-btn.step  { background:rgba(16,185,129,.1);  border-color:rgba(16,185,129,.3); color:#10b981; }
-.csv-ctrl-btn.step:hover { background:rgba(16,185,129,.2); }
-.csv-ctrl-btn.back  { background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.25);color:#f59e0b; }
-.csv-ctrl-btn.back:hover { background:rgba(245,158,11,.18); }
-.csv-ctrl-btn.reset { background:#13151f; border-color:#1e2235; color:#64748b; }
-.csv-ctrl-btn.reset:hover { color:#94a3b8; }
-.csv-speed {
-  font-family:var(--mono); font-size:10px; color:#64748b;
-  background:#1a1d2e; border:1px solid #1e2235; border-radius:5px;
-  padding:5px 8px; cursor:pointer;
-}
-.csv-counter { font-family:var(--mono); font-size:11px; color:#64748b; margin-left:auto; }
-.csv-depth   { font-family:var(--mono); font-size:10px; color:#6366f1;
-               background:rgba(99,102,241,.1); border:1px solid rgba(99,102,241,.2);
-               padding:3px 9px; border-radius:10px; }
-.csv-result  {
-  display:none; font-family:var(--mono); font-size:10px; font-weight:700;
-  color:#10b981; background:rgba(16,185,129,.1);
-  border:1px solid rgba(16,185,129,.3); padding:3px 10px; border-radius:10px;
-}
-
-/* ── Main body: 2 columns ── */
-.csv-body {
-  display:grid; grid-template-columns:1fr 1fr;
-  flex:1; overflow:hidden; min-height:0;
-}
-@media(max-width:620px) {
-  .csv-body { grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
-}
-
-/* ── LEFT: Call Stack panel ── */
-.csv-stack-panel {
-  border-right:1px solid #1e2235;
-  display:flex; flex-direction:column; overflow:hidden;
-}
-.csv-panel-hd {
-  padding:10px 16px; background:#13151f;
-  border-bottom:1px solid #1e2235; flex-shrink:0;
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  color:#64748b; letter-spacing:1.2px; text-transform:uppercase;
-  display:flex; align-items:center; gap:8px;
-}
-.csv-panel-hd-dot { width:8px; height:8px; border-radius:50%; }
-.csv-stack {
-  flex:1; overflow-y:auto; padding:12px;
-  display:flex; flex-direction:column; gap:6px;
-  /* Stack grows upward — newer frames on top in display */
-}
-/* Individual frame */
-.cs-frame {
-  background:#13151f; border:1px solid #1e2235; border-radius:8px;
-  padding:10px 14px; transition:all .2s;
-}
-.cs-frame-top {
-  background:#1a1d2e; box-shadow:0 0 0 1px rgba(99,102,241,.2);
-}
-.cs-frame-fn {
-  font-family:var(--mono); font-size:12px; font-weight:700;
-  display:flex; align-items:center; gap:8px; margin-bottom:5px;
-}
-.cs-frame-args {
-  font-family:var(--mono); font-size:11px; color:#94a3b8;
-  margin-bottom:3px; word-break:break-word;
-}
-.cs-frame-vars {
-  font-family:var(--mono); font-size:10px; color:#64748b;
-  word-break:break-word;
-}
-/* Frame action badges */
-.cs-badge {
-  font-size:9px; font-weight:800; padding:2px 7px; border-radius:6px;
-  letter-spacing:.5px;
-}
-.cs-push { background:rgba(99,102,241,.2); color:#818cf8; }
-.cs-pop  { background:rgba(239,68,68,.15); color:#f87171; }
-.cs-exec { background:rgba(245,158,11,.15); color:#fbbf24; }
-.cs-res  { background:rgba(16,185,129,.15); color:#34d399; }
-
-/* Stack depth ruler on the left */
-.csv-stack-panel { position:relative; }
-
-/* ── RIGHT: Code panel ── */
-.csv-code-panel {
-  display:flex; flex-direction:column; overflow:hidden;
-}
-.csv-code {
-  flex:1; overflow-y:auto;
-  padding:12px 0; font-family:var(--mono); font-size:12.5px;
-  line-height:1.9; background:#070910;
-}
-.csv-code-line {
-  display:flex; align-items:baseline; gap:0;
-  padding:0 16px; transition:all .2s;
-  border-left:3px solid transparent;
-}
-.csv-ln {
-  color:#2d3555; font-size:10px; min-width:24px;
-  margin-right:14px; user-select:none; text-align:right;
-}
-/* Active line states */
-.csv-line-push      { background:rgba(99,102,241,.15); border-left-color:#6366f1; }
-.csv-line-push .csv-ln { color:#6366f1; }
-.csv-line-pop       { background:rgba(239,68,68,.1);   border-left-color:#ef4444; }
-.csv-line-pop .csv-ln  { color:#ef4444; }
-.csv-line-highlight { background:rgba(245,158,11,.1);  border-left-color:#f59e0b; }
-.csv-line-highlight .csv-ln { color:#f59e0b; }
-.csv-line-result    { background:rgba(16,185,129,.12); border-left-color:#10b981; }
-.csv-line-result .csv-ln { color:#10b981; }
-
-/* ── BOTTOM: Note strip ── */
-.csv-note-bar {
-  padding:12px 18px; background:#13151f;
-  border-top:1px solid #1e2235; flex-shrink:0;
-  font-size:.8rem; color:#94a3b8; line-height:1.5;
-  min-height:48px;
-}
-.csv-note-bar strong { color:#e2e8f0; }
